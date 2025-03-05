@@ -1,13 +1,9 @@
 import { Routes, Route } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-// import Layout from "./components/Layout/Layout";
-// import Home from "./pages/Home/Home";
-// import Registration from "./pages/Registration/Registration";
-// import Login from "./pages/Login/Login";
-// import PrivateRoute from "./routes/PrivateRoute";
-// import RestrictedRoute from "./routes/RestrictedRoute";
-// import { refreshUser } from "./redux/auth/operations";
+import PrivateRoute from "./routes/PrivateRoute";
+import RestrictedRoute from "./routes/RestrictedRoute";
+import { refreshUser } from "./redux/auth/operations";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -26,9 +22,6 @@ const App = () => {
 
   return (
     <Routes>
-      <Route path="/" element={<Layout />}>
-        <Route index element={<Home />} />
-      </Route>
       <Route
         path="login"
         element={
@@ -43,6 +36,14 @@ const App = () => {
           <RestrictedRoute isLoggedIn={isLoggedIn}>
             <Registration />
           </RestrictedRoute>
+        }
+      />
+      <Route
+        path="/water"
+        element={
+          <PrivateRoute isLoggedIn={isLoggedIn}>
+            <Water />
+          </PrivateRoute>
         }
       />
     </Routes>
