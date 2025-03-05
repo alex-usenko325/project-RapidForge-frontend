@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import PrivateRoute from "./routes/PrivateRoute";
 import RestrictedRoute from "./routes/RestrictedRoute";
-import { refreshUser } from "./redux/auth/operations";
+// import { refreshUser } from "./redux/auth/operations";
 
 const App = () => {
   const dispatch = useDispatch();
