@@ -1,5 +1,6 @@
-/* Styles for Mobile devices */
+/* Mobile (від 320px, базова стилізація) */
 .container {
+  width: 100%;
   min-width: 320px;
   max-width: 375px;
   margin: 0 auto;
@@ -7,16 +8,18 @@
 }
 
 .section {
-  padding-bottom: 80px;
+  padding: 40px 0 80px;
 }
-/* Styles for Tablet devices */
+
+/* Tablet (від 768px) */
 @media (min-width: 768px) {
   .container {
     max-width: 768px;
     padding: 0 32px;
   }
 }
-/* Styles for Desktop devices */
+
+/* Desktop (від 1440px) */
 @media (min-width: 1440px) {
   .container {
     max-width: 1440px;
