@@ -1,13 +1,13 @@
 import { Routes, Route } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import Layout from "./components/Layout/Layout";
-import Home from "./pages/Home/Home";
-import Registration from "./pages/Registration/Registration";
-import Login from "./pages/Login/Login";
-import PrivateRoute from "./routes/PrivateRoute";
-import RestrictedRoute from "./routes/RestrictedRoute";
-import { refreshUser } from "./redux/auth/operations";
+// import Layout from "./components/Layout/Layout";
+// import Home from "./pages/Home/Home";
+// import Registration from "./pages/Registration/Registration";
+// import Login from "./pages/Login/Login";
+// import PrivateRoute from "./routes/PrivateRoute";
+// import RestrictedRoute from "./routes/RestrictedRoute";
+// import { refreshUser } from "./redux/auth/operations";
 
 const App = () => {
   const dispatch = useDispatch();
