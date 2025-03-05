@@ -11,3 +11,10 @@
   font-weight: 700;
   src: url("../assets/fonts/Poppins-Bold.ttf") format("truetype");
 }
+
+@font-face {
+  font-display: swap;
+  font-family: "Gilroy";
+  font-weight: 400;
+  src: url("../assets/fonts/Gilroy-Regular.ttf") format("truetype");
+}
