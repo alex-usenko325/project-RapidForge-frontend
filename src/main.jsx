@@ -5,9 +5,9 @@ import { BrowserRouter } from 'react-router-dom';
 import { store, persistor } from './redux/store';
 import { Toaster } from 'react-hot-toast';
 import { CssBaseline, CircularProgress } from '@mui/material';
+import App from './App.jsx';
 import './index.css';
 import 'modern-normalize';
-import App from './App.jsx';
 
 createRoot(document.getElementById('root')).render(
   <Provider store={store}>

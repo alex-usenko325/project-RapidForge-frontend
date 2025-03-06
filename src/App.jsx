@@ -7,9 +7,9 @@ import RestrictedRoute from './routes/RestrictedRoute';
 import { refreshUser } from './redux/auth/operations';
 import SignUpPage from './pages/SignUpPage/SignUpPage';
 import SignInPage from './pages/SignInPage/SignInPage';
-import Water from './components/Water/Water';
 import TrackerPage from './pages/TrackerPage/TrackerPage';
 import NotFoundPage from './pages/NotFoundPage/NotFoundPage';
+import HomePage from './pages/HomePage/HomePage';
 
 const App = () => {
   const dispatch = useDispatch();
@@ -28,11 +28,10 @@ const App = () => {
 
   return (
     <Routes>
-      {/* Редирект з кореневого шляху на /water */}
-      <Route path="/" element={<Navigate to="/water" />} />
+      <Route path="/" element={<HomePage />} />
 
       <Route
-        path="/login"
+        path="/signin"
         element={
           <RestrictedRoute isLoggedIn={isLoggedIn}>
             <SignInPage />
@@ -40,19 +39,11 @@ const App = () => {
         }
       />
       <Route
-        path="/register"
+        path="/signup"
         element={
           <RestrictedRoute isLoggedIn={isLoggedIn}>
             <SignUpPage />
           </RestrictedRoute>
-        }
-      />
-      <Route
-        path="/water"
-        element={
-          <PrivateRoute isLoggedIn={isLoggedIn}>
-            <Water />
-          </PrivateRoute>
         }
       />
       <Route
@@ -63,7 +54,6 @@ const App = () => {
           </PrivateRoute>
         }
       />
-      {/* Додано обробник невідомих маршрутів */}
       <Route path="*" element={<NotFoundPage />} />
     </Routes>
   );
