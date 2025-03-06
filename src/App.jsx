@@ -7,6 +7,8 @@ import RestrictedRoute from './routes/RestrictedRoute';
 import { refreshUser } from './redux/auth/operations';
 import SignUpPage from './pages/SignUpPage/SignUpPage';
 import SignInPage from './pages/SignInPage/SignInPage';
+import Water from './components/Water/Water';
+import TrackerPage from './pages/TrackerPage/TrackerPage';
 
 const App = () => {
   const dispatch = useDispatch();
@@ -44,14 +46,22 @@ const App = () => {
           </RestrictedRoute>
         }
       />
-      {/* <Route
+      <Route
         path="/water"
         element={
           <PrivateRoute isLoggedIn={isLoggedIn}>
             <Water />
           </PrivateRoute>
         }
-      /> */}
+      />
+      <Route
+        path="/tracker"
+        element={
+          <PrivateRoute isLoggedIn={isLoggedIn}>
+            <TrackerPage />
+          </PrivateRoute>
+        }
+      />
       {/* Додано обробник невідомих маршрутів */}
       <Route path="*" element={<Navigate to="/" />} />
     </Routes>
