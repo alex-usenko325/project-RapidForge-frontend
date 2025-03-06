@@ -1,9 +1,15 @@
-import { Routes, Route } from 'react-router-dom';
+import './App.css';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import PrivateRoute from './routes/PrivateRoute';
 import RestrictedRoute from './routes/RestrictedRoute';
 import { refreshUser } from './redux/auth/operations';
+import SignUpPage from './pages/SignUpPage/SignUpPage';
+import SignInPage from './pages/SignInPage/SignInPage';
+import TrackerPage from './pages/TrackerPage/TrackerPage';
+import NotFoundPage from './pages/NotFoundPage/NotFoundPage';
+import HomePage from './pages/HomePage/HomePage';
 
 const App = () => {
   const dispatch = useDispatch();
@@ -22,30 +28,33 @@ const App = () => {
 
   return (
     <Routes>
+      <Route path="/" element={<HomePage />} />
+
       <Route
-        path="login"
+        path="/signin"
         element={
           <RestrictedRoute isLoggedIn={isLoggedIn}>
-            <Login />
+            <SignInPage />
           </RestrictedRoute>
         }
       />
       <Route
-        path="register"
+        path="/signup"
         element={
           <RestrictedRoute isLoggedIn={isLoggedIn}>
-            <Registration />
+            <SignUpPage />
           </RestrictedRoute>
         }
       />
       <Route
-        path="/water"
+        path="/tracker"
         element={
           <PrivateRoute isLoggedIn={isLoggedIn}>
-            <Water />
+            <TrackerPage />
           </PrivateRoute>
         }
       />
+      <Route path="*" element={<NotFoundPage />} />
     </Routes>
   );
 };

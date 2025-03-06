@@ -4,19 +4,181 @@
   min-width: 320px;
   max-width: 375px;
   margin: 0 auto;
-  padding: 0 20px;
+  /* padding: 0 20px; */
+  padding: 16px;
 }
 
 .section {
   padding: 40px 0 80px;
 }
 
+/* ----- Styles for SignIn and SignUp forms ----- */
+.authContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.authSection {
+  background-color: var(--background);
+  padding: 24px 16px;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  min-height: calc(100vh - 2*16px);
+  border-radius: 30px;
+}
+
+.authWrap {
+  margin-top: auto;
+  margin-bottom: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 32px;
+}
+
+.authSubtitle {
+  font-weight: 700;
+  font-size: 32px;
+  line-height: 1;
+  letter-spacing: -0.01em;
+}
+
+.authForm {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex-grow: 1;
+  width: 100%;
+  gap: 32px;
+}
+
+.authFormWrap {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.authLabel {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.labelSpan {
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 1.29;
+  letter-spacing: -0.01em;
+  color: var(--main-text);
+}
+
+.authField {
+  border: 1px solid rgba(47, 47, 47, 0.2);
+  border-radius: 15px;
+  padding: 16px;
+  background-color: inherit;
+}
+
+.authField::placeholder {
+  font-size: 14px;
+  line-height: 1.29;
+  letter-spacing: -0.01em;
+  color: rgba(47, 47, 47, 0.6);
+}
+
+.errorMessage {
+  font-size: 14px;
+  line-height: 1.29;
+  letter-spacing: -0.01em;
+  color: var(--error);
+}
+
+.authBtnWrap {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.authBtn {
+  border-radius: 30px;
+  padding: 16px;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 1.29;
+  letter-spacing: -0.01em;
+  text-align: center;
+  background: var(--accent);
+
+}
+
+.haveAnAccount {
+  font-size: 14px;
+  line-height: 1.29;
+  letter-spacing: -0.01em;
+  color: rgba(47, 47, 47, 0.5);
+  align-self: center;
+}
+
+.authLink {
+  font-weight: 700;
+  text-decoration: underline;
+  text-decoration-skip-ink: none;
+  color: var(--main-text);
+}
+
+/* ----- End of styles for SignIn and SignUp forms ----- */
+
 /* Tablet (від 768px) */
 @media (min-width: 768px) {
   .container {
     max-width: 768px;
-    padding: 0 32px;
+    padding: 32px;
   }
+
+  /* ----- Styles for SignIn and SignUp forms ----- */
+  .authSection {
+    padding: 32px;
+    min-height: calc(100vh - 2*32px);
+  }
+
+  .authWrap {
+    width: 436px;
+    margin: auto;
+  }
+
+  .subtitle {
+    font-size: 36px;
+    line-height: 1.06;
+  }
+
+  .authFormWrap {
+    gap: 20px;
+  }
+
+  .labelSpan {
+    font-size: 16px;
+    line-height: 1.5;
+  }
+
+  .authField::placeholder {
+    font-size: 16px;
+    line-height: 1.5;
+  }
+
+  .authBtn {
+    padding: 18px;
+    font-size: 16px;
+    line-height: 1.5;
+  }
+
+  .haveAnAccount {
+    font-size: 16px;
+    line-height: 1.5;
+  }
+
+  /* ----- End of styles for SignIn and SignUp forms ----- */
 }
 
 /* Desktop (від 1440px) */
