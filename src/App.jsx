@@ -1,14 +1,14 @@
-import { Routes, Route } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
-import PrivateRoute from "./routes/PrivateRoute";
-import RestrictedRoute from "./routes/RestrictedRoute";
-// import { refreshUser } from "./redux/auth/operations";
+import { Routes, Route } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import PrivateRoute from './routes/PrivateRoute';
+import RestrictedRoute from './routes/RestrictedRoute';
+import { refreshUser } from './redux/auth/operations';
 
 const App = () => {
   const dispatch = useDispatch();
-  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
-  const isRefreshing = useSelector((state) => state.auth.isRefreshing);
+  const isLoggedIn = useSelector(state => state.auth.isLoggedIn);
+  const isRefreshing = useSelector(state => state.auth.isRefreshing);
 
   useEffect(() => {
     if (!isLoggedIn) {
