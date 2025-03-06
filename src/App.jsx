@@ -1,12 +1,13 @@
-import { Routes, Route, Navigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
-import PrivateRoute from "./routes/PrivateRoute";
-import RestrictedRoute from "./routes/RestrictedRoute";
-import LoginForm from "./components/LoginForm/LoginForm";
-import Registration from "./components/RegistrationForm/RegistrationForm";
-import Water from "./components/Water/Water";
-import { refreshUser } from "./redux/auth/operations";
+import { Routes, Route, Navigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import PrivateRoute from './routes/PrivateRoute';
+import RestrictedRoute from './routes/RestrictedRoute';
+import LoginForm from './components/LoginForm/LoginForm';
+import Registration from './components/RegistrationForm/RegistrationForm';
+import Water from './components/Water/Water';
+import { refreshUser } from './redux/auth/operations';
+import NotFoundPage from './pages/NotFoundPage/NotFoundPage';
 
 const App = () => {
   const dispatch = useDispatch();
@@ -53,7 +54,7 @@ const App = () => {
         }
       />
       {/* Додано обробник невідомих маршрутів */}
-      <Route path="*" element={<Navigate to="/" />} />
+      <Route path="*" element={<NotFoundPage />} />
     </Routes>
   );
 };
