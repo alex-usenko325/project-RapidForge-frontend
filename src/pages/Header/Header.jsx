@@ -15,13 +15,7 @@ const Header = () => {
   return (
     <header>
       {isLoading && <p>Loading...</p>}
-      {user ? (
-        <p>
-          Hello, {user.name} ({user.email})
-        </p>
-      ) : (
-        <p>No user data</p>
-      )}
+      {user ? <p>Hello, {user.email.split("@")[0]}</p> : <p>No user data</p>}
     </header>
   );
 };
