@@ -1,12 +1,14 @@
+import './App.css';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import PrivateRoute from './routes/PrivateRoute';
 import RestrictedRoute from './routes/RestrictedRoute';
-import LoginForm from './components/LoginForm/LoginForm';
-import Registration from './components/RegistrationForm/RegistrationForm';
-import Water from './components/Water/Water';
 import { refreshUser } from './redux/auth/operations';
+import SignUpPage from './pages/SignUpPage/SignUpPage';
+import SignInPage from './pages/SignInPage/SignInPage';
+import Water from './components/Water/Water';
+import TrackerPage from './pages/TrackerPage/TrackerPage';
 import NotFoundPage from './pages/NotFoundPage/NotFoundPage';
 
 const App = () => {
@@ -33,7 +35,7 @@ const App = () => {
         path="/login"
         element={
           <RestrictedRoute isLoggedIn={isLoggedIn}>
-            <LoginForm />
+            <SignInPage />
           </RestrictedRoute>
         }
       />
@@ -41,7 +43,7 @@ const App = () => {
         path="/register"
         element={
           <RestrictedRoute isLoggedIn={isLoggedIn}>
-            <Registration />
+            <SignUpPage />
           </RestrictedRoute>
         }
       />
@@ -50,6 +52,14 @@ const App = () => {
         element={
           <PrivateRoute isLoggedIn={isLoggedIn}>
             <Water />
+          </PrivateRoute>
+        }
+      />
+      <Route
+        path="/tracker"
+        element={
+          <PrivateRoute isLoggedIn={isLoggedIn}>
+            <TrackerPage />
           </PrivateRoute>
         }
       />
