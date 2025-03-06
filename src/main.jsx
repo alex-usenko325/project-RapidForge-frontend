@@ -7,6 +7,7 @@ import { Toaster } from "react-hot-toast";
 import { CssBaseline, ThemeProvider, CircularProgress } from "@mui/material";
 import App from "./App.jsx";
 import "modern-normalize";
+import "./index.css";
 
 createRoot(document.getElementById("root")).render(
   <Provider store={store}>

@@ -1,9 +1,12 @@
+import "./App.css";
 import { Routes, Route } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import PrivateRoute from "./routes/PrivateRoute";
 import RestrictedRoute from "./routes/RestrictedRoute";
 // import { refreshUser } from "./redux/auth/operations";
+import SignUpPage from "./pages/SignUpPage/SignUpPage";
+import SignInPage from "./pages/SignInPage/SignInPage";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -26,7 +29,7 @@ const App = () => {
         path="login"
         element={
           <RestrictedRoute isLoggedIn={isLoggedIn}>
-            <Login />
+            <SignInPage />
           </RestrictedRoute>
         }
       />
@@ -34,7 +37,7 @@ const App = () => {
         path="register"
         element={
           <RestrictedRoute isLoggedIn={isLoggedIn}>
-            <Registration />
+            <SignUpPage />
           </RestrictedRoute>
         }
       />
