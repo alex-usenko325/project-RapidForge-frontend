@@ -1,14 +1,17 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import PrivateRoute from "./routes/PrivateRoute";
 import RestrictedRoute from "./routes/RestrictedRoute";
-// import { refreshUser } from "./redux/auth/operations";
+import LoginForm from "./components/LoginForm/LoginForm";
+import Registration from "./components/RegistrationForm/RegistrationForm";
+import Water from "./components/Water/Water";
+import { refreshUser } from "./redux/auth/operations";
 
 const App = () => {
   const dispatch = useDispatch();
-  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
-  const isRefreshing = useSelector((state) => state.auth.isRefreshing);
+  const isLoggedIn = useSelector(state => state.auth.isLoggedIn);
+  const isRefreshing = useSelector(state => state.auth.isRefreshing);
 
   useEffect(() => {
     if (!isLoggedIn) {
@@ -22,16 +25,19 @@ const App = () => {
 
   return (
     <Routes>
+      {/* Редирект з кореневого шляху на /water */}
+      <Route path="/" element={<Navigate to="/water" />} />
+
       <Route
-        path="login"
+        path="/login"
         element={
           <RestrictedRoute isLoggedIn={isLoggedIn}>
-            <Login />
+            <LoginForm />
           </RestrictedRoute>
         }
       />
       <Route
-        path="register"
+        path="/register"
         element={
           <RestrictedRoute isLoggedIn={isLoggedIn}>
             <Registration />
@@ -46,6 +52,8 @@ const App = () => {
           </PrivateRoute>
         }
       />
+      {/* Додано обробник невідомих маршрутів */}
+      <Route path="*" element={<Navigate to="/" />} />
     </Routes>
   );
 };
