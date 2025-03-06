@@ -1,0 +1,25 @@
+.text {
+  font-weight: 700;
+  font-size: 18px;
+  font-family: 'Poppins', sans-serif;
+  z-index: 999;
+  display: flex;
+  margin-top: 50px;
+}
+
+.wrapper {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  position: relative;
+  overflow: hidden;
+  background-image: url(../../assets/pageNotFound.jpg);
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+p {
+  margin: 0;
+}
