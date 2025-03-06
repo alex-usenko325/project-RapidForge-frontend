@@ -1,4 +1,4 @@
-import AddWaterBtn from './AddWaterBtn/AddWaterBtn';
+import AddWaterBtn from '../AddWaterBtn/AddWaterBtn';
 import WaterDailyNorma from './WaterDailyNorma/WaterDailyNorma';
 import WaterProgressBar from './WaterProgressBar/WaterProgressBar';
 
