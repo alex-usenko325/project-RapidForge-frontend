@@ -38,7 +38,7 @@
   gap: 32px;
 }
 
-.subtitle {
+.authSubtitle {
   font-weight: 700;
   font-size: 32px;
   line-height: 1;
@@ -186,47 +186,4 @@
   .container {
     max-width: 1440px;
   }
-
-  /* ----- Styles for SignIn and SignUp forms ----- */
-  .authSection {
-    padding: 32px;
-    min-height: calc(100vh - 2*32px);
-  }
-
-  .authWrap {
-    width: 436px;
-    margin: auto;
-  }
-
-  .subtitle {
-    font-size: 36px;
-    line-height: 1.06;
-  }
-
-  .authFormWrap {
-    gap: 20px;
-  }
-
-  .labelSpan {
-    font-size: 16px;
-    line-height: 1.5;
-  }
-
-  .authField::placeholder {
-    font-size: 16px;
-    line-height: 1.5;
-  }
-
-  .authBtn {
-    padding: 18px;
-    font-size: 16px;
-    line-height: 1.5;
-  }
-
-  .haveAnAccount {
-    font-size: 16px;
-    line-height: 1.5;
-  }
-
-  /* ----- End of styles for SignIn and SignUp forms ----- */
 }
