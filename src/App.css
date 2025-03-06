@@ -95,6 +95,12 @@
   color: var(--error);
 }
 
+.authBtnWrap {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
 .authBtn {
   border-radius: 30px;
   padding: 16px;

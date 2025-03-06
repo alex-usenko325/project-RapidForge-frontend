@@ -43,7 +43,7 @@ const SignInForm = () => {
                   />
                 </label>
               </div>
-              <div className="authFormWrap">
+              <div className="authBtnWrap">
                 <button type="submit" className="authBtn">
                   Sign In
                 </button>
