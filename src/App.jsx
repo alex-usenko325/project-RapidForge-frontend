@@ -1,11 +1,9 @@
-import { Routes, Route } from 'react-router-dom';
+import './App.css';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import PrivateRoute from './routes/PrivateRoute';
 import RestrictedRoute from './routes/RestrictedRoute';
-import LoginForm from './components/LoginForm/LoginForm';
-import Registration from './components/RegistrationForm/RegistrationForm';
-import Water from './components/Water/Water';
 import { refreshUser } from './redux/auth/operations';
 import SignUpPage from './pages/SignUpPage/SignUpPage';
 import SignInPage from './pages/SignInPage/SignInPage';
@@ -34,7 +32,7 @@ const App = () => {
         path="/login"
         element={
           <RestrictedRoute isLoggedIn={isLoggedIn}>
-            <SignInPageForm />
+            <SignInPage />
           </RestrictedRoute>
         }
       />
@@ -46,14 +44,14 @@ const App = () => {
           </RestrictedRoute>
         }
       />
-      <Route
+      {/* <Route
         path="/water"
         element={
           <PrivateRoute isLoggedIn={isLoggedIn}>
             <Water />
           </PrivateRoute>
         }
-      />
+      /> */}
       {/* Додано обробник невідомих маршрутів */}
       <Route path="*" element={<Navigate to="/" />} />
     </Routes>
