@@ -8,7 +8,7 @@ const SignUpForm = () => {
       <div className="authSection">
         <Logo />
         <div className="authWrap">
-          <h2 className="subtitle">Sign Up</h2>
+          <h2 className="authSubtitle">Sign Up</h2>
           <Formik>
             <Form className="authForm">
               <div className="authFormWrap">
@@ -58,7 +58,7 @@ const SignUpForm = () => {
                   />
                 </label>
               </div>
-              <div className="authFormWrap">
+              <div className="authBtnWrap">
                 <button type="submit" className="authBtn">
                   Sign Up
                 </button>
