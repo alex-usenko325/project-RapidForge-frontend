@@ -64,7 +64,7 @@ const SignUpForm = () => {
                 </button>
                 <div className="haveAnAccount">
                   Already have account?{' '}
-                  <a href="/login" className="authLink">
+                  <a href="/signin" className="authLink">
                     Sign In
                   </a>
                 </div>

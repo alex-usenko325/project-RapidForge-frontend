@@ -49,7 +49,7 @@ const SignInForm = () => {
                 </button>
                 <div className="haveAnAccount">
                   Don’t have an account?{' '}
-                  <a href="/register" className="authLink">
+                  <a href="/signup" className="authLink">
                     Sign Up
                   </a>
                 </div>
