@@ -1,13 +1,12 @@
-import clsx from "clsx";
-import { ErrorMessage, Field, Form, Formik } from "formik";
+import clsx from 'clsx';
+import { ErrorMessage, Field, Form, Formik } from 'formik';
+import Logo from '../Logo/Logo';
 
 const SignUpForm = () => {
   return (
-    <div className={clsx("container", "authContainer")}>
+    <div className={clsx('container', 'authContainer')}>
       <div className="authSection">
-        <a href="/" className="authLogo">
-          AQUARTACK
-        </a>
+        <Logo />
         <div className="authWrap">
           <h2 className="subtitle">Sign Up</h2>
           <Formik>
@@ -24,7 +23,7 @@ const SignUpForm = () => {
                   />
                   <ErrorMessage
                     name="email"
-                    component={"span"}
+                    component={'span'}
                     className="errorMessage"
                   />
                 </label>
@@ -39,7 +38,7 @@ const SignUpForm = () => {
                   />
                   <ErrorMessage
                     name="password"
-                    component={"span"}
+                    component={'span'}
                     className="errorMessage"
                   />
                 </label>
@@ -54,7 +53,7 @@ const SignUpForm = () => {
                   />
                   <ErrorMessage
                     name="password"
-                    component={"span"}
+                    component={'span'}
                     className="errorMessage"
                   />
                 </label>
@@ -64,7 +63,7 @@ const SignUpForm = () => {
                   Sign Up
                 </button>
                 <div className="haveAnAccount">
-                  Already have account?{" "}
+                  Already have account?{' '}
                   <a href="/login" className="authLink">
                     Sign In
                   </a>

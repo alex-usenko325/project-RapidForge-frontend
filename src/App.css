@@ -24,14 +24,11 @@
   background-color: var(--background);
   padding: 24px 16px;
   display: flex;
-  justify-content: center;
   flex-direction: column;
   width: 100%;
   min-height: calc(100vh - 2*16px);
   border-radius: 30px;
 }
-
-.authLogo {}
 
 .authWrap {
   margin-top: auto;
