@@ -5,7 +5,6 @@ export default function TrackerPage() {
     <div>
       <h1>Water Tracker</h1>
       <WaterMainInfo />
-      {/* <WaterDetailedInfo /> */}
     </div>
   );
 }
