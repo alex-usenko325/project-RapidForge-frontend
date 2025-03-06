@@ -9,6 +9,7 @@ import SignUpPage from './pages/SignUpPage/SignUpPage';
 import SignInPage from './pages/SignInPage/SignInPage';
 import Water from './components/Water/Water';
 import TrackerPage from './pages/TrackerPage/TrackerPage';
+import NotFoundPage from './pages/NotFoundPage/NotFoundPage';
 
 const App = () => {
   const dispatch = useDispatch();
@@ -63,7 +64,7 @@ const App = () => {
         }
       />
       {/* Додано обробник невідомих маршрутів */}
-      <Route path="*" element={<Navigate to="/" />} />
+      <Route path="*" element={<NotFoundPage />} />
     </Routes>
   );
 };

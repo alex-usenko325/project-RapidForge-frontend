@@ -1,5 +1,7 @@
+@import './styles/fonts.css';
+
 :root {
-  --font-family: "Poppins", sans-serif;
+  --font-family: 'Poppins', sans-serif;
   --main: #323f47;
   --main-text: #2f2f2f;
   --accent: #9be1a0;
@@ -15,12 +17,12 @@
 }
 
 body {
-  font-family: var(--font-family);
-  color: var(--main);
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 1.5;
-  background-color: var(--main-white);
+  font-family: var(--font-family) !important;
+  color: var(--main) !important;
+  font-weight: 400 !important;
+  font-size: 16px !important;
+  line-height: 1.5 !important;
+  background-color: var(--main-white) !important;
 }
 
 h1,
