@@ -1,0 +1,35 @@
+.userPanelCont {
+   
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
+    gap: 20px;
+    padding: 40px 0px; 
+    margin-bottom: 40px;
+  }
+  
+  .title {
+    font-weight: 400;
+    font-size: 32px;
+    max-width: 300px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: var(--main);
+  }
+  
+  .span {
+    font-weight: 700;
+  }
+  
+  @media screen and (min-width: 768px) {
+    .userPanelCont {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+    }
+    .title {
+      max-width: 310px;
+    }
+  }
