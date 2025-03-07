@@ -15,7 +15,8 @@
   cursor: pointer;
   transition: background-color 0.3s ease;
   margin-top: 42px;
-  margin-left: 187px;
+  margin-right: 16px;
+  margin-left: auto;
 }
 
 .button:hover {
@@ -28,9 +29,40 @@
   font-weight: 400;
 }
 
-@media screen and (max-width: 374px) {
+@media screen and (min-width: 768px) {
   .button {
-    margin-right: 16px;
+    width: 178px;
+    height: 60px;
+    font-size: 16px;
+    line-height: 24px;
+    margin-top: 26px;
     margin-left: auto;
+    margin-right: 32px;
+  }
+  .button:hover {
+    background-color: #3d3d3d;
+  }
+  .plus {
+    margin-right: 10px;
+    font-size: 24px;
+    font-weight: 350;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .button {
+    width: 178px;
+    height: 60px;
+    font-size: 16px;
+    line-height: 24px;
+    margin-top: 56px;
+    margin-right: 32px;
+    margin-left: auto;
+  }
+
+  .plus {
+    margin-right: 10px;
+    font-size: 24px;
+    font-weight: 350;
   }
 }
