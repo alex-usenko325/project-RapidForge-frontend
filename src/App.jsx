@@ -23,7 +23,7 @@ const App = () => {
   }, [dispatch, isLoggedIn]);
 
   if (isRefreshing) {
-    return <p>Loading...</p>;
+    return <p></p>;
   }
 
   return (
