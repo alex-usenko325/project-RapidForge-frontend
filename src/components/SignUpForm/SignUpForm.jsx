@@ -1,15 +1,49 @@
 import clsx from 'clsx';
 import { ErrorMessage, Field, Form, Formik } from 'formik';
 import Logo from '../Logo/Logo';
+import * as Yup from 'yup';
+import { useDispatch } from 'react-redux';
+import { signup } from '../../redux/auth/operations';
+
+const SingUpValidationSchema = Yup.object().shape({
+  email: Yup.string()
+    .email('Please enter a valid email')
+    .required('Email is required field!'),
+  password: Yup.string()
+    .min(6, 'Password is too short!')
+    .max(18, 'Password is too long!')
+    .required('Password is required field!'),
+  repeatPassword: Yup.string().oneOf(
+    [Yup.ref('password'), null],
+    'Passwords must match'
+  ),
+});
+
+const initialValues = {
+  email: '',
+  password: '',
+  repeatPassword: '',
+};
 
 const SignUpForm = () => {
+  const dispatch = useDispatch();
+
+  const handleSubmit = (values, actions) => {
+    dispatch(signup({ email: values.email, password: values.password }));
+    actions.resetForm();
+  };
+
   return (
     <div className={clsx('container', 'authContainer')}>
       <div className="authSection">
         <Logo />
         <div className="authWrap">
           <h2 className="authSubtitle">Sign Up</h2>
-          <Formik>
+          <Formik
+            initialValues={initialValues}
+            onSubmit={handleSubmit}
+            validationSchema={SingUpValidationSchema}
+          >
             <Form className="authForm">
               <div className="authFormWrap">
                 <label className="authLabel">
@@ -52,7 +86,7 @@ const SignUpForm = () => {
                     required
                   />
                   <ErrorMessage
-                    name="password"
+                    name="repeatPassword"
                     component={'span'}
                     className="errorMessage"
                   />

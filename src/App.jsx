@@ -1,5 +1,5 @@
 import './App.css';
-import { Routes, Route, Navigate } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import PrivateRoute from './routes/PrivateRoute';
@@ -23,7 +23,7 @@ const App = () => {
   }, [dispatch, isLoggedIn]);
 
   if (isRefreshing) {
-    return <p>Loading...</p>;
+    return <p></p>;
   }
 
   return (

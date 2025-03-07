@@ -2,7 +2,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
 const authAPI = axios.create({
-  baseURL: 'http://localhost:5000', // Вкажіть правильний порт вашого серверу
+  baseURL: 'https://aqua-track-app.onrender.com', // Вкажіть правильний порт вашого серверу
 });
 
 // Додавання та очищення заголовку авторизації
@@ -19,7 +19,7 @@ export const signup = createAsyncThunk(
   'auth/signup',
   async (body, thunkAPI) => {
     try {
-      const response = await authAPI.post('/auth/signup', body);
+      const response = await authAPI.post('/auth/register', body);
       setAuthHeader(response.data.token);
       return response.data;
     } catch (err) {
@@ -33,7 +33,7 @@ export const signin = createAsyncThunk(
   'auth/signin',
   async (body, thunkAPI) => {
     try {
-      const response = await authAPI.post('/auth/signin', body);
+      const response = await authAPI.post('/auth/login', body);
       setAuthHeader(response.data.token);
       return response.data;
     } catch (err) {
@@ -57,7 +57,7 @@ export const refreshUser = createAsyncThunk(
   'auth/refreshUser',
   async (_, thunkAPI) => {
     try {
-      const response = await authAPI.get('/auth/refresh');
+      const response = await authAPI.post('/auth/refresh');
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.response.data);
