@@ -1,0 +1,170 @@
+.wrapper {
+  width: 100%;
+  height: 411px;
+  border-radius: 30px;
+  padding: 24px 16px;
+
+  background-color: var(--background);
+  color: var(--main);
+}
+
+@media (min-width: 320px) and (max-width: 360px) {
+  .wrapper {
+    width: 100%;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .wrapper {
+    width: 704px;
+    height: 498px;
+    padding: 32px;
+  }
+}
+
+@media only screen and (min-width: 1440px) {
+  .wrapper {
+    width: 672px;
+    height: 736px;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .wrapperContent {
+    padding-left: 64px;
+  }
+}
+
+.subtitle {
+  margin-bottom: 16px;
+  margin-top: 94px;
+
+  font-size: 14px;
+  line-height: 1.3;
+  letter-spacing: 0.06em;
+  line-height: 1.3;
+  color: var(--main-text);
+}
+
+@media only screen and (min-width: 768px) {
+  .subtitle {
+    margin-top: 74px;
+    font-size: 16px;
+    line-height: 1.5;
+  }
+}
+
+@media only screen and (min-width: 1440px) {
+  .subtitle {
+    margin-top: 156px;
+  }
+}
+
+.title {
+  margin-bottom: 32px;
+
+  font-weight: 700;
+  font-size: 38px;
+  line-height: 0.95;
+  letter-spacing: -0.01em;
+}
+
+@media only screen and (min-width: 768px) {
+  .title {
+    width: 547px;
+    font-size: 64px;
+  }
+}
+
+@media only screen and (min-width: 1440px) {
+  .title {
+    font-size: 80px;
+  }
+}
+
+.btnWrapper {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+}
+
+@media only screen and (min-width: 768px) {
+  .btnWrapper {
+    gap: 16px;
+  }
+}
+
+.btnTracker {
+  width: 116px;
+  height: 46px;
+  border-radius: 30px;
+  padding: 14px 19px;
+  background-color: var(--accent);
+
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+  color: var(--main);
+
+  transition: background-color 0.3s ease;
+}
+
+@media only screen and (min-width: 768px) {
+  .btnTracker {
+    width: 169px;
+    height: 60px;
+    padding: 18px 40px;
+
+    font-size: 16px;
+    line-height: 1.5;
+  }
+}
+
+.btnTracker:hover {
+  background-color: #87d28d;
+}
+
+.btnTracker:disabled {
+  background-color: transparent;
+  color: #bcbcbc;
+}
+
+.btnSignIn {
+  width: 104px;
+  height: 46px;
+  border: 1px solid var(--main);
+  border-radius: 30px;
+  padding: 14px 27px;
+  background-color: transparent;
+
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+  color: var(--main);
+
+  transition: border 0.3s ease, color 0.3s ease;
+}
+
+@media (min-width: 320px) and (max-width: 360px) {
+  .btnSignIn {
+    font-size: 13px;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .btnSignIn {
+    width: 135px;
+    height: 60px;
+    padding: 18px 38px;
+
+    font-size: 16px;
+    line-height: 1.5;
+  }
+}
+
+.btnSignIn:hover {
+  border: 1px solid #87d28d;
+  color: #87d28d;
+}
