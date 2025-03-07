@@ -28,3 +28,6 @@
   color: var(--main-text);
   white-space: nowrap;
 }
+
+@media screen and (max-width: 374px) {
+}

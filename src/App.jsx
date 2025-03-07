@@ -1,8 +1,8 @@
 import './App.css';
-import { Routes, Route, Navigate } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
-import PrivateRoute from './routes/PrivateRoute';
+// import PrivateRoute from './routes/PrivateRoute';
 import RestrictedRoute from './routes/RestrictedRoute';
 import { refreshUser } from './redux/auth/operations';
 import SignUpPage from './pages/SignUpPage/SignUpPage';
@@ -46,14 +46,7 @@ const App = () => {
           </RestrictedRoute>
         }
       />
-      <Route
-        path="/tracker"
-        element={
-          <PrivateRoute isLoggedIn={isLoggedIn}>
-            <TrackerPage />
-          </PrivateRoute>
-        }
-      />
+      <Route path="/tracker" element={<TrackerPage />} />
       <Route path="*" element={<NotFoundPage />} />
     </Routes>
   );
