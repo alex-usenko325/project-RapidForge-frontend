@@ -1,18 +1,22 @@
 import s from './WelcomeSection.module.css';
+import Logo from '../Logo/Logo.jsx';
+import { Link } from 'react-router-dom';
 
 const WelcomeSection = () => {
   return (
     <div className={s.wrapper}>
-      <div className={s.logo}>Logo</div>
-      <h2 className={s.subtitle}>Record daily water intake and track</h2>
-      <h1 className={s.title}>Water consumption tracker</h1>
-      <div className={s.btnWrapper}>
-        <button type="button" className={s.btnTracker}>
-          Try tracker
-        </button>
-        <button type="button" className={s.btnSignIn}>
-          Sign In
-        </button>
+      <Logo />
+      <div className={s.wrapperContent}>
+        <p className={s.subtitle}>Record daily water intake and track</p>
+        <h1 className={s.title}>Water consumption tracker</h1>
+        <div className={s.btnWrapper}>
+          <Link to="/signup" className={s.btnTracker}>
+            Try tracker
+          </Link>
+          <Link to="/signin" className={s.btnSignIn}>
+            Sign In
+          </Link>
+        </div>
       </div>
     </div>
   );

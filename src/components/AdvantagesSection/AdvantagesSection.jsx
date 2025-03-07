@@ -1,7 +1,7 @@
 import s from './AdvantagesSection.module.css';
-import customer1 from '../../assets/img/customers/customer1.png';
-import customer2 from '../../assets/img/customers/customer2.png';
-import customer3 from '../../assets/img/customers/customer3.png';
+import customer1 from '../../assets/images/customers/desktop/1x/customer-1-desk-x1.png';
+import customer2 from '../../assets/images/customers/desktop/1x/customer-2-desk-x1.png';
+import customer3 from '../../assets/images/customers/desktop/1x/customer-3-desk-x1.png';
 
 const AdvantagesSection = () => {
   const customers = [customer1, customer2, customer3];
