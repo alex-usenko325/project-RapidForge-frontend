@@ -1,0 +1,124 @@
+.modalWrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    border-radius: 15px;
+    padding: 40px 14px;
+    width: 100%;
+    box-shadow: 0 4px 50px 0 rgba(0, 0, 0, 0.1);
+    background: var(--main-white);
+    transition: opacity 0.3s ease, transform 0.3s ease, filter 0.3s ease;
+}
+
+.logoutTitle {
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+    color: var(--main);
+    margin-bottom: 16px;
+}
+
+.logoutText {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 1.29;
+    letter-spacing: -0.01em;
+    text-align: center;
+    color: var(--main);
+    margin-bottom: 28px;
+}
+
+/* .closeBtn {
+    stroke-width: 3px;
+    stroke: var(--main-text);
+    color: #2F2F2F;
+    width: 18px;
+    height: 18px;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+} */
+
+.btnLogoutWrapper {
+    display: flex;
+    flex-direction: column;
+    width: 100%; 
+    gap: 9px;
+}
+
+.btnLogout,
+.btnCancel {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    border-radius: 30px;
+    width: 100%;
+    height: 46px;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 1.29;
+    letter-spacing: -0.01em;
+    border: none;
+    cursor: pointer;
+    transition: color 250ms ease-in, background-color 250ms ease-in;
+}
+
+.btnLogout {
+    background-color: var(--accent);
+    color: var(--main);
+}
+
+.btnLogout:hover {
+    background-color: #87d28d;;
+}
+
+.btnCancel {
+    background-color: var(--background);
+    color: rgba(50, 63, 71, 0.3);
+}
+
+.btnCancel:hover {
+    color: var(--main);
+}
+
+
+@media screen and (min-width: 768px) {
+    .modalWrapper {
+        padding: 40px;
+        width: 516px;
+    }                   
+
+    .logoutTitle {
+        font-size: 28px;
+        line-height: 1.14;
+        margin-bottom: 24px;
+    }
+
+    .logoutText {
+        font-size: 18px;
+        line-height: 1.33;
+        margin-bottom: 24px;
+    }
+
+    .btnLogoutWrapper {
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .btnLogout,
+    .btnCancel {
+        width: 173px;
+        height: 60px;
+        font-size: 16px;
+        line-height: 1.5;
+    }
+}
