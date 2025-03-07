@@ -1,0 +1,30 @@
+.container {
+  background-color: var(--main-white);
+  margin-top: 80px;
+  margin-left: 16px;
+  border-radius: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+  padding: 12px;
+  height: 54px;
+  width: 102px;
+}
+
+.litr {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 14px;
+  color: var(--main-text);
+}
+
+.norma {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 400;
+  font-size: 10px;
+  line-height: 10px;
+  color: var(--main-text);
+  white-space: nowrap;
+}

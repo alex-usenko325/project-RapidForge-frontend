@@ -1,3 +1,5 @@
+@import './styles/fonts.css';
+
 :root {
   --font-family: 'Poppins', sans-serif;
   --main: #323f47;
@@ -5,6 +7,7 @@
   --accent: #9be1a0;
   --background: #f0eff4;
   --main-white: #fff;
+  --error: #ef5050;
 }
 
 * {

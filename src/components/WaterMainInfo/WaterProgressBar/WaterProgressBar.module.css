@@ -1,0 +1,66 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--main-white);
+  width: 198px;
+  height: 70px;
+  padding: 12px;
+  border-radius: 15px;
+  gap: 6px;
+  margin-top: 49px;
+  margin-left: 73px;
+}
+
+.label {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 14px;
+  color: var(--main-text);
+  margin: 0;
+}
+
+.progressBar {
+  position: relative;
+  width: 100%;
+  height: 6px;
+  background-color: rgba(240, 239, 244, 1);
+  border-radius: 9px;
+}
+
+.progressFill {
+  height: 100%;
+  background-color: var(--accent);
+  border-radius: 9px;
+  transition: width 0.3s ease;
+}
+
+.progressMarker {
+  position: absolute;
+  top: -3px;
+  width: 12px;
+  height: 12px;
+  background-color: var(--main-white);
+  border: 1px solid var(--accent);
+  border-radius: 50%;
+  transform: translateX(-50%);
+}
+
+.progressLabels {
+  display: flex;
+  justify-content: space-between;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 700;
+  font-size: 12px;
+  line-height: 12px;
+  color: var(--main-text);
+  margin: 0;
+}
+
+.progressSpan {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 400;
+  font-size: 10px;
+  line-height: 10px;
+  color: var(--main-text);
+}
