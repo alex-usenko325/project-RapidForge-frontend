@@ -12,6 +12,7 @@ const SingUpValidationSchema = Yup.object().shape({
   password: Yup.string()
     .min(6, 'Password is too short!')
     .max(18, 'Password is too long!')
+    .pattern(new RegExp('^(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])'))
     .required('Password is required field!'),
   repeatPassword: Yup.string().oneOf(
     [Yup.ref('password'), null],
