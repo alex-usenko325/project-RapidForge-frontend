@@ -1,0 +1,32 @@
+.container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: 415px;
+  width: 343px;
+  background-color: var(--accent);
+  border-radius: 30px;
+  background-image: url(../../assets/images/bottle/tablet/bottle-tablet-x1.png);
+  background-size: 76%;
+  background-position: center 50px;
+  background-repeat: no-repeat;
+}
+.trackH2 {
+  margin-top: 24px;
+  margin-left: 16px;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 14px;
+  color: var(--main-text);
+  text-transform: uppercase;
+}
+
+@media only screen and (min-resolution: 192dpi),
+  only screen and (min-resolution: 2dppx),
+  only screen and (-webkit-min-device-pixel-ratio: 2) {
+  .container {
+    background-image: url(../../assets/images/bottle/tablet/bottle-tablet-x2.png);
+    background-size: 76%;
+  }
+}

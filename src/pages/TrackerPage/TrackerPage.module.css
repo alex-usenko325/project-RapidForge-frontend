@@ -1,0 +1,7 @@
+.container {
+  display: flex;
+  background-color: var(--main-white);
+  flex-direction: column;
+  padding: 16px;
+  align-items: center;
+}
