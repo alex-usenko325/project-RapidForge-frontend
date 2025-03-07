@@ -25,6 +25,40 @@
   font-weight: 400;
   font-size: 10px;
   line-height: 10px;
-  color: var(--main-text);
+  color: rgba(47, 47, 47, 0.6);
   white-space: nowrap;
+}
+
+@media screen and (min-width: 768px) {
+  .container {
+    width: 129px;
+    height: 78px;
+    padding: 14px 18px 14px 18px;
+    gap: 4px;
+    margin-top: 89px;
+    margin-left: 32px;
+  }
+  .litr {
+    font-size: 15px;
+    line-height: 22.4px;
+  }
+  .norma {
+    font-size: 10px;
+    line-height: 22.4px;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .container {
+    margin-top: 101px;
+    margin-left: 64px;
+  }
+  .litr {
+    font-size: 15px;
+    line-height: 22.4px;
+  }
+  .norma {
+    font-size: 12px;
+    line-height: 22.4px;
+  }
 }
