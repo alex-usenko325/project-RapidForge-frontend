@@ -1,0 +1,90 @@
+.btn {
+  border-radius: 30px;
+  padding: 14px 20px;
+  width: 140px;
+  height: 46px;
+  background: #323f47;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 1.28571;
+  letter-spacing: -0.01em;
+  text-align: center;
+  color: #fff;
+  font-family: 'Poppins', sans-serif;
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  outline: none;
+  border: none;
+}
+
+.icon {
+  position: relative;
+  width: 12px;
+  height: 12px;
+  display: inline-block;
+}
+
+.icon::before,
+.icon::after {
+  content: '';
+  position: absolute;
+  background-color: white;
+  border-radius: 50px;
+}
+
+.icon::before {
+  width: 100%;
+  height: 1.5px;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.icon::after {
+  width: 1.5px;
+  height: 100%;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.btn:hover,
+.btn:active {
+  color: #9be1a0;
+}
+
+.btn:hover .icon::before,
+.btn:active .icon::before {
+  background-color: #9be1a0;
+}
+
+.btn:hover .icon::after,
+.btn:active .icon::after {
+  background-color: #9be1a0;
+}
+
+@media (min-width: 768px) {
+  .btn {
+    border-radius: 30px;
+    padding: 18px 30px;
+    width: 178px;
+    height: 60px;
+    font-size: 16px;
+    line-height: 1.5;
+    gap: 15px;
+  }
+  .icon {
+    width: 14px;
+    height: 14px;
+  }
+
+  .icon::before {
+    height: 2px;
+  }
+  .icon::after {
+    width: 2px;
+  }
+}
