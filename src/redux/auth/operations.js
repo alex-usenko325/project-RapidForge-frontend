@@ -2,7 +2,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
 const authAPI = axios.create({
-  baseURL: 'http://localhost:5000', // Вкажіть правильний порт вашого серверу
+  baseURL: 'https://aqua-track-app.onrender.com', // Вкажіть правильний порт вашого серверу
 });
 
 // Додавання та очищення заголовку авторизації
