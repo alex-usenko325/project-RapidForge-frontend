@@ -1,1 +1,193 @@
+/* ----- Styles for SignIn and SignUp forms ----- */
+.authSection {
+  background-color: var(--background);
+  padding: 24px 16px;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  min-height: calc(100vh - 2*16px);
+  border-radius: 30px;
+}
 
+.authWrap {
+  margin-top: auto;
+  margin-bottom: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 32px;
+  padding-top: 20px;
+}
+
+.authSubtitle {
+  font-weight: 700;
+  font-size: 32px;
+  line-height: 1;
+  letter-spacing: -0.01em;
+}
+
+.authForm {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex-grow: 1;
+  width: 100%;
+  gap: 32px;
+}
+
+.authFormWrap {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.authLabel {
+  display: flex;
+  flex-direction: column;
+}
+
+.labelSpan {
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 1.29;
+  letter-spacing: -0.01em;
+  color: var(--main-text);
+  margin-bottom: 8px;
+}
+
+.inputWrap {
+  position: relative;
+  width: 100%;
+}
+
+.authField {
+  border: 1px solid rgba(47, 47, 47, 0.2);
+  border-radius: 15px;
+  padding: 16px;
+  background-color: inherit;
+  width: 100%;
+}
+
+.authField::placeholder {
+  font-size: 14px;
+  line-height: 1.29;
+  letter-spacing: -0.01em;
+  color: rgba(47, 47, 47, 0.6);
+}
+
+.authIcon {
+  fill: var(--main-white);
+  stroke: var(--main-text);
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  right: 18px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+.errorMessage {
+  font-size: 12px;
+  line-height: 1.29;
+  letter-spacing: -0.01em;
+  color: var(--error);
+  position: absolute;
+  width: 100%;
+  margin-top: 78px;
+  width: auto;
+}
+
+.authBtnWrap {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.authBtn {
+  border-radius: 30px;
+  padding: 16px;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 1.29;
+  letter-spacing: -0.01em;
+  text-align: center;
+  background: var(--accent);
+}
+
+.haveAnAccount {
+  font-size: 14px;
+  line-height: 1.29;
+  letter-spacing: -0.01em;
+  color: rgba(47, 47, 47, 0.5);
+  align-self: center;
+}
+
+.authLink {
+  font-weight: 700;
+  text-decoration: underline;
+  text-decoration-skip-ink: none;
+  color: var(--main-text);
+}
+
+/* Tablet (від 768px) */
+@media (min-width: 768px) {
+  .authSection {
+    padding: 32px;
+    min-height: calc(100vh - 2*32px);
+  }
+
+  .authWrap {
+    width: 436px;
+    margin: auto;
+  }
+
+  .authSubtitle {
+    font-size: 36px;
+    line-height: 1.06;
+  }
+
+  .authFormWrap {
+    gap: 20px;
+  }
+
+  .labelSpan {
+    font-size: 16px;
+    line-height: 1.5;
+  }
+
+  .authField::placeholder {
+    font-size: 16px;
+    line-height: 1.5;
+  }
+
+  .errorMessage {
+    font-size: 14px;
+    margin-top: 84px;
+  }
+
+  .authBtn {
+    padding: 18px;
+    font-size: 16px;
+    line-height: 1.5;
+  }
+
+  .haveAnAccount {
+    font-size: 16px;
+    line-height: 1.5;
+  }
+}
+
+/* Desktop (від 1440px) */
+@media (min-width: 1440px) {
+  .authSection {
+    max-width: 672px;
+    min-height: calc((100% - 2 * 16px));
+  }
+
+  .authWrap {
+    padding-top: 0;
+  }
+}
+
+/* ----- End of styles for SignIn and SignUp forms ----- */
