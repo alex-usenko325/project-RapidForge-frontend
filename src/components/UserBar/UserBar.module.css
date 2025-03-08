@@ -1,0 +1,45 @@
+.btn {
+  border-radius: 30px;
+  padding: 6px 12px;
+  width: 137px;
+  height: 50px;
+  background: #323f47;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.name {
+  font-weight: 700;
+  font-size: 14px;
+  font-family: 'Poppins', sans-serif;
+  line-height: 1.28571;
+  letter-spacing: -0.01em;
+  text-align: center;
+  color: #fff;
+}
+
+.avatar {
+  border-radius: 100%;
+  width: 38px;
+  height: 38px;
+}
+
+.icon {
+  width: 16px;
+  height: 16px;
+  fill: transparent;
+  stroke: white;
+}
+
+@media (min-width: 768px) {
+  .btn {
+    width: 157px;
+    height: 56px;
+  }
+
+  .icon {
+    width: 20px;
+    height: 20px;
+  }
+}
