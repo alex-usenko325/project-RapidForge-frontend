@@ -88,13 +88,14 @@
 }
 
 .errorMessage {
-  font-size: 14px;
+  font-size: 12px;
   line-height: 1.29;
   letter-spacing: -0.01em;
   color: var(--error);
   position: absolute;
   width: 100%;
-  margin-top: 80px;
+  margin-top: 78px;
+  width: auto;
 }
 
 .authBtnWrap {
@@ -161,6 +162,7 @@
   }
 
   .errorMessage {
+    font-size: 14px;
     margin-top: 84px;
   }
 
