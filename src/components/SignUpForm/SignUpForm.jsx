@@ -4,6 +4,7 @@ import * as Yup from 'yup';
 import { useDispatch } from 'react-redux';
 import { signup } from '../../redux/auth/operations';
 import s from './SignUpForm.module.css';
+import sprite from '../../../public/sprite.svg';
 
 const SingUpValidationSchema = Yup.object().shape({
   email: Yup.string()
@@ -62,13 +63,18 @@ const SignUpForm = () => {
               </label>
               <label className={s.authLabel}>
                 <span className={s.labelSpan}>Password</span>
-                <Field
-                  className={s.authField}
-                  type="password"
-                  name="password"
-                  placeholder="Enter your password"
-                  required
-                />
+                <div className={s.inputWrap}>
+                  <Field
+                    className={s.authField}
+                    type="password"
+                    name="password"
+                    placeholder="Enter your password"
+                    required
+                  />
+                  <svg className={s.authIcon}>
+                    <use xlinkHref={`${sprite}#icon-eye-off`} />
+                  </svg>
+                </div>
                 <ErrorMessage
                   name="password"
                   component={'span'}
@@ -76,14 +82,19 @@ const SignUpForm = () => {
                 />
               </label>
               <label className={s.authLabel}>
-                <span className="labelSpan">Repeat password</span>
-                <Field
-                  className={s.authField}
-                  type="password"
-                  name="repeatPassword"
-                  placeholder="Repeat password"
-                  required
-                />
+                <span className={s.labelSpan}>Repeat password</span>
+                <div className={s.inputWrap}>
+                  <Field
+                    className={s.authField}
+                    type="password"
+                    name="repeatPassword"
+                    placeholder="Repeat password"
+                    required
+                  />
+                  <svg className={s.authIcon}>
+                    <use xlinkHref={`${sprite}#icon-eye-off`} />
+                  </svg>
+                </div>
                 <ErrorMessage
                   name="repeatPassword"
                   component={'span'}
