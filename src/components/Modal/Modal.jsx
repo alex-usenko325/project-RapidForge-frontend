@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import s from './Modal.module.css';
+import sprite from '../../assets/sprite.svg';
 
 const Modal = ({ children, onClose }) => {
   const handleCloseModal = () => {
@@ -31,7 +32,8 @@ const Modal = ({ children, onClose }) => {
         <div className={s.modal}>
           <button className={s.btn} onClick={handleCloseModal}>
             <svg className={s.icon} width="24" height="24">
-              <use href="/sprite.svg#icon-close"></use>
+              {/* <use href="/sprite.svg#icon-close"></use> */}
+              <use xlinkHref={`${sprite}#icon-close`} />
             </svg>
           </button>
           {children}

@@ -10,7 +10,6 @@ import SignInPage from './pages/SignInPage/SignInPage';
 import TrackerPage from './pages/TrackerPage/TrackerPage';
 import NotFoundPage from './pages/NotFoundPage/NotFoundPage';
 import HomePage from './pages/HomePage/HomePage';
-import AddWaterBtn from './components/AddWaterBtn/AddWaterBtn.jsx';
 
 const App = () => {
   const dispatch = useDispatch();
@@ -58,7 +57,6 @@ const App = () => {
         />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
-      <AddWaterBtn />
     </div>
   );
 };

@@ -5,7 +5,7 @@ import * as Yup from 'yup';
 import { useDispatch } from 'react-redux';
 import { signin } from '../../redux/auth/operations';
 import s from '../SignUpForm/SignUpForm.module.css';
-import sprite from '../../../public/sprite.svg';
+import sprite from '../../assets/sprite.svg';
 
 const SingInValidationSchema = Yup.object().shape({
   email: Yup.string()
