@@ -1,0 +1,62 @@
+.userBar {
+  margin-top: 4px;
+  border-radius: 15px;
+  padding: 14px 57px 14px 20px;
+  width: 137px;
+  height: 72px;
+  box-shadow: 0 4px 50px 0 rgba(0, 0, 0, 0.1);
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.btn_settings {
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 1.28571;
+  color: #323f47;
+  font-family: 'Poppins', sans-serif;
+  display: flex;
+  width: 77px;
+  height: 18px;
+  gap: 8px;
+}
+.btn_logout {
+  font-weight: 700;
+  font-size: 14px;
+  font-family: 'Poppins', sans-serif;
+  line-height: 1.28571;
+  color: rgba(50, 63, 71, 0.4);
+  display: flex;
+  width: 77px;
+  height: 18px;
+  gap: 8px;
+}
+
+.icon_settings {
+  stroke-width: 1.5px;
+  stroke: #323f47;
+  fill: transparent;
+}
+.icon_logout {
+  stroke-width: 1.5px;
+  stroke: rgba(50, 63, 71, 0.4);
+  fill: transparent;
+}
+
+@media (min-width: 768px) {
+  .userBar {
+    width: 157px;
+    height: 82px;
+    margin-top: 8px;
+  }
+  .btn_settings {
+    width: 80px;
+    height: 23px;
+  }
+  .btn_logout {
+    width: 80px;
+    height: 23px;
+  }
+}
