@@ -27,35 +27,37 @@ const App = () => {
   }
 
   return (
-    <Routes>
-      <Route path="/" element={<HomePage />} />
+    <div>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
 
-      <Route
-        path="/signin"
-        element={
-          <RestrictedRoute isLoggedIn={isLoggedIn}>
-            <SignInPage />
-          </RestrictedRoute>
-        }
-      />
-      <Route
-        path="/signup"
-        element={
-          <RestrictedRoute isLoggedIn={isLoggedIn}>
-            <SignUpPage />
-          </RestrictedRoute>
-        }
-      />
-      <Route
-        path="/tracker"
-        element={
-          <PrivateRoute isLoggedIn={isLoggedIn}>
-            <TrackerPage />
-          </PrivateRoute>
-        }
-      />
-      <Route path="*" element={<NotFoundPage />} />
-    </Routes>
+        <Route
+          path="/signin"
+          element={
+            <RestrictedRoute isLoggedIn={isLoggedIn}>
+              <SignInPage />
+            </RestrictedRoute>
+          }
+        />
+        <Route
+          path="/signup"
+          element={
+            <RestrictedRoute isLoggedIn={isLoggedIn}>
+              <SignUpPage />
+            </RestrictedRoute>
+          }
+        />
+        <Route
+          path="/tracker"
+          element={
+            <PrivateRoute isLoggedIn={isLoggedIn}>
+              <TrackerPage />
+            </PrivateRoute>
+          }
+        />
+        <Route path="*" element={<NotFoundPage />} />
+      </Routes>
+    </div>
   );
 };
 

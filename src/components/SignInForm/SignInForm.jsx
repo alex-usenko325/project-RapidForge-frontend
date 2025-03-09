@@ -1,9 +1,11 @@
-import clsx from 'clsx';
+// import clsx from 'clsx';
 import { ErrorMessage, Field, Form, Formik } from 'formik';
 import Logo from '../Logo/Logo';
 import * as Yup from 'yup';
 import { useDispatch } from 'react-redux';
 import { signin } from '../../redux/auth/operations';
+import s from '../SignUpForm/SignUpForm.module.css';
+import sprite from '../../assets/sprite.svg';
 
 const SingInValidationSchema = Yup.object().shape({
   email: Yup.string()
@@ -29,63 +31,66 @@ const SignInForm = () => {
   };
 
   return (
-    <div className={clsx('container', 'authContainer')}>
-      <div className="authSection">
-        <Logo />
-        <div className="authWrap">
-          <h2 className="authSubtitle">Sign In</h2>
-          <Formik
-            initialValues={initialValues}
-            onSubmit={handleSubmit}
-            validationSchema={SingInValidationSchema}
-          >
-            <Form className="authForm">
-              <div className="authFormWrap">
-                <label className="authLabel">
-                  <span className="labelSpan">E-mail</span>
+    <div className={s.authSection}>
+      <Logo />
+      <div className={s.authWrap}>
+        <h2 className={s.authSubtitle}>Sign In</h2>
+        <Formik
+          initialValues={initialValues}
+          onSubmit={handleSubmit}
+          validationSchema={SingInValidationSchema}
+        >
+          <Form className={s.authForm}>
+            <div className={s.authFormWrap}>
+              <label className={s.authLabel}>
+                <span className={s.labelSpan}>E-mail</span>
+                <Field
+                  className={s.authField}
+                  type="email"
+                  name="email"
+                  placeholder="Enter your email"
+                  required
+                />
+                <ErrorMessage
+                  name="email"
+                  component={'span'}
+                  className={s.errorMessage}
+                />
+              </label>
+              <label className={s.authLabel}>
+                <span className={s.labelSpan}>Password</span>
+                <div className={s.inputWrap}>
                   <Field
-                    className="authField"
-                    type="email"
-                    name="email"
-                    placeholder="Enter your email"
-                    required
-                  />
-                  <ErrorMessage
-                    name="email"
-                    component={'span'}
-                    className="errorMessage"
-                  />
-                </label>
-                <label className="authLabel">
-                  <span className="labelSpan">Password</span>
-                  <Field
-                    className="authField"
+                    className={s.authField}
                     type="password"
                     name="password"
                     placeholder="Enter your password"
                     required
                   />
-                  <ErrorMessage
-                    name="password"
-                    component={'span'}
-                    className="errorMessage"
-                  />
-                </label>
-              </div>
-              <div className="authBtnWrap">
-                <button type="submit" className="authBtn">
-                  Sign In
-                </button>
-                <div className="haveAnAccount">
-                  Don’t have an account?{' '}
-                  <a href="/signup" className="authLink">
-                    Sign Up
-                  </a>
+                  <svg className={s.authIcon}>
+                    <use xlinkHref={`${sprite}#icon-eye-off`} />
+                  </svg>
                 </div>
+                <ErrorMessage
+                  name="password"
+                  component={'span'}
+                  className={s.errorMessage}
+                />
+              </label>
+            </div>
+            <div className={s.authBtnWrap}>
+              <button type="submit" className={s.authBtn}>
+                Sign In
+              </button>
+              <div className={s.haveAnAccount}>
+                Don’t have an account?{' '}
+                <a href="/signup" className={s.authLink}>
+                  Sign Up
+                </a>
               </div>
-            </Form>
-          </Formik>
-        </div>
+            </div>
+          </Form>
+        </Formik>
       </div>
     </div>
   );
