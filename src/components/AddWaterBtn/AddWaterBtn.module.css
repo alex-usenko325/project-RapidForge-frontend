@@ -1,0 +1,75 @@
+.addWaterBtn {
+  position: relative;
+  width: 124px;
+  height: 30px;
+  background-color: transparent;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+  margin-bottom: 100px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding-left: 40px;
+  font-weight: 700;
+  line-height: 150%;
+  letter-spacing: -0.01em;
+  text-align: center;
+  font-family: 'Poppins', sans-serif;
+  color: #323f47;
+  transition: background-color 0.3s ease;
+}
+.addWaterBtn:hover,
+.addWaterBtn:active {
+  color: #323f47;
+}
+
+.plus {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 30px;
+  height: 30px;
+  background-color: #9be1a0;
+  color: #323f47;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.addWaterBtn:hover .plus,
+.addWaterBtn:active .plus {
+  background-color: #323f47;
+}
+.addWaterBtn:hover .plus::before,
+.addWaterBtn:active .plus::before,
+.addWaterBtn:hover .plus::after,
+.addWaterBtn:active .plus::after {
+  background-color: white;
+}
+
+.plus::before,
+.plus::after {
+  content: '';
+  position: absolute;
+  background-color: #323f47;
+  border-radius: 50px;
+}
+
+.plus::before {
+  width: 15px;
+  height: 2px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.plus::after {
+  width: 2px;
+  height: 15px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
