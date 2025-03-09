@@ -11,6 +11,7 @@ import TrackerPage from './pages/TrackerPage/TrackerPage';
 import NotFoundPage from './pages/NotFoundPage/NotFoundPage';
 import HomePage from './pages/HomePage/HomePage';
 import AddWaterBtn from './components/AddWaterBtn/AddWaterBtn.jsx';
+import VerificationPage from './pages/VerificationPage/VerificationPage.jsx';
 
 const App = () => {
   const dispatch = useDispatch();
@@ -28,10 +29,9 @@ const App = () => {
   }
 
   return (
-    <div>
+    <>
       <Routes>
         <Route path="/" element={<HomePage />} />
-
         <Route
           path="/signin"
           element={
@@ -49,17 +49,21 @@ const App = () => {
           }
         />
         <Route
+          path="/verification"
+          element={<VerificationPage />} // Додаємо новий маршрут
+        />
+        <Route
           path="/tracker"
           element={
             <PrivateRoute isLoggedIn={isLoggedIn}>
               <TrackerPage />
+              <AddWaterBtn />
             </PrivateRoute>
           }
         />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
-      <AddWaterBtn />
-    </div>
+    </>
   );
 };
 
