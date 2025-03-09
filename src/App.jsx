@@ -10,7 +10,6 @@ import SignInPage from './pages/SignInPage/SignInPage';
 import TrackerPage from './pages/TrackerPage/TrackerPage';
 import NotFoundPage from './pages/NotFoundPage/NotFoundPage';
 import HomePage from './pages/HomePage/HomePage';
-import AddWaterBtn from './components/AddWaterBtn/AddWaterBtn.jsx';
 import VerificationPage from './pages/VerificationPage/VerificationPage.jsx';
 
 const App = () => {
@@ -57,7 +56,6 @@ const App = () => {
           element={
             <PrivateRoute isLoggedIn={isLoggedIn}>
               <TrackerPage />
-              <AddWaterBtn />
             </PrivateRoute>
           }
         />
