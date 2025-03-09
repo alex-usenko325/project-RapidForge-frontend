@@ -1,0 +1,72 @@
+/* Verification.module.css */
+
+/* ----- Styles for Verification page ----- */
+.verificationContainer {
+  background-color: var(--background);
+  padding: 24px 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  width: 100%;
+}
+
+.verificationMessage {
+  font-size: 20px;
+  line-height: 1.5;
+  color: var(--main-text);
+  font-weight: 500;
+  text-align: center;
+}
+
+.verificationSuccess {
+  color: var(--accent);
+  font-weight: 700;
+  font-size: 22px;
+}
+
+.verificationError {
+  color: var(--error);
+  font-weight: 700;
+  font-size: 22px;
+}
+
+.verificationButtons {
+  margin-top: 24px;
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+}
+
+.verificationBtn {
+  padding: 14px 24px;
+  font-size: 16px;
+  background-color: var(--accent);
+  border-radius: 30px;
+  color: var(--main-white);
+  font-weight: 700;
+}
+
+.verificationBtn:hover {
+  background-color: #83cf8e;
+}
+
+@media (min-width: 768px) {
+  .verificationContainer {
+    padding: 32px;
+  }
+
+  .verificationMessage {
+    font-size: 24px;
+  }
+}
+
+@media (min-width: 1440px) {
+  .verificationContainer {
+    max-width: 672px;
+    margin: 0 auto;
+  }
+}
+
+/* ----- End of Verification Styles ----- */

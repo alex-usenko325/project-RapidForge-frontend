@@ -1,9 +1,11 @@
-import clsx from 'clsx';
 import { ErrorMessage, Field, Form, Formik } from 'formik';
 import Logo from '../Logo/Logo';
 import * as Yup from 'yup';
 import { useDispatch } from 'react-redux';
-import { signup } from '../../redux/auth/operations';
+import { signup, sendVerificationEmail } from '../../redux/auth/operations';
+import s from './SignUpForm.module.css';
+import { useState } from 'react';
+import sprite from '../../assets/sprite.svg';
 
 const SingUpValidationSchema = Yup.object().shape({
   email: Yup.string()
@@ -12,6 +14,12 @@ const SingUpValidationSchema = Yup.object().shape({
   password: Yup.string()
     .min(6, 'Password is too short!')
     .max(18, 'Password is too long!')
+    .matches(/[A-Z]/, 'Password must contain at least one uppercase letter!')
+    .matches(/[0-9]/, 'Password must contain at least one number!')
+    .matches(
+      /[!@#$%^&*]/,
+      'Password must contain at least one special character!'
+    )
     .required('Password is required field!'),
   repeatPassword: Yup.string().oneOf(
     [Yup.ref('password'), null],
@@ -25,87 +33,112 @@ const initialValues = {
   repeatPassword: '',
 };
 
-const SignUpForm = () => {
+const SignUpForm = ({ onSignUpSuccess }) => {
   const dispatch = useDispatch();
+  const [error, setError] = useState(null);
 
   const handleSubmit = (values, actions) => {
-    dispatch(signup({ email: values.email, password: values.password }));
-    actions.resetForm();
+    // Спочатку викликаєш signup
+    dispatch(signup({ email: values.email, password: values.password }))
+      .then(() => {
+        // Після успішної реєстрації викликаєш sendVerificationEmail з email
+        dispatch(sendVerificationEmail(values.email))
+          .then(() => {
+            onSignUpSuccess(); // Відправляємо користувача на іншу сторінку
+            actions.resetForm();
+          })
+          .catch(err => {
+            setError(err.message); // Обробка помилки відправки email
+            actions.setSubmitting(false);
+          });
+      })
+      .catch(err => {
+        setError(err.message); // Обробка помилки реєстрації
+        actions.setSubmitting(false);
+      });
   };
-
   return (
-    <div className={clsx('container', 'authContainer')}>
-      <div className="authSection">
-        <Logo />
-        <div className="authWrap">
-          <h2 className="authSubtitle">Sign Up</h2>
-          <Formik
-            initialValues={initialValues}
-            onSubmit={handleSubmit}
-            validationSchema={SingUpValidationSchema}
-          >
-            <Form className="authForm">
-              <div className="authFormWrap">
-                <label className="authLabel">
-                  <span className="labelSpan">E-mail</span>
+    <div className={s.authSection}>
+      <Logo />
+      <div className={s.authWrap}>
+        <h2 className={s.authSubtitle}>Sign Up</h2>
+        <Formik
+          initialValues={initialValues}
+          onSubmit={handleSubmit}
+          validationSchema={SingUpValidationSchema}
+        >
+          <Form className={s.authForm}>
+            <div className={s.authFormWrap}>
+              <label className={s.authLabel}>
+                <span className={s.labelSpan}>E-mail</span>
+                <Field
+                  className={s.authField}
+                  type="email"
+                  name="email"
+                  placeholder="Enter your email"
+                  required
+                />
+                <ErrorMessage
+                  name="email"
+                  component={'span'}
+                  className={s.errorMessage}
+                />
+              </label>
+              <label className={s.authLabel}>
+                <span className={s.labelSpan}>Password</span>
+                <div className={s.inputWrap}>
                   <Field
-                    className="authField"
-                    type="email"
-                    name="email"
-                    placeholder="Enter your email"
-                    required
-                  />
-                  <ErrorMessage
-                    name="email"
-                    component={'span'}
-                    className="errorMessage"
-                  />
-                </label>
-                <label className="authLabel">
-                  <span className="labelSpan">Password</span>
-                  <Field
-                    className="authField"
+                    className={s.authField}
                     type="password"
                     name="password"
                     placeholder="Enter your password"
                     required
                   />
-                  <ErrorMessage
-                    name="password"
-                    component={'span'}
-                    className="errorMessage"
-                  />
-                </label>
-                <label className="authLabel">
-                  <span className="labelSpan">Repeat password</span>
+                  <svg className={s.authIcon}>
+                    <use xlinkHref={`${sprite}#icon-eye-off`} />
+                  </svg>
+                </div>
+                <ErrorMessage
+                  name="password"
+                  component={'span'}
+                  className={s.errorMessage}
+                />
+              </label>
+              <label className={s.authLabel}>
+                <span className={s.labelSpan}>Repeat password</span>
+                <div className={s.inputWrap}>
                   <Field
-                    className="authField"
+                    className={s.authField}
                     type="password"
                     name="repeatPassword"
                     placeholder="Repeat password"
                     required
                   />
-                  <ErrorMessage
-                    name="repeatPassword"
-                    component={'span'}
-                    className="errorMessage"
-                  />
-                </label>
-              </div>
-              <div className="authBtnWrap">
-                <button type="submit" className="authBtn">
-                  Sign Up
-                </button>
-                <div className="haveAnAccount">
-                  Already have account?{' '}
-                  <a href="/signin" className="authLink">
-                    Sign In
-                  </a>
+                  <svg className={s.authIcon}>
+                    <use xlinkHref={`${sprite}#icon-eye-off`} />
+                  </svg>
                 </div>
+                <ErrorMessage
+                  name="repeatPassword"
+                  component={'span'}
+                  className={s.errorMessage}
+                />
+              </label>
+            </div>
+            <div className={s.authBtnWrap}>
+              <button type="submit" className={s.authBtn}>
+                Sign Up
+              </button>
+              {error && <div className={s.error}>{error}</div>}
+              <div className={s.haveAnAccount}>
+                Already have an account?{' '}
+                <a href="/signin" className={s.authLink}>
+                  Sign In
+                </a>
               </div>
-            </Form>
-          </Formik>
-        </div>
+            </div>
+          </Form>
+        </Formik>
       </div>
     </div>
   );
