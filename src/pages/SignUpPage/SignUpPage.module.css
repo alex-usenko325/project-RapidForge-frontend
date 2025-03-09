@@ -1,0 +1,14 @@
+/* ----- Styles for SignIn and SignUp pages ----- */
+.authContainer {
+  display: flex;
+}
+
+/* Desktop (від 1440px) */
+@media (min-width: 1440px) {
+  .authContainer {
+    flex-direction: row;
+    gap: 32px;
+  }
+}
+
+/* ----- End of styles for SignIn and SignUp forms ----- */
