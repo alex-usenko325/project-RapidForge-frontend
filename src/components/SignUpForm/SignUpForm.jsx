@@ -2,8 +2,9 @@ import { ErrorMessage, Field, Form, Formik } from 'formik';
 import Logo from '../Logo/Logo';
 import * as Yup from 'yup';
 import { useDispatch } from 'react-redux';
-import { signup } from '../../redux/auth/operations';
+import { signup, sendVerificationEmail } from '../../redux/auth/operations';
 import s from './SignUpForm.module.css';
+import { useState } from 'react';
 import sprite from '../../assets/sprite.svg';
 
 const SingUpValidationSchema = Yup.object().shape({
@@ -32,14 +33,30 @@ const initialValues = {
   repeatPassword: '',
 };
 
-const SignUpForm = () => {
+const SignUpForm = ({ onSignUpSuccess }) => {
   const dispatch = useDispatch();
+  const [error, setError] = useState(null);
 
   const handleSubmit = (values, actions) => {
-    dispatch(signup({ email: values.email, password: values.password }));
-    actions.resetForm();
+    // Спочатку викликаєш signup
+    dispatch(signup({ email: values.email, password: values.password }))
+      .then(() => {
+        // Після успішної реєстрації викликаєш sendVerificationEmail з email
+        dispatch(sendVerificationEmail(values.email))
+          .then(() => {
+            onSignUpSuccess(); // Відправляємо користувача на іншу сторінку
+            actions.resetForm();
+          })
+          .catch(err => {
+            setError(err.message); // Обробка помилки відправки email
+            actions.setSubmitting(false);
+          });
+      })
+      .catch(err => {
+        setError(err.message); // Обробка помилки реєстрації
+        actions.setSubmitting(false);
+      });
   };
-
   return (
     <div className={s.authSection}>
       <Logo />
@@ -112,8 +129,9 @@ const SignUpForm = () => {
               <button type="submit" className={s.authBtn}>
                 Sign Up
               </button>
+              {error && <div className={s.error}>{error}</div>}
               <div className={s.haveAnAccount}>
-                Already have account?{' '}
+                Already have an account?{' '}
                 <a href="/signin" className={s.authLink}>
                   Sign In
                 </a>
