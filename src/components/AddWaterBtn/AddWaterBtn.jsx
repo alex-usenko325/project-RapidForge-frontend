@@ -2,7 +2,7 @@ import { useState } from 'react';
 import WaterModal from '../WaterModal/WaterModal';
 import s from './AddWaterBtn.module.css';
 
-const AddWaterBtn = () => {
+const AddWaterBtn = ({ style }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleClickOpenWaterModal = () => {
@@ -11,8 +11,11 @@ const AddWaterBtn = () => {
 
   return (
     <>
-      <button className={s.addWaterBtn} onClick={handleClickOpenWaterModal}>
-        <span className={s.plus}></span>Add water
+      <button
+        className={style === 'green' ? s.addWaterBtn : s.btn}
+        onClick={handleClickOpenWaterModal}
+      >
+        <span className={style === 'green' ? s.plus : s.icon}></span>Add water
       </button>
       {isModalOpen && <WaterModal />}
     </>
