@@ -1,6 +1,3 @@
-.overlay {
-}
-
 .modal {
   border-radius: 15px;
   padding: 40px 14px;
@@ -10,6 +7,7 @@
   background: #fff;
   display: flex;
   flex-direction: column;
+  position: absolute;
 }
 .header {
   font-family: 'Poppins', sans-serif;
@@ -36,6 +34,15 @@
   width: 304px;
   height: 46px;
   background: #9be1a0;
+  text-align: center;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 1.28571;
+  letter-spacing: -0.01em;
+  color: #323f47;
+}
+.btn_delete:hover {
+  background: #87d28d;
 }
 .btn_cancel {
   border-radius: 30px;
@@ -43,12 +50,95 @@
   width: 304px;
   height: 46px;
   background: #f0eff4;
+  text-align: center;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 1.28571;
+  letter-spacing: -0.01em;
+  color: rgba(50, 63, 71, 0.3);
+}
+.btn_cancel:hover {
+  color: #323f47;
 }
 .buttons {
   display: flex;
   flex-direction: column;
   gap: 9px;
 }
+
 .header_text {
   margin-bottom: 28px;
+}
+
+.icon {
+  stroke-width: 2px;
+  stroke: #2f2f2f;
+}
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+  background: rgba(47, 47, 47, 0.6);
+}
+
+.btn_close {
+  position: absolute;
+  top: 20px;
+  right: 16px;
+}
+
+@media (min-width: 768px) {
+  .modal {
+    padding: 40px;
+    width: 516px;
+    height: 244px;
+  }
+
+  .buttons {
+    flex-direction: row;
+    justify-content: center;
+    gap: 10px;
+  }
+
+  .btn_delete {
+    border-radius: 30px;
+    padding: 0;
+    width: 170px;
+    height: 60px;
+    font-size: 16px;
+    line-height: 1.5;
+  }
+  .btn_cancel {
+    border-radius: 30px;
+    padding: 0;
+    width: 170px;
+    height: 60px;
+    font-size: 16px;
+    line-height: 1.5;
+  }
+
+  .btn_close {
+    right: 20px;
+  }
+  .header_text {
+    margin-bottom: 24px;
+  }
+  .header {
+    font-weight: 700;
+    font-size: 28px;
+    line-height: 1.14286;
+    margin-bottom: 24px;
+  }
+
+  .text {
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 1.33333;
+  }
 }
