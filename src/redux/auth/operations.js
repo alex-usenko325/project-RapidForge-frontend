@@ -32,28 +32,17 @@ export const sendVerificationEmail = createAsyncThunk(
   'auth/sendVerificationEmail',
   async (email, thunkAPI) => {
     try {
-      // Додаємо консоль лог, щоб побачити, що ми відправляємо
       console.log('Sending verification email to:', email); // Лог email перед відправкою
 
-      // Відправка запиту
       const response = await authAPI.post('/auth/verifycate', { email });
-      console.log('Success:', response.data); // Виведення успішної відповіді
-      return response.data; // Повертаємо результат
-    } catch (error) {
-      // Обробка помилки
-      if (error.response) {
-        console.error('Response Error:', error.response.data);
-        console.error('Response Status:', error.response.status);
-      } else if (error.request) {
-        console.error('Request Error:', error.request);
-      } else {
-        console.error('Error:', error.message);
-      }
 
-      // Відправка помилки в Redux
-      return thunkAPI.rejectWithValue(
-        error.response ? error.response.data : error.message
-      );
+      console.log('Verification email sent successfully:', response.data); // Лог відповіді після успішного запиту
+
+      return response.data;
+    } catch (error) {
+      console.error('Error sending verification email:', error.message); // Лог помилки, якщо вона сталася
+
+      return thunkAPI.rejectWithValue(error.message); // Повертання помилки в Redux
     }
   }
 );
