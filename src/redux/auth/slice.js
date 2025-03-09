@@ -1,7 +1,5 @@
-
 import { createSlice } from '@reduxjs/toolkit';
 import { signin, logout, refreshUser, signup, getUserData } from './operations';
-
 
 const initialState = {
   user: {
@@ -12,6 +10,7 @@ const initialState = {
     weight: 0,
     time: 0,
     avatarUrl: null,
+    _id: null,
   },
   token: null,
   isLoggedIn: false,
@@ -21,6 +20,16 @@ const initialState = {
 const authSlice = createSlice({
   name: 'auth',
   initialState,
+  reducers: {
+    // Синхронна дія для встановлення щоденної норми води
+    setDailyNorm: (state, action) => {
+      state.user.dailyNorm = action.payload;
+    },
+    // Синхронна дія для оновлення даних користувача
+    updateUserData: (state, action) => {
+      state.user = { ...state.user, ...action.payload };
+    },
+  },
   extraReducers: builder => {
     builder
 
@@ -55,13 +64,15 @@ const authSlice = createSlice({
         state.isLoggedIn = true;
         state.isRefreshing = false;
       })
-      .addCase(getUserData.pending, (state) => {
+      .addCase(getUserData.pending, state => {
         state.isRefreshing = true;
       })
-      .addCase(getUserData.rejected, (state) => {
+      .addCase(getUserData.rejected, state => {
         state.isRefreshing = false;
       });
   },
 });
+
+export const { setDailyNorm, updateUserData } = authSlice.actions;
 
 export const authReducer = authSlice.reducer;
