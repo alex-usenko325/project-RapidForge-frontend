@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import s from './UserBar.module.css';
 import UserBarPopover from '../UserBarPopover/UserBarPopover';
+import sprite from '../../assets/sprite.svg';
 
 const UserBar = ({ avatar, name }) => {
   const [isPopoverOpen, setIsPopoverOpen] = useState(false);
@@ -35,11 +36,11 @@ const UserBar = ({ avatar, name }) => {
   return (
     <div className={s.user_bar}>
       <button className={s.btn} onClick={togglePopover} ref={buttonRef}>
-        <span className={s.name}>{name}</span>
+        <span className={s.name}>{userName}</span>
         <img className={s.avatar} src={avatar} alt="user avatar" />
         <svg className={s.icon} width="16" height="16">
           <use
-            href={`./sprite.svg#${
+            href={`${sprite}#${
               isPopoverOpen ? 'icon-chevron-up' : 'icon-chevron-down'
             }`}
           ></use>
