@@ -12,14 +12,10 @@
 }
 .modal {
   position: absolute;
-  width: 343px;
   border-radius: 15px;
   box-shadow: 0 4px 50px 0 rgba(0, 0, 0, 0.1);
   background: #fff;
   overflow-y: auto;
-  min-height: 267px;
-  max-height: 90vh;
-  padding: 40px 14px;
 }
 .btn {
   position: absolute;
@@ -35,20 +31,13 @@
     width: 28px;
     height: 28px;
   }
-
   .modal {
     min-width: 516px;
-    width: 648px;
-    min-height: 587px;
-    padding: 40px;
   }
 }
 
 @media (min-width: 1440px) {
   .modal {
-    padding: 40px;
     width: 518px;
-    width: 920px;
-    min-height: 244px;
   }
 }
