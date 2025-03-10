@@ -6,14 +6,23 @@ const waterAPI = axios.create({
 });
 
 const setAuthHeader = token => {
-  waterAPI.defaults.headers.common.Authorization = `Bearer ${token}`;
+  if (token) {
+    waterAPI.defaults.headers.common.Authorization = `Bearer ${token}`;
+  } else {
+    delete waterAPI.defaults.headers.common.Authorization;
+  }
 };
 
 export const getWaterRecords = createAsyncThunk(
   'water/getWaterRecords',
   async (_, thunkAPI) => {
-    // Тимчасово вписуємо токен
-    const token = 'LQ9iKu38TzNb38epf2EMnPZh6FVJwfyjHvvnuezI';
+    const { auth } = thunkAPI.getState();
+    const token = auth?.token;
+
+    if (!token) {
+      return thunkAPI.rejectWithValue('No authentication token provided');
+    }
+
     setAuthHeader(token);
     try {
       const response = await waterAPI.get('/today');
