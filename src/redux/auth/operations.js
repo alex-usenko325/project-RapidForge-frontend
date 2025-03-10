@@ -34,6 +34,7 @@ export const signin = createAsyncThunk(
   async (body, thunkAPI) => {
     try {
       const response = await authAPI.post('/auth/login', body);
+      console.log('Signin response:', response.data);
       setAuthHeader(response.data.token);
       return response.data;
     } catch (err) {

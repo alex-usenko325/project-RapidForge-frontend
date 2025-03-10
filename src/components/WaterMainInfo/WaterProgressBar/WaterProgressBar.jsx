@@ -55,16 +55,23 @@
 //   );
 // }
 
-import css from './WaterProgressBar.module.css';
-import { useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { getWaterRecords } from '../../../redux/water/operations';
 import {
   selectWaterProgress,
   selectWaterIsLoading,
 } from '../../../redux/water/selectors';
+import css from './WaterProgressBar.module.css';
 
 export default function WaterProgressBar() {
+  const dispatch = useDispatch();
   const progress = useSelector(selectWaterProgress);
   const isLoading = useSelector(selectWaterIsLoading);
+
+  useEffect(() => {
+    dispatch(getWaterRecords());
+  }, [dispatch]);
 
   const fixedLabels = [0, 50, 100];
   const isFixedLabel = fixedLabels.includes(Math.round(progress));

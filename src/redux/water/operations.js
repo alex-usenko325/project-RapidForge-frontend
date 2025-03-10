@@ -2,7 +2,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
 const waterAPI = axios.create({
-  baseURL: 'https://aqua-track-app.onrender.com/water',
+  baseURL: 'http://localhost:3001/water/',
 });
 
 const setAuthHeader = token => {
@@ -12,13 +12,15 @@ const setAuthHeader = token => {
 export const getWaterRecords = createAsyncThunk(
   'water/getWaterRecords',
   async (_, thunkAPI) => {
-    const { auth } = thunkAPI.getState();
-    const token = auth.token;
-    if (token) setAuthHeader(token);
+    // Тимчасово вписуємо токен
+    const token = 'LQ9iKu38TzNb38epf2EMnPZh6FVJwfyjHvvnuezI';
+    setAuthHeader(token);
     try {
       const response = await waterAPI.get('/today');
+      console.log('Response from /water/today:', response.data);
       return response.data;
     } catch (error) {
+      console.error('Error fetching records:', error);
       return thunkAPI.rejectWithValue(
         error.response?.data || 'Error fetching records'
       );
