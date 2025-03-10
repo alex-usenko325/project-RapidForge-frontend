@@ -8,3 +8,4 @@ export const selectWaterProgress = state => {
   const waterConsumed = records.reduce((sum, record) => sum + record.volume, 0);
   return dailyNorm > 0 ? Math.min((waterConsumed / dailyNorm) * 100, 100) : 0;
 };
+
