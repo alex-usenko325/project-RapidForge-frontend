@@ -3,11 +3,6 @@
   padding: 40px 14px;
   width: 344px;
   height: 267px;
-  box-shadow: 0 4px 50px 0 rgba(0, 0, 0, 0.1);
-  background: #fff;
-  display: flex;
-  flex-direction: column;
-  position: absolute;
 }
 .header {
   font-family: 'Poppins', sans-serif;
@@ -73,18 +68,6 @@
 .icon {
   stroke-width: 2px;
   stroke: #2f2f2f;
-}
-.overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 999;
-  background: rgba(47, 47, 47, 0.6);
 }
 
 .btn_close {
