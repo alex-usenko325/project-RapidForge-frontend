@@ -115,6 +115,11 @@
   background: var(--accent);
 }
 
+.authBtn:hover,
+.authBtn:focus {
+  background: var(--accent-hover);
+}
+
 .haveAnAccount {
   font-size: 14px;
   line-height: 1.29;
@@ -128,6 +133,11 @@
   text-decoration: underline;
   text-decoration-skip-ink: none;
   color: var(--main-text);
+}
+
+.authLink:hover,
+.authLink:focus {
+  color: rgba(47, 47, 47, 0.5);
 }
 
 /* Tablet (від 768px) */

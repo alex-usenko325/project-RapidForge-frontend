@@ -3,6 +3,7 @@ import axios from 'axios';
 
 const authAPI = axios.create({
   baseURL: 'https://aqua-track-app.onrender.com', // Вкажіть правильний порт вашого серверу
+  // baseURL: 'http://localhost:3000', // Локальний порт вашого серверу
 });
 
 // Додавання та очищення заголовку авторизації

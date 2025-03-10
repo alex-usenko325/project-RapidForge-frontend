@@ -2,6 +2,7 @@ import { configureStore } from '@reduxjs/toolkit';
 import { persistStore, persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import { authReducer } from './auth/slice';
+import { modalReducer } from './modal/slice';
 
 import { userReducer } from './user/slice.js';
 import { waterReducer } from './water/slice';
@@ -22,6 +23,7 @@ export const store = configureStore({
     user: userReducer,
     water: waterReducer,
     auth: persistedAuthReducer,
+    modal: modalReducer,
     // filters: filtersReducer,
   },
   middleware: getDefaultMiddleware =>

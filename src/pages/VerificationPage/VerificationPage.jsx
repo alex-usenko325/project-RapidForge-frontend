@@ -2,9 +2,9 @@ import clsx from 'clsx';
 import { useLocation } from 'react-router-dom';
 import AdvantagesSection from '../../components/AdvantagesSection/AdvantagesSection.jsx';
 import SendVerification from '../../components/SendVerificationEmail/SendVerificationEmail.jsx'; // Імпорт для відправки email
-import VerifyEmail from '../../components/verifyEmail/verifyEmail.jsx'; // Імпорт для верифікації
-import s from './VerificatePage.module.css';
+import s from './VerificationPage.module.css';
 import { useState, useEffect } from 'react';
+import VerifyEmail from '../../components/VerifyEmail/VerifyEmail.jsx';
 
 const VerificatePage = () => {
   const location = useLocation();
