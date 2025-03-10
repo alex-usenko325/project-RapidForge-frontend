@@ -1,5 +1,5 @@
 import Modal from '../Modal/Modal';
-import s from '../TempVerify/VerifyEmail.module.css';
+import s from '../VerifyEmail/VerifyEmail.module.css';
 import clsx from 'clsx';
 
 const VerifyEmailModal = () => {

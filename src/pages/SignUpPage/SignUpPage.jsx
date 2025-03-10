@@ -7,7 +7,7 @@ import s from './SignUpPage.module.css';
 import { useDispatch } from 'react-redux';
 import { openModal } from '../../redux/modal/slice';
 import { selectModalComponent } from '../../redux/modal/selectors';
-import VerifyEmailModal from '../../components/TempModalF/TempModalF';
+import VerifyEmailModal from '../../components/VerifyEmailModal/VerifyEmailModal';
 
 const SignUpPage = () => {
   const [isLargeScreen, setIsLargeScreen] = useState(window.innerWidth >= 1440);
