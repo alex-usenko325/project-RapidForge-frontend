@@ -16,9 +16,6 @@ const LogOutModal = ({ onClose }) => {
 
   return (
     <div className={styles.modalWrapper} role="dialog" aria-labelledby="logout-title">
-    {/* <button className={styles.closeBtn} onClick={onClose} aria-label="Close modal">
-        &times;
-    </button> */}
     <h2 className={styles.logoutTitle}>Log out</h2>
     <p className={styles.logoutText}>Do you really want to leave?</p>
     <div className={styles.btnLogoutWrapper}>
