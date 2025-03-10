@@ -6,14 +6,14 @@ import {
   selectVerificationStatus,
   selectVerificationError,
 } from '../../redux/auth/selectors';
-import s from './VerifyEmail.module.css';
+import s from './SendVerifyEmail.module.css';
 import Modal from '../Modal/Modal';
 import { GiConfirmed } from 'react-icons/gi';
 import { FiXCircle } from 'react-icons/fi';
 import clsx from 'clsx';
 import { closeModalAction } from '../../redux/modal/operations';
 
-const VerifyEmail = () => {
+const SendVerifyEmail = () => {
   const location = useLocation();
   const dispatch = useDispatch();
   const verificationStatus = useSelector(selectVerificationStatus);
@@ -73,4 +73,4 @@ const VerifyEmail = () => {
   );
 };
 
-export default VerifyEmail;
+export default SendVerifyEmail;

@@ -4,13 +4,13 @@ import { useLocation } from 'react-router-dom';
 import clsx from 'clsx';
 import AdvantagesSection from '../../components/AdvantagesSection/AdvantagesSection';
 import SignInForm from '../../components/SignInForm/SignInForm';
-import VerifyEmail from '../../components/verifyEmail/verifyEmail.jsx';
 import {
   openModalAction,
   closeModalAction,
 } from '../../redux/modal/operations';
 import { selectModalComponent } from '../../redux/modal/selectors';
 import s from '../SignUpPage/SignUpPage.module.css';
+import SendVerifyEmail from '../../components/SendVerifyEmail/SendVerifyEmail.jsx';
 
 const SignInPage = () => {
   const [isLargeScreen, setIsLargeScreen] = useState(window.innerWidth >= 1440);
@@ -48,7 +48,7 @@ const SignInPage = () => {
 
       {/* Відображення модалки, якщо вона активна */}
       {modalComponent === 'VerifyEmail' && (
-        <VerifyEmail onClose={handleCloseModal} />
+        <SendVerifyEmail onClose={handleCloseModal} />
       )}
     </div>
   );
