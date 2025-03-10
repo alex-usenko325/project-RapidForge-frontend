@@ -23,9 +23,8 @@ const waterSlice = createSlice({
       })
       .addCase(getWaterRecords.fulfilled, (state, action) => {
         state.isLoading = false;
-        // Очищаємо поточний масив і додаємо нові дані, зберігаючи референцію
-        state.records.length = 0; // Очищаємо існуючий масив
-        action.payload.data.forEach(record => state.records.push(record)); // Додаємо елементи
+        state.records.length = 0;
+        action.payload.data.forEach(record => state.records.push(record));
       })
       .addCase(getWaterRecords.rejected, (state, action) => {
         state.isLoading = false;
@@ -37,7 +36,7 @@ const waterSlice = createSlice({
       })
       .addCase(addWaterRecord.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.records.push(action.payload.data); // Додаємо до існуючого масиву
+        state.records.push(action.payload.data);
       })
       .addCase(addWaterRecord.rejected, (state, action) => {
         state.isLoading = false;
@@ -66,7 +65,6 @@ const waterSlice = createSlice({
       })
       .addCase(deleteWaterRecord.fulfilled, (state, action) => {
         state.isLoading = false;
-        // Фільтруємо на місці, щоб уникнути нової референції
         for (let i = state.records.length - 1; i >= 0; i--) {
           if (state.records[i]._id === action.payload) {
             state.records.splice(i, 1);
