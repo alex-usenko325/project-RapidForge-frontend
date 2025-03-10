@@ -4,15 +4,19 @@ import AdvantagesSection from '../../components/AdvantagesSection/AdvantagesSect
 import clsx from 'clsx';
 import s from './SignUpPage.module.css';
 // import { useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import { openModal } from '../../redux/modal/slice';
+import { useDispatch, useSelector } from 'react-redux';
 import { selectModalComponent } from '../../redux/modal/selectors';
-import VerifyEmailModal from '../../components/VerifyEmailModal/VerifyEmailModal';
+import VerifyModal from '../../components/VerifyModal/VerifyModal';
+import {
+  closeModalAction,
+  openModalAction,
+} from '../../redux/modal/operations';
 
 const SignUpPage = () => {
   const [isLargeScreen, setIsLargeScreen] = useState(window.innerWidth >= 1440);
   // const navigate = useNavigate();
   const dispatch = useDispatch();
+  const modalComponent = useSelector(selectModalComponent);
 
   useEffect(() => {
     const handleResize = () => {
@@ -25,20 +29,25 @@ const SignUpPage = () => {
 
   // Функція відкриття модалки після успішної реєстрації
   const handleSignUpSuccess = () => {
-    dispatch(openModal(<VerifyEmailModal />));
+    openModalAction(dispatch, 'VerifyModal');
   };
 
   // Функція для перенаправлення на сторінку верифікації
   // const handleSignUpSuccess = () => {
   //   navigate('/verification');
   // };
+  const handleCloseModal = () => {
+    closeModalAction(dispatch);
+  };
 
   return (
     <div className={clsx('container', s.authContainer)}>
       <SignUpForm onSignUpSuccess={handleSignUpSuccess} />
       {isLargeScreen && <AdvantagesSection />}
 
-      {selectModalComponent}
+      {modalComponent === 'VerifyModal' && (
+        <VerifyModal onClose={handleCloseModal} />
+      )}
     </div>
   );
 };

@@ -1,8 +1,15 @@
+import { useDispatch } from 'react-redux';
 import Modal from '../Modal/Modal';
 import s from '../VerifyEmail/VerifyEmail.module.css';
 import clsx from 'clsx';
+import { closeModalAction } from '../../redux/modal/operations';
 
-const VerifyEmailModal = () => {
+const VerifyModal = () => {
+  const dispatch = useDispatch();
+  const handleClose = () => {
+    closeModalAction(dispatch);
+  };
+
   return (
     <Modal>
       <div className={s.wrapper}>
@@ -11,10 +18,14 @@ const VerifyEmailModal = () => {
           Please check your email for verification link.
         </p>
         <div className={s.btnWrap}>
-          <button type="submit" className={s.btn}>
+          <a className={s.btn} href="mailto:example@email.com">
             Open email client
-          </button>
-          <button type="submit" className={clsx(s.btn, s.grey)}>
+          </a>
+          <button
+            type="submit"
+            className={clsx(s.btn, s.grey)}
+            onClick={handleClose}
+          >
             Close
           </button>
         </div>
@@ -23,4 +34,4 @@ const VerifyEmailModal = () => {
   );
 };
 
-export default VerifyEmailModal;
+export default VerifyModal;
