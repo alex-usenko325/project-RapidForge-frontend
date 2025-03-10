@@ -25,7 +25,7 @@ export const getWaterRecords = createAsyncThunk(
 
     setAuthHeader(token);
     try {
-      const response = await waterAPI.get('/today');
+      const response = await waterAPI.get('water/today');
       console.log('Response from /water/today:', response.data);
       return response.data;
     } catch (error) {
@@ -44,7 +44,7 @@ export const addWaterRecord = createAsyncThunk(
     const token = auth.token;
     if (token) setAuthHeader(token);
     try {
-      const response = await waterAPI.post('/', record);
+      const response = await waterAPI.post('water/', record);
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(
@@ -61,7 +61,7 @@ export const updateWaterRecord = createAsyncThunk(
     const token = auth.token;
     if (token) setAuthHeader(token);
     try {
-      const response = await waterAPI.patch(`/${id}`, updatedData);
+      const response = await waterAPI.patch(`water/${id}`, updatedData);
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(
@@ -78,7 +78,7 @@ export const deleteWaterRecord = createAsyncThunk(
     const token = auth.token;
     if (token) setAuthHeader(token);
     try {
-      await waterAPI.delete(`/${id}`);
+      await waterAPI.delete(`water/${id}`);
       return id;
     } catch (error) {
       return thunkAPI.rejectWithValue(
