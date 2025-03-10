@@ -4,10 +4,10 @@ import AdvantagesSection from '../../components/AdvantagesSection/AdvantagesSect
 import clsx from 'clsx';
 import s from './SignUpPage.module.css';
 // import { useNavigate } from 'react-router-dom';
-// import VerifyEmailModal from '../../components/VerifyEmailModal/VerifyEmailModal';
 import { useDispatch } from 'react-redux';
 import { openModal } from '../../redux/modal/slice';
 import { selectModalComponent } from '../../redux/modal/selectors';
+import VerifyEmailModal from '../../components/TempModalF/TempModalF';
 
 const SignUpPage = () => {
   const [isLargeScreen, setIsLargeScreen] = useState(window.innerWidth >= 1440);
