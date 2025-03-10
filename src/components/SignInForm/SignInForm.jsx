@@ -6,6 +6,7 @@ import { useDispatch } from 'react-redux';
 import { signin } from '../../redux/auth/operations';
 import s from '../SignUpForm/SignUpForm.module.css';
 import sprite from '../../assets/sprite.svg';
+import ResetPwdModal from '../ResetPwdModal/ResetPwdModal';
 
 const SingInValidationSchema = Yup.object().shape({
   email: Yup.string()
@@ -33,6 +34,7 @@ const SignInForm = () => {
   return (
     <div className={s.authSection}>
       <Logo />
+      <ResetPwdModal />
       <div className={s.authWrap}>
         <h2 className={s.authSubtitle}>Sign In</h2>
         <Formik

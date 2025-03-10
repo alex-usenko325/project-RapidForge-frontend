@@ -1,0 +1,83 @@
+.wrapper {
+  padding: 40px 20px;
+  width: 344px;
+  background: var(--main-white);
+}
+
+.title {
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  text-align: center;
+  /* color: var(--main); */
+  margin-bottom: 8px;
+}
+
+.paragraph {
+  font-size: 14px;
+  line-height: 1.29;
+  letter-spacing: -0.01em;
+  text-align: center;
+  margin-bottom: 4px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  /* flex-grow: 1; */
+  width: 100%;
+  gap: 9px;
+}
+
+.authLabel {
+  display: flex;
+  flex-direction: column;
+}
+
+.labelSpan {
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 1.29;
+  letter-spacing: -0.01em;
+  margin-bottom: 4px;
+}
+
+.authField {
+  border: 1px solid rgba(47, 47, 47, 0.2);
+  border-radius: 15px;
+  padding: 12px;
+  background-color: inherit;
+  width: 100%;
+}
+
+.authField::placeholder {
+  font-size: 14px;
+  line-height: 1.29;
+  letter-spacing: -0.01em;
+  color: rgba(47, 47, 47, 0.6);
+}
+
+.errorMessage {
+  font-size: 12px;
+  line-height: 1.29;
+  letter-spacing: -0.01em;
+  color: var(--error);
+  position: absolute;
+  width: 100%;
+  margin-top: 78px;
+  width: auto;
+}
+
+.btn {
+  border-radius: 30px;
+  width: 100%;
+  padding: 14px 8px;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 1.29;
+  letter-spacing: -0.01em;
+  text-align: center;
+  background: var(--accent);
+}
