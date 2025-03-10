@@ -54,7 +54,7 @@ export const verifyEmail = createAsyncThunk(
   async (token, thunkAPI) => {
     console.log('Received token in verifyEmail:', token); // Логування отриманого токена
     try {
-      const response = await authAPI.get(`/auth/verifycate?token=${token}`);
+      const response = await authAPI.get(`/auth/signin?token=${token}`);
       console.log('Verification response:', response.data); // Лог відповіді сервера
       return response.data;
     } catch (error) {
