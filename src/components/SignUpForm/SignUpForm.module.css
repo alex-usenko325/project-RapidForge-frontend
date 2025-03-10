@@ -5,7 +5,7 @@
   display: flex;
   flex-direction: column;
   width: 100%;
-  min-height: calc(100vh - 2*16px);
+  min-height: calc(100vh - 2 * 16px);
   border-radius: 30px;
 }
 
@@ -84,7 +84,7 @@
   right: 18px;
   top: 50%;
   transform: translateY(-50%);
-  pointer-events: none;
+  pointer-events: auto;
 }
 
 .errorMessage {
@@ -134,7 +134,7 @@
 @media (min-width: 768px) {
   .authSection {
     padding: 32px;
-    min-height: calc(100vh - 2*32px);
+    min-height: calc(100vh - 2 * 32px);
   }
 
   .authWrap {
