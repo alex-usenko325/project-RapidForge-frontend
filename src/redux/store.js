@@ -2,7 +2,9 @@ import { configureStore } from '@reduxjs/toolkit';
 import { persistStore, persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import { authReducer } from './auth/slice';
-import { userReducer } from './user/slice.js';
+
+import { userReducer,waterReducer } from './user/slice.js';
+
 
 const authPersistConfig = {
   key: 'auth',
@@ -14,8 +16,10 @@ const persistedAuthReducer = persistReducer(authPersistConfig, authReducer);
 
 export const store = configureStore({
   reducer: {
+
     // water: waterReducer,
     user: userReducer,
+    water: waterReducer,
     auth: persistedAuthReducer,
     // filters: filtersReducer,
   },
