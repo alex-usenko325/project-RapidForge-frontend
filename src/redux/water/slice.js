@@ -23,8 +23,7 @@ const waterSlice = createSlice({
       })
       .addCase(getWaterRecords.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.records.length = 0;
-        action.payload.data.forEach(record => state.records.push(record));
+        state.records = action.payload; // Оновлюємо масив
       })
       .addCase(getWaterRecords.rejected, (state, action) => {
         state.isLoading = false;
@@ -36,7 +35,7 @@ const waterSlice = createSlice({
       })
       .addCase(addWaterRecord.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.records.push(action.payload.data);
+        state.records.push(action.payload);
       })
       .addCase(addWaterRecord.rejected, (state, action) => {
         state.isLoading = false;
@@ -48,11 +47,12 @@ const waterSlice = createSlice({
       })
       .addCase(updateWaterRecord.fulfilled, (state, action) => {
         state.isLoading = false;
+        const updatedRecord = action.payload;
         const index = state.records.findIndex(
-          record => record._id === action.payload.data._id
+          record => record._id === updatedRecord._id
         );
         if (index !== -1) {
-          state.records[index] = action.payload.data;
+          state.records[index] = updatedRecord;
         }
       })
       .addCase(updateWaterRecord.rejected, (state, action) => {
@@ -65,11 +65,9 @@ const waterSlice = createSlice({
       })
       .addCase(deleteWaterRecord.fulfilled, (state, action) => {
         state.isLoading = false;
-        for (let i = state.records.length - 1; i >= 0; i--) {
-          if (state.records[i]._id === action.payload) {
-            state.records.splice(i, 1);
-          }
-        }
+        state.records = state.records.filter(
+          record => record._id !== action.payload
+        );
       })
       .addCase(deleteWaterRecord.rejected, (state, action) => {
         state.isLoading = false;
