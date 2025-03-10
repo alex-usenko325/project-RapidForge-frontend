@@ -23,7 +23,7 @@ const waterSlice = createSlice({
       })
       .addCase(getWaterRecords.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.records = action.payload; // Оновлюємо масив
+        state.records = action.payload.data;
       })
       .addCase(getWaterRecords.rejected, (state, action) => {
         state.isLoading = false;
