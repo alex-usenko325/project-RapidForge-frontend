@@ -30,21 +30,6 @@
     margin-bottom: 28px;
 }
 
-/* .closeBtn {
-    stroke-width: 3px;
-    stroke: var(--main-text);
-    color: #2F2F2F;
-    width: 18px;
-    height: 18px;
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    background: none;
-    border: none;
-    font-size: 24px;
-    cursor: pointer;
-} */
-
 .btnLogoutWrapper {
     display: flex;
     flex-direction: column;
@@ -52,15 +37,16 @@
     gap: 9px;
 }
 
-.btnLogout,
-.btnCancel {
+.logoutBtn,
+.cancelBtn {
     display: flex;
     align-items: center;
     justify-content: center;
     text-align: center;
     border-radius: 30px;
-    width: 100%;
+    width: 304px;
     height: 46px;
+    margin: auto;
     font-weight: 700;
     font-size: 14px;
     line-height: 1.29;
@@ -70,21 +56,21 @@
     transition: color 250ms ease-in, background-color 250ms ease-in;
 }
 
-.btnLogout {
+.logoutBtn {
     background-color: var(--accent);
     color: var(--main);
 }
 
-.btnLogout:hover {
+.logoutBtn:hover {
     background-color: #87d28d;;
 }
 
-.btnCancel {
+.cancelBtn {
     background-color: var(--background);
     color: rgba(50, 63, 71, 0.3);
 }
 
-.btnCancel:hover {
+.cancelBtn:hover {
     color: var(--main);
 }
 
@@ -114,8 +100,8 @@
         gap: 10px;
     }
 
-    .btnLogout,
-    .btnCancel {
+    .logoutBtn,
+    .cancelBtn {
         width: 173px;
         height: 60px;
         font-size: 16px;
