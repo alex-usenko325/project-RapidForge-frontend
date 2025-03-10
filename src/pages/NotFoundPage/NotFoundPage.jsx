@@ -1,9 +1,12 @@
 import s from './NotFoundPage.module.css';
+import { Link } from 'react-router-dom';
 
 const NotFoundPage = () => {
   return (
     <div className={s.wrapper}>
-      <p className={s.text}>Page is not found...</p>
+      <Link to="/">
+        <button className={s.btn}>Back to Home Page</button>
+      </Link>
     </div>
   );
 };
