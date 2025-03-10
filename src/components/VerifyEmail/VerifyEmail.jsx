@@ -33,16 +33,6 @@ const VerifyEmail = () => {
   };
 
   return (
-    // <div className={s.container}>
-    //   {verificationStatus === 'loading' && <h1>Перевірка верифікації...</h1>}
-    //   {verificationStatus === 'succeeded' && (
-    //     <h1>Ваша електронна пошта успішно верифікована! 🎉</h1>
-    //   )}
-    //   {verificationStatus === 'failed' && (
-    //     <h1>Помилка верифікації: {verificationError || 'Спробуйте ще раз!'}</h1>
-    //   )}
-    // </div>
-
     <Modal>
       {verificationStatus === 'succeeded' && (
         <div className={s.wrapper}>
