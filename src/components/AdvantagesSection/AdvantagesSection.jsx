@@ -2,9 +2,19 @@ import s from './AdvantagesSection.module.css';
 import customer1 from '../../assets/images/customers/desktop/1x/customer-1-desk-x1.png';
 import customer2 from '../../assets/images/customers/desktop/1x/customer-2-desk-x1.png';
 import customer3 from '../../assets/images/customers/desktop/1x/customer-3-desk-x1.png';
+import { useDispatch, useSelector } from 'react-redux';
+import { getClientsNumber } from '../../redux/user/operations.js';
+import { selectUsersCount } from '../../redux/user/selectors.js';
+import { useEffect } from 'react';
 
 const AdvantagesSection = () => {
   const customers = [customer1, customer2, customer3];
+  const dispatch = useDispatch();
+  const userCount = useSelector(selectUsersCount);
+
+  useEffect(() => {
+    dispatch(getClientsNumber());
+  }, [dispatch]);
 
   return (
     <div className={s.wrapper}>
@@ -16,7 +26,8 @@ const AdvantagesSection = () => {
         </div>
 
         <p className={s.text}>
-          Our <span>happy</span> customer
+          Our {userCount}
+          <span> happy</span> customers
         </p>
       </div>
       <ul className={s.benefits}>

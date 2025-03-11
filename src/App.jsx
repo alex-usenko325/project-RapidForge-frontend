@@ -10,7 +10,6 @@ import SignInPage from './pages/SignInPage/SignInPage';
 import TrackerPage from './pages/TrackerPage/TrackerPage';
 import NotFoundPage from './pages/NotFoundPage/NotFoundPage';
 import HomePage from './pages/HomePage/HomePage';
-import VerificationPage from './pages/VerificationPage/VerificationPage.jsx';
 
 const App = () => {
   const dispatch = useDispatch();
@@ -46,10 +45,6 @@ const App = () => {
               <SignUpPage />
             </RestrictedRoute>
           }
-        />
-        <Route
-          path="/verification"
-          element={<VerificationPage />} // Додаємо новий маршрут
         />
         <Route
           path="/tracker"
