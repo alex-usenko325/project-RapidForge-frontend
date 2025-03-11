@@ -133,7 +133,11 @@ export const getUserData = createAsyncThunk(
     try {
       // Логуємо запит перед виконанням
       console.log('Sending request to get current user data...');
-
+      const savedToken = thunkAPI.getState().auth.token;
+      if (!savedToken) {
+        return thunkAPI.rejectWithValue('Token is not exist');
+      }
+      setAuthHeader(savedToken);
       const response = await authAPI.get('/user/currentUser');
 
       // Логуємо отриману відповідь
@@ -151,4 +155,5 @@ export const getUserData = createAsyncThunk(
       );
     }
   }
+  // { condition({ getState }) { } }
 );

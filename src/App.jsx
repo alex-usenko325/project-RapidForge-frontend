@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import PrivateRoute from './routes/PrivateRoute';
 import RestrictedRoute from './routes/RestrictedRoute';
-import { refreshUser } from './redux/auth/operations';
+import { getUserData } from './redux/auth/operations';
 import SignUpPage from './pages/SignUpPage/SignUpPage';
 import SignInPage from './pages/SignInPage/SignInPage';
 import TrackerPage from './pages/TrackerPage/TrackerPage';
@@ -18,7 +18,7 @@ const App = () => {
 
   useEffect(() => {
     if (!isLoggedIn) {
-      dispatch(refreshUser());
+      dispatch(getUserData());
     }
   }, [dispatch, isLoggedIn]);
 
