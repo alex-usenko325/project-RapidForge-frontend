@@ -57,6 +57,10 @@ const SignUpForm = ({ onSignUpSuccess }) => {
         actions.setSubmitting(false);
       });
   };
+
+  const [showPassword, changeShowPassword] = useState(false);
+  const [showRepeatPassword, changeShowRepeatPassword] = useState(false);
+
   return (
     <div className={s.authSection}>
       <Logo />
@@ -89,17 +93,23 @@ const SignUpForm = ({ onSignUpSuccess }) => {
                 <div className={s.inputWrap}>
                   <Field
                     className={s.authField}
-                    type="password"
+                    type={showPassword ? 'text' : 'password'}
                     name="password"
                     placeholder="Enter your password"
                     required
                   />
-                  <svg className={s.authIcon}>
-                    <use xlinkHref={`${sprite}#icon-eye-off`} />
+                  <svg
+                    className={s.authIcon}
+                    onClick={() => changeShowPassword(!showPassword)}
+                  >
+                    {showPassword && (
+                      <use xlinkHref={`${sprite}#icon-eye-off`} />
+                    )}
+                    {!showPassword && <use xlinkHref={`${sprite}#icon-eye`} />}
                   </svg>
                 </div>
                 <ErrorMessage
-                  name="password"
+                  name={showPassword ? 'text' : 'password'}
                   component={'span'}
                   className={s.errorMessage}
                 />
@@ -109,13 +119,23 @@ const SignUpForm = ({ onSignUpSuccess }) => {
                 <div className={s.inputWrap}>
                   <Field
                     className={s.authField}
-                    type="password"
+                    type={showRepeatPassword ? 'text' : 'password'}
                     name="repeatPassword"
                     placeholder="Repeat password"
                     required
                   />
-                  <svg className={s.authIcon}>
-                    <use xlinkHref={`${sprite}#icon-eye-off`} />
+                  <svg
+                    className={s.authIcon}
+                    onClick={() =>
+                      changeShowRepeatPassword(!showRepeatPassword)
+                    }
+                  >
+                    {showRepeatPassword && (
+                      <use xlinkHref={`${sprite}#icon-eye-off`} />
+                    )}
+                    {!showRepeatPassword && (
+                      <use xlinkHref={`${sprite}#icon-eye`} />
+                    )}
                   </svg>
                 </div>
                 <ErrorMessage
