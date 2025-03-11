@@ -111,14 +111,40 @@ export const refreshUser = createAsyncThunk(
 );
 
 // Отримання даних користувача
+// export const getUserData = createAsyncThunk(
+//   'auth/getUserData',
+//   async (_, thunkAPI) => {
+//     try {
+//       const response = await authAPI.get('/user/currentUser');
+//       return response.data;
+//     } catch (error) {
+//       return thunkAPI.rejectWithValue(error.response.data);
+//     }
+//   }
+// );
+
 export const getUserData = createAsyncThunk(
   'auth/getUserData',
   async (_, thunkAPI) => {
     try {
-      const response = await authAPI.get('/user/profile');
-      return response.data;
+      // Логуємо запит перед виконанням
+      console.log('Sending request to get current user data...');
+
+      const response = await authAPI.get('/user/currentUser');
+
+      // Логуємо отриману відповідь
+      console.log('User data received:', response.data.data);
+
+      return response.data.data;
     } catch (error) {
-      return thunkAPI.rejectWithValue(error.response.data);
+      // Логуємо помилку, якщо вона сталася
+      console.error(
+        'Error fetching user data:',
+        error.response ? error.response.data : error.message
+      );
+      return thunkAPI.rejectWithValue(
+        error.response ? error.response.data : error.message
+      );
     }
   }
 );
