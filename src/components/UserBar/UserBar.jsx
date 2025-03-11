@@ -58,12 +58,16 @@
 // };
 
 // export default UserBar;
+
 import { useEffect, useRef, useState } from 'react';
 import s from './UserBar.module.css';
 import UserBarPopover from '../UserBarPopover/UserBarPopover';
 import sprite from '../../assets/sprite.svg';
 
-const UserBar = ({ avatar, name }) => {
+const UserBar = ({
+  avatar = 'https://res.cloudinary.com/diee7l1on/image/upload/v1741187439/default-avatar-profile-icon-social-media-user-image-gray-avatar-icon-blank-profile-silhouette-vector-illustration_561158-3467_bvqe8k.avif',
+  name,
+}) => {
   const [isPopoverOpen, setIsPopoverOpen] = useState(false);
   const popoverRef = useRef(null);
   const buttonRef = useRef(null);
@@ -71,9 +75,6 @@ const UserBar = ({ avatar, name }) => {
   const togglePopover = () => {
     setIsPopoverOpen(prev => !prev);
   };
-
-  // Використовуємо передане ім'я, або 'USER' за замовчуванням
-  const userName = name ? name : 'USER';
 
   useEffect(() => {
     const handleClickOutside = e => {
@@ -99,7 +100,7 @@ const UserBar = ({ avatar, name }) => {
   return (
     <div className={s.user_bar}>
       <button className={s.btn} onClick={togglePopover} ref={buttonRef}>
-        <span className={s.name}>{userName}</span>
+        <span className={s.name}>{name}</span>
         <img className={s.avatar} src={avatar} alt="user avatar" />
         <svg className={s.icon} width="16" height="16">
           <use

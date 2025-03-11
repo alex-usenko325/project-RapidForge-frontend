@@ -122,6 +122,7 @@ export const refreshUser = createAsyncThunk(
 //     }
 //   }
 // );
+
 export const getUserData = createAsyncThunk(
   'auth/getUserData',
   async (_, thunkAPI) => {
@@ -132,9 +133,9 @@ export const getUserData = createAsyncThunk(
       const response = await authAPI.get('/user/currentUser');
 
       // Логуємо отриману відповідь
-      console.log('User data received:', response.data);
+      console.log('User data received:', response.data.data);
 
-      return response.data;
+      return response.data.data;
     } catch (error) {
       // Логуємо помилку, якщо вона сталася
       console.error(

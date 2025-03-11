@@ -3,11 +3,10 @@ import { ErrorMessage, Field, Form, Formik } from 'formik';
 import Logo from '../Logo/Logo';
 import * as Yup from 'yup';
 import { useDispatch } from 'react-redux';
-import { signin } from '../../redux/auth/operations';
+import { getUserData, signin } from '../../redux/auth/operations';
 import s from '../SignUpForm/SignUpForm.module.css';
 import sprite from '../../assets/sprite.svg';
 import { useState } from 'react';
-import ResetPwdModal from '../ResetPwdModal/ResetPwdModal';
 
 const SingInValidationSchema = Yup.object().shape({
   email: Yup.string()
@@ -29,6 +28,7 @@ const SignInForm = () => {
 
   const handleSubmit = (values, actions) => {
     dispatch(signin(values));
+    dispatch(getUserData());
     actions.resetForm();
   };
 
@@ -37,7 +37,6 @@ const SignInForm = () => {
   return (
     <div className={s.authSection}>
       <Logo />
-      <ResetPwdModal />
       <div className={s.authWrap}>
         <h2 className={s.authSubtitle}>Sign In</h2>
         <Formik
