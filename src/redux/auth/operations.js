@@ -107,7 +107,7 @@ export const refreshUser = createAsyncThunk(
     try {
       setAuthHeader(savedToken);
       const response = await authAPI.post('/auth/refresh');
-      return response.data;
+      return response.data.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.response.data);
     }
