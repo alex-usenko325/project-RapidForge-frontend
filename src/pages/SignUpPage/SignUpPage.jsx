@@ -10,6 +10,7 @@ import {
   closeModalAction,
   openModalAction,
 } from '../../redux/modal/operations';
+import EmailInUseModal from '../../components/EmailInUseModal/EmailInUseModal';
 
 const SignUpPage = () => {
   const [isLargeScreen, setIsLargeScreen] = useState(window.innerWidth >= 1440);
@@ -42,6 +43,10 @@ const SignUpPage = () => {
 
       {modalComponent === 'VerifyModal' && (
         <VerifyModal onClose={handleCloseModal} />
+      )}
+
+      {modalComponent === 'EmailInUseModal' && (
+        <EmailInUseModal onClose={handleCloseModal} />
       )}
     </div>
   );

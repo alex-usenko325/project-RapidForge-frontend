@@ -26,8 +26,19 @@ export const signup = createAsyncThunk(
   async (body, thunkAPI) => {
     try {
       const response = await authAPI.post('/auth/register', body);
+      console.log('Response from API:', response); // Лог відповіді після успішного запиту
       return response.data.data;
     } catch (err) {
+      console.error('Error caught in signup:', err); // Лог помилки
+
+      if (err) {
+        console.log('Error response:', err.response); // Лог помилки в response
+        if (err.response && err.response.status === 409) {
+          console.log('Email is already in use'); // Лог повідомлення для помилки 409
+          return thunkAPI.rejectWithValue('Email is already in use');
+        }
+      }
+
       return thunkAPI.rejectWithValue(err.message);
     }
   }
