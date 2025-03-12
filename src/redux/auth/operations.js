@@ -3,6 +3,11 @@ import axios from 'axios';
 
 const authAPI = axios.create({
   baseURL: 'https://aqua-track-app.onrender.com', // Вкажіть правильний порт вашого серверу
+  // baseURL: 'http://localhost:3000', // Локальний порт вашого серверу
+  headers: {
+    'Content-Type': 'application/json',
+  },
+  withCredentials: true,
 });
 
 // Додавання та очищення заголовку авторизації
@@ -53,7 +58,7 @@ export const verifyEmail = createAsyncThunk(
   async (token, thunkAPI) => {
     console.log('Received token in verifyEmail:', token); // Логування отриманого токена
     try {
-      const response = await authAPI.get(`/auth/verifycate?token=${token}`);
+      const response = await authAPI.get(`/auth/signin?token=${token}`);
       console.log('Verification response:', response.data); // Лог відповіді сервера
       return response.data;
     } catch (error) {
@@ -102,7 +107,7 @@ export const refreshUser = createAsyncThunk(
     try {
       setAuthHeader(savedToken);
       const response = await authAPI.post('/auth/refresh');
-      return response.data;
+      return response.data.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.response.data);
     }
@@ -110,14 +115,45 @@ export const refreshUser = createAsyncThunk(
 );
 
 // Отримання даних користувача
+// export const getUserData = createAsyncThunk(
+//   'auth/getUserData',
+//   async (_, thunkAPI) => {
+//     try {
+//       const response = await authAPI.get('/user/currentUser');
+//       return response.data;
+//     } catch (error) {
+//       return thunkAPI.rejectWithValue(error.response.data);
+//     }
+//   }
+// );
+
 export const getUserData = createAsyncThunk(
   'auth/getUserData',
   async (_, thunkAPI) => {
     try {
-      const response = await authAPI.get('/user/profile');
-      return response.data;
+      // Логуємо запит перед виконанням
+      console.log('Sending request to get current user data...');
+      const savedToken = thunkAPI.getState().auth.token;
+      if (!savedToken) {
+        return thunkAPI.rejectWithValue('Token is not exist');
+      }
+      setAuthHeader(savedToken);
+      const response = await authAPI.get('/user/currentUser');
+
+      // Логуємо отриману відповідь
+      console.log('User data received:', response.data.data);
+
+      return response.data.data;
     } catch (error) {
-      return thunkAPI.rejectWithValue(error.response.data);
+      // Логуємо помилку, якщо вона сталася
+      console.error(
+        'Error fetching user data:',
+        error.response ? error.response.data : error.message
+      );
+      return thunkAPI.rejectWithValue(
+        error.response ? error.response.data : error.message
+      );
     }
   }
+  // { condition({ getState }) { } }
 );

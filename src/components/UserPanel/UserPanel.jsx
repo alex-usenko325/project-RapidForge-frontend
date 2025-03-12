@@ -1,19 +1,22 @@
-// функціонал отримання інформації про поточного користувача
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { getUserData } from "../../redux/auth/operations";
-import { selectUser, selectIsRefreshing  } from '../../redux/auth/selectors';
-import { Rings } from "react-loader-spinner";
-import styles from "./UserPanel.module.css";
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { getUserData } from '../../redux/auth/operations';
+import { selectUser, selectIsRefreshing } from '../../redux/auth/selectors';
+import { Rings } from 'react-loader-spinner';
+import styles from './UserPanel.module.css';
 import UserBar from '../UserBar/UserBar';
+
 const UserPanel = () => {
   const dispatch = useDispatch();
   const user = useSelector(selectUser);
   const isLoading = useSelector(selectIsRefreshing);
 
   useEffect(() => {
-    dispatch(getUserData());
-  }, [dispatch]);
+    if (!user) {
+      // Перевірка, чи є користувач і чи є ім'я
+      dispatch(getUserData()); // Якщо ім'я користувача відсутнє, викликаємо запит
+    }
+  }, [dispatch, user]);
 
   if (isLoading) {
     return (
@@ -27,21 +30,18 @@ const UserPanel = () => {
     return <p>No user data</p>;
   }
 
-  const userName = user.name ? user.name : user.email.split("@")[0];
-
-  const userPhoto = user.avatar
-  ? user.avatar
-  : `https://www.gravatar.com/avatar/${user.email}?d=identicon`;
+  // Визначаємо відображуване ім'я
+  let userDisplayName =
+    user.name || (user.email ? user.email.split('@')[0] : 'User');
 
   return (
     <div className={styles.userPanelCont}>
       <h2 className={styles.title}>
-        Hello, <span className={styles.span}>{userName}!</span>
+        Hello, <span className={styles.span}>{userDisplayName}!</span>
       </h2>
-      <UserBar name={userName} avatar={userPhoto} />
+      <UserBar name={userDisplayName} avatar={user.avatar} />
     </div>
   );
 };
 
 export default UserPanel;
-
