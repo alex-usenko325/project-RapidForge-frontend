@@ -1,3 +1,5 @@
+// ----------------------------------------- not redux -------------------------------------
+
 // import { useEffect } from 'react';
 // import CalendarItem from './CalendarItem';
 // import s from './Calendar.module.css';
@@ -44,6 +46,8 @@
 //   );
 // };
 // export default Calendar;
+
+// ----------------------------------------- not redux -------------------------------------
 
 import { useEffect } from 'react';
 import CalendarItem from './CalendarItem';

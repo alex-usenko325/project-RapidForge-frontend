@@ -1,3 +1,5 @@
+// ----------------------------------------- not redux -------------------------------------
+
 // import s from './CalendarItem.module.css';
 // import clsx from 'clsx';
 // import dayjs from 'dayjs';
@@ -48,6 +50,8 @@
 //   );
 // };
 // export default CalendarItem;
+
+// ----------------------------------------- not redux -------------------------------------
 
 import s from './CalendarItem.module.css';
 import clsx from 'clsx';
