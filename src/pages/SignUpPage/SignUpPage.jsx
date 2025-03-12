@@ -3,7 +3,6 @@ import SignUpForm from '../../components/SignUpForm/SignUpForm';
 import AdvantagesSection from '../../components/AdvantagesSection/AdvantagesSection';
 import clsx from 'clsx';
 import s from './SignUpPage.module.css';
-// import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectModalComponent } from '../../redux/modal/selectors';
 import VerifyModal from '../../components/VerifyModal/VerifyModal';
@@ -32,10 +31,6 @@ const SignUpPage = () => {
     openModalAction(dispatch, 'VerifyModal');
   };
 
-  // Функція для перенаправлення на сторінку верифікації
-  // const handleSignUpSuccess = () => {
-  //   navigate('/verification');
-  // };
   const handleCloseModal = () => {
     closeModalAction(dispatch);
   };

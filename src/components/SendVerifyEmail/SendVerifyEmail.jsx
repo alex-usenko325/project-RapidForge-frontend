@@ -2,14 +2,18 @@ import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import { verifyEmail } from '../../redux/auth/operations';
-import s from './VerifyEmail.module.css';
+import {
+  selectVerificationStatus,
+  selectVerificationError,
+} from '../../redux/auth/selectors';
+import s from './SendVerifyEmail.module.css';
 import Modal from '../Modal/Modal';
 import { GiConfirmed } from 'react-icons/gi';
 // import { FiXCircle } from 'react-icons/fi';
 import clsx from 'clsx';
 import { closeModalAction } from '../../redux/modal/operations';
 
-const VerifyEmail = () => {
+const SendVerifyEmail = () => {
   const location = useLocation();
   const dispatch = useDispatch();
 
@@ -67,4 +71,4 @@ const VerifyEmail = () => {
   );
 };
 
-export default VerifyEmail;
+export default SendVerifyEmail;

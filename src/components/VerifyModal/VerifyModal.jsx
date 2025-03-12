@@ -1,6 +1,6 @@
 import { useDispatch } from 'react-redux';
 import Modal from '../Modal/Modal';
-import s from '../VerifyEmail/VerifyEmail.module.css';
+import s from '../SendVerifyEmail/SendVerifyEmail.module.css';
 import clsx from 'clsx';
 import { closeModalAction } from '../../redux/modal/operations';
 
