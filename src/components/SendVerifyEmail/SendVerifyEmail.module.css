@@ -1,0 +1,115 @@
+.wrapper {
+  padding: 40px 20px;
+  width: 344px;
+  background: var(--main-white);
+}
+
+.icon {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  margin: 0 auto 8px;
+}
+
+.success {
+  color: var(--accent);
+}
+
+.error {
+  color: var(--error);
+}
+
+.title {
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  text-align: center;
+  margin-bottom: 16px;
+}
+
+.paragraph {
+  font-size: 14px;
+  line-height: 1.29;
+  letter-spacing: -0.01em;
+  text-align: center;
+  margin-bottom: 28px;
+}
+
+.btnWrap {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+}
+
+.btn {
+  border-radius: 30px;
+  width: 100%;
+  max-width: 100%;
+  padding: 14px;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 1.29;
+  letter-spacing: -0.01em;
+  text-align: center;
+  background: var(--accent);
+}
+
+.btn:hover,
+.btn:focus {
+  background: var(--accent-hover);
+}
+
+.grey {
+  background: var(--background);
+  color: rgba(50, 63, 71, 0.3);
+}
+
+.grey:hover,
+.grey:focus {
+  background: var(--background);
+  color: var(--main)
+}
+
+/* Tablet (від 768px) */
+@media (min-width: 768px) {
+  .wrapper {
+    padding: 40px;
+    width: 516px;
+  }
+
+  .icon {
+    width: 44px;
+    height: 44px;
+    margin: 0 auto 12px;
+  }
+
+  .title {
+    font-size: 28px;
+    line-height: 1.14;
+    margin-bottom: 24px;
+  }
+
+  .paragraph {
+    font-size: 18px;
+    line-height: 1.33;
+    margin-bottom: 24px;
+  }
+
+  .btnWrap {
+    flex-direction: row;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .btn {
+    width: auto;
+    min-width: 170px;
+    padding: 18px 14px;
+    font-size: 16px;
+    line-height: 1.5;
+  }
+}

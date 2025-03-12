@@ -3,9 +3,10 @@ import { ErrorMessage, Field, Form, Formik } from 'formik';
 import Logo from '../Logo/Logo';
 import * as Yup from 'yup';
 import { useDispatch } from 'react-redux';
-import { signin } from '../../redux/auth/operations';
+import { getUserData, signin } from '../../redux/auth/operations';
 import s from '../SignUpForm/SignUpForm.module.css';
 import sprite from '../../assets/sprite.svg';
+import { useState } from 'react';
 
 const SingInValidationSchema = Yup.object().shape({
   email: Yup.string()
@@ -27,8 +28,11 @@ const SignInForm = () => {
 
   const handleSubmit = (values, actions) => {
     dispatch(signin(values));
+    dispatch(getUserData());
     actions.resetForm();
   };
+
+  const [showPassword, changeShowPassword] = useState(false);
 
   return (
     <div className={s.authSection}>
@@ -62,13 +66,19 @@ const SignInForm = () => {
                 <div className={s.inputWrap}>
                   <Field
                     className={s.authField}
-                    type="password"
+                    type={showPassword ? 'text' : 'password'}
                     name="password"
                     placeholder="Enter your password"
                     required
                   />
-                  <svg className={s.authIcon}>
-                    <use xlinkHref={`${sprite}#icon-eye-off`} />
+                  <svg
+                    className={s.authIcon}
+                    onClick={() => changeShowPassword(!showPassword)}
+                  >
+                    {showPassword && (
+                      <use xlinkHref={`${sprite}#icon-eye-off`} />
+                    )}
+                    {!showPassword && <use xlinkHref={`${sprite}#icon-eye`} />}
                   </svg>
                 </div>
                 <ErrorMessage

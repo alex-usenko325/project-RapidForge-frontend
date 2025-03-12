@@ -9,6 +9,7 @@
   display: flex;
   flex-direction: column;
   gap: 8px;
+  position: absolute;
 }
 
 .btn_settings {
@@ -22,6 +23,7 @@
   height: 18px;
   gap: 8px;
 }
+
 .btn_logout {
   font-weight: 700;
   font-size: 14px;
@@ -39,6 +41,7 @@
   stroke: #323f47;
   fill: transparent;
 }
+
 .icon_logout {
   stroke-width: 1.5px;
   stroke: rgba(50, 63, 71, 0.4);
@@ -51,10 +54,12 @@
     height: 82px;
     margin-top: 8px;
   }
+
   .btn_settings {
     width: 80px;
     height: 23px;
   }
+
   .btn_logout {
     width: 80px;
     height: 23px;

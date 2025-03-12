@@ -4,13 +4,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import PrivateRoute from './routes/PrivateRoute';
 import RestrictedRoute from './routes/RestrictedRoute';
-import { refreshUser } from './redux/auth/operations';
+import { getUserData } from './redux/auth/operations';
 import SignUpPage from './pages/SignUpPage/SignUpPage';
 import SignInPage from './pages/SignInPage/SignInPage';
 import TrackerPage from './pages/TrackerPage/TrackerPage';
 import NotFoundPage from './pages/NotFoundPage/NotFoundPage';
 import HomePage from './pages/HomePage/HomePage';
-import VerificationPage from './pages/VerificationPage/VerificationPage.jsx';
 
 const App = () => {
   const dispatch = useDispatch();
@@ -19,7 +18,7 @@ const App = () => {
 
   useEffect(() => {
     if (!isLoggedIn) {
-      dispatch(refreshUser());
+      dispatch(getUserData());
     }
   }, [dispatch, isLoggedIn]);
 
@@ -46,10 +45,6 @@ const App = () => {
               <SignUpPage />
             </RestrictedRoute>
           }
-        />
-        <Route
-          path="/verification"
-          element={<VerificationPage />} // Додаємо новий маршрут
         />
         <Route
           path="/tracker"
