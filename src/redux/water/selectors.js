@@ -5,7 +5,10 @@ export const selectWaterError = state => state.water.error;
 export const selectWaterProgress = state => {
   const dailyNorm = state.auth.user.dailyNorm || 1500;
   const records = selectWaterRecords(state);
-  const waterConsumed = records.reduce(
+  const recordsArray = Array.isArray(records)
+    ? records
+    : Object.values(records);
+  const waterConsumed = recordsArray.reduce(
     (sum, record) => sum + (record.volume || 0),
     0
   );
