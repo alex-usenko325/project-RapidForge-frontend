@@ -37,9 +37,11 @@
       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M12 4h8"/>
       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3.6" d="M4 8h24m-2.667 0-.935 14.026c-.14 2.104-.21 3.156-.665 3.954a4.007 4.007 0 0 1-1.731 1.62c-.826.4-1.881.4-3.99.4h-4.025c-2.109 0-3.163 0-3.99-.4a4.001 4.001 0 0 1-1.731-1.62c-.455-.798-.525-1.85-.665-3.954L6.666 8"/>
     </symbol>
-    <symbol id="icon-upload" viewBox="0 0 32 32">
-      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.88" d="M28 20v5.333A2.668 2.668 0 0 1 25.333 28H6.666a2.668 2.668 0 0 1-2.667-2.667V20M22.666 10.667 15.999 4l-6.667 6.667M16 4v16"/>
-    </symbol>
+    <symbol id="icon-upload" viewBox="0 0 21 20">
+<path d="M18 12.5V15.8333C18 16.2754 17.8244 16.6993 17.5118 17.0118C17.1993 17.3244 16.7754 17.5 16.3333 17.5H4.66667C4.22464 17.5 3.80072 17.3244 3.48816 17.0118C3.17559 16.6993 3 16.2754 3 15.8333V12.5" stroke="#2F2F2F" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M14.6668 6.66667L10.5002 2.5L6.3335 6.66667" stroke="#2F2F2F" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M10.5 2.5V12.5" stroke="#2F2F2F" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+</symbol>
     <symbol id="icon-close" viewBox="0 0 32 32">
       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3.429" d="M24 8 8 24M8 8l16 16"/>
     </symbol>

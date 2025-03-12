@@ -1,0 +1,9 @@
+.settings_modal {
+  padding: 40px 20px;
+}
+
+@media (min-width: 1440px) {
+  .settings_modal {
+    padding: 40px;
+  }
+}
