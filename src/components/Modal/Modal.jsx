@@ -1,8 +1,9 @@
 import { useEffect } from 'react';
 import s from './Modal.module.css';
 import sprite from '../../assets/sprite.svg';
+import classNames from 'classnames';
 
-const Modal = ({ children, onClose }) => {
+const Modal = ({ children, onClose, modalClass }) => {
   const handleCloseModal = () => {
     onClose();
   };
@@ -29,10 +30,9 @@ const Modal = ({ children, onClose }) => {
   return (
     <div>
       <div className={s.overlay} onClick={handleBackdropClick}>
-        <div className={s.modal}>
+        <div className={modalClass ? modalClass : s.modal}>
           <button className={s.btn} onClick={handleCloseModal}>
             <svg className={s.icon} width="24" height="24">
-              {/* <use href="/sprite.svg#icon-close"></use> */}
               <use xlinkHref={`${sprite}#icon-close`} />
             </svg>
           </button>
