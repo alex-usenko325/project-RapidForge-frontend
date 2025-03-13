@@ -1,28 +1,6 @@
-import { useState } from 'react';
 import s from './UserBarPopover.module.css';
-import LogOutModal from '../LogOutModal/LogOutModal';
-import UserSettingsModal from '../UserSettingsModal/UserSettingsModal';
 
-const UserBarPopover = ({ onClose }) => {
-  const [isLogoutOpen, setIsLogoutOpen] = useState(false);
-  const [isUserSettingsOpen, setIsUserSettingsOpen] = useState(false);
-
-  const openLogout = () => {
-    setIsLogoutOpen(true);
-  };
-
-  const closeLogout = () => {
-    setIsLogoutOpen(false);
-  };
-
-  const openUserSettings = () => {
-    setIsUserSettingsOpen(true);
-  };
-
-  const closeUserSettings = () => {
-    setIsUserSettingsOpen(false);
-  };
-
+const UserBarPopover = ({ onClose, openUserSettings, openLogout }) => {
   return (
     <div className={s.userBar}>
       <button className={s.btn_settings} onClick={openUserSettings}>
@@ -37,8 +15,6 @@ const UserBarPopover = ({ onClose }) => {
         </svg>
         Log out
       </button>
-      {isLogoutOpen && <LogOutModal onClose={closeLogout} />}
-      {isUserSettingsOpen && <UserSettingsModal onClose={closeUserSettings} />}
     </div>
   );
 };
