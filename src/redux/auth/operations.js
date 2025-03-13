@@ -157,3 +157,33 @@ export const getUserData = createAsyncThunk(
   }
   // { condition({ getState }) { } }
 );
+
+export const patchUserData = createAsyncThunk(
+  'user/patchUserData',
+  async ({ userData, userId }, thunkAPI) => {
+    try {
+      const response = await authAPI.patch(`user/update/${userId}`, userData);
+
+      return response.data.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.response.data);
+    }
+  }
+);
+
+export const patchUserAvatar = createAsyncThunk(
+  'user/patchUserAvatar',
+  async ({ formData, userId }, thunkAPI) => {
+    try {
+      const response = await authAPI.patch(`/user/avatar/${userId}`, formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
+
+      return response.data.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.response?.data || error.message);
+    }
+  }
+);
