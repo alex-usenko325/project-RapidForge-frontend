@@ -13,7 +13,7 @@ const SingUpValidationSchema = Yup.object().shape({
     .required('Email is required field!'),
   password: Yup.string()
     .min(6, 'Password is too short!')
-    .max(18, 'Password is too long!')
+    .max(50, 'Password is too long!')
     .matches(/[A-Z]/, 'Password must contain at least one uppercase letter!')
     .matches(/[0-9]/, 'Password must contain at least one number!')
     .matches(
@@ -70,6 +70,8 @@ const SignUpForm = ({ onSignUpSuccess }) => {
           initialValues={initialValues}
           onSubmit={handleSubmit}
           validationSchema={SingUpValidationSchema}
+          validateOnChange={true} // Включаємо валідацію на кожну зміну
+          validateOnBlur={true} // Включаємо валідацію при втраті фокусу
         >
           <Form className={s.authForm}>
             <div className={s.authFormWrap}>
@@ -102,14 +104,14 @@ const SignUpForm = ({ onSignUpSuccess }) => {
                     className={s.authIcon}
                     onClick={() => changeShowPassword(!showPassword)}
                   >
-                    {showPassword && (
+                    {!showPassword && (
                       <use xlinkHref={`${sprite}#icon-eye-off`} />
                     )}
-                    {!showPassword && <use xlinkHref={`${sprite}#icon-eye`} />}
+                    {showPassword && <use xlinkHref={`${sprite}#icon-eye`} />}
                   </svg>
                 </div>
                 <ErrorMessage
-                  name={showPassword ? 'text' : 'password'}
+                  name="password"
                   component={'span'}
                   className={s.errorMessage}
                 />
@@ -130,10 +132,10 @@ const SignUpForm = ({ onSignUpSuccess }) => {
                       changeShowRepeatPassword(!showRepeatPassword)
                     }
                   >
-                    {showRepeatPassword && (
+                    {!showRepeatPassword && (
                       <use xlinkHref={`${sprite}#icon-eye-off`} />
                     )}
-                    {!showRepeatPassword && (
+                    {showRepeatPassword && (
                       <use xlinkHref={`${sprite}#icon-eye`} />
                     )}
                   </svg>

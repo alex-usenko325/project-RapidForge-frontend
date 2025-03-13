@@ -1,9 +1,10 @@
 import Modal from '../Modal/Modal';
 import s from '../SendVerifyEmail/SendVerifyEmail.module.css';
 import clsx from 'clsx';
+import { Link } from 'react-router-dom';
 import { useState } from 'react';
 
-const VerifyModal = () => {
+const EmailInUseModal = () => {
   const [isOpen, setIsOpen] = useState(true);
 
   const closeModal = () => {
@@ -14,14 +15,14 @@ const VerifyModal = () => {
     isOpen && (
       <Modal onClose={closeModal}>
         <div className={s.wrapper}>
-          <h2 className={s.title}>Verify your email</h2>
+          <h2 className={s.title}>Email already exists</h2>
           <p className={s.paragraph}>
-            Please check your email for verification link.
+            Please sign in or use a different email.
           </p>
           <div className={s.btnWrap}>
-            <a className={s.btn} href="mailto:example@email.com">
-              Open email client
-            </a>
+            <Link className={s.btn} to="/signin">
+              Go to Sign in
+            </Link>
             <button
               type="submit"
               className={clsx(s.btn, s.grey)}
@@ -36,4 +37,4 @@ const VerifyModal = () => {
   );
 };
 
-export default VerifyModal;
+export default EmailInUseModal;
