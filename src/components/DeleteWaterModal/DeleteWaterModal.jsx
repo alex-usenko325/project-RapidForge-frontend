@@ -15,6 +15,7 @@ const DeleteWaterModal = ({ onClose, waterEntryId }) => {
       toast.error('No entry selected for deletion');
       return;
     }
+
     setIsLoading(true);
     try {
       await dispatch(deleteWaterRecord(waterEntryId)).unwrap();
