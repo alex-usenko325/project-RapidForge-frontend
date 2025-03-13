@@ -14,7 +14,7 @@ const SingInValidationSchema = Yup.object().shape({
     .required('Email is required field!'),
   password: Yup.string()
     .min(6, 'Password is too short!')
-    .max(18, 'Password is too long!')
+    .max(50, 'Password is too long!')
     .required('Password is required field!'),
 });
 
@@ -43,6 +43,8 @@ const SignInForm = () => {
           initialValues={initialValues}
           onSubmit={handleSubmit}
           validationSchema={SingInValidationSchema}
+          validateOnChange={true} // Включаємо валідацію на кожну зміну
+          validateOnBlur={true} // Включаємо валідацію при втраті фокусу
         >
           <Form className={s.authForm}>
             <div className={s.authFormWrap}>
@@ -75,10 +77,10 @@ const SignInForm = () => {
                     className={s.authIcon}
                     onClick={() => changeShowPassword(!showPassword)}
                   >
-                    {showPassword && (
+                    {!showPassword && (
                       <use xlinkHref={`${sprite}#icon-eye-off`} />
                     )}
-                    {!showPassword && <use xlinkHref={`${sprite}#icon-eye`} />}
+                    {showPassword && <use xlinkHref={`${sprite}#icon-eye`} />}
                   </svg>
                 </div>
                 <ErrorMessage
