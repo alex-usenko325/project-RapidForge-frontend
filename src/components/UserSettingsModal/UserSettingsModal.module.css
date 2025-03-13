@@ -1,9 +1,30 @@
-.settings_modal {
-  padding: 40px 20px;
+.settings {
+  position: absolute;
+  border-radius: 15px;
+  box-shadow: 0 4px 50px 0 rgba(0, 0, 0, 0.1);
+  background: #fff;
+  overflow-y: auto;
+  top: 64px;
+  left: 16px;
+  right: 16px;
+  padding: 80px 16px;
+  height: calc(100vh - 64px);
+}
+
+@media (min-width: 768px) {
+  .settings {
+    width: 648px;
+    left: 60px;
+    right: 60px;
+    padding: 40px;
+  }
 }
 
 @media (min-width: 1440px) {
-  .settings_modal {
+  .settings {
+    width: 920px;
+    left: auto;
+    right: auto;
     padding: 40px;
   }
 }

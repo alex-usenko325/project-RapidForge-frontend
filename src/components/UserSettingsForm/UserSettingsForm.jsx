@@ -1,31 +1,38 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { useDispatch, useSelector } from 'react-redux';
+import { getUserData, patchUserAvatar } from '../../redux/auth/operations';
+import { patchUserData } from '../../redux/auth/operations';
+import { selectUser } from '../../redux/auth/selectors';
 import s from './UserSettingsForm.module.css';
 import sprite from '../../assets/sprite.svg';
 
-// Import images
-import avatarDefault from '../../assets/images/customers/defaultAvatar.png';
+const schema = yup.object({
+  name: yup
+    .string()
+    .min(3, 'Name must be at least 3 characters')
+    .max(12, 'Name must be at most 12 characters')
+    .required('Name is required'),
+  email: yup.string().email('Invalid email').required('Email is required'),
+  dailyNorm: yup
+    .number()
+    .positive('Water norma must be a positive number')
+    .max(15, 'The maximum water norma is 15 liters')
+    .required('Water norma is required'),
+});
 
-// Define validation schema with Yup
-const schema = yup
-  .object({
-    name: yup
-      .string()
-      .min(2, 'Name must be at least 2 characters')
-      .max(12, 'Name must be less than 12 characters')
-      .notRequired(),
-    email: yup.string().email('Invalid email').required('Email is required'),
-    waterNorma: yup
-      .number()
-      .typeError('Must be a number')
-      .positive('Must be a positive number')
-      .required('Field is required'),
-  })
-  .required();
+export default function UserSettingsForm({ closeModal }) {
+  const dispatch = useDispatch();
+  const user = useSelector(selectUser);
+  const [avatar, setAvatar] = useState(null);
+  const [gender, setGender] = useState(user.gender);
+  const [weight, setWeight] = useState('0');
+  const [activeTime, setActiveTime] = useState('0');
+  const [waterNorma, setWaterNorma] = useState();
+  const [customWaterNorma, setCustomWaterNorma] = useState('');
 
-export default function UserSettingsForm() {
   const {
     register,
     handleSubmit,
@@ -34,26 +41,25 @@ export default function UserSettingsForm() {
   } = useForm({
     resolver: yupResolver(schema),
   });
-  const [avatar, setAvatar] = useState(null);
-  const [gender, setGender] = useState('female');
-  const [weight, setWeight] = useState('0');
-  const [activeTime, setActiveTime] = useState('0');
-  const [waterNorma, setWaterNorma] = useState();
+
+  useEffect(() => {
+    if (!user) {
+      dispatch(getUserData());
+    }
+  }, [dispatch, user]);
 
   const calculateWaterNorma = (weight, activeTime, gender) => {
     let water;
-
     if (weight && activeTime && gender) {
       const M = parseFloat(weight);
       const T = parseFloat(activeTime);
 
-      if (gender === 'female') {
+      if (gender === 'woman') {
         water = M * 0.03 + T * 0.4;
-      } else if (gender === 'male') {
+      } else if (gender === 'man') {
         water = M * 0.04 + T * 0.6;
       }
     }
-
     return water;
   };
 
@@ -64,24 +70,75 @@ export default function UserSettingsForm() {
     }
   }, [gender, weight, activeTime]);
 
-  const onSubmit = data => {
-    console.log(data);
-  };
+  const onSubmit = async data => {
+    const waterInMilliliters = customWaterNorma
+      ? parseFloat(customWaterNorma) * 1000
+      : 0;
 
-  const handleAvatarChange = e => {
-    const file = e.target.files[0];
-    if (file) {
-      setAvatar(URL.createObjectURL(file));
+    const userData = {
+      name: data.name || '',
+      email: data.email,
+      gender: data.gender,
+      dailyNorm: waterInMilliliters || '',
+    };
+
+    const userId = user._id;
+
+    try {
+      dispatch(patchUserData({ userData, userId }));
+      closeModal();
+    } catch (error) {
+      console.error('Failed to update user data:', error);
     }
   };
 
+  const handleAvatarChange = async e => {
+    const file = e.target.files[0];
+    if (file) {
+      setAvatar(URL.createObjectURL(file));
+
+      const formData = new FormData();
+      formData.append('avatar', file);
+
+      const userId = user._id;
+
+      try {
+        dispatch(patchUserAvatar({ formData, userId }));
+      } catch (error) {
+        console.error('Failed to update avatar:', error);
+      }
+    }
+  };
+
+  const handleWaterNormaChange = e => {
+    const newWaterNorma = e.target.value
+      .replace(/[^0-9.]/g, '')
+      .replace(/\.(?=.*\.)/g, '')
+      .replace(/^(\d+)\.(\d{3}).*/g, '$1.$2');
+    setCustomWaterNorma(newWaterNorma);
+  };
+
   const handleWeightChange = e => {
-    const newWeight = e.target.value.replace(/[^\d]/g, ''); // Allow only digits
+    let newWeight = e.target.value.replace(/[^\d]/g, '');
+
+    if (newWeight === '') {
+      newWeight = '0';
+    } else if (newWeight.startsWith('0') && newWeight.length > 1) {
+      newWeight = newWeight.replace(/^0+/, '');
+    }
+
     setWeight(newWeight);
   };
 
   const handleActiveTimeChange = e => {
-    const newActiveTime = e.target.value.replace(/[^\d]/g, ''); // Allow only digits
+    let newActiveTime = e.target.value.replace(/[^\d]/g, '');
+
+    if (newActiveTime === '') {
+      newActiveTime = '0';
+    } else if (newActiveTime.startsWith('0') && newActiveTime.length > 1) {
+      newActiveTime = newActiveTime.replace(/^0+/, '');
+    }
+
     setActiveTime(newActiveTime);
   };
 
@@ -90,20 +147,33 @@ export default function UserSettingsForm() {
   };
 
   useEffect(() => {
-    setValue('gender', gender);
-    setValue('weight', weight);
-    setValue('time', activeTime);
-  }, [gender, weight, activeTime, setValue]);
+    setValue('email', user?.email || '');
+
+    if (user?.name) {
+      setValue('name', user.name);
+    } else {
+      setValue('name', '');
+    }
+
+    if (user?.dailyNorm) {
+      setValue('dailyNorm', (user.dailyNorm / 1000).toFixed(0));
+      setCustomWaterNorma((user.dailyNorm / 1000).toFixed(0));
+    } else {
+      setValue('dailyNorm', '');
+      setWaterNorma('');
+      setCustomWaterNorma('');
+    }
+
+    if (user?.gender) {
+      setValue(user.gender);
+    }
+  }, [gender, activeTime, setValue, user]);
 
   return (
     <div className={s.formContainer}>
       <div className={s.avatar_container}>
         <div className={s.avatar}>
-          <img
-            className={s.avatar}
-            src={avatar || avatarDefault}
-            alt="avatar"
-          />
+          <img className={s.avatar} src={avatar || user.avatar} alt="avatar" />
         </div>
 
         <label htmlFor="avatar-upload" className={s.uploadButton}>
@@ -116,7 +186,7 @@ export default function UserSettingsForm() {
           id="avatar-upload"
           type="file"
           className={s.fileInput}
-          accept="image/*"
+          accept="image/png, image/jpeg"
           onChange={handleAvatarChange}
           style={{ display: 'none' }}
         />
@@ -131,15 +201,15 @@ export default function UserSettingsForm() {
                 <input
                   className={s.radio}
                   type="radio"
-                  id="female"
-                  value="female"
+                  id="woman"
+                  value="woman"
                   {...register('gender')}
                   onChange={handleGenderChange}
-                  checked={gender === 'female'}
+                  checked={gender === 'woman'}
                 />
                 <label
                   className={`${s.secondaryLabel} ${s.radioLabel}`}
-                  htmlFor="female"
+                  htmlFor="woman"
                 >
                   Woman
                 </label>
@@ -149,15 +219,15 @@ export default function UserSettingsForm() {
                 <input
                   className={s.radio}
                   type="radio"
-                  id="male"
-                  value="male"
+                  id="man"
+                  value="man"
                   {...register('gender')}
                   onChange={handleGenderChange}
-                  checked={gender === 'male'}
+                  checked={gender === 'man'}
                 />
                 <label
                   className={`${s.secondaryLabel} ${s.radioLabel}`}
-                  htmlFor="male"
+                  htmlFor="man"
                 >
                   Man
                 </label>
@@ -169,7 +239,7 @@ export default function UserSettingsForm() {
             <div className={s.inputContainer}>
               <label className={`${s.mainLabel} ${s.forInput}`}>Name</label>
               <input
-                className={`${s.input} ${errors.name ? s.errorInput : ''}`} // Умова для червоного бордера
+                className={`${s.input} ${errors.name ? s.errorInput : ''}`}
                 type="text"
                 {...register('name')}
                 placeholder="Enter your name"
@@ -180,7 +250,7 @@ export default function UserSettingsForm() {
             <div className={s.inputContainer}>
               <label className={`${s.mainLabel} ${s.forInput}`}>Email</label>
               <input
-                className={`${s.input} ${errors.email ? s.errorInput : ''}`} // Умова для червоного бордера
+                className={`${s.input} ${errors.email ? s.errorInput : ''}`}
                 type="email"
                 {...register('email')}
                 placeholder="Enter your email"
@@ -223,7 +293,7 @@ export default function UserSettingsForm() {
                 Your weight in kilograms:
               </label>
               <input
-                className={`${s.input} ${errors.weight ? s.errorInput : ''}`} // Умова для червоного бордера
+                className={`${s.input} ${errors.weight ? s.errorInput : ''}`}
                 type="text"
                 value={weight}
                 onChange={handleWeightChange}
@@ -238,7 +308,7 @@ export default function UserSettingsForm() {
               <input
                 className={`${s.input} ${
                   errors.activeTime ? s.errorInput : ''
-                }`} // Умова для червоного бордера
+                }`}
                 type="text"
                 value={activeTime}
                 onChange={handleActiveTimeChange}
@@ -258,18 +328,15 @@ export default function UserSettingsForm() {
                 Write down how much water you will drink:
               </label>
               <input
-                className={`${s.input} ${
-                  errors.waterNorma ? s.errorInput : ''
-                }`} // Умова для червоного бордера
+                className={`${s.input} ${errors.dailyNorm ? s.errorInput : ''}`}
                 type="text"
-                {...register('waterNorma')}
+                {...register('dailyNorm')}
+                value={customWaterNorma}
+                onChange={handleWaterNormaChange}
                 placeholder="Enter your water norma"
-                onInput={e =>
-                  (e.target.value = e.target.value.replace(/[^\d]/g, ''))
-                } // Allow only digits
               />
-              {errors.waterNorma && (
-                <p className={s.error}>{errors.waterNorma.message}</p>
+              {errors.dailyNorm && (
+                <p className={s.error}>{errors.dailyNorm.message}</p>
               )}
             </div>
           </div>
