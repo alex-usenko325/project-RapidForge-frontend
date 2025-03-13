@@ -6,7 +6,9 @@ export default function AddWaterBtn() {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleClick = () => {
-    setIsModalOpen(true);
+    if (!isModalOpen) {
+      setIsModalOpen(true);
+    }
   };
 
   const handleCloseModal = () => {

@@ -10,16 +10,7 @@
   background-size: 76%;
   background-position: center 50px;
   background-repeat: no-repeat;
-}
-.trackH2 {
-  margin-top: 24px;
-  margin-left: 16px;
-  font-family: 'Poppins', sans-serif;
-  font-weight: 700;
-  font-size: 18px;
-  line-height: 14px;
-  color: var(--main-text);
-  text-transform: uppercase;
+  padding: 24px 16px;
 }
 
 @media only screen and (min-resolution: 192dpi),
@@ -48,12 +39,7 @@
     background-size: 53%;
     background-position: center;
     margin: 0 auto;
-  }
-
-  .trackH2 {
-    margin-top: 32px;
-    margin-left: 33px;
-    font-size: 24px;
+    padding: 32px;
   }
 
   @media only screen and (min-resolution: 192dpi),
@@ -74,13 +60,6 @@
     background-size: 76%;
     background-position: center 50px;
     background-repeat: no-repeat;
-  }
-
-  .trackH2 {
-    margin-top: 32px;
-    margin-left: 32px;
-    font-size: 24px;
-    line-height: 24px;
   }
 
   @media only screen and (min-resolution: 192dpi),
