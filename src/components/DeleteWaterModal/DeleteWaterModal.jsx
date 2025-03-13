@@ -21,7 +21,7 @@ const DeleteWaterModal = ({ onClose, waterEntryId }) => {
       onClose();
       toast.success('Entry deleted successfully');
     } catch (error) {
-      toast.error('Error deleting entry!');
+      toast.error('Error deleting entry');
     } finally {
       setIsLoading(false);
     }
