@@ -7,6 +7,7 @@ import RestrictedRoute from './routes/RestrictedRoute';
 import { getUserData } from './redux/auth/operations';
 import NotFoundPage from './pages/NotFoundPage/NotFoundPage';
 import { RotatingLines } from 'react-loader-spinner';
+import { Toaster } from 'react-hot-toast';
 
 const HomePage = lazy(() => import('./pages/HomePage/HomePage'));
 const TrackerPage = lazy(() => import('./pages/TrackerPage/TrackerPage'));
@@ -30,6 +31,8 @@ const App = () => {
 
   return (
     <div>
+      <Toaster />
+
       <Suspense
         fallback={
           <div
