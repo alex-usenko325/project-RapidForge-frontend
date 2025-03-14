@@ -7,23 +7,26 @@ import { modalReducer } from './modal/slice';
 import { userReducer } from './user/slice.js';
 import { waterReducer } from './water/slice';
 
+import { injectStore } from './auth/operations.js';
+
+import { waterPerReducer } from './monthInfo/waterSlice';
 
 const authPersistConfig = {
   key: 'auth',
   storage,
-  whitelist: ['token'],
+  // whitelist: ['token'],
 };
 
 const persistedAuthReducer = persistReducer(authPersistConfig, authReducer);
 
 export const store = configureStore({
   reducer: {
-
     // water: waterReducer,
     user: userReducer,
     water: waterReducer,
     auth: persistedAuthReducer,
     modal: modalReducer,
+    waterPer: waterPerReducer,
     // filters: filtersReducer,
   },
   middleware: getDefaultMiddleware =>
@@ -34,4 +37,5 @@ export const store = configureStore({
     }),
 });
 
+injectStore(store);
 export const persistor = persistStore(store);
