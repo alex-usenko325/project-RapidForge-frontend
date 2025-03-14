@@ -53,7 +53,7 @@ import { useEffect } from 'react';
 import CalendarItem from './CalendarItem';
 import s from './Calendar.module.css';
 import dayjs from 'dayjs';
-import { fetchWaterPer } from '../../../redux/monthInfo/getWaterPercent.js';
+import { getMonthWaterInfo } from '../../../redux/monthInfo/getWaterPercent.js';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectWaterData } from '../../../redux/monthInfo/waterSlice.js';
 
@@ -67,7 +67,7 @@ const Calendar = ({ selectedDate, setSelectedDate }) => {
 
   useEffect(() => {
     const formattedDate = getFormattedDate(selectedDate);
-    dispatch(fetchWaterPer(formattedDate));
+    dispatch(getMonthWaterInfo(formattedDate));
   }, [selectedDate, dispatch]);
 
   const daysInMonth = dayjs(selectedDate).daysInMonth();

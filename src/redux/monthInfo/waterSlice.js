@@ -1,47 +1,31 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { fetchWaterPer } from './getWaterPercent.js';
-
-export const fetchWaterPercentData = createAsyncThunk(
-  'waterPer/fetchWaterPercentData',
-  async (date, thunkApi) => {
-    try {
-      const data = await fetchWaterPer(date);
-
-      return data;
-    } catch (error) {
-      return thunkApi.rejectWithValue(error.message);
-    }
-  }
-);
+import { createSlice } from '@reduxjs/toolkit';
+import { getMonthWaterInfo } from './getWaterPercent';
 
 const initialState = {
-  waterData: [],
+  monthData: [],
   isLoading: false,
-  isError: false,
+  error: null,
 };
 
-const waterPerSlice = createSlice({
-  name: 'waterPer',
+const waterSlice = createSlice({
+  name: 'water',
   initialState,
   reducers: {},
   extraReducers: builder => {
     builder
-      .addCase(fetchWaterPer.pending, state => {
+      .addCase(getMonthWaterInfo.pending, state => {
         state.isLoading = true;
+        state.error = null;
       })
-      .addCase(fetchWaterPer.fulfilled, (state, action) => {
+      .addCase(getMonthWaterInfo.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.waterData = action.payload;
+        state.monthData = action.payload;
       })
-      .addCase(fetchWaterPer.rejected, (state, action) => {
+      .addCase(getMonthWaterInfo.rejected, (state, action) => {
         state.isLoading = false;
-        state.isError = action.payload;
+        state.error = action.payload;
       });
   },
 });
 
-export const selectWaterData = state => state.waterPer.waterData;
-export const selectIsLoading = state => state.waterPer.isLoading;
-export const selectIsError = state => state.waterPer.isError;
-
-export const waterPerReducer = waterPerSlice.reducer;
+export default waterSlice.reducer;

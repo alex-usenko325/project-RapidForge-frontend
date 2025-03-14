@@ -1,15 +1,23 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { authAPI } from '../auth/operations';
+import axios from 'axios';
 
-export const fetchWaterPer = createAsyncThunk(
-  'fetchWaterPer',
-  async (date, thunkApi) => {
+axios.defaults.baseURL = 'https://aqua-track-app.onrender.com';
+
+export const getMonthWaterInfo = createAsyncThunk(
+  'water/getMonthWaterInfo',
+  async ({ year, month }, { getState, rejectWithValue }) => {
+    const token = getState().auth.token;
     try {
-      const { data } = await authAPI.get(`/water/month/${date}`);
-
-      return data.data.waterMonthByDay;
+      const { data } = await axios.get(`/water/month`, {
+        params: { year, month },
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      console.log('😊Fetched month water data:', data);
+      return data.data;
     } catch (error) {
-      return thunkApi.rejectWithValue(error.message);
+      return rejectWithValue(error.response?.data?.message || 'Fetch error');
     }
   }
 );
