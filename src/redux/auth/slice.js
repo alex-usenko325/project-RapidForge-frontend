@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import {
   signin,
   logout,
-  refreshUser,
+  refresh,
   signup,
   getUserData,
   sendVerificationEmail,
@@ -41,7 +41,7 @@ const authSlice = createSlice({
 
       // Обробка результатів signin
       .addCase(signin.fulfilled, (state, action) => {
-        console.log('✅ Логін успішний, токен:', action.payload.token);
+        console.log('✅ Логін успішний, токен:', action.payload.accessToken);
         state.token = action.payload.accessToken;
         state.isLoggedIn = true;
       })
@@ -50,15 +50,17 @@ const authSlice = createSlice({
       .addCase(logout.fulfilled, () => initialState)
 
       // Обробка результатів refreshUser
-      .addCase(refreshUser.pending, state => {
+      .addCase(refresh.pending, state => {
         state.isRefreshing = true;
+        state.isLoggedIn = false;
       })
-      .addCase(refreshUser.fulfilled, (state, action) => {
-        state.user = action.payload;
+      .addCase(refresh.fulfilled, (state, action) => {
+        console.log('✅ Рефреш успішний, токен:', action.payload.accessToken);
+        state.token = action.payload.accessToken;
         state.isLoggedIn = true;
         state.isRefreshing = false;
       })
-      .addCase(refreshUser.rejected, state => {
+      .addCase(refresh.rejected, state => {
         state.isRefreshing = false;
         state.token = null;
       })
@@ -68,13 +70,6 @@ const authSlice = createSlice({
         console.log('🔥 Redux: отримані дані користувача', action.payload);
         state.user = action.payload;
         state.isLoggedIn = true;
-        state.isRefreshing = false;
-      })
-      .addCase(getUserData.pending, state => {
-        state.isRefreshing = true;
-      })
-      .addCase(getUserData.rejected, state => {
-        state.isRefreshing = false;
       })
 
       // Обробка результатів sendVerificationEmail

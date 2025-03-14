@@ -107,22 +107,47 @@ export const logout = createAsyncThunk('auth/logout', async (_, thunkAPI) => {
     return thunkAPI.rejectWithValue(err.message);
   }
 });
-
 // Оновлення токена користувача
-export const refreshUser = createAsyncThunk(
+export const refresh = createAsyncThunk(
   'auth/refreshUser',
   async (_, thunkAPI) => {
     const savedToken = thunkAPI.getState().auth.token;
+
+    // Якщо токен відсутній в Redux
     if (!savedToken) {
-      return thunkAPI.rejectWithValue('Token is not exist');
+      try {
+        console.log('No token found in Redux, requesting new token...');
+
+        const response = await authAPI.post('/auth/refresh');
+        const newToken = response.data.data.accessToken;
+
+        console.log('New Token from refresh: ', newToken); // Лог нового токену
+
+        // Встановлюємо новий токен у заголовок
+        setAuthHeader(newToken);
+        console.log('New token set in header');
+
+        // Викликаємо action для отримання даних користувача
+        await thunkAPI.dispatch(getUserData());
+        console.log('User data fetched successfully');
+
+        return response.data.data;
+      } catch (error) {
+        console.error('Error during token refresh: ', error);
+        return thunkAPI.rejectWithValue(error.response?.data || error.message);
+      }
     }
-    try {
-      setAuthHeader(savedToken);
-      const response = await authAPI.post('/auth/refresh');
-      return response.data.data;
-    } catch (error) {
-      return thunkAPI.rejectWithValue(error.response.data);
-    }
+
+    // Якщо токен є в Redux, встановлюємо його в заголовок
+    console.log('Using saved token from Redux: ', savedToken);
+    setAuthHeader(savedToken);
+    console.log('Token set in header from Redux');
+
+    // Отримуємо дані користувача після встановлення токену
+    await thunkAPI.dispatch(getUserData());
+    console.log('User data fetched successfully after token refresh');
+
+    return { token: savedToken };
   }
 );
 
@@ -131,11 +156,6 @@ export const getUserData = createAsyncThunk(
   'auth/getUserData',
   async (_, thunkAPI) => {
     try {
-      const savedToken = thunkAPI.getState().auth.token;
-      if (!savedToken) {
-        return thunkAPI.rejectWithValue('Token is not exist');
-      }
-      setAuthHeader(savedToken);
       const response = await authAPI.get('/user/currentUser');
       return response.data.data;
     } catch (error) {
