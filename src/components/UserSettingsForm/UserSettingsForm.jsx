@@ -3,9 +3,13 @@ import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useDispatch, useSelector } from 'react-redux';
-import { getUserData, patchUserAvatar } from '../../redux/auth/operations';
-import { patchUserData } from '../../redux/auth/operations';
-import { selectUser } from '../../redux/auth/selectors';
+import {
+  getUserData,
+  patchUserAvatar,
+  patchUserData,
+} from '../../redux/user/operations';
+
+import { selectUser } from '../../redux/user/selectors';
 import s from './UserSettingsForm.module.css';
 import sprite from '../../assets/sprite.svg';
 
