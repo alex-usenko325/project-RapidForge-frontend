@@ -12,7 +12,7 @@ export default function WaterModal({ onClose }) {
           <p className={s.amount}>Amount of water:</p>
           <div className={s.wrapperAmount}>
             <button type="button" className={clsx(s.btn, s.btnMinus)}></button>
-            <p className={s.number}>50ml</p>
+            <p className={s.number}>50 ml</p>
             <button type="button" className={clsx(s.btn, s.btnPlus)}></button>
           </div>
           <form className={s.form}>

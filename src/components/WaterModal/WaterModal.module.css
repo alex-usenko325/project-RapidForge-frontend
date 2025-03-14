@@ -2,8 +2,6 @@
   border-radius: 15px;
   padding: 40px 20px;
   width: 343px;
-  height: 490px;
-
   box-shadow: 0 4px 50px 0 rgba(0, 0, 0, 0.1);
   background: var(--main-white);
   color: var(----main-text);
@@ -19,7 +17,6 @@
   .wrapper {
     padding: 40px;
     width: 518px;
-    height: 555px;
   }
 }
 
@@ -123,12 +120,11 @@
 }
 
 .number {
-  width: 81px;
-  height: 40px;
+  width: 100px;
   border-radius: 30px;
   padding: 11px 20px;
   background-color: var(--main);
-
+  text-align: center;
   font-weight: 700;
   font-size: 14px;
   line-height: 1.28;
@@ -137,21 +133,14 @@
 
 @media only screen and (min-width: 768px) {
   .number {
-    width: 86px;
-    height: 43px;
     font-size: 15px;
     line-height: 1.5;
   }
 }
 
-.form {
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
-}
-
 .labelTime {
   display: block;
+  margin-bottom: 24px;
   font-weight: 400;
   font-size: 14px;
   line-height: 1.28;
@@ -199,6 +188,7 @@
 
 .labelValueWater {
   display: block;
+  margin-bottom: 24px;
   font-weight: 700;
   line-height: 1.25;
   letter-spacing: -0.01em;
@@ -212,7 +202,6 @@
 }
 
 .btnSave {
-  width: 116px;
   border-radius: 30px;
   padding: 14px 40px;
   background-color: var(--accent);
@@ -226,7 +215,6 @@
 
 @media only screen and (min-width: 768px) {
   .btnSave {
-    width: 141px;
     padding: 18px 50px;
     font-size: 16px;
     line-height: 1.5;
@@ -237,9 +225,3 @@
 .btnSave:focus {
   background-color: var(--accent-hover);
 }
-
-/* @media only screen and (min-width: 1440px) {
-  .title {
-   
-  }
-} */
