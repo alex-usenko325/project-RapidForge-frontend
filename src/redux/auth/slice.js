@@ -7,6 +7,8 @@ import {
   getUserData,
   sendVerificationEmail,
   verifyEmail,
+  patchUserData,
+  patchUserAvatar,
 } from './operations';
 
 const initialState = {
@@ -97,6 +99,32 @@ const authSlice = createSlice({
       .addCase(verifyEmail.rejected, (state, action) => {
         state.verificationStatus = 'failed'; // Помилка
         state.verificationError = action.payload; // Зберігаємо помилку
+      })
+
+      // patch user data
+      .addCase(patchUserData.pending, state => {
+        state.isLoading = true;
+      })
+      .addCase(patchUserData.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.user = action.payload;
+      })
+      .addCase(patchUserData.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload;
+      })
+
+      //patch user avatar
+      .addCase(patchUserAvatar.pending, state => {
+        state.isLoading = true;
+      })
+      .addCase(patchUserAvatar.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.user = action.payload;
+      })
+      .addCase(patchUserAvatar.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload;
       });
   },
 });

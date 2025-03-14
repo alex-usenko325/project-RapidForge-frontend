@@ -15,12 +15,14 @@ const SingUpValidationSchema = Yup.object().shape({
     .email(() => i18next.t('signUp.validation.email.invalid'))
     .required(() => i18next.t('signUp.validation.email.required')),
   password: Yup.string()
+
     .min(6, () => i18next.t('signUp.validation.password.short'))
     .max(18, () => i18next.t('signUp.validation.password.long'))
     .matches(/[A-Z]/, () => i18next.t('signUp.validation.password.uppercase'))
     .matches(/[0-9]/, () => i18next.t('signUp.validation.password.number'))
     .matches(/[!@#$%^&*]/, () =>
       i18next.t('signUp.validation.password.special')
+
     )
     .required(() => i18next.t('signUp.validation.password.required')),
 
@@ -76,6 +78,8 @@ const SignUpForm = ({ onSignUpSuccess }) => {
           initialValues={initialValues}
           onSubmit={handleSubmit}
           validationSchema={SingUpValidationSchema}
+          validateOnChange={true} // Включаємо валідацію на кожну зміну
+          validateOnBlur={true} // Включаємо валідацію при втраті фокусу
         >
           <Form className={s.authForm}>
             <div className={s.authFormWrap}>
@@ -108,14 +112,14 @@ const SignUpForm = ({ onSignUpSuccess }) => {
                     className={s.authIcon}
                     onClick={() => changeShowPassword(!showPassword)}
                   >
-                    {showPassword && (
+                    {!showPassword && (
                       <use xlinkHref={`${sprite}#icon-eye-off`} />
                     )}
-                    {!showPassword && <use xlinkHref={`${sprite}#icon-eye`} />}
+                    {showPassword && <use xlinkHref={`${sprite}#icon-eye`} />}
                   </svg>
                 </div>
                 <ErrorMessage
-                  name={showPassword ? 'text' : 'password'}
+                  name="password"
                   component={'span'}
                   className={s.errorMessage}
                 />
@@ -138,10 +142,10 @@ const SignUpForm = ({ onSignUpSuccess }) => {
                       changeShowRepeatPassword(!showRepeatPassword)
                     }
                   >
-                    {showRepeatPassword && (
+                    {!showRepeatPassword && (
                       <use xlinkHref={`${sprite}#icon-eye-off`} />
                     )}
-                    {!showRepeatPassword && (
+                    {showRepeatPassword && (
                       <use xlinkHref={`${sprite}#icon-eye`} />
                     )}
                   </svg>
