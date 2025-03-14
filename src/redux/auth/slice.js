@@ -42,6 +42,7 @@ const authSlice = createSlice({
 
       // Обробка результатів signin
       .addCase(signin.fulfilled, (state, action) => {
+        console.log('✅ Логін успішний, токен:', action.payload.token);
         state.token = action.payload.accessToken;
         state.isLoggedIn = true;
       })
@@ -65,6 +66,7 @@ const authSlice = createSlice({
 
       // Обробка результатів getUserData
       .addCase(getUserData.fulfilled, (state, action) => {
+        console.log('🔥 Redux: отримані дані користувача', action.payload);
         state.user = action.payload;
         // state.isLoggedIn = true;
         state.isRefreshingUser = false;

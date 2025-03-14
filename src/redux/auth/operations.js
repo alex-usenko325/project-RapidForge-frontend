@@ -121,7 +121,9 @@ export const signin = createAsyncThunk(
   async (body, thunkAPI) => {
     try {
       const response = await authAPI.post('/auth/login', body);
+
       setAuthHeader(response.data.data.accessToken);
+      console.log('🔥 Відповідь від бекенду:', response.data); // Додай цей лог
       return response.data.data;
     } catch (err) {
       return thunkAPI.rejectWithValue(err.message);
@@ -162,14 +164,12 @@ export const getUserData = createAsyncThunk(
   'auth/getUserData',
   async (_, thunkAPI) => {
     try {
-      console.log('Sending request to get current user data...');
       const savedToken = thunkAPI.getState().auth.token;
       if (!savedToken) {
         return thunkAPI.rejectWithValue('Token is not exist');
       }
       setAuthHeader(savedToken);
       const response = await authAPI.get('/user/currentUser');
-      console.log('User data received:', response.data.data);
       return response.data.data;
     } catch (error) {
       console.error(

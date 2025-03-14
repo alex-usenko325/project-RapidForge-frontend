@@ -14,21 +14,21 @@ const TrackerPage = lazy(() => import('./pages/TrackerPage/TrackerPage'));
 const SignUpPage = lazy(() => import('./pages/SignUpPage/SignUpPage'));
 const SignInPage = lazy(() => import('./pages/SignInPage/SignInPage'));
 
-
 const App = () => {
   const dispatch = useDispatch();
   const isLoggedIn = useSelector(state => state.auth.isLoggedIn);
   const isRefreshingUser = useSelector(state => state.auth.isRefreshingUser);
 
-  useEffect(() => {
-    if (isLoggedIn) {
-      dispatch(getUserData());
-    }
-  }, [dispatch, isLoggedIn]);
-
-  if (isRefreshingUser) {
-    return <p></p>;
+useEffect(() => {
+  if (isLoggedIn) {
+    console.log('✅ Отримуємо дані користувача...');
+    dispatch(getUserData());
   }
+}, [dispatch, isLoggedIn]);
+
+if (isRefreshingUser) {
+ 
+}
 
   return (
     <div>
