@@ -6,25 +6,31 @@ import { signup, sendVerificationEmail } from '../../redux/auth/operations';
 import s from './SignUpForm.module.css';
 import { useState } from 'react';
 import sprite from '../../assets/sprite.svg';
+import { useTranslation } from 'react-i18next';
+import i18next from 'i18next';
+import LocalizationDropdownMenu from '../LocalizationDropdownMenu/LocalizationDropdownMenu';
 
 const SingUpValidationSchema = Yup.object().shape({
   email: Yup.string()
-    .email('Please enter a valid email')
-    .required('Email is required field!'),
+    .email(() => i18next.t('signUp.validation.email.invalid'))
+    .required(() => i18next.t('signUp.validation.email.required')),
   password: Yup.string()
-    .min(6, 'Password is too short!')
-    .max(50, 'Password is too long!')
-    .matches(/[A-Z]/, 'Password must contain at least one uppercase letter!')
-    .matches(/[0-9]/, 'Password must contain at least one number!')
-    .matches(
-      /[!@#$%^&*]/,
-      'Password must contain at least one special character!'
+
+    .min(6, () => i18next.t('signUp.validation.password.short'))
+    .max(18, () => i18next.t('signUp.validation.password.long'))
+    .matches(/[A-Z]/, () => i18next.t('signUp.validation.password.uppercase'))
+    .matches(/[0-9]/, () => i18next.t('signUp.validation.password.number'))
+    .matches(/[!@#$%^&*]/, () =>
+      i18next.t('signUp.validation.password.special')
+
     )
-    .required('Password is required field!'),
-  repeatPassword: Yup.string().oneOf(
-    [Yup.ref('password'), null],
-    'Passwords must match'
-  ),
+    .required(() => i18next.t('signUp.validation.password.required')),
+
+  repeatPassword: Yup.string()
+    .oneOf([Yup.ref('password'), null], () =>
+      i18next.t('signUp.validation.password.match')
+    )
+    .required(() => i18next.t('signUp.validation.password.confirmRequired')),
 });
 
 const initialValues = {
@@ -34,6 +40,7 @@ const initialValues = {
 };
 
 const SignUpForm = ({ onSignUpSuccess }) => {
+  const { t } = useTranslation();
   const dispatch = useDispatch();
   const [error, setError] = useState(null);
 
@@ -63,9 +70,10 @@ const SignUpForm = ({ onSignUpSuccess }) => {
 
   return (
     <div className={s.authSection}>
+      <LocalizationDropdownMenu />
       <Logo />
       <div className={s.authWrap}>
-        <h2 className={s.authSubtitle}>Sign Up</h2>
+        <h2 className={s.authSubtitle}>{t('signUp.sign_up')}</h2>
         <Formik
           initialValues={initialValues}
           onSubmit={handleSubmit}
@@ -76,12 +84,12 @@ const SignUpForm = ({ onSignUpSuccess }) => {
           <Form className={s.authForm}>
             <div className={s.authFormWrap}>
               <label className={s.authLabel}>
-                <span className={s.labelSpan}>E-mail</span>
+                <span className={s.labelSpan}>{t('signUp.e_mail')}</span>
                 <Field
                   className={s.authField}
                   type="email"
                   name="email"
-                  placeholder="Enter your email"
+                  placeholder={t('signUp.enter_your_email')}
                   required
                 />
                 <ErrorMessage
@@ -91,13 +99,13 @@ const SignUpForm = ({ onSignUpSuccess }) => {
                 />
               </label>
               <label className={s.authLabel}>
-                <span className={s.labelSpan}>Password</span>
+                <span className={s.labelSpan}>{t('signUp.password')}</span>
                 <div className={s.inputWrap}>
                   <Field
                     className={s.authField}
                     type={showPassword ? 'text' : 'password'}
                     name="password"
-                    placeholder="Enter your password"
+                    placeholder={t('signUp.enter_your_password')}
                     required
                   />
                   <svg
@@ -117,13 +125,15 @@ const SignUpForm = ({ onSignUpSuccess }) => {
                 />
               </label>
               <label className={s.authLabel}>
-                <span className={s.labelSpan}>Repeat password</span>
+                <span className={s.labelSpan}>
+                  {t('signUp.repeat_password')}
+                </span>
                 <div className={s.inputWrap}>
                   <Field
                     className={s.authField}
                     type={showRepeatPassword ? 'text' : 'password'}
                     name="repeatPassword"
-                    placeholder="Repeat password"
+                    placeholder={t('signUp.repeat_password')}
                     required
                   />
                   <svg
@@ -149,13 +159,13 @@ const SignUpForm = ({ onSignUpSuccess }) => {
             </div>
             <div className={s.authBtnWrap}>
               <button type="submit" className={s.authBtn}>
-                Sign Up
+                {t('signUp.sign_up')}
               </button>
               {error && <div className={s.error}>{error}</div>}
               <div className={s.haveAnAccount}>
-                Already have an account?{' '}
+                {t('signUp.already_have_account')}{' '}
                 <a href="/signin" className={s.authLink}>
-                  Sign In
+                  {t('signUp.sign_in')}
                 </a>
               </div>
             </div>
