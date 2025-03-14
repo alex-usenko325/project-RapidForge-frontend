@@ -24,6 +24,7 @@ const initialState = {
   token: null,
   isLoggedIn: false,
   isRefreshing: false,
+  isRefreshingUser: false,
   verificationStatus: 'idle', // Статус для верифікації
   verificationError: null, // Для збереження помилок верифікації
   error: null, // Для обробки загальних помилок
@@ -53,7 +54,7 @@ const authSlice = createSlice({
         state.isRefreshing = true;
       })
       .addCase(refreshUser.fulfilled, (state, action) => {
-        state.user = action.payload;
+        state.token = action.payload.accessToken;
         state.isLoggedIn = true;
         state.isRefreshing = false;
       })
@@ -65,14 +66,14 @@ const authSlice = createSlice({
       // Обробка результатів getUserData
       .addCase(getUserData.fulfilled, (state, action) => {
         state.user = action.payload;
-        state.isLoggedIn = true;
-        state.isRefreshing = false;
+        // state.isLoggedIn = true;
+        state.isRefreshingUser = false;
       })
       .addCase(getUserData.pending, state => {
-        state.isRefreshing = true;
+        state.isRefreshingUser = true;
       })
       .addCase(getUserData.rejected, state => {
-        state.isRefreshing = false;
+        state.isRefreshingUser = false;
       })
 
       // Обробка результатів sendVerificationEmail
