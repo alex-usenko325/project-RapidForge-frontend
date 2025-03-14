@@ -16,6 +16,7 @@ const DeleteWaterModal = ({ onClose, waterEntryId }) => {
       return;
     }
     setIsLoading(true);
+
     try {
       await dispatch(deleteWaterRecord(waterEntryId)).unwrap();
       onClose();
