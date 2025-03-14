@@ -6,6 +6,9 @@ import { modalReducer } from './modal/slice';
 
 import { userReducer } from './user/slice.js';
 import { waterReducer } from './water/slice';
+
+import { injectStore } from './auth/operations.js';
+
 import { waterPerReducer } from './monthInfo/waterSlice';
 
 const authPersistConfig = {
@@ -34,4 +37,5 @@ export const store = configureStore({
     }),
 });
 
+injectStore(store);
 export const persistor = persistStore(store);

@@ -11,6 +11,39 @@ export const authAPI = axios.create({
   withCredentials: true,
 });
 
+let store;
+
+export const injectStore = _store => {
+  store = _store;
+};
+
+authAPI.interceptors.response.use(
+  response => response,
+  async error => {
+    console.log('interceptor error response', error);
+    const originalRequest = error.config;
+    console.log('originalRequest._retry: ', originalRequest._retry);
+
+    if (
+      // error.response.status === 401 &&
+      error.response.data.message === 'Access token expired' &&
+      !originalRequest._retry
+    ) {
+      console.log('error.response.data.message', error.response.data.message);
+      originalRequest._retry = true;
+      try {
+        await store.dispatch(refreshUser());
+        return authAPI(originalRequest);
+      } catch (refreshError) {
+        console.error('Token refresh failed:', refreshError);
+        // window.location.href = '/login';
+        return Promise.reject(refreshError);
+      }
+    }
+    return Promise.reject(error);
+  }
+);
+
 // Функції для додавання та очищення заголовку авторизації
 export const setAuthHeader = token => {
   console.log('setAuthHeader', token);
