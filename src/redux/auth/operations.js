@@ -1,26 +1,27 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-const authAPI = axios.create({
-  baseURL: 'https://aqua-track-app.onrender.com', // Вкажіть правильний порт вашого серверу
-  // baseURL: 'http://localhost:3000', // Локальний порт вашого серверу
+// Створення екземпляра axios для авторизації
+export const authAPI = axios.create({
+  baseURL: 'https://aqua-track-app.onrender.com', // Вкажіть правильний URL вашого серверу
+  // baseURL: 'http://localhost:3000', // Локальний URL серверу, якщо потрібно
   headers: {
     'Content-Type': 'application/json',
   },
   withCredentials: true,
 });
 
-// Додавання та очищення заголовку авторизації
-const setAuthHeader = token => {
+// Функції для додавання та очищення заголовку авторизації
+export const setAuthHeader = token => {
   console.log('setAuthHeader', token);
   authAPI.defaults.headers.common.Authorization = `Bearer ${token}`;
 };
 
-const clearAuthHeader = () => {
+export const clearAuthHeader = () => {
   authAPI.defaults.headers.common.Authorization = '';
 };
 
-// Реєстрація
+// Реєстрація користувача
 export const signup = createAsyncThunk(
   'auth/signup',
   async (body, thunkAPI) => {
@@ -44,33 +45,30 @@ export const signup = createAsyncThunk(
   }
 );
 
+// Відправлення верифікаційного email
 export const sendVerificationEmail = createAsyncThunk(
   'auth/sendVerificationEmail',
   async (email, thunkAPI) => {
     try {
-      console.log('Sending verification email to:', email); // Лог email перед відправкою
-
+      console.log('Sending verification email to:', email);
       const response = await authAPI.post('/auth/verifycate', { email });
-
-      console.log('Verification email sent successfully:', response.data); // Лог відповіді після успішного запиту
-
+      console.log('Verification email sent successfully:', response.data);
       return response.data;
     } catch (error) {
-      console.error('Error sending verification email:', error.message); // Лог помилки, якщо вона сталася
-
-      return thunkAPI.rejectWithValue(error.message); // Повертання помилки в Redux
+      console.error('Error sending verification email:', error.message);
+      return thunkAPI.rejectWithValue(error.message);
     }
   }
 );
 
-// Додавання операції verifyEmail для верифікації електронної пошти
+// Верифікація email через токен
 export const verifyEmail = createAsyncThunk(
   'auth/verifyEmail',
   async (token, thunkAPI) => {
-    console.log('Received token in verifyEmail:', token); // Логування отриманого токена
+    console.log('Received token in verifyEmail:', token);
     try {
       const response = await authAPI.get(`/auth/verifycate?token=${token}`);
-      console.log('Verification response:', response.data); // Лог відповіді сервера
+      console.log('Verification response:', response.data);
       return response.data;
     } catch (error) {
       console.error(
@@ -84,6 +82,7 @@ export const verifyEmail = createAsyncThunk(
   }
 );
 
+// Вхід користувача (логін)
 export const signin = createAsyncThunk(
   'auth/signin',
   async (body, thunkAPI) => {
@@ -97,7 +96,7 @@ export const signin = createAsyncThunk(
   }
 );
 
-// Логаут
+// Логаут користувача
 export const logout = createAsyncThunk('auth/logout', async (_, thunkAPI) => {
   try {
     await authAPI.post('/auth/logout');
@@ -126,23 +125,10 @@ export const refreshUser = createAsyncThunk(
 );
 
 // Отримання даних користувача
-// export const getUserData = createAsyncThunk(
-//   'auth/getUserData',
-//   async (_, thunkAPI) => {
-//     try {
-//       const response = await authAPI.get('/user/currentUser');
-//       return response.data;
-//     } catch (error) {
-//       return thunkAPI.rejectWithValue(error.response.data);
-//     }
-//   }
-// );
-
 export const getUserData = createAsyncThunk(
   'auth/getUserData',
   async (_, thunkAPI) => {
     try {
-      // Логуємо запит перед виконанням
       console.log('Sending request to get current user data...');
       const savedToken = thunkAPI.getState().auth.token;
       if (!savedToken) {
@@ -150,13 +136,9 @@ export const getUserData = createAsyncThunk(
       }
       setAuthHeader(savedToken);
       const response = await authAPI.get('/user/currentUser');
-
-      // Логуємо отриману відповідь
       console.log('User data received:', response.data.data);
-
       return response.data.data;
     } catch (error) {
-      // Логуємо помилку, якщо вона сталася
       console.error(
         'Error fetching user data:',
         error.response ? error.response.data : error.message
@@ -166,7 +148,6 @@ export const getUserData = createAsyncThunk(
       );
     }
   }
-  // { condition({ getState }) { } }
 );
 
 export const patchUserData = createAsyncThunk(
