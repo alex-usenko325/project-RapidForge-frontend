@@ -70,6 +70,11 @@ export default function UserSettingsForm({ closeModal }) {
   }, [gender, weight, activeTime]);
 
   const onSubmit = async data => {
+    if (!hasChanges(data)) {
+      closeModal();
+      return;
+    }
+
     const waterInMilliliters = customWaterNorma
       ? parseFloat(customWaterNorma) * 1000
       : 0;
@@ -182,6 +187,15 @@ export default function UserSettingsForm({ closeModal }) {
       setValue(user.gender);
     }
   }, [gender, activeTime, setValue, user]);
+
+  const hasChanges = data => {
+    return (
+      data.name !== user.name ||
+      data.email !== user.email ||
+      data.gender !== user.gender ||
+      parseFloat(data.dailyNorm) * 1000 !== user.dailyNorm
+    );
+  };
 
   return (
     <div className={s.formContainer}>
