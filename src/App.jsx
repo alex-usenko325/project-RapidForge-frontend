@@ -11,6 +11,7 @@ import TrackerPage from './pages/TrackerPage/TrackerPage';
 import NotFoundPage from './pages/NotFoundPage/NotFoundPage';
 import HomePage from './pages/HomePage/HomePage';
 
+
 const App = () => {
   const dispatch = useDispatch();
   const isLoggedIn = useSelector(state => state.auth.isLoggedIn);
