@@ -8,11 +8,13 @@ export default function WaterModal({ onClose }) {
       <Modal onClose={onClose}>
         <div className={s.wrapper}>
           <h2 className={s.title}>Add water</h2>
+          {/* <h2 className={s.title}>Edit the entered amount of water</h2> */}
           <p className={s.subtitle}>Choose a value</p>
+          {/* <p className={s.subtitle}>Correct entered data:</p> */}
           <p className={s.amount}>Amount of water:</p>
           <div className={s.wrapperAmount}>
             <button type="button" className={clsx(s.btn, s.btnMinus)}></button>
-            <p className={s.number}>50ml</p>
+            <p className={s.number}>50 ml</p>
             <button type="button" className={clsx(s.btn, s.btnPlus)}></button>
           </div>
           <form className={s.form}>
@@ -27,7 +29,7 @@ export default function WaterModal({ onClose }) {
             <label className={s.labelValueWater}>
               Enter the value of the water used:
               <input
-                type="number"
+                type="text"
                 placeholder="50"
                 className={clsx(s.inputValueWater, s.input)}
               />
