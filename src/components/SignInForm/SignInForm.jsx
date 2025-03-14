@@ -30,9 +30,11 @@ const initialValues = {
 const SignInForm = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
-  const handleSubmit = (values, actions) => {
-    dispatch(signin(values));
-    dispatch(getUserData());
+  const handleSubmit = async (values, actions) => {
+    const response = await dispatch(signin(values));
+    if (signin.fulfilled.match(response)) {
+      dispatch(getUserData()); // Викликати тільки після успішного входу
+    }
     actions.resetForm();
   };
 
