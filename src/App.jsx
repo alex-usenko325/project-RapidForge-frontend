@@ -1,62 +1,91 @@
 import './App.css';
 import { Routes, Route } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { useEffect } from 'react';
+import { Suspense, lazy, useEffect } from 'react';
 import PrivateRoute from './routes/PrivateRoute';
 import RestrictedRoute from './routes/RestrictedRoute';
 import { getUserData } from './redux/auth/operations';
-import SignUpPage from './pages/SignUpPage/SignUpPage';
-import SignInPage from './pages/SignInPage/SignInPage';
-import TrackerPage from './pages/TrackerPage/TrackerPage';
 import NotFoundPage from './pages/NotFoundPage/NotFoundPage';
-import HomePage from './pages/HomePage/HomePage';
+import { RotatingLines } from 'react-loader-spinner';
+import { Toaster } from 'react-hot-toast';
+
+const HomePage = lazy(() => import('./pages/HomePage/HomePage'));
+const TrackerPage = lazy(() => import('./pages/TrackerPage/TrackerPage'));
+const SignUpPage = lazy(() => import('./pages/SignUpPage/SignUpPage'));
+const SignInPage = lazy(() => import('./pages/SignInPage/SignInPage'));
 
 const App = () => {
   const dispatch = useDispatch();
   const isLoggedIn = useSelector(state => state.auth.isLoggedIn);
-  const isRefreshing = useSelector(state => state.auth.isRefreshing);
+  const isRefreshingUser = useSelector(state => state.auth.isRefreshingUser);
 
-  useEffect(() => {
-    if (!isLoggedIn) {
-      dispatch(getUserData());
-    }
-  }, [dispatch, isLoggedIn]);
-
-  if (isRefreshing) {
-    return <p></p>;
+useEffect(() => {
+  if (isLoggedIn) {
+    console.log('✅ Отримуємо дані користувача...');
+    dispatch(getUserData());
   }
+}, [dispatch, isLoggedIn]);
+
+if (isRefreshingUser) {
+ 
+}
 
   return (
-    <>
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route
-          path="/signin"
-          element={
-            <RestrictedRoute isLoggedIn={isLoggedIn}>
-              <SignInPage />
-            </RestrictedRoute>
-          }
-        />
-        <Route
-          path="/signup"
-          element={
-            <RestrictedRoute isLoggedIn={isLoggedIn}>
-              <SignUpPage />
-            </RestrictedRoute>
-          }
-        />
-        <Route
-          path="/tracker"
-          element={
-            <PrivateRoute isLoggedIn={isLoggedIn}>
-              <TrackerPage />
-            </PrivateRoute>
-          }
-        />
-        <Route path="*" element={<NotFoundPage />} />
-      </Routes>
-    </>
+    <div>
+      <Toaster />
+
+      <Suspense
+        fallback={
+          <div
+            style={{
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+              height: '100vh',
+            }}
+          >
+            <RotatingLines
+              visible={true}
+              height="96"
+              width="96"
+              color="grey"
+              strokeWidth="5"
+              animationDuration="0.75"
+              ariaLabel="rotating-lines-loading"
+            />
+          </div>
+        }
+      >
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route
+            path="/signin"
+            element={
+              <RestrictedRoute isLoggedIn={isLoggedIn}>
+                <SignInPage />
+              </RestrictedRoute>
+            }
+          />
+          <Route
+            path="/signup"
+            element={
+              <RestrictedRoute isLoggedIn={isLoggedIn}>
+                <SignUpPage />
+              </RestrictedRoute>
+            }
+          />
+          <Route
+            path="/tracker"
+            element={
+              <PrivateRoute isLoggedIn={isLoggedIn}>
+                <TrackerPage />
+              </PrivateRoute>
+            }
+          />
+          <Route path="*" element={<NotFoundPage />} />
+        </Routes>
+      </Suspense>
+    </div>
   );
 };
 

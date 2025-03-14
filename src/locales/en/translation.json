@@ -1,0 +1,61 @@
+{
+  "language": "language",
+  "advantagesSection": {
+    "ourcustomers": "Our {{userCount}} happy customers",
+    "habitdrive": "Habit drive",
+    "viewstatistics": "View statistics",
+    "personalratesetting": "Personal rate setting",
+    "happy": "happy",
+    "customers": "customers"
+  },
+  "signUp": {
+    "validation": {
+      "email": {
+        "invalid": "Please enter a valid email",
+        "required": "Email is required field"
+      },
+      "password": {
+        "short": "Password is too short",
+        "long": "Password is too long",
+        "uppercase": "Password must contain at least one uppercase letter",
+        "number": "Password must contain at least one number",
+        "special": "Password must contain at least one special character",
+        "required": "Password is required",
+        "match": "Passwords must match",
+        "confirmRequired": "Confirm password is required"
+      }
+    },
+    "sign_up": "Sign Up",
+    "e_mail": "E-mail",
+    "enter_your_email": "Enter your email",
+    "password": "Password",
+    "enter_your_password": "Enter your password",
+    "repeat_password": "Repeat password",
+    "already_have_account": "Already have an account?",
+    "sign_in": "Sign In"
+  },
+  "signIn": {
+    "validation": {
+      "email": {
+        "invalid": "Please enter a valid email",
+        "required": "Email is required field"
+      },
+      "password": {
+        "short": "Password is too short",
+        "long": "Password is too long",
+        "required": "Password is required"
+      }
+    },
+    "sign_in": "Sign In",
+    "e_mail": "E-mail",
+    "enter_your_email": "Enter your email",
+    "password": "Password",
+    "enter_your_password": "Enter your password",
+    "dont_have_account": "Don’t have an account?",
+    "sign_up": "Sign Up"
+  },
+
+  "addWaterBtn": {
+    "addWater": "Add water"
+  }
+}

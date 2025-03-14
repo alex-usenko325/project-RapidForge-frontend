@@ -16,7 +16,7 @@ const LogOutModal = ({ onClose }) => {
   };
 
   return (
-    <Modal>
+    <Modal onClose={onClose}>
       <div
         className={styles.modalWrapper}
         role="dialog"
