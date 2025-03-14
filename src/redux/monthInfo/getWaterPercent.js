@@ -1,14 +1,17 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-axios.defaults.baseURL = 'https://aqua-track-app.onrender.com';
+const authApi = axios.create({
+  // baseURL: 'https://aqua-track-app.onrender.com',
+  baseURL: 'http://localhost:3000',
+});
 
 export const getMonthWaterInfo = createAsyncThunk(
   'water/getMonthWaterInfo',
   async ({ year, month }, { getState, rejectWithValue }) => {
     const token = getState().auth.token;
     try {
-      const { data } = await axios.get(`/water/month`, {
+      const { data } = await authApi.get(`/water/month`, {
         params: { year, month },
         headers: {
           Authorization: `Bearer ${token}`,
