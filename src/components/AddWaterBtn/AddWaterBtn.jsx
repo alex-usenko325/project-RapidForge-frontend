@@ -9,7 +9,12 @@ const AddWaterBtn = ({ style }) => {
   const handleClickOpenWaterModal = () => {
     setIsModalOpen(true);
   };
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
+
   const { t } = useTranslation();
+
   return (
     <>
       <button
@@ -19,7 +24,7 @@ const AddWaterBtn = ({ style }) => {
         <span className={style === 'green' ? s.plus : s.icon}></span>
         {t('addWaterBtn.addWater')}
       </button>
-      {isModalOpen && <WaterModal />}
+      {isModalOpen && <WaterModal onClose={closeModal} />}
     </>
   );
 };

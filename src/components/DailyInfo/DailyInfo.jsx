@@ -6,7 +6,7 @@ const DailyInfo = () => {
   return (
     <div>
       <ChooseDate />
-      <AddWaterBtn style="green" onclick="onclick" />
+      <AddWaterBtn style="green" />
       <WaterList />
     </div>
   );
