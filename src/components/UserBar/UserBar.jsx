@@ -9,6 +9,14 @@ const UserBar = ({ avatar, name }) => {
   const [isPopoverOpen, setIsPopoverOpen] = useState(false);
   const [isLogoutOpen, setIsLogoutOpen] = useState(false);
   const [isUserSettingsOpen, setIsUserSettingsOpen] = useState(false);
+  const [userBarWidth, setUserBarWidth] = useState(null);
+
+  useEffect(() => {
+    if (buttonRef.current) {
+      setUserBarWidth(buttonRef.current.offsetWidth);
+    }
+  }, [isPopoverOpen]);
+
   const popoverRef = useRef(null);
   const buttonRef = useRef(null);
 
@@ -75,6 +83,7 @@ const UserBar = ({ avatar, name }) => {
             onClose={() => setIsPopoverOpen(false)}
             openUserSettings={openUserSettings}
             openLogout={openLogout}
+            width={userBarWidth}
           />
         </div>
       )}

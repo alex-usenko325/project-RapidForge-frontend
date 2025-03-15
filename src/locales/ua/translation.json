@@ -3,16 +3,17 @@
   "welcomeSection": {
     "subtitle": "Записуйте щоденне споживання води та відстежуйте",
     "title": "Трекер споживання води",
-    "tryTracker": "Спробувати трекер",
+    "tryTracker": "Спробувати",
     "signIn": "Увійти"
   },
   "advantagesSection": {
     "ourcustomers": "Наші {{useCount}} щасливі клієнти",
-    "happy": "щасливих",
-    "customers": "клієнтів",
-    "habitdrive": "Звичка на ходу",
-    "viewstatistics": "Перегляд статистики",
-    "personalratesetting": "Особисті налаштування"
+    "our": "Наші",
+    "happy": "щасливі",
+    "customers": "клієнти",
+    "habitdrive": "Керуй звичкою",
+    "viewstatistics": "Переглядай статистику",
+    "personalratesetting": "Персональні налаштування"
   },
   "signUp": {
     "validation": {
@@ -39,6 +40,31 @@
     "repeat_password": "Повторіть пароль",
     "already_have_account": "Вже маєте обліковий запис?",
     "sign_in": "Увійти"
+  },
+  "emailInUseModal": {
+    "title": "Електронна пошта вже існує",
+    "message": "Будь ласка, увійдіть або використайте іншу електронну пошту.",
+    "signInLink": "Перейти до входу",
+    "close": "Закрити"
+  },
+  "sendVerifyEmail": {
+    "verificationSuccess": {
+      "title": "Підтвердження успішне",
+      "message": "Ви успішно підтвердили вашу електронну пошту.",
+      "button": "Ок"
+    },
+    "verificationError": {
+      "title": "Помилка підтвердження",
+      "message": "Спробуйте ще раз",
+      "link": "Повернутись до реєстрації",
+      "button": "Закрити"
+    }
+  },
+  "verifyModal": {
+    "title": "Підтвердьте свою електронну пошту",
+    "message": "Будь ласка, перевірте вашу електронну пошту для отримання посилання для підтвердження.",
+    "button": "Закрити",
+    "link": "Відкрити поштовий клієнт"
   },
   "signIn": {
     "validation": {
@@ -71,6 +97,9 @@
   "waterDailyNorma": {
     "dailyNorma": "Денна норма",
     "liters": "л"
+  },
+  "waterList": {
+    "noEntries": "Сьогодні Ви ще не пили воду."
   },
   "waterProgressBar": {
     "today": "Сьогодні",
@@ -136,6 +165,17 @@
     "logoutButton": "Вийти",
     "cancelButton": "Скасувати"
   },
+  "deleteWaterModal": {
+    "header": "Видалити запис",
+    "text": "Ви впевнені, що хочете видалити запис?",
+    "delete": "Видалити",
+    "cancel": "Скасувати",
+    "error": {
+      "noEntrySelected": "Не вибрано запис для видалення",
+      "deletionFailed": "Помилка при видаленні запису"
+    },
+    "success": "Запис успішно видалено"
+  },
   "calendarPagination": {
     "month": "Місяць"
   },
@@ -155,5 +195,9 @@
   },
   "addWaterBtn": {
     "addWater": "Додати води"
+  },
+  "waterItem": {
+    "volume": "{{volume}} мл",
+    "time": "{{time}} "
   }
 }

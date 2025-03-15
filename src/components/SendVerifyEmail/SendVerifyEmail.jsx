@@ -12,10 +12,12 @@ import { GiConfirmed } from 'react-icons/gi';
 import { FiXCircle } from 'react-icons/fi';
 import clsx from 'clsx';
 import { closeModalAction } from '../../redux/modal/operations';
-
+import { useTranslation } from 'react-i18next';
 const SendVerifyEmail = () => {
+  const { t } = useTranslation();
   const location = useLocation();
   const dispatch = useDispatch();
+
   const verificationStatus = useSelector(selectVerificationStatus);
   const verificationError = useSelector(selectVerificationError);
 
@@ -37,13 +39,15 @@ const SendVerifyEmail = () => {
       {verificationStatus === 'succeeded' && (
         <div className={s.wrapper}>
           <GiConfirmed className={clsx(s.icon, s.success)} />
-          <h2 className={s.title}>Verification success</h2>
+          <h2 className={s.title}>
+            {t('sendVerifyEmail.verificationSuccess.title')}
+          </h2>
           <p className={s.paragraph}>
-            You have successfully verified your email.
+            {t('sendVerifyEmail.verificationSuccess.message')}
           </p>
           <div className={s.btnWrap}>
             <button type="submit" className={s.btn} onClick={handleClose}>
-              Ok
+              {t('sendVerifyEmail.verificationSuccess.button')}
             </button>
           </div>
         </div>
@@ -51,20 +55,23 @@ const SendVerifyEmail = () => {
       {verificationStatus === 'failed' && (
         <div className={s.wrapper}>
           <FiXCircle className={clsx(s.icon, s.error)} />
-          <h2 className={s.title}>Verification error</h2>
+          <h2 className={s.title}>
+            {t('sendVerifyEmail.verificationError.title')}
+          </h2>
           <p className={s.paragraph}>
-            {verificationError || 'Try one more time'}
+            {verificationError ||
+              t('sendVerifyEmail.verificationError.message')}
           </p>
           <div className={s.btnWrap}>
             <Link to="/signup" className={s.btn}>
-              Go back to Sign Up
+              {t('sendVerifyEmail.verificationError.link')}
             </Link>
             <button
               type="submit"
               className={clsx(s.btn, s.grey)}
               onClick={handleClose}
             >
-              Close
+              {t('sendVerifyEmail.verificationError.button')}
             </button>
           </div>
         </div>
