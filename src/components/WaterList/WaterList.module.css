@@ -1,0 +1,47 @@
+.waterList {
+  display: flex;
+  gap: 16px;
+  max-width: 303px;
+  padding: 0;
+  overflow-x: auto;
+  padding-bottom: 24px;
+  margin-bottom: 40px;
+}
+
+.waterList::-webkit-scrollbar {
+  background-color: #ffffff;
+  height: 8px;
+  border-radius: 9px;
+}
+.waterList::-webkit-scrollbar-thumb {
+  background-color: #323f47;
+  border-radius: 9px;
+}
+
+.waterItem {
+  list-style: none;
+  flex: 0 0 auto;
+}
+
+.noWater {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 24px;
+  letter-spacing: -1%;
+  color: #323f47;
+  margin-bottom: 40px;
+  /* padding-bottom: 24px; */
+}
+
+@media screen and (min-width: 768px) {
+  .waterList {
+    max-width: 640px;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .waterList {
+    max-width: 608px;
+  }
+}
