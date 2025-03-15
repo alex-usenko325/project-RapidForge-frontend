@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react';
 import Modal from '../Modal/Modal.jsx';
 import s from './WaterForm.module.css';
-
-
 import clsx from 'clsx';
+import { useTranslation } from 'react-i18next';
 
 export default function WaterForm({ onClose }) {
+  const { t } = useTranslation();
     const [waterAmount, setWaterAmount] = useState(50);
     const increaseWater = () => setWaterAmount(waterAmount + 50);
     const decreaseWater = () => setWaterAmount(waterAmount > 50 ? waterAmount - 50 : 50);
@@ -19,7 +19,6 @@ export default function WaterForm({ onClose }) {
     setCustomWaterAmount(value);
     setWaterAmount(value);
     };
-
    // Встановлення початкового часу при завантаженні
   useEffect(() => {
     const now = new Date();
@@ -28,39 +27,35 @@ export default function WaterForm({ onClose }) {
     setTime(`${hours}:${minutes}`);
   }, []);
 
-
-
-
-
     return (
     <div>
       <Modal onClose={onClose} >
         <div className={s.wrapper}>
-          {/* NEW <h2 className={s.title}>{t('waterModal.addWater')}</h2> */}
-          <h2 className={s.title}>Add water</h2>
-          {/* NEW <p className={s.subtitle}>{t('waterModal.chooseValue')}</p> */}
-          <p className={s.subtitle}>Choose a value</p>
-          {/* <p className={s.amount}>{t('waterModal.amountWater')}</p> */}
-          <p className={s.amount}>Amount of water:</p>
-          <div className={s.wrapperAmount}>
+        <h2 className={s.title}>{t('waterModal.addWater')}</h2>
+          <p className={s.subtitle}>{t('waterModal.chooseValue')}</p>
+          <p className={s.amount}>{t('waterModal.amountWater')}</p>
+           <div className={s.wrapperAmount}>
+         
             <button type="button" className={clsx(s.btn, s.btnMinus)} onClick={decreaseWater}></button>
-            <p className={s.number}>{waterAmount} ml</p>
+
+            <p className={s.number}>{waterAmount} {t('waterModal.ml')}</p>
+            {/* <p className={s.number}>{waterAmount} ml</p> */}
             <button type="button" className={clsx(s.btn, s.btnPlus)} onClick= {increaseWater} disabled={waterAmount >= 5000}> </button>
+          
           </div>
           <form className={s.form}>
             <label className={s.labelTime}>
-              Recording time:
-              {/* NEW {t('waterModal.recordingTime')} */}
+            {t('waterModal.recordingTime')}
               <input
                 type="time" value={time} onChange={(e) => setTime(e.target.value)} className={clsx(s.inputTime, s.input)} required/>
             </label>
             <label className={s.labelValueWater}>
-               Enter the value of the water used:
+               {t('waterModal.enterValue')}
                <input  type="number"   value={waterAmount}  onChange={handleCustomWaterAmount} min="0" className={clsx(s.inputValueWater, s.input)}/>
+               
             </label>
-            {/* <button type="button" className={s.btnSave}> */}
             <button type="submit" className={s.btnSave}>
-              Save
+            {t('waterModal.save')}
             </button>
           </form>
         </div>
@@ -69,6 +64,14 @@ export default function WaterForm({ onClose }) {
   );
 }
 
+
+
+
+
+
+
+
+////////////
 
 
 
