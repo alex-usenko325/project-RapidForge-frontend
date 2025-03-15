@@ -83,8 +83,8 @@ const App = () => {
           />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
- 
       </Suspense>
+      
     </div>
   );
 };

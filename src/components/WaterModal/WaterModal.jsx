@@ -60,8 +60,7 @@ export default function WaterModal({ onClose }) {
     const increaseWater = () => setWaterAmount(waterAmount + 50);
     const decreaseWater = () => setWaterAmount(waterAmount > 50 ? waterAmount - 50 : 50);
     
-    
-    const [CustomWaterAmount, setCustomWaterAmount] = useState(50);
+      const [CustomWaterAmount, setCustomWaterAmount] = useState(50);
 
 
 
