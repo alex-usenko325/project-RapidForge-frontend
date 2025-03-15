@@ -5,23 +5,25 @@ import { RotatingLines } from 'react-loader-spinner';
 import { deleteWaterRecord } from '../../redux/water/operations';
 import { useState } from 'react';
 import toast from 'react-hot-toast';
+import { useTranslation } from 'react-i18next';
 
 const DeleteWaterModal = ({ onClose, waterEntryId }) => {
+  const { t } = useTranslation();
   const [isLoading, setIsLoading] = useState(false);
   const dispatch = useDispatch();
 
   const handleDelete = async () => {
     if (!waterEntryId) {
-      toast.error('No entry selected for deletion');
+      toast.error(t('deleteWaterModal.error.noEntrySelected'));
       return;
     }
     setIsLoading(true);
     try {
       await dispatch(deleteWaterRecord(waterEntryId)).unwrap();
       onClose();
-      toast.success('Entry deleted successfully');
+      toast.success(t('deleteWaterModal.success'));
     } catch (error) {
-      toast.error('Error deleting entry');
+      toast.error(t('deleteWaterModal.error.deletionFailed'));
     } finally {
       setIsLoading(false);
     }
@@ -31,8 +33,8 @@ const DeleteWaterModal = ({ onClose, waterEntryId }) => {
     <Modal onClose={onClose}>
       <div className={s.modal}>
         <div className={s.header_text}>
-          <h3 className={s.header}>Delete entry</h3>
-          <p className={s.text}>Are you sure you want to delete the entry?</p>
+          <h3 className={s.header}>{t('deleteWaterModal.header')}</h3>
+          <p className={s.text}>{t('deleteWaterModal.text')}</p>
         </div>
         <div className={s.buttons}>
           {isLoading ? (
@@ -50,10 +52,10 @@ const DeleteWaterModal = ({ onClose, waterEntryId }) => {
           ) : (
             <>
               <button className={s.btn_delete} onClick={handleDelete}>
-                Delete
+                {t('deleteWaterModal.delete')}
               </button>
               <button className={s.btn_cancel} onClick={onClose}>
-                Cancel
+                {t('deleteWaterModal.cancel')}
               </button>
             </>
           )}

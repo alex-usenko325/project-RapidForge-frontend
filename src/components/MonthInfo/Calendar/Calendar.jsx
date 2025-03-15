@@ -53,6 +53,7 @@ import { useEffect } from 'react';
 import CalendarItem from './CalendarItem';
 import s from './Calendar.module.css';
 import dayjs from 'dayjs';
+import 'dayjs/locale/uk'; // Для української локалізації
 import { fetchWaterPer } from '../../../redux/monthInfo/getWaterPercent.js';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectWaterData } from '../../../redux/monthInfo/waterSlice.js';
@@ -60,7 +61,7 @@ import { selectWaterData } from '../../../redux/monthInfo/waterSlice.js';
 const getFormattedDate = selectedDate => {
   return dayjs(selectedDate).format('YYYY-MM');
 };
-
+dayjs.locale('uk'); // Встановлюємо локаль
 const Calendar = ({ selectedDate, setSelectedDate }) => {
   const dispatch = useDispatch();
   const waterData = useSelector(selectWaterData);
