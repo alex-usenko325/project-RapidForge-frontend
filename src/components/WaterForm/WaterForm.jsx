@@ -38,8 +38,8 @@ export default function WaterForm({ onClose }) {
          
             <button type="button" className={clsx(s.btn, s.btnMinus)} onClick={decreaseWater}></button>
 
-            <p className={s.number}>{waterAmount} {t('waterModal.ml')}</p>
-            {/* <p className={s.number}>{waterAmount} ml</p> */}
+            {/* <p className={s.number}>{waterAmount} {t('waterModal.ml')}</p> */}
+            <p className={s.number}>{waterAmount} ml</p>
             <button type="button" className={clsx(s.btn, s.btnPlus)} onClick= {increaseWater} disabled={waterAmount >= 5000}> </button>
           
           </div>
