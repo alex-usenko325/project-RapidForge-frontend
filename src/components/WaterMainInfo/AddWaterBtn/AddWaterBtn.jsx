@@ -17,11 +17,6 @@ export default function AddWaterBtn() {
   };
 
   return (
-    // <>
-    //   <button className={css.button}>
-    //     <span className={css.plus}>+</span> Add water
-    //   </button>
-    // </>
     <>
       <button className={css.button} onClick={handleClick}>
         <span className={css.plus}>+</span> {t('addWaterTracker.addWater')}
