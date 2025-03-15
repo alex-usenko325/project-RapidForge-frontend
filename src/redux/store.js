@@ -17,12 +17,18 @@ const authPersistConfig = {
   // whitelist: ['token'],
 };
 
+const userPersistConfig = {
+  key: 'user',
+  storage,
+};
+
 const persistedAuthReducer = persistReducer(authPersistConfig, authReducer);
+const persistedUserReducer = persistReducer(userPersistConfig, userReducer);
 
 export const store = configureStore({
   reducer: {
     // water: waterReducer,
-    user: userReducer,
+    user: persistedUserReducer,
     water: waterReducer,
     auth: persistedAuthReducer,
     modal: modalReducer,

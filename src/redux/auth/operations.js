@@ -32,7 +32,7 @@ authAPI.interceptors.response.use(
       console.log('error.response.data.message', error.response.data.message);
       originalRequest._retry = true;
       try {
-        await store.dispatch(refreshUser());
+        await store.dispatch(refreshAccessToken());
         return authAPI(originalRequest);
       } catch (refreshError) {
         console.error('Token refresh failed:', refreshError);
@@ -142,7 +142,7 @@ export const logout = createAsyncThunk('auth/logout', async (_, thunkAPI) => {
 });
 
 // Оновлення токена користувача
-export const refreshUser = createAsyncThunk(
+export const refreshAccessToken = createAsyncThunk(
   'auth/refreshUser',
   async (_, thunkAPI) => {
     const savedToken = thunkAPI.getState().auth.token;
@@ -155,60 +155,6 @@ export const refreshUser = createAsyncThunk(
       return response.data.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.response.data);
-    }
-  }
-);
-
-// Отримання даних користувача
-export const getUserData = createAsyncThunk(
-  'auth/getUserData',
-  async (_, thunkAPI) => {
-    try {
-      const savedToken = thunkAPI.getState().auth.token;
-      if (!savedToken) {
-        return thunkAPI.rejectWithValue('Token is not exist');
-      }
-      setAuthHeader(savedToken);
-      const response = await authAPI.get('/user/currentUser');
-      return response.data.data;
-    } catch (error) {
-      console.error(
-        'Error fetching user data:',
-        error.response ? error.response.data : error.message
-      );
-      return thunkAPI.rejectWithValue(
-        error.response ? error.response.data : error.message
-      );
-    }
-  }
-);
-
-export const patchUserData = createAsyncThunk(
-  'user/patchUserData',
-  async ({ userData, userId }, thunkAPI) => {
-    try {
-      const response = await authAPI.patch(`user/update/${userId}`, userData);
-
-      return response.data.data;
-    } catch (error) {
-      return thunkAPI.rejectWithValue(error.response.data);
-    }
-  }
-);
-
-export const patchUserAvatar = createAsyncThunk(
-  'user/patchUserAvatar',
-  async ({ formData, userId }, thunkAPI) => {
-    try {
-      const response = await authAPI.patch(`/user/avatar/${userId}`, formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
-      });
-
-      return response.data.data;
-    } catch (error) {
-      return thunkAPI.rejectWithValue(error.response?.data || error.message);
     }
   }
 );
