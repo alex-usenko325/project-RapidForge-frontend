@@ -1,8 +1,9 @@
 import dayjs from 'dayjs';
 import s from './CalendarPagination.module.css';
 import sprite from '../../assets/sprite.svg';
-
+import { useTranslation } from 'react-i18next';
 const CalendarPagination = ({ selectedDate, onDateChange }) => {
+  const { t } = useTranslation();
   const handlePreviousMonth = () => {
     onDateChange(dayjs(selectedDate).subtract(1, 'month').toDate());
   };
@@ -14,7 +15,7 @@ const CalendarPagination = ({ selectedDate, onDateChange }) => {
   return (
     <div className={s.calendarpagination}>
       <div>
-        <h1 className={s.month}>Month</h1>
+        <h1 className={s.month}>{t('calendarPagination.month')}</h1>
       </div>
       <div className={s.pagination}>
         <svg className={s.btnpagination} onClick={handlePreviousMonth}>

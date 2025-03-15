@@ -1,0 +1,91 @@
+.waterItem {
+  display: flex;
+  background-color: #ffffff;
+  border-radius: 15px;
+  padding: 18px 14px;
+  gap: 10px;
+}
+
+.waterIcon {
+  width: 44px;
+  height: 45px;
+  fill: #9be1a0;
+}
+
+.volume {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 14px;
+  color: #323f47;
+  margin: 0;
+  margin-bottom: 6px;
+}
+
+.time {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 12px;
+  color: #323f47;
+  margin: 0;
+}
+
+.waterButtons {
+  display: flex;
+  flex-direction: column;
+}
+
+.waterButton {
+  background-color: transparent;
+  border: none;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.waterButton:nth-child(1) {
+  margin-bottom: 8px;
+}
+
+.editBtn {
+  fill: white;
+  stroke: black;
+  color: black;
+  width: 16px;
+  height: 16px;
+  transition: stroke 0.3s ease;
+}
+
+.removeBtn {
+  fill: white;
+  stroke: black;
+  width: 16px;
+  height: 16px;
+  transition: stroke 0.3s ease;
+}
+
+.waterButton:hover .editBtn,
+.waterButton:hover .removeBtn {
+  stroke: #9be1a0;
+}
+
+@media screen and (min-width: 768px) {
+  .waterItem {
+    padding: 20px;
+    gap: 20px;
+  }
+  .volume {
+    font-size: 15px;
+    line-height: 22.4px;
+    margin: 0;
+  }
+  .time {
+    line-height: 22.4px;
+  }
+  .waterButton:nth-child(1) {
+    margin-bottom: 14px;
+  }
+}

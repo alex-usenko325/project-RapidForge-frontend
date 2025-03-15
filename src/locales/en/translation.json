@@ -1,5 +1,11 @@
 {
   "language": "language",
+  "welcomeSection": {
+    "subtitle": "Record daily water intake and track",
+    "title": "Water consumption tracker",
+    "tryTracker": "Try tracker",
+    "signIn": "Sign in"
+  },
   "advantagesSection": {
     "ourcustomers": "Our {{userCount}} happy customers",
     "habitdrive": "Habit drive",
@@ -54,8 +60,107 @@
     "dont_have_account": "Don’t have an account?",
     "sign_up": "Sign Up"
   },
-
+  "userBarPopover": {
+    "settings": "Settings",
+    "logout": "Log out"
+  },
+  "userPanel": {
+    "hello": "Hello",
+    "noUserData": "No user data"
+  },
+  "waterDailyNorma": {
+    "dailyNorma": "My daily norma",
+    "liters": "L"
+  },
+  "waterList": {
+    "noEntries": "No water consumed today."
+  },
+  "waterProgressBar": {
+    "today": "Today",
+    "loading": "Loading..."
+  },
+  "addWaterTracker": {
+    "addWater": "Add water"
+  },
+  "waterModal": {
+    "addWater": "Add water",
+    "chooseValue": "Choose a value:",
+    "amountWater": "Amount of water:",
+    "ml": "мл",
+    "recordingTime": "Recording time:",
+    "enterValue": "Enter the value of the water used:",
+    "save": "Save"
+  },
+  "userSettingsModal": {
+    "settings": "Settings"
+  },
+  "userSettingsForm": {
+    "errors": {
+      "name": {
+        "min": "Name must be at least 3 characters",
+        "max": "Name must be at most 12 characters",
+        "required": "Name is required"
+      },
+      "email": {
+        "email": "Invalid email",
+        "required": "Email is required"
+      },
+      "dailyNorm": {
+        "positive": "Water norma must be a positive number",
+        "max": "The maximum water norma is 15 liters",
+        "required": "Water norma is required"
+      }
+    },
+    "uploadPhoto": "Upload photo",
+    "gender": "Your gender identity",
+    "woman": "Woman",
+    "man": "Man",
+    "name": "Name",
+    "placeholderName": "Enter your name",
+    "email": "Email",
+    "placeholderEmail": "Enter your email",
+    "dailyNorma": "My daily norma",
+    "formulaWoman": "For woman: V=(M*0,03) + (T*0,4)",
+    "formulaMan": "For man: V=(M*0,04) + (T*0,6)",
+    "description": "* V is the volume of the water norm in liters per day, M is your body weight, T is the time of active sports, or another type of activity commensurate in terms of loads (in the absence of these, you must set 0)",
+    "activeTimeLabel": "Active time in hours",
+    "weight": "Your weight in kilograms:",
+    "enterWeight": "Enter your weight",
+    "activeTimeSport": "The time of active participation in sports:",
+    "enterTime": "Enter your time",
+    "waterNorma": "The required amount of water in liters per day:",
+    "writeWaterNorma": "Write down how much water you will drink:",
+    "enterWaterNorma": "Enter your water norma",
+    "save": "Save"
+  },
+  "logOutModal": {
+    "logout": "Log out",
+    "leaveMessage": "Do you really want to leave?",
+    "logoutButton": "Log out",
+    "cancelButton": "Cancel"
+  },
+  "calendarPagination": {
+    "month": "Month"
+  },
+  "months": {
+    "january": "January",
+    "february": "February",
+    "march": "March",
+    "april": "April",
+    "may": "May",
+    "june": "June",
+    "july": "July",
+    "august": "August",
+    "september": "September",
+    "october": "October",
+    "november": "November",
+    "december": "December"
+  },
   "addWaterBtn": {
     "addWater": "Add water"
+  },
+  "waterItem": {
+    "volume": "{{volume}} ml",
+    "time": "{{time}} "
   }
 }

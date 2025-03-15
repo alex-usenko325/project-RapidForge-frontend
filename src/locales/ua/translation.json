@@ -1,4 +1,11 @@
 {
+  "language": "Мова",
+  "welcomeSection": {
+    "subtitle": "Записуйте щоденне споживання води та відстежуйте",
+    "title": "Трекер споживання води",
+    "tryTracker": "Спробувати трекер",
+    "signIn": "Увійти"
+  },
   "advantagesSection": {
     "ourcustomers": "Наші {{useCount}} щасливі клієнти",
     "happy": "щасливих",
@@ -53,8 +60,107 @@
     "dont_have_account": "Ще немає облікового запису?",
     "sign_up": "Зареєструватися"
   },
-
+  "userBarPopover": {
+    "settings": "Налаштування",
+    "logout": "Вийти"
+  },
+  "userPanel": {
+    "hello": "Привіт",
+    "noUserData": "Дані користувача відсутні"
+  },
+  "waterDailyNorma": {
+    "dailyNorma": "Моя щоденна норма",
+    "liters": "л"
+  },
+  "waterList": {
+    "noEntries": "Сьогодні Ви ще не пили воду."
+  },
+  "waterProgressBar": {
+    "today": "Сьогодні",
+    "loading": "Завантаження..."
+  },
+  "addWaterTracker": {
+    "addWater": "Додати воду"
+  },
+  "waterModal": {
+    "addWater": "Додати воду",
+    "chooseValue": "Оберіть значення:",
+    "amountWater": "Кількість води:",
+    "ml": "мл",
+    "recordingTime": "Час запису:",
+    "enterValue": "Введіть кількість використаної води:",
+    "save": "Зберегти"
+  },
+  "userSettingsModal": {
+    "settings": "Налаштування"
+  },
+  "userSettingsForm": {
+    "errors": {
+      "name": {
+        "min": "Ім'я повинно містити хоча б 3 символи",
+        "max": "Ім'я повинно містити не більше 12 символів",
+        "required": "Ім'я обов'язкове"
+      },
+      "email": {
+        "email": "Невірна електронна пошта",
+        "required": "Електронна пошта обов'язкова"
+      },
+      "dailyNorm": {
+        "positive": "Норма води повинна бути додатною",
+        "max": "Максимальна норма води — 15 літрів",
+        "required": "Норма води обов'язкова"
+      }
+    },
+    "uploadPhoto": "Завантажити фото",
+    "gender": "Ваша стать",
+    "woman": "Жінка",
+    "man": "Чоловік",
+    "name": "Ім'я",
+    "placeholderName": "Введіть ваше ім'я",
+    "email": "Електронна пошта",
+    "placeholderEmail": "Введіть вашу електронну пошту",
+    "dailyNorma": "Моя щоденна норма",
+    "formulaWoman": "Для жінки: V=(M*0,03) + (T*0,4)",
+    "formulaMan": "Для чоловіка: V=(M*0,04) + (T*0,6)",
+    "description": "* V — об'єм водної норми в літрах на день, M — ваша вага, T — час активних спортивних навантажень або іншої діяльності, що відповідає за інтенсивністю (за відсутності цих показників потрібно вказати 0)",
+    "activeTimeLabel": "Час активності в годинах",
+    "weight": "Ваша вага в кілограмах:",
+    "enterWeight": "Введіть вашу вагу",
+    "activeTimeSport": "Час активної участі у спорті:",
+    "enterTime": "Введіть ваш час",
+    "waterNorma": "Необхідна кількість води в літрах на день:",
+    "writeWaterNorma": "Запишіть, скільки води ви будете пити:",
+    "enterWaterNorma": "Введіть вашу норму води",
+    "save": "Зберегти"
+  },
+  "logOutModal": {
+    "logout": "Вийти",
+    "leaveMessage": "Ви дійсно хочете вийти?",
+    "logoutButton": "Вийти",
+    "cancelButton": "Скасувати"
+  },
+  "calendarPagination": {
+    "month": "Місяць"
+  },
+  "months": {
+    "january": "Січень",
+    "february": "Лютий",
+    "march": "Березень",
+    "april": "Квітень",
+    "may": "Травень",
+    "june": "Червень",
+    "july": "Липень",
+    "august": "Серпень",
+    "september": "Вересень",
+    "october": "Жовтень",
+    "november": "Листопад",
+    "december": "Грудень"
+  },
   "addWaterBtn": {
     "addWater": "Додати води"
+  },
+  "waterItem": {
+    "volume": "{{volume}} мл",
+    "time": "{{time}} "
   }
 }
