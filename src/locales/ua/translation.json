@@ -72,6 +72,9 @@
     "dailyNorma": "Моя щоденна норма",
     "liters": "л"
   },
+  "waterList": {
+    "noEntries": "Сьогодні Ви ще не пили воду."
+  },
   "waterProgressBar": {
     "today": "Сьогодні",
     "loading": "Завантаження..."
@@ -155,5 +158,9 @@
   },
   "addWaterBtn": {
     "addWater": "Додати води"
+  },
+  "waterItem": {
+    "volume": "{{volume}} мл",
+    "time": "{{time}} "
   }
 }
