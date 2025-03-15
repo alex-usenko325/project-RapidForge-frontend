@@ -1,23 +1,24 @@
 import Modal from '../Modal/Modal.jsx';
 import s from './WaterModal.module.css';
 import clsx from 'clsx';
-
+import { useTranslation } from 'react-i18next';
 export default function WaterModal({ onClose }) {
+  const { t } = useTranslation();
   return (
     <div>
       <Modal onClose={onClose}>
         <div className={s.wrapper}>
-          <h2 className={s.title}>Add water</h2>
-          <p className={s.subtitle}>Choose a value</p>
-          <p className={s.amount}>Amount of water:</p>
+          <h2 className={s.title}>{t('waterModal.addWater')}</h2>
+          <p className={s.subtitle}>{t('waterModal.chooseValue')}</p>
+          <p className={s.amount}>{t('waterModal.amountWater')}</p>
           <div className={s.wrapperAmount}>
             <button type="button" className={clsx(s.btn, s.btnMinus)}></button>
-            <p className={s.number}>50 ml</p>
+            <p className={s.number}>50 {t('waterModal.ml')}</p>
             <button type="button" className={clsx(s.btn, s.btnPlus)}></button>
           </div>
           <form className={s.form}>
             <label className={s.labelTime}>
-              Recording time:
+              {t('waterModal.recordingTime')}
               <input
                 type="text"
                 placeholder="7:00"
@@ -25,7 +26,7 @@ export default function WaterModal({ onClose }) {
               />
             </label>
             <label className={s.labelValueWater}>
-              Enter the value of the water used:
+              {t('waterModal.enterValue')}
               <input
                 type="number"
                 placeholder="50"
@@ -33,7 +34,7 @@ export default function WaterModal({ onClose }) {
               />
             </label>
             <button type="button" className={s.btnSave}>
-              Save
+              {t('waterModal.save')}
             </button>
           </form>
         </div>

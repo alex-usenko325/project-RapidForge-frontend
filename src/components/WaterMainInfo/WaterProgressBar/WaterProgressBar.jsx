@@ -6,8 +6,9 @@ import {
   selectWaterIsLoading,
 } from '../../../redux/water/selectors';
 import css from './WaterProgressBar.module.css';
-
+import { useTranslation } from 'react-i18next';
 export default function WaterProgressBar() {
+  const { t } = useTranslation();
   const dispatch = useDispatch();
   const progress = useSelector(selectWaterProgress);
   const isLoading = useSelector(selectWaterIsLoading);
@@ -24,11 +25,11 @@ export default function WaterProgressBar() {
     return distance > 15 || distance === 0;
   });
 
-  if (isLoading) return <p>Loading...</p>;
+  if (isLoading) return <p>{t('waterProgressBar.loading')}</p>;
 
   return (
     <div className={css.container}>
-      <p className={css.label}>Today</p>
+      <p className={css.label}>{t('waterProgressBar.today')}</p>
       <div className={css.progressBar}>
         <div
           className={css.progressFill}

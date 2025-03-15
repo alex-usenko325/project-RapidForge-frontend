@@ -3,8 +3,9 @@ import { logout } from '../../redux/auth/operations';
 import { useNavigate } from 'react-router-dom';
 import styles from './LogOutModal.module.css';
 import Modal from '../Modal/Modal';
-
+import { useTranslation } from 'react-i18next';
 const LogOutModal = ({ onClose }) => {
+  const { t } = useTranslation();
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -22,14 +23,14 @@ const LogOutModal = ({ onClose }) => {
         role="dialog"
         aria-labelledby="logout-title"
       >
-        <h2 className={styles.logoutTitle}>Log out</h2>
-        <p className={styles.logoutText}>Do you really want to leave?</p>
+        <h2 className={styles.logoutTitle}>{t('logOutModal.logout')}</h2>
+        <p className={styles.logoutText}>{t('logOutModal.leaveMessage')}</p>
         <div className={styles.btnLogoutWrapper}>
           <button className={styles.logoutBtn} onClick={handleLogout}>
-            Log out
+            {t('logOutModal.logoutButton')}
           </button>
           <button className={styles.cancelBtn} onClick={onClose}>
-            Cancel
+            {t('logOutModal.cancelButton')}
           </button>
         </div>
       </div>
