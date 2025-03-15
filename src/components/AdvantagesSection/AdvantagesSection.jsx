@@ -7,7 +7,7 @@ import { getClientsNumber } from '../../redux/user/operations.js';
 import { selectUsersCount } from '../../redux/user/selectors.js';
 import { useEffect } from 'react';
 import { Trans, useTranslation } from 'react-i18next';
-import LocalizationDropdownMenu  from '../LocalizationDropdownMenu/LocalizationDropdownMenu'
+import LocalizationDropdownMenu from '../LocalizationDropdownMenu/LocalizationDropdownMenu';
 const AdvantagesSection = () => {
   const customers = [customer1, customer2, customer3];
   const dispatch = useDispatch();
@@ -21,7 +21,7 @@ const AdvantagesSection = () => {
 
   return (
     <div className={s.wrapper}>
-      <LocalizationDropdownMenu />
+      {/* <LocalizationDropdownMenu /> */}
       <div className={s.customers}>
         <div className={s.img}>
           {customers.map((img, index) => (
@@ -30,15 +30,30 @@ const AdvantagesSection = () => {
         </div>
 
         <p className={s.text}>
-          <Trans i18nKey={userCount} values={{ userCount }} />
-          <span> {t('advantagesSection.happy')}</span> {t('advantagesSection.customers')}
+          <div className={s.counter}>
+            +
+            <Trans i18nKey={userCount} values={{ userCount }} />
+          </div>
+          {t('advantagesSection.our')}{' '}
+          <span> {t('advantagesSection.happy')}</span>
+          <br />
+          {t('advantagesSection.customers')}
         </p>
       </div>
-      <ul className={s.benefits}>
-        <li className={s.benefitHabit}>{t('advantagesSection.habitdrive')}</li>
-        <li className={s.benefitStatistics}>{t('advantagesSection.viewstatistics')}</li>
-        <li className={s.benefitSetting}>{t('advantagesSection.personalratesetting')}</li>
-      </ul>
+      <div className={s.benefits}>
+        <div className={s.benefitsTop}>
+          <p className={s.benefitHabit}>
+            <span className={s.benefitHabitCircle}></span>
+            {t('advantagesSection.habitdrive')}
+          </p>
+          <p className={s.benefitStatistics}>
+            {t('advantagesSection.viewstatistics')}
+          </p>
+        </div>
+        <p className={s.benefitSetting}>
+          {t('advantagesSection.personalratesetting')}
+        </p>
+      </div>
     </div>
   );
 };
