@@ -3,7 +3,7 @@
   flex-direction: column;
   background-color: var(--main-white);
   width: 198px;
-  height: 70px;
+  height: 76px;
   padding: 12px;
   border-radius: 15px;
   gap: 8px;
@@ -19,6 +19,7 @@
   line-height: 14px;
   color: var(--main-text);
   margin: 0;
+  margin-bottom: 10px;
 }
 
 .progressBar {
@@ -50,28 +51,53 @@
 .progressLabels {
   position: relative;
   width: 100%;
-  height: 20px;
+  height: 6px;
 }
-
 .progressSpan {
   font-family: 'Poppins', sans-serif;
   font-weight: 400;
   font-size: 10px;
   line-height: 10px;
   color: rgba(47, 47, 47, 0.6);
+  position: absolute;
 }
-
 .progressSpan.active {
   color: var(--accent);
   font-weight: 400;
   font-size: 10px;
 }
+.progressSpan.dynamic {
+  color: var(--accent);
+  font-weight: 400;
+  font-size: 8px;
+  top: -26px;
+}
+
+.loaderContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 34px;
+}
+
+.loader {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: 4px solid var(--background);
+  border-top: 4px solid var(--accent);
+  animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
 
 @media screen and (max-width: 374px) {
   .container {
     margin-top: 49px;
-    margin-left: auto;
-    margin-right: auto;
   }
 }
 
@@ -81,8 +107,6 @@
     height: 106px;
     padding: 20px;
     margin-top: 87px;
-    margin-left: auto;
-    margin-right: auto;
     justify-content: center;
     gap: 6px;
   }
@@ -94,6 +118,7 @@
     width: 100%;
     height: 8px;
   }
+
   .progressFill {
     height: 100%;
     background-color: var(--accent);
@@ -112,6 +137,18 @@
   .progressSpan {
     font-size: 12px;
     line-height: 22.4px;
+  }
+  .progressSpan.active {
+    font-size: 12px;
+  }
+  .progressSpan.dynamic {
+    color: var(--accent);
+    font-weight: 400;
+    font-size: 12px;
+    top: -32px;
+  }
+  .progressLabels {
+    height: 30px;
   }
 }
 
