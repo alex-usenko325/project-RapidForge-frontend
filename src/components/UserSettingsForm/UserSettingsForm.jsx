@@ -14,6 +14,7 @@ import s from './UserSettingsForm.module.css';
 import sprite from '../../assets/sprite.svg';
 import { useTranslation } from 'react-i18next';
 import i18next from 'i18next';
+import toast from 'react-hot-toast';
 
 const schema = yup.object({
   name: yup
@@ -103,7 +104,16 @@ export default function UserSettingsForm({ closeModal }) {
       dispatch(patchUserData({ userData, userId }));
       closeModal();
     } catch (error) {
-      console.error('Failed to update user data:', error);
+      if (
+        error.response &&
+        error.response.data.message === 'Access token expired'
+      ) {
+        toast.error('Access token expired, please log in again.');
+        localStorage.removeItem('accessToken');
+      } else {
+        toast.error('Failed to update user data');
+        console.error('Error updating user data:', error);
+      }
     }
   };
 
