@@ -29,7 +29,7 @@ const AdvantagesSection = () => {
           ))}
         </div>
 
-        <p className={s.text}>
+        <div className={s.text}>
           <div className={s.counter}>
             +
             <Trans i18nKey={userCount} values={{ userCount }} />
@@ -38,7 +38,7 @@ const AdvantagesSection = () => {
           <span> {t('advantagesSection.happy')}</span>
           <br />
           {t('advantagesSection.customers')}
-        </p>
+        </div>
       </div>
       <div className={s.benefits}>
         <div className={s.benefitsTop}>
