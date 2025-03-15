@@ -71,13 +71,9 @@
   position: absolute;
   top: 209px;
 
-  display: flex;
-  flex-direction: row;
+  display: inline-flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 35px;
-  width: 160px;
-  height: 48px;
+  gap: 4px;
   border-radius: 30px;
   padding: 10px 14px;
 
@@ -87,10 +83,7 @@
 
 @media only screen and (min-width: 768px) {
   .customers {
-    gap: 56px;
     top: 283px;
-    width: 237px;
-    height: 67px;
     padding: 10px 20px;
   }
 }
@@ -102,7 +95,7 @@
 }
 
 .img {
-  display: flex;
+  display: inline-flex;
   flex-direction: row;
 }
 
@@ -163,12 +156,6 @@
   top: 265px;
   right: 16px;
 
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  gap: 4px;
-  width: 168px;
-
   font-weight: 700;
   font-size: 8px;
   line-height: 1;
@@ -180,8 +167,6 @@
   .benefits {
     top: 336px;
     right: 32px;
-    width: 242px;
-    gap: 10px;
     font-size: 12px;
   }
 }
@@ -192,11 +177,26 @@
   }
 }
 
+.benefitsTop {
+  display: flex;
+  gap: 4px;
+  margin-bottom: 4px;
+}
+
+@media only screen and (min-width: 768px) {
+  .benefitsTop {
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+}
+
 .benefitHabit {
   position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
 
-  width: 81px;
-  height: 26px;
   border-radius: 30px;
   padding: 9px 12px;
 
@@ -207,16 +207,12 @@
 
 @media only screen and (min-width: 768px) {
   .benefitHabit {
-    width: 111px;
-    height: 34px;
     padding: 11px 16px;
   }
 }
 
-.benefitHabit::before {
-  position: absolute;
+.benefitHabitCircle {
   display: block;
-  content: '';
   width: 8px;
   height: 8px;
   border-radius: 50%;
@@ -224,8 +220,6 @@
 }
 
 .benefitStatistics {
-  width: 83px;
-  height: 26px;
   border-radius: 30px;
   padding: 9px 12px;
 
@@ -235,15 +229,12 @@
 
 @media only screen and (min-width: 768px) {
   .benefitStatistics {
-    width: 121px;
-    height: 34px;
     padding: 11px 16px;
   }
 }
 
 .benefitSetting {
-  width: 108px;
-  height: 26px;
+  width: max-content;
   border-radius: 30px;
   padding: 9px 12px;
 
@@ -253,8 +244,29 @@
 
 @media only screen and (min-width: 768px) {
   .benefitSetting {
-    width: 158px;
-    height: 34px;
     padding: 11px 16px;
+  }
+}
+
+.counter {
+  position: absolute;
+  display: block;
+  border-radius: 30px;
+  background-color: #323f47eb;
+  top: -9px;
+  left: 109px;
+  color: var(--accent);
+  padding: 3px 6px;
+  text-align: center;
+  font-weight: 400;
+  font-size: 10px;
+}
+
+@media only screen and (min-width: 768px) {
+  .counter {
+    top: -18px;
+    left: 165px;
+    padding: 3px 8px;
+    font-size: 13px;
   }
 }

@@ -12,14 +12,14 @@ const WelcomeSection = () => {
       <div className={s.wrapperContent}>
         <p className={s.subtitle}>{t('welcomeSection.subtitle')}</p>
         <h1 className={s.title}>{t('welcomeSection.title')}</h1>
-        <div className={s.btnWrapper}>
-          <Link to="/signup" className={s.btnTracker}>
-            {t('welcomeSection.tryTracker')}
-          </Link>
-          <Link to="/signin" className={s.btnSignIn}>
-            {t('welcomeSection.signIn')}
-          </Link>
-        </div>
+      </div>
+      <div className={s.btnWrapper}>
+        <Link to="/signup" className={s.btnTracker}>
+          {t('welcomeSection.tryTracker')}
+        </Link>
+        <Link to="/signin" className={s.btnSignIn}>
+          {t('welcomeSection.signIn')}
+        </Link>
       </div>
     </div>
   );
