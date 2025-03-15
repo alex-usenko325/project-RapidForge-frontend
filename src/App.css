@@ -5,12 +5,15 @@
   max-width: 375px;
   margin: 0 auto;
   padding: 16px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .section {
   padding: 40px 0 80px;
 }
-
 
 /* Tablet (від 768px) */
 @media (min-width: 768px) {
