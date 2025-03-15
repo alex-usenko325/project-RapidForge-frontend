@@ -77,9 +77,9 @@ export default function WaterModal({ onClose }) {
     <div>
       <Modal onClose={onClose}>
         <div className={s.wrapper}>
-          <h2 className={s.title}>Add water</h2>
-          <p className={s.subtitle}>Choose a value</p>
-          <p className={s.amount}>Amount of water:</p>
+          <h2 className={s.title}>{t('waterModal.addWater')}</h2>
+          <p className={s.subtitle}>{t('waterModal.chooseValue')}</p>
+          <p className={s.amount}>{t('waterModal.amountWater')}</p>
           <div className={s.wrapperAmount}>
             <button type="button" className={clsx(s.btn, s.btnMinus)} onClick={decreaseWater}></button>
             <p className={s.number}>{waterAmount} ml</p>
@@ -87,7 +87,7 @@ export default function WaterModal({ onClose }) {
           </div>
           <form className={s.form}>
             <label className={s.labelTime}>
-              Recording time:
+              {t('waterModal.recordingTime')}
               <input
                 type="text"
                 placeholder="7:00"
