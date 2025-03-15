@@ -1,79 +1,100 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, isAnyOf } from '@reduxjs/toolkit';
 import {
+  deleteWaterRecord,
   getWaterRecords,
+  fetchWaterPer,
   addWaterRecord,
   updateWaterRecord,
-  deleteWaterRecord,
 } from './operations';
 
 const initialState = {
-  records: [],
+  items: [],
+  operationType: 'add',
+  itemId: '',
+  waterDay: '',
+  isError: null,
   isLoading: false,
-  error: null,
+  waterData: [],
 };
 
 const waterSlice = createSlice({
   name: 'water',
   initialState,
+  reducers: {
+    setOperationType: (state, action) => {
+      state.operationType = action.payload;
+    },
+    setItemId: (state, action) => {
+      state.itemId = action.payload;
+    },
+    setWaterDay: (state, action) => {
+      state.waterDay = action.payload;
+    },
+  },
   extraReducers: builder => {
     builder
-      .addCase(getWaterRecords.pending, state => {
-        state.isLoading = true;
-        state.error = null;
-      })
       .addCase(getWaterRecords.fulfilled, (state, action) => {
-        state.isLoading = false;
-        state.records = action.payload.data;
-      })
-      .addCase(getWaterRecords.rejected, (state, action) => {
-        state.isLoading = false;
-        state.error = action.payload;
-      })
-      .addCase(addWaterRecord.pending, state => {
-        state.isLoading = true;
-        state.error = null;
+        state.items = action.payload;
       })
       .addCase(addWaterRecord.fulfilled, (state, action) => {
-        state.isLoading = false;
-        state.records.push(action.payload);
-      })
-      .addCase(addWaterRecord.rejected, (state, action) => {
-        state.isLoading = false;
-        state.error = action.payload;
-      })
-      .addCase(updateWaterRecord.pending, state => {
-        state.isLoading = true;
-        state.error = null;
-      })
-      .addCase(updateWaterRecord.fulfilled, (state, action) => {
-        state.isLoading = false;
-        const updatedRecord = action.payload;
-        const index = state.records.findIndex(
-          record => record._id === updatedRecord._id
-        );
-        if (index !== -1) {
-          state.records[index] = updatedRecord;
-        }
-      })
-      .addCase(updateWaterRecord.rejected, (state, action) => {
-        state.isLoading = false;
-        state.error = action.payload;
-      })
-      .addCase(deleteWaterRecord.pending, state => {
-        state.isLoading = true;
-        state.error = null;
+        state.items.push(action.payload);
       })
       .addCase(deleteWaterRecord.fulfilled, (state, action) => {
-        state.isLoading = false;
-        state.records = state.records.filter(
-          record => record._id !== action.payload
-        );
+        state.items = state.items.filter(item => item._id !== action.payload);
       })
-      .addCase(deleteWaterRecord.rejected, (state, action) => {
-        state.isLoading = false;
-        state.error = action.payload;
-      });
+      .addCase(fetchWaterPer.fulfilled, (state, action) => {
+        state.waterData = action.payload;
+      })
+      .addMatcher(
+        isAnyOf(
+          getWaterRecords.pending,
+          addWaterRecord.pending,
+          updateWaterRecord.pending,
+          fetchWaterPer.pending
+        ),
+        state => {
+          state.isLoading = true;
+        }
+      )
+      .addMatcher(
+        isAnyOf(
+          getWaterRecords.fulfilled,
+          addWaterRecord.fulfilled,
+          updateWaterRecord.fulfilled,
+          fetchWaterPer.fulfilled
+        ),
+        state => {
+          state.isLoading = false;
+          state.isError = null;
+        }
+      )
+      .addMatcher(
+        isAnyOf(
+          getWaterRecords.rejected,
+          addWaterRecord.rejected,
+          deleteWaterRecord.rejected,
+          updateWaterRecord.rejected,
+          fetchWaterPer.rejected
+        ),
+        state => {
+          state.isLoading = false;
+          state.isError = true;
+        }
+      );
   },
 });
 
-export const waterReducer = waterSlice.reducer;
+export default waterSlice.reducer;
+
+export const { setOperationType, setItemId, setWaterDay } = waterSlice.actions;
+
+export const selectWaterItem = state => state.water.items;
+export const selectOperationType = state => state.water.operationType;
+export const selectIsError = state => state.water.isError;
+export const selectIsLoading = state => state.water.isLoading;
+export const selectItemId = state => state.water.itemId;
+export const selectWaterDay = state => state.water.waterDay;
+
+export const selectWaterData = state => state.water.waterData;
+export const selectIsLoadingPer = state => state.water.isLoading;
+export const selectIsErrorPer = state => state.water.isError;
