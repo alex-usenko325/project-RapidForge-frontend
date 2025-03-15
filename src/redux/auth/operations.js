@@ -33,6 +33,11 @@ authAPI.interceptors.response.use(
       originalRequest._retry = true;
       try {
         await store.dispatch(refreshAccessToken());
+
+        const newToken = store.getState().auth.token;
+        setAuthHeader(newToken, 'interceptors');
+        originalRequest.headers.Authorization = `Bearer ${newToken}`;
+        console.log('interseptors: newToken', newToken);
         return authAPI(originalRequest);
       } catch (refreshError) {
         console.error('Token refresh failed:', refreshError);
@@ -45,8 +50,8 @@ authAPI.interceptors.response.use(
 );
 
 // Функції для додавання та очищення заголовку авторизації
-export const setAuthHeader = token => {
-  console.log('setAuthHeader', token);
+export const setAuthHeader = (token, from = '') => {
+  console.log(`setAuthHeader from: ${from}`, token);
   authAPI.defaults.headers.common.Authorization = `Bearer ${token}`;
 };
 
@@ -150,7 +155,7 @@ export const refreshAccessToken = createAsyncThunk(
       return thunkAPI.rejectWithValue('Token is not exist');
     }
     try {
-      setAuthHeader(savedToken);
+      setAuthHeader(savedToken, 'refreshAccessToken');
       const response = await authAPI.post('/auth/refresh');
       return response.data.data;
     } catch (error) {

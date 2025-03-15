@@ -1,5 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
+import { authAPI, refreshAccessToken } from '../auth/operations';
 
 export const userAPI = axios.create({
   baseURL: 'https://aqua-track-app.onrender.com',
@@ -14,6 +15,46 @@ export const setAuthHeader = token => {
   console.log('setAuthHeader', token);
   userAPI.defaults.headers.common.Authorization = `Bearer ${token}`;
 };
+
+let store;
+
+export const injectUserStore = _store => {
+  store = _store;
+};
+
+userAPI.interceptors.response.use(
+  response => response,
+  async error => {
+    console.log('interceptor error response', error);
+    const originalRequest = error.config;
+    console.log(
+      'interceptor: originalRequest._retry: ',
+      originalRequest._retry
+    );
+
+    if (
+      // error.response.status === 401 &&
+      error.response.data.message === 'Access token expired' &&
+      !originalRequest._retry
+    ) {
+      console.log('error.response.data.message', error.response.data.message);
+      originalRequest._retry = true;
+      try {
+        await store.dispatch(refreshAccessToken());
+
+        const newToken = store.getState().auth.token;
+        setAuthHeader(newToken, 'interceptors');
+        originalRequest.headers.Authorization = `Bearer ${newToken}`;
+        console.log('interseptors: newToken', newToken);
+      } catch (refreshError) {
+        console.error('Token refresh failed:', refreshError);
+        // window.location.href = '/login';
+        return Promise.reject(refreshError);
+      }
+    }
+    return Promise.reject(error);
+  }
+);
 
 export const getClientsNumber = createAsyncThunk(
   'user/getClientsNumber',

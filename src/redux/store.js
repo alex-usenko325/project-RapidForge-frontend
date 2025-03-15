@@ -10,6 +10,7 @@ import { waterReducer } from './water/slice';
 import { injectStore } from './auth/operations.js';
 
 import { waterPerReducer } from './monthInfo/waterSlice';
+import { injectUserStore } from './user/operations.js';
 
 const authPersistConfig = {
   key: 'auth',
@@ -44,4 +45,5 @@ export const store = configureStore({
 });
 
 injectStore(store);
+injectUserStore(store);
 export const persistor = persistStore(store);
