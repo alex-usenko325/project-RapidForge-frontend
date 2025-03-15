@@ -3,16 +3,17 @@
   "welcomeSection": {
     "subtitle": "Записуйте щоденне споживання води та відстежуйте",
     "title": "Трекер споживання води",
-    "tryTracker": "Спробувати трекер",
+    "tryTracker": "Спробувати",
     "signIn": "Увійти"
   },
   "advantagesSection": {
     "ourcustomers": "Наші {{useCount}} щасливі клієнти",
-    "happy": "щасливих",
-    "customers": "клієнтів",
-    "habitdrive": "Звичка на ходу",
-    "viewstatistics": "Перегляд статистики",
-    "personalratesetting": "Особисті налаштування"
+    "our": "Наші",
+    "happy": "щасливі",
+    "customers": "клієнти",
+    "habitdrive": "Керуй звичкою",
+    "viewstatistics": "Переглядай статистику",
+    "personalratesetting": "Персональні налаштування"
   },
   "signUp": {
     "validation": {
