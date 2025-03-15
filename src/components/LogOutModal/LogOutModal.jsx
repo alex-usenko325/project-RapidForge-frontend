@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import styles from './LogOutModal.module.css';
 import Modal from '../Modal/Modal';
 import { useTranslation } from 'react-i18next';
+
 const LogOutModal = ({ onClose }) => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
