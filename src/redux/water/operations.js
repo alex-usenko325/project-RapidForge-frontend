@@ -94,9 +94,12 @@ export const fetchWaterPer = createAsyncThunk(
   'fetchWaterPer',
   async (date, thunkApi) => {
     try {
-      const formattedDate = dayjs(date).startOf('month').format('YYYY-MM-DD');
+      const year = dayjs(date).year();
+      const month = dayjs(date).month() + 1; // +1, бо dayjs повертає 0 для січня
 
-      const { data } = await authAPI.get(`/water/month/${formattedDate}`);
+      const { data } = await authAPI.get(
+        `/water/month?year=${year}&month=${month}`
+      );
 
       return data.data.waterMonthByDay;
     } catch (error) {
