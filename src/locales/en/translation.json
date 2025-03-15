@@ -156,5 +156,9 @@
   },
   "addWaterBtn": {
     "addWater": "Add water"
+  },
+  "waterItem": {
+    "volume": "{{volume}} ml",
+    "time": "{{time}} "
   }
 }

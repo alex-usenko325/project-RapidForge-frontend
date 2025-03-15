@@ -155,5 +155,9 @@
   },
   "addWaterBtn": {
     "addWater": "Додати води"
+  },
+  "waterItem": {
+    "volume": "{{volume}} мл",
+    "time": "{{time}} "
   }
 }

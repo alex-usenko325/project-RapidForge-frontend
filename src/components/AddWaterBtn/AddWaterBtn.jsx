@@ -17,7 +17,7 @@ const AddWaterBtn = ({ style }) => {
         onClick={handleClickOpenWaterModal}
       >
         <span className={style === 'green' ? s.plus : s.icon}></span>
-        {t('addwaterBtn.add_water')}
+        {t('addWaterBtn.addWater')}
       </button>
       {isModalOpen && <WaterModal />}
     </>
