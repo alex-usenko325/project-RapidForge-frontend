@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getUserData } from '../../redux/auth/operations';
-import { selectUser, selectIsRefreshing } from '../../redux/auth/selectors';
+import { getUserData } from '../../redux/user/operations';
+import { selectUser, selectIsRefreshing } from '../../redux/user/selectors';
 import { Rings } from 'react-loader-spinner';
 import styles from './UserPanel.module.css';
 import UserBar from '../UserBar/UserBar';

@@ -3,13 +3,14 @@ import { ErrorMessage, Field, Form, Formik } from 'formik';
 import Logo from '../Logo/Logo';
 import * as Yup from 'yup';
 import { useDispatch } from 'react-redux';
-import { getUserData, signin } from '../../redux/auth/operations';
+import { signin } from '../../redux/auth/operations';
 import s from '../SignUpForm/SignUpForm.module.css';
 import sprite from '../../assets/sprite.svg';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import i18next from 'i18next';
 import LocalizationDropdownMenu from '../LocalizationDropdownMenu/LocalizationDropdownMenu';
+import { getUserData } from '../../redux/user/operations';
 
 const SingInValidationSchema = Yup.object().shape({
   email: Yup.string()

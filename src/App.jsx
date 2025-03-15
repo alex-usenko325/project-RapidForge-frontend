@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Suspense, lazy, useEffect } from 'react';
 import PrivateRoute from './routes/PrivateRoute';
 import RestrictedRoute from './routes/RestrictedRoute';
-import { getUserData } from './redux/auth/operations';
+import { getUserData } from './redux/user/operations';
 import NotFoundPage from './pages/NotFoundPage/NotFoundPage';
 import { RotatingLines } from 'react-loader-spinner';
 import { Toaster } from 'react-hot-toast';
@@ -19,16 +19,15 @@ const App = () => {
   const isLoggedIn = useSelector(state => state.auth.isLoggedIn);
   const isRefreshingUser = useSelector(state => state.auth.isRefreshingUser);
 
-useEffect(() => {
-  if (isLoggedIn) {
-    console.log('✅ Отримуємо дані користувача...');
-    dispatch(getUserData());
-  }
-}, [dispatch, isLoggedIn]);
+  useEffect(() => {
+    if (isLoggedIn) {
+      console.log('✅ Отримуємо дані користувача...');
+      dispatch(getUserData());
+    }
+  }, [dispatch, isLoggedIn]);
 
-if (isRefreshingUser) {
- 
-}
+  if (isRefreshingUser) {
+  }
 
   return (
     <div>

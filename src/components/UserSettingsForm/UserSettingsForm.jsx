@@ -3,9 +3,13 @@ import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useDispatch, useSelector } from 'react-redux';
-import { getUserData, patchUserAvatar } from '../../redux/auth/operations';
-import { patchUserData } from '../../redux/auth/operations';
-import { selectUser } from '../../redux/auth/selectors';
+import {
+  getUserData,
+  patchUserAvatar,
+  patchUserData,
+} from '../../redux/user/operations';
+
+import { selectUser } from '../../redux/user/selectors';
 import s from './UserSettingsForm.module.css';
 import sprite from '../../assets/sprite.svg';
 import { useTranslation } from 'react-i18next';
@@ -76,6 +80,11 @@ export default function UserSettingsForm({ closeModal }) {
   }, [gender, weight, activeTime]);
 
   const onSubmit = async data => {
+    if (!hasChanges(data)) {
+      closeModal();
+      return;
+    }
+
     const waterInMilliliters = customWaterNorma
       ? parseFloat(customWaterNorma) * 1000
       : 0;
@@ -136,11 +145,26 @@ export default function UserSettingsForm({ closeModal }) {
   };
 
   const handleActiveTimeChange = e => {
-    let newActiveTime = e.target.value.replace(/[^\d]/g, '');
+    let newActiveTime = e.target.value.replace(/[^\d.]/g, '');
+
+    const parts = newActiveTime.split('.');
+    if (parts.length > 2) {
+      newActiveTime = parts[0] + '.' + parts.slice(1).join('');
+    }
+
+    if (parts.length > 1) {
+      newActiveTime = parts[0] + '.' + parts[1].slice(0, 2);
+    }
 
     if (newActiveTime === '') {
       newActiveTime = '0';
-    } else if (newActiveTime.startsWith('0') && newActiveTime.length > 1) {
+    }
+
+    if (
+      newActiveTime.startsWith('0') &&
+      newActiveTime.length > 1 &&
+      !newActiveTime.startsWith('0.')
+    ) {
       newActiveTime = newActiveTime.replace(/^0+/, '');
     }
 
@@ -161,8 +185,8 @@ export default function UserSettingsForm({ closeModal }) {
     }
 
     if (user?.dailyNorm) {
-      setValue('dailyNorm', (user.dailyNorm / 1000).toFixed(0));
-      setCustomWaterNorma((user.dailyNorm / 1000).toFixed(0));
+      setValue('dailyNorm', (user.dailyNorm / 1000).toFixed(1));
+      setCustomWaterNorma((user.dailyNorm / 1000).toFixed(1));
     } else {
       setValue('dailyNorm', '');
       setWaterNorma('');
@@ -173,6 +197,15 @@ export default function UserSettingsForm({ closeModal }) {
       setValue(user.gender);
     }
   }, [gender, activeTime, setValue, user]);
+
+  const hasChanges = data => {
+    return (
+      data.name !== user.name ||
+      data.email !== user.email ||
+      data.gender !== user.gender ||
+      parseFloat(data.dailyNorm) * 1000 !== user.dailyNorm
+    );
+  };
 
   return (
     <div className={s.formContainer}>
@@ -198,7 +231,7 @@ export default function UserSettingsForm({ closeModal }) {
       </div>
 
       <form onSubmit={handleSubmit(onSubmit)} className={s.form}>
-        <div className={s.userInfo_container}>
+        <div className={s.user_gender}>
           <div className={s.genderContainer}>
             <label className={s.mainLabel}>
               {t('userSettingsForm.gender')}
@@ -241,7 +274,9 @@ export default function UserSettingsForm({ closeModal }) {
               </div>
             </div>
           </div>
+        </div>
 
+        <div className={s.userInfo_container}>
           <div className={s.infoContainer}>
             <div className={s.inputContainer}>
               <label className={`${s.mainLabel} ${s.forInput}`}>
