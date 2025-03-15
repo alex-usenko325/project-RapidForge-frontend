@@ -113,11 +113,12 @@
   letter-spacing: -0.01em;
   text-align: center;
   background: var(--accent);
+  transition: background-color 0.3s ease;
 }
 
 .authBtn:hover,
 .authBtn:focus {
-  background: var(--accent-hover);
+  background-color: var(--accent-hover);
 }
 
 .haveAnAccount {
@@ -133,6 +134,7 @@
   text-decoration: underline;
   text-decoration-skip-ink: none;
   color: var(--main-text);
+  transition: color 0.3s ease;
 }
 
 .authLink:hover,

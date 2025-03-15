@@ -2,7 +2,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #2d2d2d;
+  background-color: var(--main);
   color: var(--main-white);
   border: none;
   border-radius: 30px;
@@ -13,14 +13,15 @@
   font-size: 14px;
   line-height: 14px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: color 0.3s ease;
   margin-top: auto;
   margin-left: auto;
   margin-bottom: 0px;
 }
 
-.button:hover {
-  background-color: #3d3d3d;
+.button:hover,
+.button:focus {
+  color: var(--accent);
 }
 
 .plus {
@@ -39,9 +40,7 @@
     margin-left: auto;
     margin-right: 0px;
   }
-  .button:hover {
-    background-color: #3d3d3d;
-  }
+
   .plus {
     margin-right: 10px;
     font-size: 24px;
@@ -51,18 +50,6 @@
 
 @media screen and (min-width: 1440px) {
   .button {
-    width: 178px;
-    height: 60px;
-    font-size: 16px;
-    line-height: 24px;
     margin-top: 56px;
-    margin-right: 0px;
-    margin-left: auto;
-  }
-
-  .plus {
-    margin-right: 10px;
-    font-size: 24px;
-    font-weight: 350;
   }
 }
