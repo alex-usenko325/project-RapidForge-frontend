@@ -8,7 +8,8 @@
   border-radius: 15px;
   gap: 8px;
   margin-top: 49px;
-  margin-left: 73px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .label {
