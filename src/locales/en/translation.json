@@ -41,6 +41,31 @@
     "already_have_account": "Already have an account?",
     "sign_in": "Sign In"
   },
+  "emailInUseModal": {
+    "title": "Email already exists",
+    "message": "Please sign in or use a different email.",
+    "signInLink": "Go to Sign in",
+    "close": "Close"
+  },
+  "sendVerifyEmail": {
+    "verificationSuccess": {
+      "title": "Verification success",
+      "message": "You have successfully verified your email.",
+      "button": "Ok"
+    },
+    "verificationError": {
+      "title": "Verification error",
+      "message": "Try one more time",
+      "link": "Go back to Sign Up",
+      "button": "Close"
+    }
+  },
+  "verifyModal": {
+    "title": "Verify your email",
+    "message": "Please check your email for verification link.",
+    "button": "Close",
+    "link": "Open email client"
+  },
   "signIn": {
     "validation": {
       "email": {
@@ -140,6 +165,17 @@
     "logoutButton": "Log out",
     "cancelButton": "Cancel"
   },
+  "deleteWaterModal": {
+    "header": "Delete entry",
+    "text": "Are you sure you want to delete the entry?",
+    "delete": "Delete",
+    "cancel": "Cancel",
+    "error": {
+      "noEntrySelected": "No entry selected for deletion",
+      "deletionFailed": "Error deleting entry"
+    },
+    "success": "Entry deleted successfully"
+  },
   "calendarPagination": {
     "month": "Month"
   },
@@ -157,6 +193,7 @@
     "november": "November",
     "december": "December"
   },
+
   "addWaterBtn": {
     "addWater": "Add water"
   },
