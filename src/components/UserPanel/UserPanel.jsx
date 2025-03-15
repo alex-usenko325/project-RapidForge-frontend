@@ -5,8 +5,9 @@ import { selectUser, selectIsRefreshing } from '../../redux/auth/selectors';
 import { Rings } from 'react-loader-spinner';
 import styles from './UserPanel.module.css';
 import UserBar from '../UserBar/UserBar';
-
+import { useTranslation } from 'react-i18next';
 const UserPanel = () => {
+  const { t } = useTranslation();
   const dispatch = useDispatch();
   const user = useSelector(selectUser);
   const isLoading = useSelector(selectIsRefreshing);
@@ -27,7 +28,7 @@ const UserPanel = () => {
   }
 
   if (!user) {
-    return <p>No user data</p>;
+    return <p>{t('userPanel.noUserData')}</p>;
   }
 
   // Визначаємо відображуване ім'я
@@ -37,7 +38,8 @@ const UserPanel = () => {
   return (
     <div className={styles.userPanelCont}>
       <h2 className={styles.title}>
-        Hello, <span className={styles.span}>{userDisplayName}!</span>
+        {t('userPanel.hello')},
+        <span className={styles.span}>{userDisplayName}!</span>
       </h2>
       <UserBar name={userDisplayName} avatar={user.avatar} />
     </div>

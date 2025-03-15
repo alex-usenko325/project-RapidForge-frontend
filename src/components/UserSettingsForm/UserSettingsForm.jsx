@@ -8,22 +8,27 @@ import { patchUserData } from '../../redux/auth/operations';
 import { selectUser } from '../../redux/auth/selectors';
 import s from './UserSettingsForm.module.css';
 import sprite from '../../assets/sprite.svg';
-
+import { useTranslation } from 'react-i18next';
+import i18next from 'i18next';
 const schema = yup.object({
   name: yup
     .string()
-    .min(3, 'Name must be at least 3 characters')
-    .max(12, 'Name must be at most 12 characters')
-    .required('Name is required'),
-  email: yup.string().email('Invalid email').required('Email is required'),
+    .min(3, () => i18next.t('userSettingsForm.errors.name.min'))
+    .max(12, () => i18next.t('userSettingsForm.errors.name.max'))
+    .required(() => i18next.t('userSettingsForm.errors.name.required')),
+  email: yup
+    .string()
+    .email(() => i18next.t('userSettingsForm.errors.email.email'))
+    .required(() => i18next.t('userSettingsForm.errors.email.required')),
   dailyNorm: yup
     .number()
-    .positive('Water norma must be a positive number')
-    .max(15, 'The maximum water norma is 15 liters')
-    .required('Water norma is required'),
+    .positive(() => i18next.t('userSettingsForm.errors.dailyNorm.positive'))
+    .max(15, () => i18next.t('userSettingsForm.errors.dailyNorm.max'))
+    .required(() => i18next.t('userSettingsForm.errors.dailyNorm.required')),
 });
 
 export default function UserSettingsForm({ closeModal }) {
+  const { t } = useTranslation();
   const dispatch = useDispatch();
   const user = useSelector(selectUser);
   const [avatar, setAvatar] = useState(null);
@@ -180,7 +185,7 @@ export default function UserSettingsForm({ closeModal }) {
           <svg className={s.icon} width="20" height="20">
             <use xlinkHref={`${sprite}#icon-upload`} />
           </svg>
-          Upload photo
+          {t('userSettingsForm.uploadPhoto')}
         </label>
         <input
           id="avatar-upload"
@@ -195,7 +200,9 @@ export default function UserSettingsForm({ closeModal }) {
       <form onSubmit={handleSubmit(onSubmit)} className={s.form}>
         <div className={s.userInfo_container}>
           <div className={s.genderContainer}>
-            <label className={s.mainLabel}>Your gender identity</label>
+            <label className={s.mainLabel}>
+              {t('userSettingsForm.gender')}
+            </label>
             <div className={s.radioButtonsContainer}>
               <div>
                 <input
@@ -211,7 +218,7 @@ export default function UserSettingsForm({ closeModal }) {
                   className={`${s.secondaryLabel} ${s.radioLabel}`}
                   htmlFor="woman"
                 >
-                  Woman
+                  {t('userSettingsForm.woman')}
                 </label>
               </div>
 
@@ -229,7 +236,7 @@ export default function UserSettingsForm({ closeModal }) {
                   className={`${s.secondaryLabel} ${s.radioLabel}`}
                   htmlFor="man"
                 >
-                  Man
+                  {t('userSettingsForm.man')}
                 </label>
               </div>
             </div>
@@ -237,23 +244,27 @@ export default function UserSettingsForm({ closeModal }) {
 
           <div className={s.infoContainer}>
             <div className={s.inputContainer}>
-              <label className={`${s.mainLabel} ${s.forInput}`}>Name</label>
+              <label className={`${s.mainLabel} ${s.forInput}`}>
+                {t('userSettingsForm.name')}
+              </label>
               <input
                 className={`${s.input} ${errors.name ? s.errorInput : ''}`}
                 type="text"
                 {...register('name')}
-                placeholder="Enter your name"
+                placeholder={t('userSettingsForm.placeholderName')}
               />
               {errors.name && <p className={s.error}>{errors.name.message}</p>}
             </div>
 
             <div className={s.inputContainer}>
-              <label className={`${s.mainLabel} ${s.forInput}`}>Email</label>
+              <label className={`${s.mainLabel} ${s.forInput}`}>
+                {t('userSettingsForm.email')}
+              </label>
               <input
                 className={`${s.input} ${errors.email ? s.errorInput : ''}`}
                 type="email"
                 {...register('email')}
-                placeholder="Enter your email"
+                placeholder={t('userSettingsForm.placeholderEmail')}
               />
               {errors.email && (
                 <p className={s.error}>{errors.email.message}</p>
@@ -262,26 +273,29 @@ export default function UserSettingsForm({ closeModal }) {
           </div>
 
           <div className={s.dailyContainer}>
-            <label className={s.mainLabel}>My daily norma</label>
+            <label className={s.mainLabel}>
+              {t('userSettingsForm.dailyNorma')}
+            </label>
             <div className={s.formulaContainer}>
               <div className={s.formulaExample}>
-                <label className={s.secondaryLabel}>For woman:</label>
+                <label className={s.secondaryLabel}>
+                  {t('userSettingsForm.formulaWoman')}
+                </label>
                 <p className={s.formula}>V=(M*0,03) + (T*0,4)</p>
               </div>
               <div className={s.formulaExample}>
-                <label className={s.secondaryLabel}>For man:</label>
+                <label className={s.secondaryLabel}>
+                  {t('userSettingsForm.formulaMan')}
+                </label>
                 <p className={s.formula}>V=(M*0,04) + (T*0,6)</p>
               </div>
             </div>
             <p className={s.descriptionInfo}>
-              * V is the volume of the water norm in liters per day, M is your
-              body weight, T is the time of active sports, or another type of
-              activity commensurate in terms of loads (in the absence of these,
-              you must set 0)
+              {t('userSettingsForm.description')}
             </p>
             <div className={`${s.secondaryLabel} ${s.activeTime}`}>
               <span className={s.hashSpan}>!</span>
-              Active time in hours
+              {t('userSettingsForm.activeTimeLabel')}
             </div>
           </div>
         </div>
@@ -290,20 +304,20 @@ export default function UserSettingsForm({ closeModal }) {
           <div className={s.timeAndWeightContainer}>
             <div className={s.inputContainer}>
               <label className={`${s.secondaryLabel} ${s.stats}`}>
-                Your weight in kilograms:
+                {t('userSettingsForm.weight')}
               </label>
               <input
                 className={`${s.input} ${errors.weight ? s.errorInput : ''}`}
                 type="text"
                 value={weight}
                 onChange={handleWeightChange}
-                placeholder="Enter your weight"
+                placeholder={t('userSettingsForm.enterWeight')}
               />
             </div>
 
             <div className={s.inputContainer}>
               <label className={`${s.secondaryLabel} ${s.stats}`}>
-                The time of active participation in sports:
+                {t('userSettingsForm.activeTimeSport')}
               </label>
               <input
                 className={`${s.input} ${
@@ -312,20 +326,20 @@ export default function UserSettingsForm({ closeModal }) {
                 type="text"
                 value={activeTime}
                 onChange={handleActiveTimeChange}
-                placeholder="Enter your time"
+                placeholder={t('userSettingsForm.enterTime')}
               />
             </div>
           </div>
 
           <div className={s.waterNormaContainer}>
             <label className={s.secondaryLabel}>
-              The required amount of water in liters per day:
+              {t('userSettingsForm.waterNorma')}
             </label>
             <span className={s.waterNorma}>{waterNorma}L</span>
 
             <div className={s.selectWater_norma}>
               <label className={`${s.mainLabel} ${s.stats}`}>
-                Write down how much water you will drink:
+                {t('userSettingsForm.writeWaterNorma')}
               </label>
               <input
                 className={`${s.input} ${errors.dailyNorm ? s.errorInput : ''}`}
@@ -333,7 +347,7 @@ export default function UserSettingsForm({ closeModal }) {
                 {...register('dailyNorm')}
                 value={customWaterNorma}
                 onChange={handleWaterNormaChange}
-                placeholder="Enter your water norma"
+                placeholder={t('userSettingsForm.enterWaterNorma')}
               />
               {errors.dailyNorm && (
                 <p className={s.error}>{errors.dailyNorm.message}</p>
@@ -344,7 +358,7 @@ export default function UserSettingsForm({ closeModal }) {
 
         <div className={s.btn_container}>
           <button type="submit" className={s.submitButton}>
-            Save
+            {t('userSettingsForm.save')}
           </button>
         </div>
       </form>
