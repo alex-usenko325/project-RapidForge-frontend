@@ -95,6 +95,8 @@ export default function UserSettingsForm({ closeModal }) {
       name: data.name || '',
       email: data.email,
       gender: data.gender,
+      weight: data.weight || 0,
+      dailySportTime: data.activeTime,
       dailyNorm: waterInMilliliters || '',
     };
 
@@ -195,6 +197,16 @@ export default function UserSettingsForm({ closeModal }) {
       setValue('name', '');
     }
 
+    if (user?.weight) {
+      setValue('weight', user.weight);
+      setWeight(user.weight);
+    }
+
+    if (user?.dailySportTime) {
+      setValue('activeTime', user.dailySportTime);
+      setActiveTime(user.dailySportTime);
+    }
+
     if (user?.dailyNorm) {
       setValue('dailyNorm', (user.dailyNorm / 1000).toFixed(1));
       setCustomWaterNorma((user.dailyNorm / 1000).toFixed(1));
@@ -207,13 +219,15 @@ export default function UserSettingsForm({ closeModal }) {
     if (user?.gender) {
       setValue(user.gender);
     }
-  }, [gender, activeTime, setValue, user]);
+  }, [gender, setValue, user]);
 
   const hasChanges = data => {
     return (
       data.name !== user.name ||
       data.email !== user.email ||
       data.gender !== user.gender ||
+      data.weight !== user.weight.toString() ||
+      data.activeTime !== user.dailySportTime.toString() ||
       parseFloat(data.dailyNorm) * 1000 !== user.dailyNorm
     );
   };
@@ -356,6 +370,7 @@ export default function UserSettingsForm({ closeModal }) {
                 className={`${s.input} ${errors.weight ? s.errorInput : ''}`}
                 type="text"
                 value={weight}
+                {...register('weight')}
                 onChange={handleWeightChange}
                 placeholder={t('userSettingsForm.enterWeight')}
               />
@@ -371,6 +386,7 @@ export default function UserSettingsForm({ closeModal }) {
                 }`}
                 type="text"
                 value={activeTime}
+                {...register('activeTime')}
                 onChange={handleActiveTimeChange}
                 placeholder={t('userSettingsForm.enterTime')}
               />
