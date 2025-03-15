@@ -14,6 +14,7 @@ import s from './UserSettingsForm.module.css';
 import sprite from '../../assets/sprite.svg';
 import { useTranslation } from 'react-i18next';
 import i18next from 'i18next';
+
 const schema = yup.object({
   name: yup
     .string()
