@@ -8,6 +8,8 @@ import { getUserData } from './redux/user/operations';
 import NotFoundPage from './pages/NotFoundPage/NotFoundPage';
 import { RotatingLines } from 'react-loader-spinner';
 import { Toaster } from 'react-hot-toast';
+import WaterModal from './components/WaterModal/WaterModal';
+// import WaterForm from './components/WaterForm/WaterForm';
 
 const HomePage = lazy(() => import('./pages/HomePage/HomePage'));
 const TrackerPage = lazy(() => import('./pages/TrackerPage/TrackerPage'));
@@ -83,8 +85,8 @@ const App = () => {
           />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
+     
       </Suspense>
-      
     </div>
   );
 };
