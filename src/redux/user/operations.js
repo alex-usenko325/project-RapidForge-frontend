@@ -2,8 +2,8 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
 export const userAPI = axios.create({
-  baseURL: 'https://aqua-track-app.onrender.com',
-  // baseURL: 'http://localhost:3000',
+  // baseURL: 'https://aqua-track-app.onrender.com',
+  baseURL: 'http://localhost:3000',
   headers: {
     'Content-Type': 'application/json',
   },

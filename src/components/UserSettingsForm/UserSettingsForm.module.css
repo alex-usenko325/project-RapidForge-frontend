@@ -3,7 +3,9 @@
   font-weight: 400;
   font-size: 14px;
   line-height: 18px;
-  padding-top: 10px;
+  padding-top: 0px;
+  position: absolute;
+  padding-top: 86px;
 }
 
 .avatar_container {
