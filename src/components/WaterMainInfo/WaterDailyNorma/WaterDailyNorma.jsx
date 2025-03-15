@@ -1,6 +1,6 @@
 import css from './WaterDailyNorma.module.css';
 import { useSelector } from 'react-redux';
-import { selectDailyNorm } from '../../../redux/auth/selectors.js';
+import { selectDailyNorm } from '../../../redux/user/selectors.js';
 
 export default function WaterDailyNorma() {
   const dailyNorm = useSelector(selectDailyNorm);
