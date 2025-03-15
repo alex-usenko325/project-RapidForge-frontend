@@ -40,7 +40,7 @@ const UserPanel = () => {
     <div className={styles.userPanelCont}>
       <h2 className={styles.title}>
         {t('userPanel.hello')},
-        <span className={styles.span}>{userDisplayName}!</span>
+        <span className={styles.span}> {userDisplayName}!</span>
       </h2>
       <UserBar name={userDisplayName} avatar={user.avatar} />
     </div>

@@ -21,6 +21,7 @@
   color: #323f47;
   font-family: 'Poppins', sans-serif;
   display: flex;
+  align-items: center;
   width: 77px;
   height: 18px;
   gap: 8px;
