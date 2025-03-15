@@ -68,10 +68,12 @@
     "hello": "Hello",
     "noUserData": "No user data"
   },
-
   "waterDailyNorma": {
     "dailyNorma": "My daily norma",
     "liters": "L"
+  },
+  "waterList": {
+    "noEntries": "No water consumed today."
   },
   "waterProgressBar": {
     "today": "Today",
@@ -156,5 +158,9 @@
   },
   "addWaterBtn": {
     "addWater": "Add water"
+  },
+  "waterItem": {
+    "volume": "{{volume}} ml",
+    "time": "{{time}} "
   }
 }

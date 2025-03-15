@@ -6,6 +6,7 @@ import { Rings } from 'react-loader-spinner';
 import styles from './UserPanel.module.css';
 import UserBar from '../UserBar/UserBar';
 import { useTranslation } from 'react-i18next';
+
 const UserPanel = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
