@@ -240,7 +240,7 @@ export default function UserSettingsForm({ closeModal }) {
         </div>
 
         <label htmlFor="avatar-upload" className={s.uploadButton}>
-          <svg className={s.icon} width="20" height="20">
+          <svg className={s.icon} width="18" height="18">
             <use xlinkHref={`${sprite}#icon-upload`} />
           </svg>
           {t('userSettingsForm.uploadPhoto')}
@@ -347,10 +347,12 @@ export default function UserSettingsForm({ closeModal }) {
                 <label className={s.secondaryLabel}>
                   {t('userSettingsForm.formulaMan')}
                 </label>
+
                 <p className={s.formula}>V=(M*0,04) + (T*0,6)</p>
               </div>
             </div>
             <p className={s.descriptionInfo}>
+              <span className={s.hashArrow}>*</span>
               {t('userSettingsForm.description')}
             </p>
             <div className={`${s.secondaryLabel} ${s.activeTime}`}>
@@ -397,7 +399,7 @@ export default function UserSettingsForm({ closeModal }) {
             <label className={s.secondaryLabel}>
               {t('userSettingsForm.waterNorma')}
             </label>
-            <span className={s.waterNorma}>{waterNorma}L</span>
+            <span className={s.waterNorma}>{waterNorma} L</span>
 
             <div className={s.selectWater_norma}>
               <label className={`${s.mainLabel} ${s.stats}`}>
