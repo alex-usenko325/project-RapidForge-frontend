@@ -110,6 +110,8 @@
   },
   "waterModal": {
     "addWater": "Add water",
+    "editTheEntered": "Edit the entered amount of water",
+    "correctEnteredData": "Correct entered data:",
     "chooseValue": "Choose a value:",
     "amountWater": "Amount of water:",
     "ml": "мл",

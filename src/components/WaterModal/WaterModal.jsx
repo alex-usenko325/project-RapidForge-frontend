@@ -3,14 +3,14 @@ import s from './WaterModal.module.css';
 import clsx from 'clsx';
 import { useTranslation } from 'react-i18next';
 
-export default function WaterModal({ onClose }) {
+export default function WaterModal({title, subtitle, onClose }) {
   const { t } = useTranslation();
 
   return (
     <Modal onClose={onClose}>
       <div className={s.wrapper}>
-        <h2 className={s.title}>{t('waterModal.addWater')}</h2>
-        <p className={s.subtitle}>{t('waterModal.chooseValue')}</p>
+        <h2 className={s.title}>{t(`waterModal.${title}`)}</h2>
+        <p className={s.subtitle}>{t(`waterModal.${subtitle}`)}</p>
         <p className={s.amount}>{t('waterModal.amountWater')}</p>
         <div className={s.wrapperAmount}>
           <button type="button" className={clsx(s.btn, s.btnMinus)}></button>

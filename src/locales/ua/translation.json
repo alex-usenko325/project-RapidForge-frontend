@@ -110,6 +110,8 @@
   },
   "waterModal": {
     "addWater": "Додати воду",
+    "editTheEntered": "Відредагуйте введену кількість води",
+    "correctEnteredData": "Виправте введені дані:",
     "chooseValue": "Оберіть значення:",
     "amountWater": "Кількість води:",
     "ml": "мл",

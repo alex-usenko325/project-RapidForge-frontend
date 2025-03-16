@@ -2,6 +2,7 @@
   display: flex;
   gap: 16px;
   max-width: 303px;
+  height: 118px;
   padding: 0;
   overflow-x: auto;
   padding-bottom: 24px;
@@ -30,8 +31,7 @@
   line-height: 24px;
   letter-spacing: -1%;
   color: #323f47;
-  margin-bottom: 40px;
-  /* padding-bottom: 24px; */
+  height: 86px;
 }
 
 @media screen and (min-width: 768px) {

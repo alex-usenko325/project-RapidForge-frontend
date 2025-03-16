@@ -18,6 +18,21 @@ const setAuthHeader = token => {
   }
 };
 
+export const getWaterByMonth = createAsyncThunk(
+  'water/getWaterByMonth',
+  async ( { month, year }, thunkApi) => {
+    try {
+      const {
+        data: { data },
+      } = await waterAPI.get(`water/month?year=${year}&month=${month}` );
+      console.log('monthDATA', data);
+      return data;
+    } catch (error) {
+      return thunkApi.rejectWithValue(error.response.data.message);
+    }
+  }
+);
+
 export const getWaterRecords = createAsyncThunk(
   'water/getWaterRecords',
   async (_, thunkAPI) => {
