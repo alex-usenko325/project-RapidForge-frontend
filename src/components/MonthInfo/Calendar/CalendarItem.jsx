@@ -58,9 +58,11 @@ import clsx from 'clsx';
 import dayjs from 'dayjs';
 import { useDispatch } from 'react-redux';
 import { setWaterDay } from '../../../redux/dailyInfo/dailyInfoSlice';
+import { setSelectedDate } from '../../../redux/water/slice.js';
 
 const CalendarItem = ({ day, selectedDate, onDateSelect, percent }) => {
   const dispatch = useDispatch();
+
   const getFormattedDate = (selectedDate, day) => {
     const date = new Date(selectedDate);
     date.setDate(day);
@@ -71,6 +73,7 @@ const CalendarItem = ({ day, selectedDate, onDateSelect, percent }) => {
 
   const handleClick = () => {
     const formattedDate = getFormattedDate(selectedDate, day);
+    dispatch(setSelectedDate(formattedDate));
     onDateSelect(formattedDate);
   };
 

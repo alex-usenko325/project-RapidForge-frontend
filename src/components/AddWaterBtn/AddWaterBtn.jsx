@@ -24,7 +24,13 @@ const AddWaterBtn = ({ style }) => {
         <span className={style === 'green' ? s.plus : s.icon}></span>
         {t('addWaterBtn.addWater')}
       </button>
-      {isModalOpen && <WaterModal onClose={closeModal} />}
+      {isModalOpen && (
+        <WaterModal
+          title="addWater"
+          subtitle="chooseValue"
+          onClose={closeModal}
+        />
+      )}
     </>
   );
 };
