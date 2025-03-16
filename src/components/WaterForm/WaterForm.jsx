@@ -8,8 +8,13 @@ import {
   addWaterRecord,
   updateWaterRecord,
 } from '../../redux/water/operations'; // Імпортуємо функцію addWaterRecord
+import toast from 'react-hot-toast';
 
-export default function WaterForm({ onClose, modalType, waterEntryId }) {
+export default function WaterForm({
+  closeAddWaterModal,
+  modalType,
+  waterEntryId,
+}) {
   const { t } = useTranslation();
   const dispatch = useDispatch(); // Використовуємо useDispatch для dispatch-у action
   const [waterAmount, setWaterAmount] = useState(50);
@@ -44,14 +49,20 @@ export default function WaterForm({ onClose, modalType, waterEntryId }) {
       time: time,
     };
 
-    // Викликаємо dispatch для збереження запису
-    if (modalType === 'edit') {
-      dispatch(updateWaterRecord({ id: waterEntryId, updatedData: record }));
-    } else {
-      dispatch(addWaterRecord(record));
+    setIsLoading(true);
+    try {
+      if (modalType === 'edit') {
+        dispatch(updateWaterRecord({ id: waterEntryId, updatedData: record }));
+      } else {
+        await dispatch(addWaterRecord(record)).unwrap();
+      }
+      closeAddWaterModal();
+      toast.success(t('waterModal.successMessage'));
+    } catch (error) {
+      toast.error(t('waterModal.errorMessage'));
+    } finally {
+      setIsLoading(false);
     }
-    // Закриваємо модальне вікно після збереження
-    onClose();
   };
 
   return (
