@@ -4,14 +4,12 @@ import clsx from 'clsx';
 import s from './CalendarItem.module.css';
 import dayjs from 'dayjs';
 
-const CalendarItem = ({ day, selectedDate, onDateSelect, percent }) => {
+const CalendarItem = ({ day, selectedDate, onDateSelect, percent = 0 }) => {
   const dispatch = useDispatch();
 
   const getFormattedDate = (selectedDate, day) => {
     const date = new Date(selectedDate);
     date.setDate(day);
-    const SelectedDate = date.toISOString().split('T')[0];
-    dispatch(setSelectedDate(SelectedDate));
     return dayjs(date).format('YYYY-MM-DD');
   };
 
@@ -29,7 +27,7 @@ const CalendarItem = ({ day, selectedDate, onDateSelect, percent }) => {
         className={clsx(s.btnstyle, {
           [s.selected]: isSelected,
           [s.calendaritemfull]: percent >= 100,
-          [s.calendaritemhalf]: percent < 100,
+          [s.calendaritemhalf]: percent > 0 && percent < 100,
         })}
         onClick={handleClick}
       >
@@ -38,7 +36,7 @@ const CalendarItem = ({ day, selectedDate, onDateSelect, percent }) => {
         </div>
         <div className={s.percentage}>
           <div className={s['percentage-value']}>
-            {percent !== undefined ? percent.toFixed(0) : 0}%
+            {percent ? percent.toFixed(0) : 0}%
           </div>
         </div>
       </button>
