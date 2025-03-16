@@ -8,9 +8,8 @@ import {
   selectWaterRecordsByMonth,
 } from '../../redux/water/selectors';
 
-const WaterList = () => {
+export const WaterList = () => {
   const { t } = useTranslation();
-
 
   const waterListByDay = useSelector(selectWaterRecords);
 
