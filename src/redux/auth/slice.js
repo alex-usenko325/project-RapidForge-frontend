@@ -26,7 +26,7 @@ const authSlice = createSlice({
     builder
       // Обробка результатів signup
       .addCase(signup.fulfilled, (state, action) => {
-        state.user = action.payload.user;
+        state.email = action.payload.email;
       })
 
       // Обробка результатів signin

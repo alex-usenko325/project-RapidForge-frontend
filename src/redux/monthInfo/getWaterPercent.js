@@ -1,11 +1,12 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { userAPI } from '../user/operations';
+
+import { authAPI } from '../auth/operations';
 
 export const fetchWaterPer = createAsyncThunk(
   'fetchWaterPer',
   async (date, thunkApi) => {
     try {
-      const { data } = await userAPI.get(`/water/month/${date}`);
+      const { data } = await authAPI.get(`/water/month/${date}`);
 
       return data.data.waterMonthByDay;
     } catch (error) {
