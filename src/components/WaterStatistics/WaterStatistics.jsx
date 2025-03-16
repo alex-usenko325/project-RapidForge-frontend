@@ -39,7 +39,7 @@ const WaterStatistic = () => {
       sevenDaysAgo.setDate(today.getDate() - 6);
 
       try {
-        const BASE_URL = 'http://localhost:3000';
+        const BASE_URL = 'https://aqua-track-app.onrender.com';
         const response = await axios.get(`${BASE_URL}/water/month`, {
           params: { year: today.getFullYear(), month: today.getMonth() + 1 },
           headers: { Authorization: `Bearer ${token}` },
@@ -88,10 +88,7 @@ const WaterStatistic = () => {
 
   return (
     <ResponsiveContainer width="100%" height={300}>
-      <AreaChart
-        data={data}
-        margin={{ top: 10, right: 20, left: 0, bottom: 0 }}
-      >
+      <AreaChart data={data} margin={{ top: 10 }}>
         <defs>
           <linearGradient id="gradient" x1="0" y1="0" x2="0" y2="1">
             <stop offset="0%" stopColor="#66CDAA" stopOpacity={0.8} />
