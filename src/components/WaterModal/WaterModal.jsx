@@ -23,7 +23,7 @@ export default function WaterModal({ onClose, modalType }) {
           </>
         )}
 
-        <WaterForm />
+        <WaterForm onClose={onClose} />
       </div>
     </Modal>
     // </div>
