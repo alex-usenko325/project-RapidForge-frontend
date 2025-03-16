@@ -1,228 +1,230 @@
 .wrapper {
-    border-radius: 15px;
-    padding: 40px 20px;
-    width: 343px;
-    box-shadow: 0 4px 50px 0 rgba(0, 0, 0, 0.1);
-    background: var(--main-white);
-    color: var(----main-text);
+  border-radius: 15px;
+  padding: 40px 20px;
+  width: 343px;
+  box-shadow: 0 4px 50px 0 rgba(0, 0, 0, 0.1);
+  background: var(--main-white);
+  color: var(----main-text);
+}
+
+@media (min-width: 320px) and (max-width: 360px) {
+  .wrapper {
+    width: 300px;
   }
-  
-  @media (min-width: 320px) and (max-width: 360px) {
-    .wrapper {
-      width: 300px;
-    }
+}
+
+@media only screen and (min-width: 768px) {
+  .wrapper {
+    padding: 40px;
+    width: 518px;
   }
-  
-  @media only screen and (min-width: 768px) {
-    .wrapper {
-      padding: 40px;
-      width: 518px;
-    }
-  }
-  
+}
+
+.title {
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  margin-bottom: 24px;
+}
+
+@media only screen and (min-width: 768px) {
   .title {
-    font-size: 20px;
-    line-height: 1.2;
+    font-size: 28px;
+    line-height: 1.14;
     letter-spacing: -0.01em;
-    margin-bottom: 24px;
   }
-  
-  @media only screen and (min-width: 768px) {
-    .title {
-      font-size: 28px;
-      line-height: 1.14;
-      letter-spacing: -0.01em;
-    }
-  }
-  
+}
+
+.subtitle {
+  font-weight: 700;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+  margin-bottom: 20px;
+}
+
+@media only screen and (min-width: 768px) {
   .subtitle {
-    font-weight: 700;
-    line-height: 1.25;
-    letter-spacing: -0.01em;
-    margin-bottom: 20px;
+    font-size: 18px;
+    line-height: 1.33;
   }
-  
-  @media only screen and (min-width: 768px) {
-    .subtitle {
-      font-size: 18px;
-      line-height: 1.33;
-    }
-  }
-  
+}
+
+.amount {
+  font-size: 14px;
+  line-height: 1.28;
+  letter-spacing: -0.01em;
+  margin-bottom: 8px;
+  color: var(--main-text);
+}
+
+@media only screen and (min-width: 768px) {
   .amount {
-    font-size: 14px;
-    line-height: 1.28;
-    letter-spacing: -0.01em;
-    margin-bottom: 8px;
+    font-size: 16px;
+    line-height: 1.5;
   }
-  
-  @media only screen and (min-width: 768px) {
-    .amount {
-      font-size: 16px;
-      line-height: 1.5;
-    }
-  }
-  
-  .wrapperAmount {
-    display: flex;
-    gap: 8px;
-    margin-bottom: 16px;
-  }
-  
+}
+
+.wrapperAmount {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.btnMinus,
+.btnPlus {
+  position: relative;
+  width: 40px;
+  height: 40px;
+  border-radius: 30px;
+  border: 1.5px solid var(--main);
+}
+
+@media only screen and (min-width: 768px) {
+
   .btnMinus,
   .btnPlus {
-    position: relative;
-    width: 40px;
-    height: 40px;
-    border-radius: 30px;
-    border: 1.5px solid var(--main);
+    width: 43px;
+    height: 43px;
   }
-  
-  @media only screen and (min-width: 768px) {
-    .btnMinus,
-    .btnPlus {
-      width: 43px;
-      height: 43px;
-    }
-  }
-  
+}
+
+.btnMinus::after,
+.btnPlus::before,
+.btnPlus::after {
+  position: absolute;
+  display: block;
+  content: '';
+  width: 14px;
+  height: 1.5px;
+  background-color: var(--main);
+  border-radius: 30px;
+  top: 47%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+@media only screen and (min-width: 768px) {
+
   .btnMinus::after,
   .btnPlus::before,
   .btnPlus::after {
-    position: absolute;
-    display: block;
-    content: '';
-    width: 14px;
-    height: 1.5px;
-    background-color: var(--main);
-    border-radius: 30px;
-  
-    top: 47%;
-    left: 50%;
-    transform: translateX(-50%);
+    width: 17px;
+    height: 3px;
   }
-  
-  @media only screen and (min-width: 768px) {
-    .btnMinus::after,
-    .btnPlus::before,
-    .btnPlus::after {
-      width: 17px;
-      height: 3px;
-    }
-  }
-  
-  .btnPlus::before {
-    position: absolute;
-    transform: rotate(90deg);
-    top: 47%;
-    left: 50.5%;
-    transform: translateX(-50%) rotate(90deg);
-  }
-  
+}
+
+.btnPlus::before {
+  position: absolute;
+  transform: rotate(90deg);
+  top: 47%;
+  left: 50.5%;
+  transform: translateX(-50%) rotate(90deg);
+}
+
+.number {
+  width: 100px;
+  border-radius: 30px;
+  padding: 11px 20px;
+  background-color: var(--main);
+  text-align: center;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 1.28;
+  color: var(--main-white);
+}
+
+@media only screen and (min-width: 768px) {
   .number {
-    width: 100px;
-    border-radius: 30px;
-    padding: 11px 20px;
-    background-color: var(--main);
-    text-align: center;
-    font-weight: 700;
-    font-size: 14px;
-    line-height: 1.28;
-    color: var(--main-white);
+    font-size: 15px;
+    line-height: 1.5;
   }
-  
-  @media only screen and (min-width: 768px) {
-    .number {
-      font-size: 15px;
-      line-height: 1.5;
-    }
-  }
-  
+}
+
+.labelTime {
+  display: block;
+  margin-bottom: 24px;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.28;
+  letter-spacing: -0.01em;
+  color: var(----main-text);
+}
+
+@media only screen and (min-width: 768px) {
   .labelTime {
-    display: block;
-    margin-bottom: 24px;
-    font-weight: 400;
-    font-size: 14px;
-    line-height: 1.28;
-    letter-spacing: -0.01em;
-    color: var(----main-text);
+    font-size: 16px;
+    line-height: 1.5;
   }
-  
-  @media only screen and (min-width: 768px) {
-    .labelTime {
-      font-size: 16px;
-      line-height: 1.5;
-    }
-  }
-  
+}
+
+.input {
+  margin-top: 8px;
+
+  width: 100%;
+  border: 1px solid rgba(47, 47, 47, 0.15);
+  border-radius: 15px;
+  padding: 14px 16px 14px 16px;
+}
+
+@media only screen and (min-width: 768px) {
   .input {
-    margin-top: 8px;
-  
-    width: 100%;
-    border: 1px solid rgba(47, 47, 47, 0.15);
-    border-radius: 15px;
-    padding: 14px 16px 14px 16px;
+    height: 56px;
+    padding: 16px;
   }
-  
-  @media only screen and (min-width: 768px) {
-    .input {
-      height: 56px;
-      padding: 16px;
-    }
-  }
-  
+}
+
+.input::placeholder {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.28;
+  letter-spacing: -0.01em;
+  color: var(----main-text);
+}
+
+@media only screen and (min-width: 768px) {
   .input::placeholder {
-    font-weight: 400;
-    font-size: 14px;
-    line-height: 1.28;
-    letter-spacing: -0.01em;
-    color: var(----main-text);
+    font-size: 16px;
+    line-height: 1.5;
   }
-  
-  @media only screen and (min-width: 768px) {
-    .input::placeholder {
-      font-size: 16px;
-      line-height: 1.5;
-    }
-  }
-  
+}
+
+.labelValueWater {
+  display: block;
+  margin-bottom: 24px;
+  font-weight: 700;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+}
+
+@media only screen and (min-width: 768px) {
   .labelValueWater {
-    display: block;
-    margin-bottom: 24px;
-    font-weight: 700;
-    line-height: 1.25;
-    letter-spacing: -0.01em;
+    font-size: 18px;
+    line-height: 1.33;
   }
-  
-  @media only screen and (min-width: 768px) {
-    .labelValueWater {
-      font-size: 18px;
-      line-height: 1.33;
-    }
-  }
-  
+}
+
+.btnSave {
+  border-radius: 30px;
+  padding: 14px 40px;
+  background-color: var(--accent);
+
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 1.28;
+  letter-spacing: -0.01em;
+  color: var(--main);
+}
+
+@media only screen and (min-width: 768px) {
   .btnSave {
-    border-radius: 30px;
-    padding: 14px 40px;
-    background-color: var(--accent);
-  
-    font-weight: 700;
-    font-size: 14px;
-    line-height: 1.28;
-    letter-spacing: -0.01em;
-    color: var(--main);
+    padding: 18px 50px;
+    font-size: 16px;
+    line-height: 1.5;
   }
-  
-  @media only screen and (min-width: 768px) {
-    .btnSave {
-      padding: 18px 50px;
-      font-size: 16px;
-      line-height: 1.5;
-    }
-  }
-  
-  .btnSave:hover,
-  .btnSave:focus {
-    background-color: var(--accent-hover);
-  }
-  
+}
+
+.btnSave:hover,
+.btnSave:focus {
+  background-color: var(--accent-hover);
+}

@@ -17,7 +17,6 @@ export const getWaterByMonth = createAsyncThunk(
       const {
         data: { data },
       } = await authAPI.get(`water/month?year=${year}&month=${month}`);
-      console.log('monthDATA', data);
       return data;
     } catch (error) {
       return thunkApi.rejectWithValue(error.response.data.message);
@@ -57,7 +56,7 @@ export const addWaterRecord = createAsyncThunk(
     if (token) setAuthHeader(token);
     try {
       const response = await authAPI.post('water/', record);
-      return response.data;
+      return response.data.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(
         error.response?.data || 'Error adding record'
@@ -74,7 +73,7 @@ export const updateWaterRecord = createAsyncThunk(
     if (token) setAuthHeader(token);
     try {
       const response = await authAPI.patch(`water/${id}`, updatedData);
-      return response.data;
+      return response.data.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(
         error.response?.data || 'Error updating record'

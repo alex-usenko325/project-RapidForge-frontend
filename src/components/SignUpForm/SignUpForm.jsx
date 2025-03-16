@@ -9,6 +9,8 @@ import sprite from '../../assets/sprite.svg';
 import { useTranslation } from 'react-i18next';
 import i18next from 'i18next';
 import LocalizationDropdownMenu from '../LocalizationDropdownMenu/LocalizationDropdownMenu';
+import toast from 'react-hot-toast';
+import { Link } from 'react-router-dom';
 
 const SingUpValidationSchema = Yup.object().shape({
   email: Yup.string()
@@ -22,7 +24,6 @@ const SingUpValidationSchema = Yup.object().shape({
     .matches(/[0-9]/, () => i18next.t('signUp.validation.password.number'))
     .matches(/[!@#$%^&*]/, () =>
       i18next.t('signUp.validation.password.special')
-
     )
     .required(() => i18next.t('signUp.validation.password.required')),
 
@@ -47,6 +48,7 @@ const SignUpForm = ({ onSignUpSuccess }) => {
   const handleSubmit = (values, actions) => {
     // Спочатку викликаєш signup
     dispatch(signup({ email: values.email, password: values.password }))
+      .unwrap()
       .then(() => {
         // Після успішної реєстрації викликаєш sendVerificationEmail з email
         dispatch(sendVerificationEmail(values.email))
@@ -62,6 +64,15 @@ const SignUpForm = ({ onSignUpSuccess }) => {
       .catch(err => {
         setError(err.message); // Обробка помилки реєстрації
         actions.setSubmitting(false);
+
+        return toast.error(
+          <span>
+            {`${err}. `}
+            <Link to="/signin" target="_blank" rel="noopener noreferrer">
+              Please <b>Log In</b>
+            </Link>
+          </span>
+        );
       });
   };
 

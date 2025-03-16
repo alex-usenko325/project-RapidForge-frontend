@@ -10,7 +10,7 @@ import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import i18next from 'i18next';
 import LocalizationDropdownMenu from '../LocalizationDropdownMenu/LocalizationDropdownMenu';
-import { getUserData } from '../../redux/user/operations';
+// import { getUserData } from '../../redux/user/operations';
 
 const SingInValidationSchema = Yup.object().shape({
   email: Yup.string()
@@ -32,10 +32,10 @@ const SignInForm = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const handleSubmit = async (values, actions) => {
-    const response = await dispatch(signin(values));
-    if (signin.fulfilled.match(response)) {
-      dispatch(getUserData()); // Викликати тільки після успішного входу
-    }
+    dispatch(signin(values));
+    // if (signin.fulfilled.match()) {
+    // dispatch(getUserData()); // Викликати тільки після успішного входу
+    // }
     actions.resetForm();
   };
 

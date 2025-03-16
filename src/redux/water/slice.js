@@ -28,14 +28,14 @@ const waterSlice = createSlice({
     builder
       .addCase(getWaterByMonth.fulfilled, (state, { payload }) => {
         state.monthIntakes = payload;
-        state.loading = false;
+        state.isLoading = false;
       })
 
       .addCase(getWaterByMonth.pending, state => {
-        state.loading = true;
+        state.isLoading = true;
       })
       .addCase(getWaterByMonth.rejected, state => {
-        state.loading = false;
+        state.isLoading = false;
       })
       .addCase(getWaterRecords.pending, state => {
         state.isLoading = true;

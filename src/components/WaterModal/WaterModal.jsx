@@ -1,13 +1,38 @@
-import WaterForm from "../WaterForm/WaterForm";
+import Modal from '../Modal/Modal';
+import WaterForm from '../WaterForm/WaterForm';
+import { useTranslation } from 'react-i18next';
+import s from '../WaterForm/WaterForm.module.css';
 
-export default function WaterModal () {
-return (
-  <div>
-<h1>Hello world</h1>
+export default function WaterModal({
+  closeAddWaterModal,
+  modalType,
+  waterEntryId,
+}) {
+  const { t } = useTranslation();
 
- <WaterForm />
- </div>
-)
+  return (
+    <Modal onClose={closeAddWaterModal}>
+      <div className={s.wrapper}>
+        {modalType === 'edit' ? (
+          <>
+            <h2 className={s.title}>{t('waterModal.editTheEntered')}</h2>
+            <p className={s.subtitle}>{t('waterModal.correctEnteredData')}</p>
+          </>
+        ) : (
+          <>
+            <h2 className={s.title}>{t('waterModal.addWater')}</h2>
+            <p className={s.subtitle}>{t('waterModal.chooseValue')}</p>
+          </>
+        )}
+
+        <WaterForm
+          closeAddWaterModal={closeAddWaterModal}
+          modalType={modalType}
+          waterEntryId={waterEntryId}
+        />
+      </div>
+    </Modal>
+  );
 }
 
 // export default function WaterModal({title, subtitle, onClose }) {
@@ -50,7 +75,6 @@ return (
 //   );
 // }
 
-
 /////////// 16-03-25
 // import { useEffect, useState } from 'react';
 // import Modal from '../Modal/Modal.jsx';
@@ -80,10 +104,6 @@ return (
 //     setTime(`${hours}:${minutes}`);
 //   }, []);
 
-
-
-
-
 //     return (
 //     <div>
 //       <Modal onClose={onClose} >
@@ -112,62 +132,6 @@ return (
 //             </label>
 //             {/* <button type="button" className={s.btnSave}> */}
 //             <button type="submit" className={s.btnSave}>
-//               Save
-//             </button>
-//           </form>
-//         </div>
-//       </Modal>
-//     </div>
-//   );
-// }
-
-
-
-
-
-
-
-
-
-
-
-// !!!!BEFORE!!!!
-
-// import Modal from '../Modal/Modal.jsx';
-// import s from './WaterModal.module.css';
-// import clsx from 'clsx';
-
-// export default function WaterModal({ onClose }) {
-//   return (
-//     <div>
-//       <Modal onClose={onClose}>
-//         <div className={s.wrapper}>
-//           <h2 className={s.title}>Add water</h2>
-//           <p className={s.subtitle}>Choose a value</p>
-//           <p className={s.amount}>Amount of water:</p>
-//           <div className={s.wrapperAmount}>
-//             <button type="button" className={clsx(s.btn, s.btnMinus)}></button>
-//             <p className={s.number}>50 ml</p>
-//             <button type="button" className={clsx(s.btn, s.btnPlus)}></button>
-//           </div>
-//           <form className={s.form}>
-//             <label className={s.labelTime}>
-//               Recording time:
-//               <input
-//                 type="text"
-//                 placeholder="7:00"
-//                 className={clsx(s.inputTime, s.input)}
-//               />
-//             </label>
-//             <label className={s.labelValueWater}>
-//               Enter the value of the water used:
-//               <input
-//                 type="number"
-//                 placeholder="50"
-//                 className={clsx(s.inputValueWater, s.input)}
-//               />
-//             </label>
-//             <button type="button" className={s.btnSave}>
 //               Save
 //             </button>
 //           </form>
