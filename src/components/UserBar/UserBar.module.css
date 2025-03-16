@@ -33,6 +33,7 @@
   border-radius: 100%;
   width: 38px;
   height: 38px;
+  object-fit: cover;
 }
 
 .icon {
