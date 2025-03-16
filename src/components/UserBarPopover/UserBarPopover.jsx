@@ -6,7 +6,7 @@ const UserBarPopover = ({ openUserSettings, openLogout, width }) => {
   const { t } = useTranslation();
 
   return (
-    <div className={s.userBar} style={{ width: `${width}px` }}>
+    <div className={s.userBar}>
       <button className={s.btn_settings} onClick={openUserSettings}>
         <svg className={s.icon_settings} width="16" height="16">
           <use xlinkHref={`${sprite}#icon-settings`} />

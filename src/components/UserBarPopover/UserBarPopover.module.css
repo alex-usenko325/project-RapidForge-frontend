@@ -2,7 +2,7 @@
   margin-top: 4px;
   border-radius: 15px;
   padding: 14px 57px 14px 20px;
-  width: 137px;
+  /* width: 137px; */
   height: 72px;
   box-shadow: 0 4px 50px 0 rgba(0, 0, 0, 0.1);
   background: #fff;
@@ -68,7 +68,6 @@ svg {
 .btn_settings:hover .icon_settings,
 .btn_settings:focus .icon_settings {
   stroke: rgba(50, 63, 71, 0.4);
-  ;
 }
 
 .icon_logout {
@@ -80,7 +79,7 @@ svg {
 
 .btn_logout:hover .icon_logout,
 .btn_logout:focus .icon_logout {
-  stroke: var(--main)
+  stroke: var(--main);
 }
 
 @media (min-width: 768px) {
