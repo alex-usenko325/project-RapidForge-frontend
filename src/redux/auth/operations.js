@@ -33,6 +33,12 @@ authAPI.interceptors.response.use(
       originalRequest._retry = true;
       try {
         await store.dispatch(refreshAccessToken());
+
+        const newToken = store.getState().auth.token;
+        setAuthHeader(newToken, 'interceptors');
+        originalRequest.headers.Authorization = `Bearer ${newToken}`;
+        console.log('interseptors: newToken', newToken);
+
         return authAPI(originalRequest);
       } catch (refreshError) {
         console.error('Token refresh failed:', refreshError);
