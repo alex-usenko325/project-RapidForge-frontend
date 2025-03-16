@@ -179,7 +179,8 @@
     "success": "Entry deleted successfully"
   },
   "calendarPagination": {
-    "month": "Month"
+    "month": "Month",
+    "statistics": "Statistics"
   },
   "months": {
     "january": "January",

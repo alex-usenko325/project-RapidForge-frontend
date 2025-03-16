@@ -179,7 +179,8 @@
     "success": "Запис успішно видалено"
   },
   "calendarPagination": {
-    "month": "Місяць"
+    "month": "Місяць",
+    "statistics": "Статистика"
   },
   "months": {
     "january": "Січень",
