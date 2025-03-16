@@ -3,11 +3,12 @@
   padding: 6px 12px;
   min-width: 137px;
   max-width: -webkit-fill-available;
-  background: #323f47;
+  background: var(--main);
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 8px;
+  color: #fff;
 }
 
 .name {
@@ -20,6 +21,12 @@
   color: #fff;
   max-width: 100%;
   overflow: hidden;
+  transition: color 0.3s ease;
+}
+
+.name:hover,
+.name:focus {
+  color: var(--accent);
 }
 
 .avatar {

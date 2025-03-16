@@ -52,7 +52,7 @@ export default function WaterForm({ onClose }) {
             <label className={s.labelValueWater}>
                {t('waterModal.enterValue')}
                <input  type="number"   value={waterAmount}  onChange={handleCustomWaterAmount} min="0" className={clsx(s.inputValueWater, s.input)}/>
-               
+              
             </label>
             <button type="submit" className={s.btnSave}>
             {t('waterModal.save')}

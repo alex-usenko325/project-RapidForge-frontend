@@ -37,7 +37,7 @@
     height: 578px;
     background-image: url(../../assets/images/bottle/tablet/bottle-tablet-x1.png);
     background-size: 53%;
-    background-position: center;
+    background-position: center 75px;
     margin: 0 auto;
     padding: 32px;
   }
@@ -48,6 +48,7 @@
     .container {
       background-image: url(../../assets/images/bottle/tablet/bottle-tablet-x2.png);
       background-size: 53%;
+      background-position: center 70px;
     }
   }
 }
@@ -57,8 +58,8 @@
     height: 736px;
     width: 672px;
     background-image: url(../../assets/images/bottle/desktop/bottle-desktop-x1.png);
-    background-size: 76%;
-    background-position: center 50px;
+    background-size: 70%;
+    background-position: center 90px;
     background-repeat: no-repeat;
   }
 
@@ -67,7 +68,8 @@
     only screen and (-webkit-min-device-pixel-ratio: 2) {
     .container {
       background-image: url(../../assets/images/bottle/desktop/bottle-desktop-x2.png);
-      background-size: 76%;
+      background-size: 70%;
+      background-position: center 90px;
     }
   }
 }

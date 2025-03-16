@@ -49,28 +49,21 @@
 
 // ----------------------------------------- not redux -------------------------------------
 
-import { useEffect } from 'react';
 import CalendarItem from './CalendarItem';
 import s from './Calendar.module.css';
 import dayjs from 'dayjs';
-import { fetchWaterPer } from '../../../redux/monthInfo/getWaterPercent.js';
+import 'dayjs/locale/uk'; // Для української локалізації
 import { useDispatch, useSelector } from 'react-redux';
+import { selectWaterRecordsByMonth } from '../../../redux/water/selectors.js';
+import { fetchWaterPer } from '../../../redux/monthInfo/getWaterPercent.js';
 import { selectWaterData } from '../../../redux/monthInfo/waterSlice.js';
 
-const getFormattedDate = selectedDate => {
-  return dayjs(selectedDate).format('YYYY-MM');
-};
+dayjs.locale('uk'); // Встановлюємо локаль
 
 const Calendar = ({ selectedDate, setSelectedDate }) => {
-  const dispatch = useDispatch();
-  const waterData = useSelector(selectWaterData);
-
-  useEffect(() => {
-    const formattedDate = getFormattedDate(selectedDate);
-    dispatch(fetchWaterPer(formattedDate));
-  }, [selectedDate, dispatch]);
-
+  const waterData = useSelector(selectWaterRecordsByMonth);
   const daysInMonth = dayjs(selectedDate).daysInMonth();
+
   const days = [...Array(daysInMonth)].map((_, dayIndex) => {
     const day = dayIndex + 1;
     const date = dayjs(selectedDate).date(day).format('YYYY-MM-DD');
@@ -90,8 +83,10 @@ const Calendar = ({ selectedDate, setSelectedDate }) => {
 
   return (
     <div>
-      <div className={s.calendargrid}> {days} </div>{' '}
+      <div className={s.calendargrid}>{days}</div>
     </div>
   );
 };
+
 export default Calendar;
+
