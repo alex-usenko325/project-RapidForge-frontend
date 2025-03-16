@@ -35,7 +35,7 @@ authAPI.interceptors.response.use(
         await store.dispatch(refreshAccessToken());
 
         const newToken = store.getState().auth.token;
-        // setAuthHeader(newToken, 'interceptors');
+        setAuthHeader(newToken, 'interceptors');
         originalRequest.headers.Authorization = `Bearer ${newToken}`;
         console.log('interseptors: newToken', newToken);
 
