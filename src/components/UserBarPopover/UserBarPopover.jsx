@@ -2,7 +2,7 @@ import s from './UserBarPopover.module.css';
 import { useTranslation } from 'react-i18next';
 import sprite from '../../assets/sprite.svg';
 
-const UserBarPopover = ({ onClose, openUserSettings, openLogout, width }) => {
+const UserBarPopover = ({ openUserSettings, openLogout, width }) => {
   const { t } = useTranslation();
 
   return (

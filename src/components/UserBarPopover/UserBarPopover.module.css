@@ -27,7 +27,14 @@ svg {
   align-items: center;
   width: 77px;
   height: 18px;
+  transition: color 0.3s ease;
 }
+
+.btn_settings:hover,
+.btn_settings:focus {
+  color: rgba(50, 63, 71, 0.4);
+}
+
 .btn_settings svg,
 .btn_logout svg {
   margin-right: 8px;
@@ -43,18 +50,37 @@ svg {
   align-items: center;
   width: 77px;
   height: 18px;
+  transition: color 0.3s ease;
+}
+
+.btn_logout:hover,
+.btn_logout:focus {
+  color: var(--main);
 }
 
 .icon_settings {
   stroke-width: 1.5px;
   stroke: #323f47;
   fill: transparent;
+  transition: stroke 0.3s ease;
+}
+
+.btn_settings:hover .icon_settings,
+.btn_settings:focus .icon_settings {
+  stroke: rgba(50, 63, 71, 0.4);
+  ;
 }
 
 .icon_logout {
   stroke-width: 1.5px;
   stroke: rgba(50, 63, 71, 0.4);
   fill: transparent;
+  transition: stroke 0.3s ease;
+}
+
+.btn_logout:hover .icon_logout,
+.btn_logout:focus .icon_logout {
+  stroke: var(--main)
 }
 
 @media (min-width: 768px) {
