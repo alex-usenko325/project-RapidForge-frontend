@@ -1,6 +1,4 @@
-import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { getWaterRecords } from '../../../redux/water/operations';
+import { useSelector } from 'react-redux';
 import {
   selectWaterProgress,
   selectWaterIsLoading,
@@ -10,13 +8,8 @@ import { useTranslation } from 'react-i18next';
 
 export default function WaterProgressBar() {
   const { t } = useTranslation();
-  const dispatch = useDispatch();
   const progress = useSelector(selectWaterProgress);
   const isLoading = useSelector(selectWaterIsLoading);
-
-  useEffect(() => {
-    dispatch(getWaterRecords());
-  }, [dispatch]);
 
   const fixedLabels = [0, 50, 100];
   const isFixedLabel = fixedLabels.includes(Math.round(progress));

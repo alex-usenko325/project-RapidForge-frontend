@@ -117,7 +117,9 @@
     "ml": "мл",
     "recordingTime": "Recording time:",
     "enterValue": "Enter the value of the water used:",
-    "save": "Save"
+    "save": "Save",
+    "successMessage": "Water consumption record added successfully!",
+    "errorMessage": "Failed to add water intake record. Please try again."
   },
   "userSettingsModal": {
     "settings": "Settings"
