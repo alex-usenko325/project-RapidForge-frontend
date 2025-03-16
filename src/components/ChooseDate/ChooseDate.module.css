@@ -1,0 +1,15 @@
+.day {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 24px;
+  letter-spacing: -1%;
+  color: #323f47;
+}
+
+@media screen and (min-width: 768px) {
+  .day {
+    font-size: 28px;
+    line-height: 32px;
+  }
+}

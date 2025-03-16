@@ -7,21 +7,25 @@
   top: 64px;
   left: auto;
   right: auto;
-  padding: 80px 16px;
+  padding: 40px 20px;
   height: calc(100vh - 64px);
-  width: 343px;
+  width: 320px;
+}
+
+@media (min-width: 375px) {
+  .settings {
+    width: 343px;
+  }
 }
 
 @media (min-width: 768px) {
   .settings {
     width: 648px;
-    padding: 40px;
   }
 }
 
 @media (min-width: 1440px) {
   .settings {
     width: 920px;
-    padding: 40px;
   }
 }

@@ -7,6 +7,7 @@ import {
 } from '../../../redux/water/selectors';
 import css from './WaterProgressBar.module.css';
 import { useTranslation } from 'react-i18next';
+
 export default function WaterProgressBar() {
   const { t } = useTranslation();
   const dispatch = useDispatch();
@@ -20,12 +21,15 @@ export default function WaterProgressBar() {
   const fixedLabels = [0, 50, 100];
   const isFixedLabel = fixedLabels.includes(Math.round(progress));
 
-  const visibleFixedLabels = fixedLabels.filter(label => {
-    const distance = Math.abs(progress - label);
-    return distance > 15 || distance === 0;
-  });
-
-  if (isLoading) return <p>{t('waterProgressBar.loading')}</p>;
+  if (isLoading)
+    return (
+      <div className={css.container}>
+        <p className={css.label}>{t('waterProgressBar.today')}</p>
+        <div className={css.loaderContainer}>
+          <div className={css.loader}></div>
+        </div>
+      </div>
+    );
 
   return (
     <div className={css.container}>
@@ -41,7 +45,7 @@ export default function WaterProgressBar() {
         ></div>
       </div>
       <div className={css.progressLabels}>
-        {visibleFixedLabels.map(value => (
+        {fixedLabels.map(value => (
           <span
             key={value}
             className={`${css.progressSpan} ${
@@ -49,7 +53,7 @@ export default function WaterProgressBar() {
             }`}
             style={{
               position: 'absolute',
-              left: `${value}%`,
+              left: value === 0 ? '2%' : value === 100 ? '95%' : `${value}%`,
               transform: 'translateX(-50%)',
             }}
           >
@@ -58,7 +62,7 @@ export default function WaterProgressBar() {
         ))}
         {!isFixedLabel && (
           <span
-            className={`${css.progressSpan} ${css.active}`}
+            className={`${css.progressSpan} ${css.dynamic}`}
             style={{
               position: 'absolute',
               left: `${progress}%`,

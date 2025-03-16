@@ -5,6 +5,7 @@ import {
   patchUserAvatar,
   getUserData,
 } from './operations';
+import { logout } from '../auth/operations.js';
 
 const initialState = {
   user: {
@@ -76,7 +77,8 @@ const userSlice = createSlice({
       .addCase(patchUserAvatar.rejected, (state, action) => {
         state.isLoading = false;
         state.error = action.payload;
-      });
+      })
+      .addCase(logout.fulfilled, () => initialState);
   },
 });
 

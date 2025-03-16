@@ -2,18 +2,28 @@ import { useTranslation } from 'react-i18next';
 import css from './WaterList.module.css';
 import WaterItem from '../WaterItem/WaterItem';
 import { useSelector } from 'react-redux';
-import { selectWaterRecords } from '../../redux/water/selectors';
-// можливо у майбутньому використовувати інший селектор, замість  - selectWaterRecords
-const WaterList = () => {
+import {
+  selectSelectedDate,
+  selectWaterRecords,
+  selectWaterRecordsByMonth,
+} from '../../redux/water/selectors';
+
+export const WaterList = () => {
   const { t } = useTranslation();
 
-  const waterList = useSelector(selectWaterRecords);
-  console.log('дані селектора selectWaterRecords', waterList);
+  const waterListByDay = useSelector(selectWaterRecords);
+
+  const waterListByMonth = useSelector(selectWaterRecordsByMonth);
+  const selectedDate = useSelector(selectSelectedDate);
+  const filteredWaterList = selectedDate
+    ? waterListByMonth.filter(item => item.date === selectedDate)
+    : waterListByDay;
+
   return (
     <>
       <ul className={css.waterList}>
-        {waterList?.length > 0 ? (
-          waterList?.map(item => (
+        {filteredWaterList?.length > 0 ? (
+          filteredWaterList?.map(item => (
             <li key={item._id} className={css.waterItem}>
               <WaterItem id={item._id} volume={item.volume} time={item.time} />
             </li>
