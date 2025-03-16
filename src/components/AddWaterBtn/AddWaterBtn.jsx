@@ -11,7 +11,7 @@ const AddWaterBtn = ({ style }) => {
     setModalType(type);
     setIsModalOpen(true);
   };
-  const closeModal = () => {
+  const closeAddWaterModal = () => {
     setIsModalOpen(false);
   };
 
@@ -29,9 +29,7 @@ const AddWaterBtn = ({ style }) => {
       {isModalOpen && (
         <WaterModal
           modalType={modalType}
-          // titleA="addWater"
-          // subtitle="chooseValue"
-          onClose={closeModal}
+          closeAddWaterModal={closeAddWaterModal}
         />
       )}
     </>
