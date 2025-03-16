@@ -13,6 +13,7 @@ export default function WaterForm({ onClose, modalType, waterEntryId }) {
   const { t } = useTranslation();
   const dispatch = useDispatch(); // Використовуємо useDispatch для dispatch-у action
   const [waterAmount, setWaterAmount] = useState(50);
+  const [isLoading, setIsLoading] = useState(false);
   const increaseWater = () => setWaterAmount(waterAmount + 50);
   const decreaseWater = () =>
     setWaterAmount(waterAmount > 50 ? waterAmount - 50 : 50);
@@ -34,13 +35,11 @@ export default function WaterForm({ onClose, modalType, waterEntryId }) {
     setTime(`${hours}:${minutes}`);
   }, []);
 
-  // Обробник для відправки даних
-  const handleSubmit = e => {
+  const handleSubmit = async e => {
     e.preventDefault();
 
-    // Створюємо запис для води
     const record = {
-      date: new Date().toISOString().split('T')[0], // Поточна дата у форматі "YYYY-MM-DD"
+      date: new Date().toISOString().split('T')[0],
       volume: waterAmount,
       time: time,
     };
