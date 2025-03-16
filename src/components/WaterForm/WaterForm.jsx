@@ -45,7 +45,7 @@ export default function WaterForm({ closeAddWaterModal }) {
     setIsLoading(true);
     try {
       await dispatch(addWaterRecord(record)).unwrap();
-      onClose();
+      closeAddWaterModal();
       toast.success(t('waterModal.successMessage'));
     } catch (error) {
       toast.error(t('waterModal.errorMessage'));
@@ -87,7 +87,7 @@ export default function WaterForm({ closeAddWaterModal }) {
           {t('waterModal.enterValue')}
           <input
             type="number"
-            // value={waterAmount}
+            value={waterAmount}
             onChange={handleCustomWaterAmount}
             min="0"
             className={clsx(s.inputValueWater, s.input)}
