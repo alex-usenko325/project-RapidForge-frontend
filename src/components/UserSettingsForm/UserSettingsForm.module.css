@@ -3,7 +3,8 @@
   font-weight: 400;
   font-size: 14px;
   line-height: 18px;
-  padding-top: 10px;
+  position: absolute;
+  margin-top: 82px;
 }
 
 .avatar_container {
@@ -44,6 +45,7 @@
 .radioButtonsContainer {
   display: flex;
   gap: 20px;
+  padding-bottom: 24px;
 }
 
 .mainLabel {
@@ -132,7 +134,7 @@
 
 .input {
   padding: 14px;
-  border: 2px solid rgba(47, 47, 47, 0.15);
+  border: 1px solid rgba(47, 47, 47, 0.15);
   border-radius: 15px;
   font-weight: 400;
   font-size: 16px;
@@ -142,18 +144,22 @@
 }
 
 .errorInput {
-  border: 2px solid red;
+  border: 1px solid #ef5050;
+  color: #ef5050;
 }
 
 .input:focus {
-  border: 2px solid rgba(47, 47, 47, 0.15);
+  border: 1px solid rgba(47, 47, 47, 0.2);
+}
+.input:active {
+  border: 1px solid rgba(47, 47, 47, 0.4);
 }
 
 .formulaContainer {
   display: flex;
   flex-direction: column;
   text-align: left;
-  gap: 28px;
+  gap: 12px;
   padding-top: 14px;
 }
 
@@ -170,11 +176,13 @@
 .formula {
   font-weight: 700;
   font-size: 14px;
-  line-height: 18px;
-  color: #9be1a0;
+  letter-spacing: -0.01em;
+  line-height: 129%;
+  color: var(--accent);
 }
 
 .descriptionInfo {
+  font-size: 14px;
   padding: 16px;
   margin-top: 14px;
   border-radius: 15px;
@@ -190,6 +198,9 @@
   padding-right: 11px;
   color: #9be1a0;
   font-weight: 600;
+}
+.hashArrow {
+  color: #9be1a0;
 }
 
 .waterNormaContainer {
@@ -224,8 +235,21 @@
   text-align: center;
 }
 
+.submitButton:hover,
+.submitButton:focus {
+  background: #87d28d;
+}
+
 /* Tablet */
 @media (min-width: 768px) {
+  .error {
+    margin-top: 86px;
+  }
+
+  .icon {
+    width: 20px;
+    height: 20px;
+  }
   .avatar {
     width: 100px;
     height: 100px;
@@ -249,6 +273,11 @@
 
   .formulaContainer {
     flex-direction: row;
+    gap: 28px;
+  }
+
+  .descriptionInfo {
+    font-size: 16px;
   }
 }
 
@@ -257,7 +286,7 @@
   .form {
     display: flex;
     flex-wrap: wrap;
-    gap: 40px;
+    column-gap: 40px;
   }
 
   .userInfo_container {

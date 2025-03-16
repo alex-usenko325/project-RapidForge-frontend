@@ -11,6 +11,7 @@
     "habitdrive": "Habit drive",
     "viewstatistics": "View statistics",
     "personalratesetting": "Personal rate setting",
+    "our": "Our",
     "happy": "happy",
     "customers": "customers"
   },
@@ -39,6 +40,31 @@
     "repeat_password": "Repeat password",
     "already_have_account": "Already have an account?",
     "sign_in": "Sign In"
+  },
+  "emailInUseModal": {
+    "title": "Email already exists",
+    "message": "Please sign in or use a different email.",
+    "signInLink": "Go to Sign in",
+    "close": "Close"
+  },
+  "sendVerifyEmail": {
+    "verificationSuccess": {
+      "title": "Verification success",
+      "message": "You have successfully verified your email.",
+      "button": "Ok"
+    },
+    "verificationError": {
+      "title": "Verification error",
+      "message": "Try one more time",
+      "link": "Go back to Sign Up",
+      "button": "Close"
+    }
+  },
+  "verifyModal": {
+    "title": "Verify your email",
+    "message": "Please check your email for verification link.",
+    "button": "Close",
+    "link": "Open email client"
   },
   "signIn": {
     "validation": {
@@ -122,9 +148,9 @@
     "email": "Email",
     "placeholderEmail": "Enter your email",
     "dailyNorma": "My daily norma",
-    "formulaWoman": "For woman: V=(M*0,03) + (T*0,4)",
-    "formulaMan": "For man: V=(M*0,04) + (T*0,6)",
-    "description": "* V is the volume of the water norm in liters per day, M is your body weight, T is the time of active sports, or another type of activity commensurate in terms of loads (in the absence of these, you must set 0)",
+    "formulaWoman": "For woman:",
+    "formulaMan": "For man:",
+    "description": " V is the volume of the water norm in liters per day, M is your body weight, T is the time of active sports, or another type of activity commensurate in terms of loads (in the absence of these, you must set 0)",
     "activeTimeLabel": "Active time in hours",
     "weight": "Your weight in kilograms:",
     "enterWeight": "Enter your weight",
@@ -140,6 +166,17 @@
     "leaveMessage": "Do you really want to leave?",
     "logoutButton": "Log out",
     "cancelButton": "Cancel"
+  },
+  "deleteWaterModal": {
+    "header": "Delete entry",
+    "text": "Are you sure you want to delete the entry?",
+    "delete": "Delete",
+    "cancel": "Cancel",
+    "error": {
+      "noEntrySelected": "No entry selected for deletion",
+      "deletionFailed": "Error deleting entry"
+    },
+    "success": "Entry deleted successfully"
   },
   "calendarPagination": {
     "month": "Month"
@@ -158,6 +195,7 @@
     "november": "November",
     "december": "December"
   },
+
   "addWaterBtn": {
     "addWater": "Add water"
   },

@@ -14,6 +14,7 @@ import s from './UserSettingsForm.module.css';
 import sprite from '../../assets/sprite.svg';
 import { useTranslation } from 'react-i18next';
 import i18next from 'i18next';
+import toast from 'react-hot-toast';
 
 const schema = yup.object({
   name: yup
@@ -94,6 +95,8 @@ export default function UserSettingsForm({ closeModal }) {
       name: data.name || '',
       email: data.email,
       gender: data.gender,
+      weight: data.weight || 0,
+      dailySportTime: data.activeTime,
       dailyNorm: waterInMilliliters || '',
     };
 
@@ -103,7 +106,16 @@ export default function UserSettingsForm({ closeModal }) {
       dispatch(patchUserData({ userData, userId }));
       closeModal();
     } catch (error) {
-      console.error('Failed to update user data:', error);
+      if (
+        error.response &&
+        error.response.data.message === 'Access token expired'
+      ) {
+        toast.error('Access token expired, please log in again.');
+        localStorage.removeItem('accessToken');
+      } else {
+        toast.error('Failed to update user data');
+        console.error('Error updating user data:', error);
+      }
     }
   };
 
@@ -185,6 +197,16 @@ export default function UserSettingsForm({ closeModal }) {
       setValue('name', '');
     }
 
+    if (user?.weight) {
+      setValue('weight', user.weight);
+      setWeight(user.weight);
+    }
+
+    if (user?.dailySportTime) {
+      setValue('activeTime', user.dailySportTime);
+      setActiveTime(user.dailySportTime);
+    }
+
     if (user?.dailyNorm) {
       setValue('dailyNorm', (user.dailyNorm / 1000).toFixed(1));
       setCustomWaterNorma((user.dailyNorm / 1000).toFixed(1));
@@ -197,13 +219,15 @@ export default function UserSettingsForm({ closeModal }) {
     if (user?.gender) {
       setValue(user.gender);
     }
-  }, [gender, activeTime, setValue, user]);
+  }, [gender, setValue, user]);
 
   const hasChanges = data => {
     return (
       data.name !== user.name ||
       data.email !== user.email ||
       data.gender !== user.gender ||
+      data.weight !== user.weight.toString() ||
+      data.activeTime !== user.dailySportTime.toString() ||
       parseFloat(data.dailyNorm) * 1000 !== user.dailyNorm
     );
   };
@@ -216,7 +240,7 @@ export default function UserSettingsForm({ closeModal }) {
         </div>
 
         <label htmlFor="avatar-upload" className={s.uploadButton}>
-          <svg className={s.icon} width="20" height="20">
+          <svg className={s.icon} width="18" height="18">
             <use xlinkHref={`${sprite}#icon-upload`} />
           </svg>
           {t('userSettingsForm.uploadPhoto')}
@@ -323,10 +347,12 @@ export default function UserSettingsForm({ closeModal }) {
                 <label className={s.secondaryLabel}>
                   {t('userSettingsForm.formulaMan')}
                 </label>
+
                 <p className={s.formula}>V=(M*0,04) + (T*0,6)</p>
               </div>
             </div>
             <p className={s.descriptionInfo}>
+              <span className={s.hashArrow}>*</span>
               {t('userSettingsForm.description')}
             </p>
             <div className={`${s.secondaryLabel} ${s.activeTime}`}>
@@ -346,6 +372,7 @@ export default function UserSettingsForm({ closeModal }) {
                 className={`${s.input} ${errors.weight ? s.errorInput : ''}`}
                 type="text"
                 value={weight}
+                {...register('weight')}
                 onChange={handleWeightChange}
                 placeholder={t('userSettingsForm.enterWeight')}
               />
@@ -361,6 +388,7 @@ export default function UserSettingsForm({ closeModal }) {
                 }`}
                 type="text"
                 value={activeTime}
+                {...register('activeTime')}
                 onChange={handleActiveTimeChange}
                 placeholder={t('userSettingsForm.enterTime')}
               />
@@ -371,7 +399,7 @@ export default function UserSettingsForm({ closeModal }) {
             <label className={s.secondaryLabel}>
               {t('userSettingsForm.waterNorma')}
             </label>
-            <span className={s.waterNorma}>{waterNorma}L</span>
+            <span className={s.waterNorma}>{waterNorma} L</span>
 
             <div className={s.selectWater_norma}>
               <label className={`${s.mainLabel} ${s.stats}`}>
