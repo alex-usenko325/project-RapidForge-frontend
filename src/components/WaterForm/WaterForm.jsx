@@ -7,7 +7,7 @@ import { useDispatch } from 'react-redux';
 import { addWaterRecord } from '../../redux/water/operations'; // Імпортуємо функцію addWaterRecord
 import toast from 'react-hot-toast';
 
-export default function WaterForm({ onClose }) {
+export default function WaterForm({ closeAddWaterModal }) {
   const { t } = useTranslation();
   const dispatch = useDispatch(); // Використовуємо useDispatch для dispatch-у action
   const [waterAmount, setWaterAmount] = useState(50);
@@ -87,7 +87,7 @@ export default function WaterForm({ onClose }) {
           {t('waterModal.enterValue')}
           <input
             type="number"
-            value={waterAmount}
+            // value={waterAmount}
             onChange={handleCustomWaterAmount}
             min="0"
             className={clsx(s.inputValueWater, s.input)}
