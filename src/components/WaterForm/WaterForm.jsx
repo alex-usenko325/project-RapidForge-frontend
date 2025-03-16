@@ -4,10 +4,17 @@ import s from './WaterForm.module.css';
 import clsx from 'clsx';
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
-import { addWaterRecord } from '../../redux/water/operations'; // Імпортуємо функцію addWaterRecord
+import {
+  addWaterRecord,
+  updateWaterRecord,
+} from '../../redux/water/operations'; // Імпортуємо функцію addWaterRecord
 import toast from 'react-hot-toast';
 
-export default function WaterForm({ closeAddWaterModal }) {
+export default function WaterForm({
+  closeAddWaterModal,
+  modalType,
+  waterEntryId,
+}) {
   const { t } = useTranslation();
   const dispatch = useDispatch(); // Використовуємо useDispatch для dispatch-у action
   const [waterAmount, setWaterAmount] = useState(50);
@@ -44,7 +51,11 @@ export default function WaterForm({ closeAddWaterModal }) {
 
     setIsLoading(true);
     try {
-      await dispatch(addWaterRecord(record)).unwrap();
+      if (modalType === 'edit') {
+        dispatch(updateWaterRecord({ id: waterEntryId, updatedData: record }));
+      } else {
+        await dispatch(addWaterRecord(record)).unwrap();
+      }
       closeAddWaterModal();
       toast.success(t('waterModal.successMessage'));
     } catch (error) {

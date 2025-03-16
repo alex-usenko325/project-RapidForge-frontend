@@ -3,7 +3,11 @@ import WaterForm from '../WaterForm/WaterForm';
 import { useTranslation } from 'react-i18next';
 import s from '../WaterForm/WaterForm.module.css';
 
-export default function WaterModal({ closeAddWaterModal, modalType }) {
+export default function WaterModal({
+  closeAddWaterModal,
+  modalType,
+  waterEntryId,
+}) {
   const { t } = useTranslation();
 
   return (
@@ -21,7 +25,11 @@ export default function WaterModal({ closeAddWaterModal, modalType }) {
           </>
         )}
 
-        <WaterForm closeAddWaterModal={closeAddWaterModal} />
+        <WaterForm
+          closeAddWaterModal={closeAddWaterModal}
+          modalType={modalType}
+          waterEntryId={waterEntryId}
+        />
       </div>
     </Modal>
   );
