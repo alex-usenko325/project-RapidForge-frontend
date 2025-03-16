@@ -5,7 +5,7 @@ import WaterModal from '../WaterModal/WaterModal.jsx';
 import { useState } from 'react';
 import DeleteWaterModal from '../DeleteWaterModal/DeleteWaterModal.jsx';
 
-const WaterItem = ({ volume, time }) => {
+const WaterItem = ({ id, volume, time }) => {
   const { t } = useTranslation();
   const [isWaterModalOpen, setIsWaterModalOpen] = useState(false);
   const [modalType, setModalType] = useState(null);
@@ -65,7 +65,9 @@ const WaterItem = ({ volume, time }) => {
             onClose={closeWaterModal}
           />
         )}
-        {isDeleteModalOpen && <DeleteWaterModal onClose={closeDeleteModal} />}
+        {isDeleteModalOpen && (
+          <DeleteWaterModal onClose={closeDeleteModal} waterEntryId={id} />
+        )}
       </div>
     </div>
   );
