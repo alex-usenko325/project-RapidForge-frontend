@@ -1,25 +1,16 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import axios from 'axios';
-
-export const userAPI = axios.create({
-  baseURL: 'https://aqua-track-app.onrender.com',
-  // baseURL: 'http://localhost:3000',
-  headers: {
-    'Content-Type': 'application/json',
-  },
-  withCredentials: true,
-});
+import { authAPI } from '../auth/operations';
 
 export const setAuthHeader = token => {
   console.log('setAuthHeader', token);
-  userAPI.defaults.headers.common.Authorization = `Bearer ${token}`;
+  authAPI.defaults.headers.common.Authorization = `Bearer ${token}`;
 };
 
 export const getClientsNumber = createAsyncThunk(
   'user/getClientsNumber',
   async (_, thunkAPI) => {
     try {
-      const response = await userAPI.get('/user/usersCount');
+      const response = await authAPI.get('/user/usersCount');
       return response.data.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.response.data);
@@ -29,7 +20,7 @@ export const getClientsNumber = createAsyncThunk(
 
 // Отримання даних користувача
 export const getUserData = createAsyncThunk(
-  'auth/getUserData',
+  'user/getUserData',
   async (_, thunkAPI) => {
     try {
       const savedToken = thunkAPI.getState().auth.token;
@@ -37,7 +28,7 @@ export const getUserData = createAsyncThunk(
         return thunkAPI.rejectWithValue('Token is not exist');
       }
       setAuthHeader(savedToken);
-      const response = await userAPI.get('/user/currentUser');
+      const response = await authAPI.get('/user/currentUser');
       return response.data.data;
     } catch (error) {
       console.error(
@@ -55,7 +46,7 @@ export const patchUserData = createAsyncThunk(
   'user/patchUserData',
   async ({ userData, userId }, thunkAPI) => {
     try {
-      const response = await userAPI.patch(`user/update/${userId}`, userData);
+      const response = await authAPI.patch(`user/update/${userId}`, userData);
 
       return response.data.data;
     } catch (error) {
@@ -68,7 +59,7 @@ export const patchUserAvatar = createAsyncThunk(
   'user/patchUserAvatar',
   async ({ formData, userId }, thunkAPI) => {
     try {
-      const response = await userAPI.patch(`/user/avatar/${userId}`, formData, {
+      const response = await authAPI.patch(`/user/avatar/${userId}`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },

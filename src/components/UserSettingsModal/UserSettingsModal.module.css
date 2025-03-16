@@ -21,6 +21,7 @@
 @media (min-width: 768px) {
   .settings {
     width: 648px;
+    padding: 40px;
   }
 }
 

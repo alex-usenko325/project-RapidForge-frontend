@@ -5,11 +5,13 @@ import { useTranslation } from 'react-i18next';
 
 const AddWaterBtn = ({ style }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [modalType, setModalType] = useState(null);
 
-  const handleClickOpenWaterModal = () => {
+  const handleClickOpenWaterModal = type => {
+    setModalType(type);
     setIsModalOpen(true);
   };
-  const closeModal = () => {
+  const closeAddWaterModal = () => {
     setIsModalOpen(false);
   };
 
@@ -19,16 +21,15 @@ const AddWaterBtn = ({ style }) => {
     <>
       <button
         className={style === 'green' ? s.addWaterBtn : s.btn}
-        onClick={handleClickOpenWaterModal}
+        onClick={() => handleClickOpenWaterModal('add')}
       >
         <span className={style === 'green' ? s.plus : s.icon}></span>
         {t('addWaterBtn.addWater')}
       </button>
       {isModalOpen && (
         <WaterModal
-          title="addWater"
-          subtitle="chooseValue"
-          onClose={closeModal}
+          modalType={modalType}
+          closeAddWaterModal={closeAddWaterModal}
         />
       )}
     </>

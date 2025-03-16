@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { Link, useLocation } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux'; // Додано useSelector
+import { useLocation, Link } from 'react-router-dom';
 import { verifyEmail } from '../../redux/auth/operations';
 import {
   selectVerificationStatus,
@@ -9,10 +9,11 @@ import {
 import s from './SendVerifyEmail.module.css';
 import Modal from '../Modal/Modal';
 import { GiConfirmed } from 'react-icons/gi';
-import { FiXCircle } from 'react-icons/fi';
+import { FiXCircle } from 'react-icons/fi'; // Активовано
 import clsx from 'clsx';
 import { closeModalAction } from '../../redux/modal/operations';
 import { useTranslation } from 'react-i18next';
+
 const SendVerifyEmail = () => {
   const { t } = useTranslation();
   const location = useLocation();
@@ -22,11 +23,11 @@ const SendVerifyEmail = () => {
   const verificationError = useSelector(selectVerificationError);
 
   const searchParams = new URLSearchParams(location.search);
-  const token = searchParams.get('token'); // Отримуємо токен з параметрів URL
+  const token = searchParams.get('token');
 
   useEffect(() => {
     if (token) {
-      dispatch(verifyEmail(token)); // Викликаємо операцію для перевірки email
+      dispatch(verifyEmail(token));
     }
   }, [dispatch, token]);
 
@@ -52,6 +53,7 @@ const SendVerifyEmail = () => {
           </div>
         </div>
       )}
+
       {verificationStatus === 'failed' && (
         <div className={s.wrapper}>
           <FiXCircle className={clsx(s.icon, s.error)} />
@@ -81,3 +83,4 @@ const SendVerifyEmail = () => {
 };
 
 export default SendVerifyEmail;
+

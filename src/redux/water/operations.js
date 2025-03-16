@@ -1,31 +1,22 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import axios from 'axios';
 
-const waterAPI = axios.create({
-  baseURL: 'https://aqua-track-app.onrender.com', // Вкажіть правильний порт вашого серверу
-  // baseURL: 'http://localhost:3000',
-  headers: {
-    'Content-Type': 'application/json',
-  },
-  withCredentials: true,
-});
+import { authAPI } from '../auth/operations';
 
 const setAuthHeader = token => {
   if (token) {
-    waterAPI.defaults.headers.common.Authorization = `Bearer ${token}`;
+    authAPI.defaults.headers.common.Authorization = `Bearer ${token}`;
   } else {
-    delete waterAPI.defaults.headers.common.Authorization;
+    delete authAPI.defaults.headers.common.Authorization;
   }
 };
 
 export const getWaterByMonth = createAsyncThunk(
   'water/getWaterByMonth',
-  async ( { month, year }, thunkApi) => {
+  async ({ month, year }, thunkApi) => {
     try {
       const {
         data: { data },
-      } = await waterAPI.get(`water/month?year=${year}&month=${month}` );
-      console.log('monthDATA', data);
+      } = await authAPI.get(`water/month?year=${year}&month=${month}`);
       return data;
     } catch (error) {
       return thunkApi.rejectWithValue(error.response.data.message);
@@ -45,7 +36,7 @@ export const getWaterRecords = createAsyncThunk(
 
     setAuthHeader(token);
     try {
-      const response = await waterAPI.get('water/today');
+      const response = await authAPI.get('water/today');
       console.log('Response from /water/today:', response.data);
       return response.data;
     } catch (error) {
@@ -64,8 +55,8 @@ export const addWaterRecord = createAsyncThunk(
     const token = auth.token;
     if (token) setAuthHeader(token);
     try {
-      const response = await waterAPI.post('water/', record);
-      return response.data;
+      const response = await authAPI.post('water/', record);
+      return response.data.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(
         error.response?.data || 'Error adding record'
@@ -81,8 +72,8 @@ export const updateWaterRecord = createAsyncThunk(
     const token = auth.token;
     if (token) setAuthHeader(token);
     try {
-      const response = await waterAPI.patch(`water/${id}`, updatedData);
-      return response.data;
+      const response = await authAPI.patch(`water/${id}`, updatedData);
+      return response.data.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(
         error.response?.data || 'Error updating record'
@@ -98,7 +89,7 @@ export const deleteWaterRecord = createAsyncThunk(
     const token = auth.token;
     if (token) setAuthHeader(token);
     try {
-      await waterAPI.delete(`water/${id}`);
+      await authAPI.delete(`water/${id}`);
       return id;
     } catch (error) {
       return thunkAPI.rejectWithValue(
