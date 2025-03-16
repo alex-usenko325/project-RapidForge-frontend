@@ -5,15 +5,13 @@ import WaterModal from '../WaterModal/WaterModal.jsx';
 import { useState } from 'react';
 import DeleteWaterModal from '../DeleteWaterModal/DeleteWaterModal.jsx';
 
-const WaterItem = ({
-  volume,
-  time,
-}) => {
+const WaterItem = ({ volume, time }) => {
   const { t } = useTranslation();
-
   const [isWaterModalOpen, setIsWaterModalOpen] = useState(false);
+  const [modalType, setModalType] = useState(null);
 
-  const handleClickOpenWaterModal = () => {
+  const handleClickOpenWaterModal = type => {
+    setModalType(type);
     setIsWaterModalOpen(true);
   };
   const closeWaterModal = () => {
@@ -44,7 +42,7 @@ const WaterItem = ({
         <button
           type="button"
           className={css.waterButton}
-          onClick={handleClickOpenWaterModal}
+          onClick={() => handleClickOpenWaterModal('edit')}
         >
           <svg className={css.editBtn}>
             <use href={`${sprite}#icon-edit`} />
@@ -61,8 +59,9 @@ const WaterItem = ({
         </button>
         {isWaterModalOpen && (
           <WaterModal
-            title="editTheEntered"
-            subtitle="correctEnteredData"
+            // title="editTheEntered"
+            // subtitle="correctEnteredData"
+            modalType={modalType}
             onClose={closeWaterModal}
           />
         )}

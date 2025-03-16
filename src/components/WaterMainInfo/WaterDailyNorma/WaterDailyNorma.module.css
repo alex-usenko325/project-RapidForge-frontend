@@ -1,7 +1,6 @@
 .container {
   background-color: var(--main-white);
-  margin-top: 56px;
-
+  margin-top: 78px;
   border-radius: 15px;
   display: flex;
   flex-direction: column;
@@ -34,13 +33,15 @@
     height: 78px;
     padding: 14px 18px 14px 18px;
     gap: 4px;
-    margin-top: 80px;
+    margin-top: 101px;
     margin-left: 0px;
   }
+
   .litr {
     font-size: 15px;
     line-height: 22.4px;
   }
+
   .norma {
     font-size: 12px;
     line-height: 22.4px;
@@ -49,13 +50,14 @@
 
 @media screen and (min-width: 1440px) {
   .container {
-    margin-top: 52px;
     margin-left: 32px;
   }
+
   .litr {
     font-size: 15px;
     line-height: 22.4px;
   }
+
   .norma {
     font-size: 12px;
     line-height: 22.4px;
