@@ -5,10 +5,8 @@ import s from '../WaterForm/WaterForm.module.css';
 
 export default function WaterModal({ onClose, modalType }) {
   const { t } = useTranslation();
-  console.log(modalType);
 
   return (
-    // <div>
     <Modal onClose={onClose}>
       <div className={s.wrapper}>
         {modalType === 'edit' ? (
@@ -26,7 +24,6 @@ export default function WaterModal({ onClose, modalType }) {
         <WaterForm onClose={onClose} />
       </div>
     </Modal>
-    // </div>
   );
 }
 
