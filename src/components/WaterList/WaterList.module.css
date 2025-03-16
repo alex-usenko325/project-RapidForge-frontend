@@ -2,7 +2,7 @@
   display: flex;
   gap: 8px;
   max-width: 303px;
-
+  height: 118px;
   padding: 0;
   overflow-x: auto;
   padding-bottom: 24px;
