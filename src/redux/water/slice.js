@@ -42,13 +42,16 @@ const waterSlice = createSlice({
         state.error = null;
       })
       .addCase(getWaterRecords.fulfilled, (state, action) => {
+        console.log('Water Records Fulfilled:', action.payload); // Лог для перевірки відповіді
         state.isLoading = false;
-        state.records = action.payload.data;
+        state.records = action.payload.data; // Перевірте, чи дані є в 'data'
       })
       .addCase(getWaterRecords.rejected, (state, action) => {
+        console.log('Error fetching water records:', action.payload); // Лог помилки, якщо є
         state.isLoading = false;
         state.error = action.payload;
       })
+
       .addCase(addWaterRecord.pending, state => {
         state.isLoading = true;
         state.error = null;
