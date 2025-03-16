@@ -99,6 +99,11 @@
   gap: 13px;
   outline: none;
   border: none;
+
+  transition: color 0.3s ease;
+  margin-top: 42px;
+  margin-left: auto;
+  margin-bottom: 0px;
 }
 
 .icon {
@@ -158,6 +163,7 @@
     font-size: 16px;
     line-height: 1.5;
     gap: 15px;
+    margin-top: 26px;
   }
 
   .icon {
@@ -171,5 +177,11 @@
 
   .icon::after {
     width: 2px;
+  }
+}
+
+@media (min-width: 768px) {
+  .btn {
+    margin-top: 56px;
   }
 }

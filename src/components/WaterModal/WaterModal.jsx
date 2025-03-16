@@ -1,13 +1,30 @@
-import WaterForm from "../WaterForm/WaterForm";
+import Modal from '../Modal/Modal';
+import WaterForm from '../WaterForm/WaterForm';
+import { useTranslation } from 'react-i18next';
+import s from '../WaterForm/WaterForm.module.css';
 
-export default function WaterModal () {
-return (
-  <div>
-<h1>Hello world</h1>
+export default function WaterModal({ onClose, modalType }) {
+  const { t } = useTranslation();
 
- <WaterForm />
- </div>
-)
+  return (
+    <Modal onClose={onClose}>
+      <div className={s.wrapper}>
+        {modalType === 'edit' ? (
+          <>
+            <h2 className={s.title}>{t('waterModal.editTheEntered')}</h2>
+            <p className={s.subtitle}>{t('waterModal.correctEnteredData')}</p>
+          </>
+        ) : (
+          <>
+            <h2 className={s.title}>{t('waterModal.addWater')}</h2>
+            <p className={s.subtitle}>{t('waterModal.chooseValue')}</p>
+          </>
+        )}
+
+        <WaterForm onClose={onClose} />
+      </div>
+    </Modal>
+  );
 }
 
 // export default function WaterModal({title, subtitle, onClose }) {
@@ -50,7 +67,6 @@ return (
 //   );
 // }
 
-
 /////////// 16-03-25
 // import { useEffect, useState } from 'react';
 // import Modal from '../Modal/Modal.jsx';
@@ -79,10 +95,6 @@ return (
 //     const minutes = String(now.getMinutes()).padStart(2, '0');
 //     setTime(`${hours}:${minutes}`);
 //   }, []);
-
-
-
-
 
 //     return (
 //     <div>
@@ -120,16 +132,6 @@ return (
 //     </div>
 //   );
 // }
-
-
-
-
-
-
-
-
-
-
 
 // !!!!BEFORE!!!!
 
