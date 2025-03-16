@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import { useLocation } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux'; // Додано useSelector
+import { useLocation, Link } from 'react-router-dom';
 import { verifyEmail } from '../../redux/auth/operations';
 import {
   selectVerificationStatus,
@@ -9,10 +9,11 @@ import {
 import s from './SendVerifyEmail.module.css';
 import Modal from '../Modal/Modal';
 import { GiConfirmed } from 'react-icons/gi';
-// import { FiXCircle } from 'react-icons/fi';
+import { FiXCircle } from 'react-icons/fi'; // Активовано
 import clsx from 'clsx';
 import { closeModalAction } from '../../redux/modal/operations';
 import { useTranslation } from 'react-i18next';
+
 const SendVerifyEmail = () => {
   const { t } = useTranslation();
   const location = useLocation();
@@ -51,9 +52,9 @@ const SendVerifyEmail = () => {
             </button>
           </div>
         </div>
+      )}
 
-      {/* )} */}
-      {/* {verificationStatus === 'failed' && (
+      {verificationStatus === 'failed' && (
         <div className={s.wrapper}>
           <FiXCircle className={clsx(s.icon, s.error)} />
           <h2 className={s.title}>
@@ -76,10 +77,10 @@ const SendVerifyEmail = () => {
             </button>
           </div>
         </div>
-      )} */}
+      )}
     </Modal>
   );
-
 };
 
 export default SendVerifyEmail;
+
