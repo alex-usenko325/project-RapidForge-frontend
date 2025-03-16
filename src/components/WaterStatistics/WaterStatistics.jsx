@@ -87,7 +87,7 @@ const WaterStatistic = () => {
   );
 
   return (
-    <ResponsiveContainer width="100%" height={350}>
+    <ResponsiveContainer width="100%" height={300}>
       <AreaChart
         data={data}
         margin={{ top: 10, right: 30, left: 40, bottom: 0 }}
