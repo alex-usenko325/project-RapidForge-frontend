@@ -7,7 +7,7 @@
   top: 64px;
   left: auto;
   right: auto;
-  padding: 80px 16px;
+  padding: 40px 20px;
   height: calc(100vh - 64px);
   width: 320px;
 }
@@ -15,7 +15,6 @@
 @media (min-width: 375px) {
   .settings {
     width: 343px;
-    padding: 40px;
   }
 }
 
