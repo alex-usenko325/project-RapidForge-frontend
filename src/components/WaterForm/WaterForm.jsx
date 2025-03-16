@@ -6,7 +6,7 @@ import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
 import { addWaterRecord } from '../../redux/water/operations'; // Імпортуємо функцію addWaterRecord
 
-export default function WaterForm({ onClose }) {
+export default function WaterForm({ closeAddWaterModal }) {
   const { t } = useTranslation();
   const dispatch = useDispatch(); // Використовуємо useDispatch для dispatch-у action
   const [waterAmount, setWaterAmount] = useState(50);
@@ -46,7 +46,7 @@ export default function WaterForm({ onClose }) {
     dispatch(addWaterRecord(record));
 
     // Закриваємо модальне вікно після збереження
-    onClose();
+    closeAddWaterModal();
   };
 
   return (
@@ -82,7 +82,7 @@ export default function WaterForm({ onClose }) {
           {t('waterModal.enterValue')}
           <input
             type="number"
-            value={waterAmount}
+            // value={waterAmount}
             onChange={handleCustomWaterAmount}
             min="0"
             className={clsx(s.inputValueWater, s.input)}
