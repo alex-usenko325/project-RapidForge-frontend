@@ -101,7 +101,7 @@ const WaterStatistics = () => {
           <linearGradient id="gradient" x1="0" y1="0" x2="0" y2="1">
             {' '}
             {/* Градієнт для заливки */}
-            <stop offset="0%" stopColor="#66CDAA" stopOpacity={0.8} />
+            <stop offset="0%" stopColor="var(--accent)" stopOpacity={1} />
             <stop offset="100%" stopColor="#66CDAA" stopOpacity={0.1} />
           </linearGradient>
         </defs>
@@ -132,7 +132,7 @@ const WaterStatistics = () => {
           contentStyle={{ backgroundColor: '#fff' }}
           itemStyle={{ color: '#000' }}
           formatter={(value, name, props) => {
-            return [`${props.payload.volumeMl} ml`, props.payload.fullDate];
+            return [`${props.payload.volumeMl} ml`];
           }}
           labelFormatter={() => ''}
         />{' '}
@@ -140,14 +140,14 @@ const WaterStatistics = () => {
         <Area
           type="linear"
           dataKey="volume"
-          stroke="#66CDAA"
+          stroke="#87d28d"
           strokeWidth={3}
           fill="url(#gradient)"
           activeDot={{
-            r: 6,
-            stroke: '#66CDAA',
+            r: 10.5,
+            stroke: '#87d28d',
             strokeWidth: 3,
-            fill: '#66CDAA',
+            fill: '#fff',
           }}
         />{' '}
         {/* Графік */}
