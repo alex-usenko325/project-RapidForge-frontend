@@ -322,7 +322,7 @@ export default function UserSettingsForm({ closeModal }) {
               </label>
               <input
                 className={`${s.input} ${errors.email ? s.errorInput : ''}`}
-                type="email"
+                type="text"
                 {...register('email')}
                 placeholder={t('userSettingsForm.placeholderEmail')}
               />

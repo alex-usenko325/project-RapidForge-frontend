@@ -98,10 +98,9 @@ const SignUpForm = ({ onSignUpSuccess }) => {
                 <span className={s.labelSpan}>{t('signUp.e_mail')}</span>
                 <Field
                   className={s.authField}
-                  type="email"
+                  type="text"
                   name="email"
                   placeholder={t('signUp.enter_your_email')}
-                  required
                 />
                 <ErrorMessage
                   name="email"
@@ -117,7 +116,6 @@ const SignUpForm = ({ onSignUpSuccess }) => {
                     type={showPassword ? 'text' : 'password'}
                     name="password"
                     placeholder={t('signUp.enter_your_password')}
-                    required
                   />
                   <svg
                     className={s.authIcon}
@@ -145,7 +143,6 @@ const SignUpForm = ({ onSignUpSuccess }) => {
                     type={showRepeatPassword ? 'text' : 'password'}
                     name="repeatPassword"
                     placeholder={t('signUp.repeat_password')}
-                    required
                   />
                   <svg
                     className={s.authIcon}
