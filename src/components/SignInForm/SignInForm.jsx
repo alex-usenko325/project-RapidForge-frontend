@@ -51,6 +51,7 @@ const SignInForm = () => {
           validationSchema={SingInValidationSchema}
           validateOnChange={true} // Включаємо валідацію на кожну зміну
           validateOnBlur={true} // Включаємо валідацію при втраті фокусу
+          noValidate
         >
           <Form className={s.authForm}>
             <div className={s.authFormWrap}>
@@ -58,10 +59,9 @@ const SignInForm = () => {
                 <span className={s.labelSpan}>{t('signIn.e_mail')}</span>
                 <Field
                   className={s.authField}
-                  type="email"
+                  type="text"
                   name="email"
                   placeholder={t('signIn.enter_your_email')}
-                  required
                 />
                 <ErrorMessage
                   name="email"
@@ -77,7 +77,6 @@ const SignInForm = () => {
                     type={showPassword ? 'text' : 'password'}
                     name="password"
                     placeholder={t('signIn.enter_your_password')}
-                    required
                   />
                   <svg
                     className={s.authIcon}
