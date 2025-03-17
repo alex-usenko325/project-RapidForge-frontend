@@ -1,9 +1,11 @@
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { useEffect } from 'react';
 import {
   selectWaterProgress,
   selectWaterIsLoading,
   selectWaterRecords,
-} from '../../../redux/water/selectors';
+} from '../../../redux/water/selectors.js';
+import { getWaterRecords } from '../../../redux/water/operations';
 import css from './WaterProgressBar.module.css';
 import { useTranslation } from 'react-i18next';
 
@@ -12,6 +14,7 @@ export default function WaterProgressBar() {
   const progress = useSelector(selectWaterProgress);
   const isLoading = useSelector(selectWaterIsLoading);
   const records = useSelector(selectWaterRecords);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     if (records.length === 0) {
