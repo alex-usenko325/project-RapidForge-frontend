@@ -24,11 +24,6 @@
   transition: color 0.3s ease;
 }
 
-.name:hover,
-.name:focus {
-  color: var(--accent);
-}
-
 .avatar {
   border-radius: 100%;
   width: 38px;

@@ -62,7 +62,8 @@ const WaterItem = ({ id, volume, time }) => {
             // title="editTheEntered"
             // subtitle="correctEnteredData"
             modalType={modalType}
-            onClose={closeWaterModal}
+            closeAddWaterModal={closeWaterModal}
+            waterEntryId={id}
           />
         )}
         {isDeleteModalOpen && (

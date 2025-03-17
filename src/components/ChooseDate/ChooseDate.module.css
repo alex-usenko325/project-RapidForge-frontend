@@ -3,8 +3,14 @@
   font-weight: 700;
   font-size: 20px;
   line-height: 24px;
-  letter-spacing: -1%;
+  letter-spacing: -0.01em;
   color: #323f47;
+}
+
+@media screen and (max-width: 374px) {
+  .day {
+    font-size: 17px;
+  }
 }
 
 @media screen and (min-width: 768px) {

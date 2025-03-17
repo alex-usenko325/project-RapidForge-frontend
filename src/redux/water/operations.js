@@ -71,7 +71,7 @@ export const updateWaterRecord = createAsyncThunk(
     if (token) setAuthHeader(token);
     try {
       const response = await authAPI.patch(`water/${id}`, updatedData);
-      return response.data;
+      return response.data.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(
         error.response?.data || 'Error updating record'
