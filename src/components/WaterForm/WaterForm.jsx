@@ -26,7 +26,7 @@ export default function WaterForm({
   const [time, setTime] = useState('');
 
   const handleCustomWaterAmount = e => {
-    const value = Math.max(0, parseInt(e.target.value) || 0);
+    const value = Math.max(0, Math.min(5000, parseInt(e.target.value) || 0));
     setWaterAmount(value);
   };
 
@@ -97,6 +97,7 @@ export default function WaterForm({
             value={waterAmount}
             onChange={handleCustomWaterAmount}
             min="0"
+            max="5000"
             className={clsx(s.inputValueWater, s.input)}
           />
         </label>
