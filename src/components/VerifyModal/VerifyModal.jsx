@@ -1,5 +1,5 @@
 import Modal from '../Modal/Modal';
-import s from '../SendVerifyEmail/SendVerifyEmail.module.css';
+import s from './VerifyModal.module.css';
 import clsx from 'clsx';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';

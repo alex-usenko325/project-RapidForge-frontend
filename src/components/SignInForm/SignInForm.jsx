@@ -1,4 +1,3 @@
-// import clsx from 'clsx';
 import { ErrorMessage, Field, Form, Formik } from 'formik';
 import Logo from '../Logo/Logo';
 import * as Yup from 'yup';
@@ -10,14 +9,13 @@ import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import i18next from 'i18next';
 import LocalizationDropdownMenu from '../LocalizationDropdownMenu/LocalizationDropdownMenu';
-// import { getUserData } from '../../redux/user/operations';
+import { RotatingLines } from 'react-loader-spinner'; // Імпортуємо індикатор завантаження
 
 const SingInValidationSchema = Yup.object().shape({
   email: Yup.string()
     .email(() => i18next.t('signIn.validation.email.invalid'))
     .required(() => i18next.t('signIn.validation.email.required')),
   password: Yup.string()
-
     .min(6, () => i18next.t('signIn.validation.password.short'))
     .max(18, () => i18next.t('signIn.validation.password.long'))
     .required(() => i18next.t('signIn.validation.password.required')),
@@ -31,15 +29,15 @@ const initialValues = {
 const SignInForm = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
+  const [showPassword, changeShowPassword] = useState(false);
+  const [isLoading, setIsLoading] = useState(false); // Додаємо стан завантаження
+
   const handleSubmit = async (values, actions) => {
-    dispatch(signin(values));
-    // if (signin.fulfilled.match()) {
-    // dispatch(getUserData()); // Викликати тільки після успішного входу
-    // }
+    setIsLoading(true); // Встановлюємо isLoading у true при початку відправки
+    await dispatch(signin(values));
+    setIsLoading(false); // Встановлюємо isLoading у false після завершення
     actions.resetForm();
   };
-
-  const [showPassword, changeShowPassword] = useState(false);
 
   return (
     <div className={s.authSection}>
@@ -99,8 +97,20 @@ const SignInForm = () => {
               </label>
             </div>
             <div className={s.authBtnWrap}>
-              <button type="submit" className={s.authBtn}>
-                {t('signIn.sign_in')}
+              <button type="submit" className={s.authBtn} disabled={isLoading}>
+                {isLoading ? (
+                  <RotatingLines
+                    visible={true}
+                    height="16"
+                    width="16"
+                    color="white"
+                    strokeWidth="5"
+                    animationDuration="0.75"
+                    ariaLabel="rotating-lines-loading"
+                  />
+                ) : (
+                  t('signIn.sign_in')
+                )}
               </button>
               <div className={s.haveAnAccount}>
                 {t('signIn.dont_have_account')}{' '}

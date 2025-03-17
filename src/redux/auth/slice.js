@@ -12,11 +12,12 @@ const initialState = {
   email: null,
   token: null,
   isLoggedIn: false,
+  isLoading: false,
   isRefreshing: false,
   isRefreshingUser: false,
-  verificationStatus: 'idle', // Статус для верифікації
-  verificationError: null, // Для збереження помилок верифікації
-  error: null, // Для обробки загальних помилок
+  verificationStatus: 'idle',
+  verificationError: null,
+  error: null,
 };
 
 const authSlice = createSlice({
@@ -24,24 +25,34 @@ const authSlice = createSlice({
   initialState,
   extraReducers: builder => {
     builder
-      // Обробка результатів signup
-      .addCase(signup.fulfilled, (state, action) => {
-        // state.user = action.payload.user;
-        state.email = action.payload.email;
+      .addCase(signup.pending, state => {
+        state.isLoading = true;
       })
-      .addCase(signup.rejected, () => initialState)
-
-      // Обробка результатів signin
+      .addCase(signup.fulfilled, (state, action) => {
+        state.email = action.payload.email;
+        state.isLoading = false;
+      })
+      .addCase(signup.rejected, state => {
+        state.isLoading = false;
+      })
+      .addCase(signin.pending, state => {
+        state.isLoading = true;
+      })
       .addCase(signin.fulfilled, (state, action) => {
-        console.log('✅ Логін успішний, токен:', action.payload.token);
         state.token = action.payload.accessToken;
         state.isLoggedIn = true;
+        state.isLoading = false;
       })
-
-      // Обробка результатів logout
+      .addCase(signin.rejected, state => {
+        state.isLoading = false;
+      })
+      .addCase(logout.pending, state => {
+        state.isLoading = true;
+      })
       .addCase(logout.fulfilled, () => initialState)
-
-      // Обробка результатів refreshUser
+      .addCase(logout.rejected, state => {
+        state.isLoading = false;
+      })
       .addCase(refreshAccessToken.pending, state => {
         state.isRefreshing = true;
       })
@@ -54,31 +65,27 @@ const authSlice = createSlice({
         state.isRefreshing = false;
         state.token = null;
       })
-
-      // Обробка результатів sendVerificationEmail
       .addCase(sendVerificationEmail.pending, state => {
-        state.verificationStatus = 'loading'; // Запит йде
+        state.verificationStatus = 'loading';
         state.error = null;
       })
       .addCase(sendVerificationEmail.fulfilled, state => {
-        state.verificationStatus = 'success'; // Успіх
+        state.verificationStatus = 'success';
       })
       .addCase(sendVerificationEmail.rejected, (state, action) => {
-        state.verificationStatus = 'failed'; // Помилка
-        state.error = action.payload || 'Failed to send verification email'; // Зберігаємо помилку
+        state.verificationStatus = 'failed';
+        state.error = action.payload || 'Failed to send verification email';
       })
-
-      // Оновлення для операції verifyEmail
       .addCase(verifyEmail.pending, state => {
-        state.verificationStatus = 'loading'; // Запит йде
+        state.verificationStatus = 'loading';
         state.verificationError = null;
       })
       .addCase(verifyEmail.fulfilled, state => {
-        state.verificationStatus = 'succeeded'; // Успіх
+        state.verificationStatus = 'succeeded';
       })
       .addCase(verifyEmail.rejected, (state, action) => {
-        state.verificationStatus = 'failed'; // Помилка
-        state.verificationError = action.payload; // Зберігаємо помилку
+        state.verificationStatus = 'failed';
+        state.verificationError = action.payload;
       });
   },
 });

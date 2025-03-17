@@ -11,6 +11,7 @@ import i18next from 'i18next';
 import LocalizationDropdownMenu from '../LocalizationDropdownMenu/LocalizationDropdownMenu';
 import toast from 'react-hot-toast';
 import { Link } from 'react-router-dom';
+import { RotatingLines } from 'react-loader-spinner';
 
 const SingUpValidationSchema = Yup.object().shape({
   email: Yup.string()
@@ -44,8 +45,10 @@ const SignUpForm = ({ onSignUpSuccess }) => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const [error, setError] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleSubmit = (values, actions) => {
+    setIsLoading(true); // Встановлюємо isLoading у true перед початком реєстрації
     // Спочатку викликаєш signup
     dispatch(signup({ email: values.email, password: values.password }))
       .unwrap()
@@ -55,15 +58,18 @@ const SignUpForm = ({ onSignUpSuccess }) => {
           .then(() => {
             onSignUpSuccess(); // Відправляємо користувача на іншу сторінку
             actions.resetForm();
+            setIsLoading(false); // Завершуємо завантаження
           })
           .catch(err => {
             setError(err.message); // Обробка помилки відправки email
             actions.setSubmitting(false);
+            setIsLoading(false); // Завершуємо завантаження
           });
       })
       .catch(err => {
         setError(err.message); // Обробка помилки реєстрації
         actions.setSubmitting(false);
+        setIsLoading(false); // Завершуємо завантаження
 
         return toast.error(
           <span>
@@ -169,9 +175,22 @@ const SignUpForm = ({ onSignUpSuccess }) => {
               </label>
             </div>
             <div className={s.authBtnWrap}>
-              <button type="submit" className={s.authBtn}>
-                {t('signUp.sign_up')}
+              <button type="submit" className={s.authBtn} disabled={isLoading}>
+                {isLoading ? (
+                  <RotatingLines
+                    visible={true}
+                    height="16"
+                    width="16"
+                    color="white"
+                    strokeWidth="5"
+                    animationDuration="0.75"
+                    ariaLabel="rotating-lines-loading"
+                  />
+                ) : (
+                  t('signUp.sign_up')
+                )}
               </button>
+
               {error && <div className={s.error}>{error}</div>}
               <div className={s.haveAnAccount}>
                 {t('signUp.already_have_account')}{' '}
