@@ -37,10 +37,8 @@ export const getWaterRecords = createAsyncThunk(
     setAuthHeader(token);
     try {
       const response = await authAPI.get('water/today');
-      console.log('Response from /water/today:', response.data);
       return response.data;
     } catch (error) {
-      console.error('Error fetching records:', error);
       return thunkAPI.rejectWithValue(
         error.response?.data || 'Error fetching records'
       );

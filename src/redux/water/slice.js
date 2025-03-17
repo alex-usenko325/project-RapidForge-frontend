@@ -7,6 +7,12 @@ import {
   getWaterByMonth,
 } from './operations';
 import { logout } from '../auth/operations.js';
+import dayjs from 'dayjs';
+import utc from 'dayjs/plugin/utc';
+import timezone from 'dayjs/plugin/timezone';
+
+dayjs.extend(utc);
+dayjs.extend(timezone);
 
 const initialState = {
   monthIntakes: [],
@@ -28,30 +34,26 @@ const waterSlice = createSlice({
     builder
       .addCase(getWaterByMonth.fulfilled, (state, { payload }) => {
         state.monthIntakes = payload;
-        state.loading = false;
+        state.isLoading = false;
       })
-
       .addCase(getWaterByMonth.pending, state => {
-        state.loading = true;
+        state.isLoading = true;
       })
       .addCase(getWaterByMonth.rejected, state => {
-        state.loading = false;
+        state.isLoading = false;
       })
       .addCase(getWaterRecords.pending, state => {
         state.isLoading = true;
         state.error = null;
       })
       .addCase(getWaterRecords.fulfilled, (state, action) => {
-        console.log('Water Records Fulfilled:', action.payload); // Лог для перевірки відповіді
         state.isLoading = false;
-        state.records = action.payload.data; // Перевірте, чи дані є в 'data'
+        state.records = action.payload.data;
       })
       .addCase(getWaterRecords.rejected, (state, action) => {
-        console.log('Error fetching water records:', action.payload); // Лог помилки, якщо є
         state.isLoading = false;
         state.error = action.payload;
       })
-
       .addCase(addWaterRecord.pending, state => {
         state.isLoading = true;
         state.error = null;
@@ -59,6 +61,21 @@ const waterSlice = createSlice({
       .addCase(addWaterRecord.fulfilled, (state, action) => {
         state.isLoading = false;
         state.records.push(action.payload);
+        if (state.selectedDate) {
+          const recordDate = dayjs(action.payload.date).tz('Europe/Kyiv');
+          const selectedMonth = dayjs(state.selectedDate)
+            .tz('Europe/Kyiv')
+            .month();
+          const selectedYear = dayjs(state.selectedDate)
+            .tz('Europe/Kyiv')
+            .year();
+          if (
+            recordDate.month() === selectedMonth &&
+            recordDate.year() === selectedYear
+          ) {
+            state.monthIntakes.push(action.payload);
+          }
+        }
       })
       .addCase(addWaterRecord.rejected, (state, action) => {
         state.isLoading = false;
@@ -89,6 +106,9 @@ const waterSlice = createSlice({
       .addCase(deleteWaterRecord.fulfilled, (state, action) => {
         state.isLoading = false;
         state.records = state.records.filter(
+          record => record._id !== action.payload
+        );
+        state.monthIntakes = state.monthIntakes.filter(
           record => record._id !== action.payload
         );
       })
