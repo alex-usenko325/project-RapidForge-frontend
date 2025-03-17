@@ -82,8 +82,8 @@ export default function UserSettingsForm({ closeModal }) {
   }, [gender, weight, activeTime]);
 
   const onSubmit = async data => {
-    if (!hasChanges(data)) {
-      closeModal();
+    if (hasChanges(data) === false) {
+      toast.success('Nothing to update');
       return;
     }
 
@@ -103,18 +103,23 @@ export default function UserSettingsForm({ closeModal }) {
     const userId = user._id;
 
     try {
-      dispatch(patchUserData({ userData, userId }));
+      const response = dispatch(patchUserData({ userData, userId }));
+
+      if (response.error) {
+        throw response.error;
+      }
+
+      toast.success('Successfully updated user data');
       closeModal();
     } catch (error) {
-      if (
-        error.response &&
-        error.response.data.message === 'Access token expired'
-      ) {
-        toast.error('Access token expired, please log in again.');
-        localStorage.removeItem('accessToken');
+      console.error('Failed to update avatar:', error);
+
+      if (error.status === 401) {
+        toast.error('Unauthorized: Please log in again.');
+      } else if (error.status === 500) {
+        toast.error('Server error: Try again later.');
       } else {
-        toast.error('Failed to update user data');
-        console.error('Error updating user data:', error);
+        toast.error('Something went wrong.');
       }
     }
   };
@@ -130,9 +135,23 @@ export default function UserSettingsForm({ closeModal }) {
       const userId = user._id;
 
       try {
-        dispatch(patchUserAvatar({ formData, userId }));
+        const response = dispatch(patchUserAvatar({ formData, userId }));
+
+        if (response.error) {
+          throw response.error;
+        }
+
+        toast.success('Successfully updated avatar');
       } catch (error) {
         console.error('Failed to update avatar:', error);
+
+        if (error.status === 401) {
+          toast.error('Unauthorized: Please log in again.');
+        } else if (error.status === 500) {
+          toast.error('Server error: Try again later.');
+        } else {
+          toast.error('Something went wrong.');
+        }
       }
     }
   };
@@ -226,8 +245,8 @@ export default function UserSettingsForm({ closeModal }) {
       data.name !== user.name ||
       data.email !== user.email ||
       data.gender !== user.gender ||
-      data.weight !== user.weight.toString() ||
-      data.activeTime !== user.dailySportTime.toString() ||
+      data.weight !== user.weight ||
+      data.activeTime !== user.dailySportTime ||
       parseFloat(data.dailyNorm) * 1000 !== user.dailyNorm
     );
   };
