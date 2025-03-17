@@ -1,3 +1,4 @@
+import s from './WaterStatistics.module.css';
 import { useState, useEffect } from 'react';
 import {
   AreaChart,
@@ -12,7 +13,10 @@ import { useSelector } from 'react-redux';
 import { selectIsRefreshing } from '../../redux/auth/selectors.js';
 import { authAPI } from '../../redux/auth/operations.js';
 import { selectWaterRecords } from '../../redux/water/selectors.js';
+import { useTranslation } from 'react-i18next';
+
 const WaterStatistics = () => {
+  const { i18n } = useTranslation();
   const [data, setData] = useState([]); // Створюємо стан data для збереження даних про споживання води
 
   const token = useSelector(state => state.auth.token); // Отримуємо токен авторизації з Redux
@@ -48,19 +52,6 @@ const WaterStatistics = () => {
           });
         }
 
-        // response.data.data.forEach(entry => {
-        //   // Перебираємо отримані дані з API
-        //   const entryDate = new Date(entry.date);
-        //   if (daysMap.has(entryDate.getDate())) {
-        //     // Якщо день є у нашій мапі, оновлюємо дані
-        //     daysMap.set(entryDate.getDate(), {
-        //       day: entryDate.getDate(),
-        //       fullDate: entryDate.toISOString().split('T')[0],
-        //       volume: entry.volume / 1000, // Переводимо мілілітри в літри
-        //       volumeMl: entry.volume, // Оригінальне значення у мілілітрах
-        //     });
-        //   }
-        // });
         response.data.data.forEach(entry => {
           const entryDate = new Date(entry.date);
           if (daysMap.has(entryDate.getDate())) {
@@ -91,68 +82,78 @@ const WaterStatistics = () => {
   ); // Генеруємо мітки для осі Y з кроком 0.5
 
   return (
-    <ResponsiveContainer width="100%" height={300}>
-      {' '}
-      {/* Контейнер, що підлаштовується під розмір */}
-      <AreaChart data={data} margin={{ top: 10 }}>
+    <div className={s.chartContainer}>
+      <ResponsiveContainer width="100%" height="100%">
         {' '}
-        {/* Областьова діаграма */}
-        <defs>
-          <linearGradient id="gradient" x1="0" y1="0" x2="0" y2="1">
-            {' '}
-            {/* Градієнт для заливки */}
-            <stop offset="0%" stopColor="var(--accent)" stopOpacity={1} />
-            <stop offset="100%" stopColor="#66CDAA" stopOpacity={0.1} />
-          </linearGradient>
-        </defs>
-        <CartesianGrid
-          strokeDasharray="0"
-          vertical={false}
-          horizontal={false}
-        />{' '}
-        {/* Сітка */}
-        <XAxis
-          dataKey="day"
-          tick={{ fill: '#666' }}
-          axisLine={false}
-          tickLine={false}
-        />{' '}
-        {/* Вісь X */}
-        <YAxis
-          tick={{ fill: '#666', textAnchor: 'start', dx: -50 }}
-          axisLine={false}
-          tickLine={false}
-          domain={[0, roundedMax]}
-          ticks={yTicks}
-          tickFormatter={value => (value === 0 ? `0%` : `${value} L`)}
-        />{' '}
-        {/* Вісь Y */}
-        <Tooltip
-          cursor={false}
-          contentStyle={{ backgroundColor: '#fff' }}
-          itemStyle={{ color: '#000' }}
-          formatter={(value, name, props) => {
-            return [`${props.payload.volumeMl} ml`];
-          }}
-          labelFormatter={() => ''}
-        />{' '}
-        {/* Спливаючий підказка */}
-        <Area
-          type="linear"
-          dataKey="volume"
-          stroke="#87d28d"
-          strokeWidth={3}
-          fill="url(#gradient)"
-          activeDot={{
-            r: 10.5,
-            stroke: '#87d28d',
-            strokeWidth: 3,
-            fill: '#fff',
-          }}
-        />{' '}
-        {/* Графік */}
-      </AreaChart>
-    </ResponsiveContainer>
+        {/* Контейнер, що підлаштовується під розмір */}
+        <AreaChart data={data} margin={{ top: 15, right: 20 }}>
+          {' '}
+          {/* Областьова діаграма */}
+          <defs>
+            <linearGradient id="gradient" x1="0" y1="0" x2="0" y2="1">
+              {' '}
+              {/* Градієнт для заливки */}
+              <stop offset="0%" stopColor="var(--accent)" stopOpacity={1} />
+              <stop offset="100%" stopColor="#66CDAA" stopOpacity={0.1} />
+            </linearGradient>
+          </defs>
+          <CartesianGrid
+            strokeDasharray="0"
+            vertical={false}
+            horizontal={false}
+          />{' '}
+          {/* Сітка */}
+          <XAxis
+            dataKey="day"
+            tick={{ fill: '#666', textAnchor: 'middle' }} // Текст по центру
+            axisLine={false}
+            tickLine={false}
+            interval="preserveStartEnd" // Оставляем только крайние подписи
+          />
+          <YAxis
+            tick={{ fill: '#666', textAnchor: 'start', dx: -40 }}
+            axisLine={false}
+            tickLine={false}
+            domain={[0, roundedMax]}
+            ticks={yTicks}
+            tickFormatter={value =>
+              value === 0
+                ? `0%`
+                : `${value} ${i18n.language === 'ua' ? 'Л' : 'L'}`
+            } // Переключаем L <-> Л
+          />{' '}
+          {/* Вісь Y */}
+          <Tooltip
+            cursor={false}
+            contentStyle={{ backgroundColor: '#fff' }}
+            itemStyle={{ color: '#000' }}
+            formatter={(value, name, props) => {
+              return [
+                `${props.payload.volumeMl}${
+                  i18n.language === 'ua' ? 'мл' : 'ml'
+                }`,
+              ];
+            }}
+            labelFormatter={() => ''}
+          />{' '}
+          {/* Спливаючий підказка */}
+          <Area
+            type="linear"
+            dataKey="volume"
+            stroke="#87d28d"
+            strokeWidth={3}
+            fill="url(#gradient)"
+            activeDot={{
+              r: 10.5,
+              stroke: '#87d28d',
+              strokeWidth: 3,
+              fill: '#fff',
+            }}
+          />{' '}
+          {/* Графік */}
+        </AreaChart>
+      </ResponsiveContainer>
+    </div>
   );
 };
 

@@ -56,8 +56,10 @@
 
 .iconpieActive {
   opacity: 1;
-  transform: scale(1.2); /* Збільшується при відкритому графіку */
-  stroke: #ff5733; /* Наприклад, червоний колір */
+}
+
+.iconpieActive:hover {
+  opacity: 0.5;
 }
 
 @media screen and (min-width: 320px) and (max-width: 767px) {
