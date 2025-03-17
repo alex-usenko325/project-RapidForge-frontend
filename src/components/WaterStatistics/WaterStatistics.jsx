@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import axios from 'axios';
+// import axios from 'axios';
 import {
   AreaChart,
   Area,
@@ -9,26 +9,27 @@ import {
   Tooltip,
   ResponsiveContainer,
 } from 'recharts';
-import { useDispatch, useSelector } from 'react-redux';
-import { refreshAccessToken } from '../../redux/auth/operations.js';
+import { useSelector } from 'react-redux';
+// import { refreshAccessToken } from '../../redux/auth/operations.js';
 import {
   selectIsRefreshing,
-  selectIsLoggedIn,
+  // selectIsLoggedIn,
 } from '../../redux/auth/selectors.js';
+import { authAPI } from '../../redux/auth/operations.js';
 
 const WaterStatistics = () => {
   const [data, setData] = useState([]);
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
   const token = useSelector(state => state.auth.token);
   const isRefreshing = useSelector(selectIsRefreshing);
-  const isLoggedIn = useSelector(selectIsLoggedIn);
+  // const isLoggedIn = useSelector(selectIsLoggedIn);
 
-  useEffect(() => {
-    if (!token && isLoggedIn) {
-      dispatch(refreshAccessToken());
-    }
-  }, [token, isLoggedIn, dispatch]);
+  // useEffect(() => {
+  //   if (!token && isLoggedIn) {
+  //     dispatch(refreshAccessToken());
+  //   }
+  // }, [token, isLoggedIn, dispatch]);
 
   useEffect(() => {
     if (!token || isRefreshing) return;
@@ -39,8 +40,8 @@ const WaterStatistics = () => {
       sevenDaysAgo.setDate(today.getDate() - 6);
 
       try {
-        const BASE_URL = 'http://localhost:3000';
-        const response = await axios.get(`${BASE_URL}/water/month`, {
+        // const BASE_URL = 'http://localhost:3000';
+        const response = await authAPI.get('/water/month', {
           params: { year: today.getFullYear(), month: today.getMonth() + 1 },
           headers: { Authorization: `Bearer ${token}` },
         });
