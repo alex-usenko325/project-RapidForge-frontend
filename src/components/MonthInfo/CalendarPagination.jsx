@@ -36,7 +36,12 @@ const CalendarPagination = ({
         </h1>
       </div>
       <div className={s.pagination}>
-        <svg className={s.btnpagination} onClick={handlePreviousMonth}>
+        <svg
+          className={`${s.btnpagination} ${
+            isStatisticVisible ? s.disabled : ''
+          }`}
+          onClick={handlePreviousMonth}
+        >
           <use href={`${sprite}#icon-chevron-left`}></use>
         </svg>
 
@@ -44,7 +49,12 @@ const CalendarPagination = ({
           {dayjs(selectedDate).locale(i18n.language).format('MMMM, YYYY')}
         </span>
 
-        <svg className={s.btnpagination} onClick={handleNextMonth}>
+        <svg
+          className={`${s.btnpagination} ${
+            isStatisticVisible ? s.disabled : ''
+          }`}
+          onClick={handleNextMonth}
+        >
           <use href={`${sprite}#icon-chevron-right`}></use>
         </svg>
         <svg
