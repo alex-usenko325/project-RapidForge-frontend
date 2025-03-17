@@ -7,7 +7,7 @@
   color: #323f47;
 }
 
-@media (min-width: 320px) and (max-width: 360px) {
+@media screen and (max-width: 374px) {
   .day {
     font-size: 17px;
   }
