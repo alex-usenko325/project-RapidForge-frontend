@@ -7,6 +7,7 @@ import RestrictedRoute from './routes/RestrictedRoute';
 import { getUserData } from './redux/user/operations';
 import NotFoundPage from './pages/NotFoundPage/NotFoundPage';
 import Layout from './components/Layout';
+// import OnboardingTour from './components/OnboardingTour/OnboardingTour';
 
 const HomePage = lazy(() => import('./pages/HomePage/HomePage'));
 const TrackerPage = lazy(() => import('./pages/TrackerPage/TrackerPage'));
@@ -30,6 +31,7 @@ const App = () => {
 
   return (
     <Layout>
+      {/* <OnboardingTour /> */}
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route

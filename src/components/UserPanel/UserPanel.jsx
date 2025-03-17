@@ -37,7 +37,7 @@ const UserPanel = () => {
     user.name || (user.email ? user.email.split('@')[0] : 'User');
 
   return (
-    <div className={styles.userPanelCont}>
+    <div className={styles.userPanelCont} data-tour="step-6">
       <h2 className={styles.title}>
         {t('userPanel.hello')},
         <span className={styles.span}> {userDisplayName}!</span>

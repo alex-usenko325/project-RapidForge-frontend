@@ -20,6 +20,7 @@ const AddWaterBtn = ({ style }) => {
   return (
     <>
       <button
+        data-tour="step-5"
         className={style === 'green' ? s.addWaterBtn : s.btn}
         onClick={() => handleClickOpenWaterModal('add')}
       >

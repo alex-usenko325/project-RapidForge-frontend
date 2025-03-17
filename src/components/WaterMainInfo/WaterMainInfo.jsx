@@ -7,7 +7,7 @@ import AddWaterBtn from '../../components/AddWaterBtn/AddWaterBtn.jsx';
 
 export default function WaterMainInfo() {
   return (
-    <div className={css.container}>
+    <div className={css.container} data-tour="step-2">
       <LocalizationDropdownMenu />
       <Logo />
       <WaterDailyNorma />

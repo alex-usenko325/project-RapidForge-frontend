@@ -1,5 +1,17 @@
 {
   "language": "language",
+  "onboardingTour": {
+    "first-step": "Welcome to AquaTrack!",
+    "second-step": "This is your personal water tracker.",
+    "third-step": "Here is your daily water consumption goal.",
+    "fourth-step": "This is your progress indicator.",
+    "fifth-step": "Click here to add more water.",
+    "sixth-step": "Here you can add your personal data and record your water consumption.",
+    "seventh-step": "This section shows your water intake for the day.",
+    "eighth-step": "Here you will see statistics for each day of the month.",
+    "ninth-step": "We hope you enjoy using AquaTrack!",
+    "startTourBtn": "Start Tour"
+  },
   "welcomeSection": {
     "subtitle": "Record daily water intake and track",
     "title": "Water consumption tracker",

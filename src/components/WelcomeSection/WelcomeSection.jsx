@@ -6,7 +6,7 @@ import LocalizationDropdownMenu from '../LocalizationDropdownMenu/LocalizationDr
 const WelcomeSection = () => {
   const { t } = useTranslation();
   return (
-    <div className={s.wrapper}>
+    <div className={s.wrapper} data-tour="step-1">
       <Logo />
       <LocalizationDropdownMenu />
       <div className={s.wrapperContent}>

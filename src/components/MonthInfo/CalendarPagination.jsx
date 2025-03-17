@@ -16,7 +16,7 @@ const CalendarPagination = ({ selectedDate, onDateChange }) => {
   };
 
   return (
-    <div className={s.calendarpagination}>
+    <div className={s.calendarpagination} data-tour="step-9">
       <div>
         <h1 className={s.month}>{t('calendarPagination.month')}</h1>
       </div>

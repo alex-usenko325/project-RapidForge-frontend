@@ -23,7 +23,7 @@ export default function WaterProgressBar() {
 
   if (isLoading)
     return (
-      <div className={css.container}>
+      <div className={css.container} data-tour="step-4">
         <p className={css.label}>{t('waterProgressBar.today')}</p>
         <div className={css.loaderContainer}>
           <div className={css.loader}></div>
@@ -32,7 +32,7 @@ export default function WaterProgressBar() {
     );
 
   return (
-    <div className={css.container}>
+    <div className={css.container} data-tour="step-2">
       <p className={css.label}>{t('waterProgressBar.today')}</p>
       <div className={css.progressBar}>
         <div

@@ -5,7 +5,7 @@ import styles from './WaterDetailedInfo.module.css';
 
 const WaterDetailedInfo = () => {
   return (
-    <div className={styles.wrapper}>
+    <div className={styles.wrapper} data-tour="step-7">
       <UserPanel />
       <DailyInfo />
       <MonthInfo />

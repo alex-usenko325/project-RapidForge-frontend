@@ -1,0 +1,81 @@
+// export const styles = {
+//   popover: base => ({
+//     ...base,
+//     borderRadius: 10,
+//     marginLeft: 10,
+//     marginRight: 10,
+//   }),
+
+//   close: base => ({
+//     ...base,
+//     position: 'absolute',
+//     top: '13px',
+//     right: '13px',
+//     cursor: 'pointer',
+//     fontSize: '20px',
+//     color: '#323f47',
+//   }),
+// };
+export const tourStyles = {
+  popover: base => ({
+    ...base,
+    backgroundColor: '#fff',
+    borderRadius: '8px',
+    padding: '20px',
+    boxShadow: '0 2px 10px rgba(0, 0, 0, 0.2)',
+  }),
+  dot: (base, state) => ({
+    ...base,
+    backgroundColor: state.current ? '#9be1a0' : '#ccc',
+  }),
+  arrow: base => ({
+    ...base,
+    color: '#323f47',
+  }),
+  close: base => ({
+    ...base,
+    color: '#9be1a0',
+    position: 'absolute',
+    top: '10px',
+    right: '10px',
+  }),
+  badge: base => ({
+    ...base,
+    backgroundColor: '#4caf50',
+    color: '#fff',
+  }),
+  tourBtn: {
+    fontWeight: 700,
+    lineHeight: 1.5,
+    letterSpacing: '-0.01em',
+    textAlign: 'center',
+    fontFamily: 'Poppins, sans-serif',
+    transition: 'background-color 0.3s ease',
+    display: 'flex',
+    alignItems: 'center',
+    height: '30px',
+    backgroundColor: 'transparent',
+    border: 'none',
+    fontSize: '16px',
+    cursor: 'pointer',
+    paddingLeft: '40px',
+    color: '#323f47',
+    position: 'relative',
+  },
+
+  icon: {
+    position: 'absolute',
+    left: 0,
+    top: '50%',
+    transform: 'translateY(-50%)',
+    width: '30px',
+    height: '30px',
+    backgroundColor: '#9be1a0',
+    color: '#323f47',
+    borderRadius: '50%',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    transition: 'background-color 0.5s ease',
+  },
+};

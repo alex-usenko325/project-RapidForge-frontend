@@ -10,7 +10,7 @@ const MonthInfo = () => {
   };
 
   return (
-    <div>
+    <div data-tour="step-8">
       <CalendarPagination
         selectedDate={selectedDate}
         onDateChange={handleDateChange}

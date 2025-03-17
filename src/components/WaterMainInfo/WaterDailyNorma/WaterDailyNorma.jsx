@@ -7,7 +7,7 @@ export default function WaterDailyNorma() {
   const dailyNorm = useSelector(selectDailyNorm);
 
   return (
-    <div className={css.container}>
+    <div className={css.container} data-tour="step-3">
       <p className={css.litr}>
         {dailyNorm / 1000} {t('waterDailyNorma.liters')}
       </p>
