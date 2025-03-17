@@ -114,7 +114,6 @@ export default function UserSettingsForm({ closeModal }) {
         localStorage.removeItem('accessToken');
       } else {
         toast.error('Failed to update user data');
-        console.error('Error updating user data:', error);
       }
     }
   };

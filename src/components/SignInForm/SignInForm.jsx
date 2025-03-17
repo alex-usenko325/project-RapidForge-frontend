@@ -1,4 +1,3 @@
-// import clsx from 'clsx';
 import { ErrorMessage, Field, Form, Formik } from 'formik';
 import Logo from '../Logo/Logo';
 import * as Yup from 'yup';
@@ -10,7 +9,7 @@ import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import i18next from 'i18next';
 import LocalizationDropdownMenu from '../LocalizationDropdownMenu/LocalizationDropdownMenu';
-// import { getUserData } from '../../redux/user/operations';
+import toast from 'react-hot-toast';
 
 const SingInValidationSchema = Yup.object().shape({
   email: Yup.string()
@@ -32,11 +31,18 @@ const SignInForm = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const handleSubmit = async (values, actions) => {
-    dispatch(signin(values));
-    // if (signin.fulfilled.match()) {
-    // dispatch(getUserData()); // Викликати тільки після успішного входу
-    // }
-    actions.resetForm();
+    try {
+      await dispatch(signin(values)).unwrap();
+      actions.resetForm();
+    } catch (error) {
+      if (error.status === 404 || error.status === 401) {
+        toast.error(t('signIn.sign_in_error'));
+      } else if (error.status === 403) {
+        toast.error(t('signIn.not_verified'));
+      } else {
+        toast.error(t('errors.generic_error'));
+      }
+    }
   };
 
   const [showPassword, changeShowPassword] = useState(false);

@@ -2,7 +2,7 @@ import CalendarItem from './CalendarItem.jsx';
 import s from './Calendar.module.css';
 import dayjs from 'dayjs';
 import 'dayjs/locale/uk';
-import utc from 'dayjs/plugin/utc'; // Додай
+import utc from 'dayjs/plugin/utc';
 import timezone from 'dayjs/plugin/timezone';
 import { useSelector, useDispatch } from 'react-redux';
 import {

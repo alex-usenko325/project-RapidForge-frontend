@@ -12,7 +12,6 @@ import { injectStore } from './auth/operations.js';
 const authPersistConfig = {
   key: 'auth',
   storage,
-  // whitelist: ['token'],
 };
 
 const userPersistConfig = {
@@ -25,12 +24,10 @@ const persistedUserReducer = persistReducer(userPersistConfig, userReducer);
 
 export const store = configureStore({
   reducer: {
-    // water: waterReducer,
     user: persistedUserReducer,
     water: waterReducer,
     auth: persistedAuthReducer,
     modal: modalReducer,
-    // filters: filtersReducer,
   },
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware({

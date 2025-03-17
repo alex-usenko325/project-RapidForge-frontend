@@ -26,14 +26,12 @@ const authSlice = createSlice({
     builder
       // Обробка результатів signup
       .addCase(signup.fulfilled, (state, action) => {
-        // state.user = action.payload.user;
         state.email = action.payload.email;
       })
       .addCase(signup.rejected, () => initialState)
 
       // Обробка результатів signin
       .addCase(signin.fulfilled, (state, action) => {
-        console.log('✅ Логін успішний, токен:', action.payload.token);
         state.token = action.payload.accessToken;
         state.isLoggedIn = true;
       })
@@ -70,14 +68,14 @@ const authSlice = createSlice({
 
       // Оновлення для операції verifyEmail
       .addCase(verifyEmail.pending, state => {
-        state.verificationStatus = 'loading'; // Запит йде
+        state.verificationStatus = 'loading';
         state.verificationError = null;
       })
       .addCase(verifyEmail.fulfilled, state => {
-        state.verificationStatus = 'succeeded'; // Успіх
+        state.verificationStatus = 'succeeded';
       })
       .addCase(verifyEmail.rejected, (state, action) => {
-        state.verificationStatus = 'failed'; // Помилка
+        state.verificationStatus = 'failed';
         state.verificationError = action.payload; // Зберігаємо помилку
       });
   },
