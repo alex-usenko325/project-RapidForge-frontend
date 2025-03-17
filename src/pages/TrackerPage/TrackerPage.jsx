@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import WaterDetailedInfo from '../../components/WaterDetailedInfo/WaterDetailedInfo';
 import WaterMainInfo from '../../components/WaterMainInfo/WaterMainInfo';
 import css from './TrackerPage.module.css';
@@ -8,10 +8,8 @@ import {
   getWaterByMonth,
   getWaterRecords,
 } from '../../redux/water/operations.js';
-import { RotatingLines } from 'react-loader-spinner';
 
 export default function TrackerPage() {
-  const [isLoading, setIsLoading] = useState(false);
   const dispatch = useDispatch();
 
   const currentDate = new Date();
@@ -22,31 +20,15 @@ export default function TrackerPage() {
     async function fetchData() {
       await dispatch(getWaterByMonth({ month, year })).unwrap();
       await dispatch(getWaterRecords()).unwrap();
-
-      setIsLoading(false);
     }
 
     fetchData();
   }, [dispatch, year, month]);
 
   return (
-    <div>
-      {isLoading ? (
-        <RotatingLines
-          visible={true}
-          height="96"
-          width="96"
-          color="grey"
-          strokeWidth="5"
-          animationDuration="0.75"
-          ariaLabel="rotating-lines-loading"
-        />
-      ) : (
-        <div className={clsx('container', css.container)}>
-          <WaterMainInfo />
-          <WaterDetailedInfo />
-        </div>
-      )}
+    <div className={clsx('container', css.container)}>
+      <WaterMainInfo />
+      <WaterDetailedInfo />
     </div>
   );
 }

@@ -1,18 +1,23 @@
 import { useDispatch } from 'react-redux';
+import { useState } from 'react';
 import { logout } from '../../redux/auth/operations';
 import { useNavigate } from 'react-router-dom';
 import styles from './LogOutModal.module.css';
 import Modal from '../Modal/Modal';
 import { useTranslation } from 'react-i18next';
+import { RotatingLines } from 'react-loader-spinner';
 
 const LogOutModal = ({ onClose }) => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleLogout = async () => {
+    setIsLoading(true); // Встановлюємо isLoading у true перед початком реєстрації
     await dispatch(logout());
     localStorage.clear();
+    setIsLoading(false);
     onClose();
     navigate('/');
   };
@@ -28,7 +33,19 @@ const LogOutModal = ({ onClose }) => {
         <p className={styles.logoutText}>{t('logOutModal.leaveMessage')}</p>
         <div className={styles.btnLogoutWrapper}>
           <button className={styles.logoutBtn} onClick={handleLogout}>
-            {t('logOutModal.logoutButton')}
+            {isLoading ? (
+              <RotatingLines
+                visible={true}
+                height="16"
+                width="16"
+                color="white"
+                strokeWidth="5"
+                animationDuration="0.75"
+                ariaLabel="rotating-lines-loading"
+              />
+            ) : (
+              t('logOutModal.logoutButton')
+            )}
           </button>
           <button className={styles.cancelBtn} onClick={onClose}>
             {t('logOutModal.cancelButton')}

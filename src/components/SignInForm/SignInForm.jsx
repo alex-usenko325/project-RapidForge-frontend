@@ -9,6 +9,7 @@ import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import i18next from 'i18next';
 import LocalizationDropdownMenu from '../LocalizationDropdownMenu/LocalizationDropdownMenu';
+import { RotatingLines } from 'react-loader-spinner'; // Імпортуємо індикатор завантаження
 import toast from 'react-hot-toast';
 
 const SingInValidationSchema = Yup.object().shape({
@@ -16,7 +17,6 @@ const SingInValidationSchema = Yup.object().shape({
     .email(() => i18next.t('signIn.validation.email.invalid'))
     .required(() => i18next.t('signIn.validation.email.required')),
   password: Yup.string()
-
     .min(6, () => i18next.t('signIn.validation.password.short'))
     .max(18, () => i18next.t('signIn.validation.password.long'))
     .required(() => i18next.t('signIn.validation.password.required')),
@@ -30,9 +30,14 @@ const initialValues = {
 const SignInForm = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
+  const [showPassword, changeShowPassword] = useState(false);
+  const [isLoading, setIsLoading] = useState(false); // Додаємо стан завантаження
+
   const handleSubmit = async (values, actions) => {
     try {
+      setIsLoading(true);
       await dispatch(signin(values)).unwrap();
+      setIsLoading(false);
       actions.resetForm();
     } catch (error) {
       if (error.status === 404 || error.status === 401) {
@@ -44,8 +49,6 @@ const SignInForm = () => {
       }
     }
   };
-
-  const [showPassword, changeShowPassword] = useState(false);
 
   return (
     <div className={s.authSection}>
@@ -59,6 +62,7 @@ const SignInForm = () => {
           validationSchema={SingInValidationSchema}
           validateOnChange={true} // Включаємо валідацію на кожну зміну
           validateOnBlur={true} // Включаємо валідацію при втраті фокусу
+          noValidate
         >
           <Form className={s.authForm}>
             <div className={s.authFormWrap}>
@@ -66,10 +70,9 @@ const SignInForm = () => {
                 <span className={s.labelSpan}>{t('signIn.e_mail')}</span>
                 <Field
                   className={s.authField}
-                  type="email"
+                  type="text"
                   name="email"
                   placeholder={t('signIn.enter_your_email')}
-                  required
                 />
                 <ErrorMessage
                   name="email"
@@ -85,7 +88,6 @@ const SignInForm = () => {
                     type={showPassword ? 'text' : 'password'}
                     name="password"
                     placeholder={t('signIn.enter_your_password')}
-                    required
                   />
                   <svg
                     className={s.authIcon}
@@ -105,8 +107,20 @@ const SignInForm = () => {
               </label>
             </div>
             <div className={s.authBtnWrap}>
-              <button type="submit" className={s.authBtn}>
-                {t('signIn.sign_in')}
+              <button type="submit" className={s.authBtn} disabled={isLoading}>
+                {isLoading ? (
+                  <RotatingLines
+                    visible={true}
+                    height="16"
+                    width="16"
+                    color="white"
+                    strokeWidth="5"
+                    animationDuration="0.75"
+                    ariaLabel="rotating-lines-loading"
+                  />
+                ) : (
+                  t('signIn.sign_in')
+                )}
               </button>
               <div className={s.haveAnAccount}>
                 {t('signIn.dont_have_account')}{' '}

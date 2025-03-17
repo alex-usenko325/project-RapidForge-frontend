@@ -5,7 +5,7 @@ import clsx from 'clsx';
 import s from './SignUpPage.module.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectModalComponent } from '../../redux/modal/selectors';
-import VerifyModal from '../../components/VerifyModal/VerifyModal';
+import VerifyModal from '../../components/VerifyModal/VerifyModal.jsx';
 import {
   closeModalAction,
   openModalAction,
@@ -14,7 +14,6 @@ import EmailInUseModal from '../../components/EmailInUseModal/EmailInUseModal';
 
 const SignUpPage = () => {
   const [isLargeScreen, setIsLargeScreen] = useState(window.innerWidth >= 1440);
-  // const navigate = useNavigate();
   const dispatch = useDispatch();
   const modalComponent = useSelector(selectModalComponent);
 
@@ -27,7 +26,6 @@ const SignUpPage = () => {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  // Функція відкриття модалки після успішної реєстрації
   const handleSignUpSuccess = () => {
     openModalAction(dispatch, 'VerifyModal');
   };

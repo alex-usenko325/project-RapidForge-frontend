@@ -10,7 +10,7 @@ import {
 } from '../../redux/modal/operations';
 import { selectModalComponent } from '../../redux/modal/selectors';
 import s from '../SignUpPage/SignUpPage.module.css';
-import SendVerifyEmail from '../../components/SendVerifyEmail/SendVerifyEmail.jsx';
+import VerifyEmailToken from '../../components/VerifyModal/VerifyEmailToken.jsx';
 
 const SignInPage = () => {
   const [isLargeScreen, setIsLargeScreen] = useState(window.innerWidth >= 1440);
@@ -48,7 +48,7 @@ const SignInPage = () => {
 
       {/* Відображення модалки, якщо вона активна */}
       {modalComponent === 'VerifyEmail' && (
-        <SendVerifyEmail onClose={handleCloseModal} />
+        <VerifyEmailToken onClose={handleCloseModal} />
       )}
     </div>
   );

@@ -51,13 +51,18 @@ export default function WaterForm({
         await dispatch(
           updateWaterRecord({ id: waterEntryId, updatedData: record })
         ).unwrap();
+        toast.success(t('waterModal.editSuccessMessage'));
       } else {
         await dispatch(addWaterRecord(record)).unwrap();
+        toast.success(t('waterModal.successMessage'));
       }
       closeAddWaterModal();
-      toast.success(t('waterModal.successMessage'));
-    } catch {
-      toast.error(t('waterModal.errorMessage'));
+    } catch (error) {
+      if (modalType === 'edit' && error.message.includes('not found')) {
+        toast.error(t('waterModal.editErrorMessage'));
+      } else {
+        toast.error(t('waterModal.errorMessage'));
+      }
     }
   };
 
@@ -87,7 +92,7 @@ export default function WaterForm({
             value={time}
             onChange={e => setTime(e.target.value)}
             className={clsx(s.inputTime, s.input)}
-            required
+            autoComplete="off"
           />
         </label>
         <label className={s.labelValueWater}>
@@ -99,6 +104,7 @@ export default function WaterForm({
             min="0"
             max="5000"
             className={clsx(s.inputValueWater, s.input)}
+            autoComplete="off"
           />
         </label>
         <button type="submit" className={s.btnSave} disabled={isLoading}>

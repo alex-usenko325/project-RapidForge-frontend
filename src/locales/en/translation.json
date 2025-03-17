@@ -127,7 +127,9 @@
     "enterValue": "Enter the value of the water used:",
     "save": "Save",
     "successMessage": "Water consumption record added successfully!",
-    "errorMessage": "Failed to add water intake record. Please try again."
+    "errorMessage": "Failed to add water intake record. Please try again.",
+    "editSuccessMessage": "Successfully updated water record!",
+    "editErrorMessage": "Water record not found"
   },
   "userSettingsModal": {
     "settings": "Settings"
@@ -212,5 +214,13 @@
   "waterItem": {
     "volume": "{{volume}} ml",
     "time": "{{time}} "
+  },
+  "settings": {
+    "nothingToUpdate": "Nothing to update",
+    "successfullyData": "Successfully updated user data",
+    "logAgain": "Unauthorized: Please log in again.",
+    "againLater": "Server error: Try again later.",
+    "wrong": "Something went wrong.",
+    "okAvatar": "'Successfully updated avatar"
   }
 }
