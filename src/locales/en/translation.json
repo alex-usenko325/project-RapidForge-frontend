@@ -119,7 +119,9 @@
     "enterValue": "Enter the value of the water used:",
     "save": "Save",
     "successMessage": "Water consumption record added successfully!",
-    "errorMessage": "Failed to add water intake record. Please try again."
+    "errorMessage": "Failed to add water intake record. Please try again.",
+    "editSuccessMessage": "Successfully updated water record!",
+    "editErrorMessage": "Water record not found"
   },
   "userSettingsModal": {
     "settings": "Settings"
