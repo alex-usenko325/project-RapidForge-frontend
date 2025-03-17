@@ -22,7 +22,6 @@ const App = () => {
 
   useEffect(() => {
     if (isLoggedIn) {
-      console.log('✅ Отримуємо дані користувача...');
       dispatch(getUserData());
     }
   }, [dispatch, isLoggedIn]);

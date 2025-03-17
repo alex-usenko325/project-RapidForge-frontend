@@ -6,6 +6,9 @@
     "tryTracker": "Try tracker",
     "signIn": "Sign in"
   },
+  "errors": {
+    "generic_error": "An error occurred. Please try again."
+  },
   "advantagesSection": {
     "ourcustomers": "Our {{userCount}} happy customers",
     "habitdrive": "Habit drive",
@@ -84,7 +87,12 @@
     "password": "Password",
     "enter_your_password": "Enter your password",
     "dont_have_account": "Don’t have an account?",
-    "sign_up": "Sign Up"
+    "sign_up": "Sign Up",
+    "sign_in_error": "Your email or password do not match. Please try again.",
+    "email_in_use": "Email is already in use.",
+    "not_verified": "Email not verified. Please check your inbox for further instructions.",
+    "please": "Please",
+    "sign_in_toast": "sign in"
   },
   "userBarPopover": {
     "settings": "Settings",

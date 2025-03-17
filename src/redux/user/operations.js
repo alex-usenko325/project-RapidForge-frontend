@@ -2,7 +2,6 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import { authAPI } from '../auth/operations';
 
 export const setAuthHeader = token => {
-  console.log('setAuthHeader', token);
   authAPI.defaults.headers.common.Authorization = `Bearer ${token}`;
 };
 
@@ -31,10 +30,6 @@ export const getUserData = createAsyncThunk(
       const response = await authAPI.get('/user/currentUser');
       return response.data.data;
     } catch (error) {
-      console.error(
-        'Error fetching user data:',
-        error.response ? error.response.data : error.message
-      );
       return thunkAPI.rejectWithValue(
         error.response ? error.response.data : error.message
       );

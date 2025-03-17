@@ -4,7 +4,7 @@ import axios from 'axios';
 // Створення екземпляра axios для авторизації
 export const authAPI = axios.create({
   baseURL: 'https://aqua-track-app.onrender.com', // Вкажіть правильний URL вашого серверу
-
+  // baseURL: 'http://localhost:3000', // Локальний URL серверу, якщо потрібно
   headers: {
     'Content-Type': 'application/json',
   },
@@ -21,7 +21,6 @@ authAPI.interceptors.response.use(
   response => response,
   async error => {
     const originalRequest = error.config;
-
     if (
       error.response.data.message === 'Access token expired' &&
       !originalRequest._retry
@@ -29,11 +28,9 @@ authAPI.interceptors.response.use(
       originalRequest._retry = true;
       try {
         await store.dispatch(refreshAccessToken());
-
         const newToken = store.getState().auth.token;
         setAuthHeader(newToken, 'interceptors');
         originalRequest.headers.Authorization = `Bearer ${newToken}`;
-
         return authAPI(originalRequest);
       } catch (refreshError) {
         return Promise.reject(refreshError);
@@ -62,7 +59,7 @@ export const signup = createAsyncThunk(
     } catch (err) {
       if (err) {
         if (err.response && err.response.status === 409) {
-          return thunkAPI.rejectWithValue('Email is already in use');
+          return thunkAPI.rejectWithValue(err.response.data);
         }
       }
       return thunkAPI.rejectWithValue(err.message);
@@ -75,12 +72,9 @@ export const sendVerificationEmail = createAsyncThunk(
   'auth/sendVerificationEmail',
   async (email, thunkAPI) => {
     try {
-      // console.log('Sending verification email to:', email);
       const response = await authAPI.post('/auth/verifycate', { email });
-      // console.log('Verification email sent successfully:', response.data);
       return response.data;
     } catch (error) {
-      // console.error('Error sending verification email:', error.message);
       return thunkAPI.rejectWithValue(error.message);
     }
   }
@@ -90,16 +84,10 @@ export const sendVerificationEmail = createAsyncThunk(
 export const verifyEmail = createAsyncThunk(
   'auth/verifyEmail',
   async (token, thunkAPI) => {
-    // console.log('Received token in verifyEmail:', token);
     try {
       const response = await authAPI.get(`/auth/verifycate?token=${token}`);
-      // console.log('Verification response:', response.data);
       return response.data;
     } catch (error) {
-      // console.error(
-      //   'Verification request failed:',
-      //   error.response?.data || error.message
-      // );
       return thunkAPI.rejectWithValue(
         error.response?.data || 'Verification failed'
       );
@@ -113,12 +101,10 @@ export const signin = createAsyncThunk(
   async (body, thunkAPI) => {
     try {
       const response = await authAPI.post('/auth/login', body);
-
       setAuthHeader(response.data.data.accessToken);
-      // console.log('🔥 Відповідь від бекенду:', response.data); // Додай цей лог
       return response.data.data;
     } catch (err) {
-      return thunkAPI.rejectWithValue(err.message);
+      return thunkAPI.rejectWithValue(err.response.data);
     }
   }
 );

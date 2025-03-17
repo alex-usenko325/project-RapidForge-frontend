@@ -42,9 +42,7 @@ const userSlice = createSlice({
       })
       // Обробка результатів getUserData
       .addCase(getUserData.fulfilled, (state, action) => {
-        console.log('🔥 Redux: отримані дані користувача', action.payload);
         state.user = action.payload;
-        // state.isLoggedIn = true;
         state.isRefreshingUser = false;
       })
       .addCase(getUserData.pending, state => {
@@ -53,7 +51,6 @@ const userSlice = createSlice({
       .addCase(getUserData.rejected, state => {
         state.isRefreshingUser = false;
       })
-      // patch user data
       .addCase(patchUserData.pending, state => {
         state.isLoading = true;
       })
@@ -65,8 +62,6 @@ const userSlice = createSlice({
         state.isLoading = false;
         state.error = action.payload;
       })
-
-      //patch user avatar
       .addCase(patchUserAvatar.pending, state => {
         state.isLoading = true;
       })

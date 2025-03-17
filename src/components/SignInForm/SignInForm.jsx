@@ -10,6 +10,7 @@ import { useTranslation } from 'react-i18next';
 import i18next from 'i18next';
 import LocalizationDropdownMenu from '../LocalizationDropdownMenu/LocalizationDropdownMenu';
 import { RotatingLines } from 'react-loader-spinner'; // Імпортуємо індикатор завантаження
+import toast from 'react-hot-toast';
 
 const SingInValidationSchema = Yup.object().shape({
   email: Yup.string()
@@ -33,10 +34,20 @@ const SignInForm = () => {
   const [isLoading, setIsLoading] = useState(false); // Додаємо стан завантаження
 
   const handleSubmit = async (values, actions) => {
-    setIsLoading(true); // Встановлюємо isLoading у true при початку відправки
-    await dispatch(signin(values));
-    setIsLoading(false); // Встановлюємо isLoading у false після завершення
-    actions.resetForm();
+    try {
+      setIsLoading(true);
+      await dispatch(signin(values)).unwrap();
+      setIsLoading(false);
+      actions.resetForm();
+    } catch (error) {
+      if (error.status === 404 || error.status === 401) {
+        toast.error(t('signIn.sign_in_error'));
+      } else if (error.status === 403) {
+        toast.error(t('signIn.not_verified'));
+      } else {
+        toast.error(t('errors.generic_error'));
+      }
+    }
   };
 
   return (

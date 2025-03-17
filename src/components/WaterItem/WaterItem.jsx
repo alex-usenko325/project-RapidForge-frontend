@@ -59,8 +59,6 @@ const WaterItem = ({ id, volume, time }) => {
         </button>
         {isWaterModalOpen && (
           <WaterModal
-            // title="editTheEntered"
-            // subtitle="correctEnteredData"
             modalType={modalType}
             closeAddWaterModal={closeWaterModal}
             waterEntryId={id}

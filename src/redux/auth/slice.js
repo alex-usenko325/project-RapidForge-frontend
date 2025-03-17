@@ -85,7 +85,7 @@ const authSlice = createSlice({
       })
       .addCase(verifyEmail.rejected, (state, action) => {
         state.verificationStatus = 'failed';
-        state.verificationError = action.payload;
+        state.verificationError = action.payload; // Зберігаємо помилку
       });
   },
 });

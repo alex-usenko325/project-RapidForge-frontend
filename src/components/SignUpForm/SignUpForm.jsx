@@ -53,10 +53,10 @@ const SignUpForm = ({ onSignUpSuccess }) => {
     dispatch(signup({ email: values.email, password: values.password }))
       .unwrap()
       .then(() => {
-        // Після успішної реєстрації викликаєш sendVerificationEmail з email
+        // Після успішної реєстрації викликаємо sendVerificationEmail з email
         dispatch(sendVerificationEmail(values.email))
           .then(() => {
-            onSignUpSuccess(); // Відправляємо користувача на іншу сторінку
+            onSignUpSuccess(); // Відкриваємо іншу сторінку
             actions.resetForm();
             setIsLoading(false); // Завершуємо завантаження
           })
@@ -67,18 +67,22 @@ const SignUpForm = ({ onSignUpSuccess }) => {
           });
       })
       .catch(err => {
-        setError(err.message); // Обробка помилки реєстрації
         actions.setSubmitting(false);
-        setIsLoading(false); // Завершуємо завантаження
-
-        return toast.error(
-          <span>
-            {`${err}. `}
-            <Link to="/signin" target="_blank" rel="noopener noreferrer">
-              Please <b>Log In</b>
-            </Link>
-          </span>
-        );
+        setIsLoading(false);
+        if (err.status === 409) {
+          toast.error(
+            <span>
+              {t('signIn.email_in_use')}
+              <br />
+              <Link to="/signin">
+                {t('signIn.please')}
+                {','} <b>{t('signIn.sign_in_toast')}</b>
+              </Link>
+            </span>
+          );
+        } else {
+          toast.error(t('errors.generic_error'));
+        }
       });
   };
 
