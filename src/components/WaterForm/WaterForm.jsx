@@ -1,13 +1,13 @@
 import { useEffect, useState } from 'react';
-// import Modal from '../Modal/Modal.jsx';
 import s from './WaterForm.module.css';
 import clsx from 'clsx';
 import { useTranslation } from 'react-i18next';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   addWaterRecord,
   updateWaterRecord,
-} from '../../redux/water/operations'; // Імпортуємо функцію addWaterRecord
+} from '../../redux/water/operations';
+import { selectWaterIsLoading } from '../../redux/water/selectors';
 import toast from 'react-hot-toast';
 
 export default function WaterForm({
@@ -16,23 +16,20 @@ export default function WaterForm({
   waterEntryId,
 }) {
   const { t } = useTranslation();
-  const dispatch = useDispatch(); // Використовуємо useDispatch для dispatch-у action
+  const dispatch = useDispatch();
+  const isLoading = useSelector(selectWaterIsLoading);
   const [waterAmount, setWaterAmount] = useState(50);
-  const [setIsLoading] = useState(false);
   const increaseWater = () => setWaterAmount(waterAmount + 50);
   const decreaseWater = () =>
     setWaterAmount(waterAmount > 50 ? waterAmount - 50 : 50);
 
-  const [setCustomWaterAmount] = useState(50);
   const [time, setTime] = useState('');
 
   const handleCustomWaterAmount = e => {
     const value = Math.max(0, parseInt(e.target.value) || 0);
-    setCustomWaterAmount(value);
     setWaterAmount(value);
   };
 
-  // Встановлення початкового часу при завантаженні
   useEffect(() => {
     const now = new Date();
     const hours = String(now.getHours()).padStart(2, '0');
@@ -49,10 +46,11 @@ export default function WaterForm({
       time: time,
     };
 
-    setIsLoading(true);
     try {
       if (modalType === 'edit') {
-        dispatch(updateWaterRecord({ id: waterEntryId, updatedData: record }));
+        await dispatch(
+          updateWaterRecord({ id: waterEntryId, updatedData: record })
+        ).unwrap();
       } else {
         await dispatch(addWaterRecord(record)).unwrap();
       }
@@ -60,8 +58,6 @@ export default function WaterForm({
       toast.success(t('waterModal.successMessage'));
     } catch {
       toast.error(t('waterModal.errorMessage'));
-    } finally {
-      setIsLoading(false);
     }
   };
 
@@ -104,8 +100,8 @@ export default function WaterForm({
             className={clsx(s.inputValueWater, s.input)}
           />
         </label>
-        <button type="submit" className={s.btnSave}>
-          {t('waterModal.save')}
+        <button type="submit" className={s.btnSave} disabled={isLoading}>
+          {isLoading ? t('waterModal.saving') : t('waterModal.save')}
         </button>
       </form>
     </>
