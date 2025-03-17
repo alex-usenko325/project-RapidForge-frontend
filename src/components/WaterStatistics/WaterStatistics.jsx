@@ -48,16 +48,28 @@ const WaterStatistics = () => {
           });
         }
 
+        // response.data.data.forEach(entry => {
+        //   // Перебираємо отримані дані з API
+        //   const entryDate = new Date(entry.date);
+        //   if (daysMap.has(entryDate.getDate())) {
+        //     // Якщо день є у нашій мапі, оновлюємо дані
+        //     daysMap.set(entryDate.getDate(), {
+        //       day: entryDate.getDate(),
+        //       fullDate: entryDate.toISOString().split('T')[0],
+        //       volume: entry.volume / 1000, // Переводимо мілілітри в літри
+        //       volumeMl: entry.volume, // Оригінальне значення у мілілітрах
+        //     });
+        //   }
+        // });
         response.data.data.forEach(entry => {
-          // Перебираємо отримані дані з API
           const entryDate = new Date(entry.date);
           if (daysMap.has(entryDate.getDate())) {
-            // Якщо день є у нашій мапі, оновлюємо дані
+            const prevData = daysMap.get(entryDate.getDate());
             daysMap.set(entryDate.getDate(), {
               day: entryDate.getDate(),
               fullDate: entryDate.toISOString().split('T')[0],
-              volume: entry.volume / 1000, // Переводимо мілілітри в літри
-              volumeMl: entry.volume, // Оригінальне значення у мілілітрах
+              volume: prevData.volume + entry.volume / 1000, // Суммируем объем воды
+              volumeMl: prevData.volumeMl + entry.volume,
             });
           }
         });
