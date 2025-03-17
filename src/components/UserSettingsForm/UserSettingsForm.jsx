@@ -83,7 +83,7 @@ export default function UserSettingsForm({ closeModal }) {
 
   const onSubmit = async data => {
     if (hasChanges(data) === false) {
-      toast.success('Nothing to update');
+      toast.success(() => i18next.t('settings.nothingToUpdate'));
       return;
     }
 
@@ -109,17 +109,17 @@ export default function UserSettingsForm({ closeModal }) {
         throw response.error;
       }
 
-      toast.success('Successfully updated user data');
+      toast.success(() => i18next.t('settings.successfullyData'));
       closeModal();
     } catch (error) {
-      console.error('Failed to update avatar:', error);
+      console.error('Failed to update user data:', error);
 
       if (error.status === 401) {
-        toast.error('Unauthorized: Please log in again.');
+        toast.error(() => i18next.t('settings.logAgain'));
       } else if (error.status === 500) {
-        toast.error('Server error: Try again later.');
+        toast.error(() => i18next.t('settings.againLater'));
       } else {
-        toast.error('Something went wrong.');
+        toast.error(() => i18next.t('settings.wrong'));
       }
     }
   };
@@ -141,16 +141,16 @@ export default function UserSettingsForm({ closeModal }) {
           throw response.error;
         }
 
-        toast.success('Successfully updated avatar');
+        toast.success(() => i18next.t('settings.okAvatar'));
       } catch (error) {
         console.error('Failed to update avatar:', error);
 
         if (error.status === 401) {
-          toast.error('Unauthorized: Please log in again.');
+          toast.error(() => i18next.t('settings.logAgain'));
         } else if (error.status === 500) {
-          toast.error('Server error: Try again later.');
+          toast.error(() => i18next.t('settings.againLater'));
         } else {
-          toast.error('Something went wrong.');
+          toast.error(() => i18next.t('settings.wrong'));
         }
       }
     }
