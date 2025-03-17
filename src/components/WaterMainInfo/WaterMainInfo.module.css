@@ -25,7 +25,7 @@
 @media screen and (max-width: 374px) {
   .container {
     width: 100%;
-    min-width: 320px;
+    /* min-width: 320px; */
     background-size: 75%;
     height: 415px;
   }

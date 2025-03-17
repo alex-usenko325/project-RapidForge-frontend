@@ -125,7 +125,7 @@
 .number {
   width: 100px;
   border-radius: 30px;
-  padding: 11px 20px;
+  padding: 11px;
   background-color: var(--main);
   text-align: center;
   font-weight: 700;
