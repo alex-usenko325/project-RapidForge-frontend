@@ -34,7 +34,8 @@ export const selectWaterProgressByMonth = createSelector(
     }, {});
     const progressByDate = Object.keys(waterByDay).reduce((acc, date) => {
       const waterConsumed = waterByDay[date] || 0;
-      acc[date] = dailyNorm > 0 ? (waterConsumed / dailyNorm) * 100 : 0;
+      acc[date] =
+        dailyNorm > 0 ? Math.min((waterConsumed / dailyNorm) * 100, 100) : 0;
       return acc;
     }, {});
 

@@ -18,12 +18,12 @@ export default function WaterForm({
   const { t } = useTranslation();
   const dispatch = useDispatch(); // Використовуємо useDispatch для dispatch-у action
   const [waterAmount, setWaterAmount] = useState(50);
-  const [isLoading, setIsLoading] = useState(false);
+  const [setIsLoading] = useState(false);
   const increaseWater = () => setWaterAmount(waterAmount + 50);
   const decreaseWater = () =>
     setWaterAmount(waterAmount > 50 ? waterAmount - 50 : 50);
 
-  const [CustomWaterAmount, setCustomWaterAmount] = useState(50);
+  const [setCustomWaterAmount] = useState(50);
   const [time, setTime] = useState('');
 
   const handleCustomWaterAmount = e => {
@@ -58,7 +58,7 @@ export default function WaterForm({
       }
       closeAddWaterModal();
       toast.success(t('waterModal.successMessage'));
-    } catch (error) {
+    } catch {
       toast.error(t('waterModal.errorMessage'));
     } finally {
       setIsLoading(false);
