@@ -1,29 +1,41 @@
-import CalendarItem from './CalendarItem';
+import CalendarItem from './CalendarItem.jsx';
 import s from './Calendar.module.css';
 import dayjs from 'dayjs';
-import 'dayjs/locale/uk'; // Українська локалізація
-import { useSelector } from 'react-redux';
-import { selectWaterRecordsByMonth } from '../../../redux/water/selectors.js';
+import 'dayjs/locale/uk';
+import utc from 'dayjs/plugin/utc'; // Додай
+import timezone from 'dayjs/plugin/timezone';
+import { useSelector, useDispatch } from 'react-redux';
+import {
+  selectWaterProgressByMonth,
+  selectWaterRecords,
+} from '../../../redux/water/selectors.js';
+import { getWaterByMonth } from '../../../redux/water/operations.js';
+import { useEffect } from 'react';
 
-dayjs.locale('uk'); // Встановлюємо локаль
+dayjs.extend(utc);
+dayjs.extend(timezone);
+dayjs.locale('uk');
 
-const Calendar = ({ selectedDate, setSelectedDate, dailyNorm = 1500 }) => {
-  const waterData = useSelector(selectWaterRecordsByMonth);
-  const daysInMonth = dayjs(selectedDate).daysInMonth();
+const Calendar = ({ selectedDate, setSelectedDate }) => {
+  const dispatch = useDispatch();
+  const getProgressForDate = useSelector(selectWaterProgressByMonth);
+  const records = useSelector(selectWaterRecords);
+  const daysInMonth = dayjs(selectedDate).tz('Europe/Kyiv').daysInMonth();
 
-  // Групуємо дані за днями (щоб швидко отримувати об'єм води)
-  const waterByDay = waterData.reduce((acc, record) => {
-    const { date, volume } = record;
-    acc[date] = (acc[date] || 0) + volume; // Підсумовуємо обсяг води за день
-    return acc;
-  }, {});
+  useEffect(() => {
+    const month = dayjs(selectedDate).tz('Europe/Kyiv').month() + 1;
+    const year = dayjs(selectedDate).tz('Europe/Kyiv').year();
+    dispatch(getWaterByMonth({ month, year }));
+  }, [selectedDate, records, dispatch]);
 
   const days = [...Array(daysInMonth)].map((_, dayIndex) => {
     const day = dayIndex + 1;
-    const date = dayjs(selectedDate).date(day).format('YYYY-MM-DD');
+    const date = dayjs(selectedDate)
+      .tz('Europe/Kyiv')
+      .date(day)
+      .format('YYYY-MM-DD');
 
-    const waterConsumed = waterByDay[date] || 0; // Випита вода за день
-    const percent = Math.min((waterConsumed / dailyNorm) * 100, 100); // Розраховуємо %
+    const percent = getProgressForDate[date] ?? 0;
 
     return (
       <CalendarItem
