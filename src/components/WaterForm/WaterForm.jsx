@@ -51,13 +51,18 @@ export default function WaterForm({
         await dispatch(
           updateWaterRecord({ id: waterEntryId, updatedData: record })
         ).unwrap();
+        toast.success(t('waterModal.editSuccessMessage'));
       } else {
         await dispatch(addWaterRecord(record)).unwrap();
+        toast.success(t('waterModal.successMessage'));
       }
       closeAddWaterModal();
-      toast.success(t('waterModal.successMessage'));
-    } catch {
-      toast.error(t('waterModal.errorMessage'));
+    } catch (error) {
+      if (modalType === 'edit' && error.message.includes('not found')) {
+        toast.error(t('waterModal.editErrorMessage'));
+      } else {
+        toast.error(t('waterModal.errorMessage'));
+      }
     }
   };
 
