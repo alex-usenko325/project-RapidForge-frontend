@@ -120,7 +120,8 @@
     "save": "Зберегти",
     "successMessage": "Запис споживання води успішно додано!",
     "errorMessage": "Не вдалося додати запис споживання води. Спробуйте ще раз",
-    "editSuccessMessage": "Успішно оновлено запис води!"
+    "editSuccessMessage": "Успішно оновлено запис води!",
+    "editErrorMessage": "Запис води не знайдено!"
   },
   "userSettingsModal": {
     "settings": "Налаштування"
