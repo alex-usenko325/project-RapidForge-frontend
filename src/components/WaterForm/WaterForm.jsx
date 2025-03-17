@@ -101,7 +101,7 @@ export default function WaterForm({
           />
         </label>
         <button type="submit" className={s.btnSave} disabled={isLoading}>
-          {isLoading ? t('waterModal.saving') : t('waterModal.save')}
+          {t('waterModal.save')}
         </button>
       </form>
     </>
