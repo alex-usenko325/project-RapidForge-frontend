@@ -3,8 +3,15 @@ import s from './CalendarPagination.module.css';
 import sprite from '../../assets/sprite.svg';
 import { useTranslation } from 'react-i18next';
 import 'dayjs/locale/uk';
+import { useState } from 'react';
 
-const CalendarPagination = ({ selectedDate, onDateChange }) => {
+const CalendarPagination = ({
+  selectedDate,
+  onDateChange,
+  isStatisticVisible,
+  toggleStatistic,
+}) => {
+  const [isChartOpen, setIsChartOpen] = useState(false);
   const { t, i18n } = useTranslation();
   dayjs.locale('uk');
   const handlePreviousMonth = () => {
@@ -15,13 +22,26 @@ const CalendarPagination = ({ selectedDate, onDateChange }) => {
     onDateChange(dayjs(selectedDate).add(1, 'month').toDate());
   };
 
+  const toggleChart = () => {
+    setIsChartOpen(prevState => !prevState);
+  };
+
   return (
     <div className={s.calendarpagination}>
       <div>
-        <h1 className={s.month}>{t('calendarPagination.month')}</h1>
+        <h1 className={s.month}>
+          {isStatisticVisible
+            ? t('calendarPagination.statistics')
+            : t('calendarPagination.month')}
+        </h1>
       </div>
       <div className={s.pagination}>
-        <svg className={s.btnpagination} onClick={handlePreviousMonth}>
+        <svg
+          className={`${s.btnpagination} ${
+            isStatisticVisible ? s.disabled : ''
+          }`}
+          onClick={handlePreviousMonth}
+        >
           <use href={`${sprite}#icon-chevron-left`}></use>
         </svg>
 
@@ -29,10 +49,21 @@ const CalendarPagination = ({ selectedDate, onDateChange }) => {
           {dayjs(selectedDate).locale(i18n.language).format('MMMM, YYYY')}
         </span>
 
-        <svg className={s.btnpagination} onClick={handleNextMonth}>
+        <svg
+          className={`${s.btnpagination} ${
+            isStatisticVisible ? s.disabled : ''
+          }`}
+          onClick={handleNextMonth}
+        >
           <use href={`${sprite}#icon-chevron-right`}></use>
         </svg>
-        <svg className={s.iconpie}>
+        <svg
+          className={`${s.iconpie} ${isChartOpen ? s.iconpieActive : ''}`}
+          onClick={() => {
+            toggleStatistic();
+            toggleChart();
+          }}
+        >
           <use href={`${sprite}#icon-pie-chart`}></use>
         </svg>
       </div>
