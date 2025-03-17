@@ -11,7 +11,7 @@ const CalendarPagination = ({
   isStatisticVisible,
   toggleStatistic,
 }) => {
-  const [isChartOpen, setIsChartOpen] = useState(false); // Стан для відкриття графіка
+  const [isChartOpen, setIsChartOpen] = useState(false);
   const { t, i18n } = useTranslation();
   dayjs.locale('uk');
   const handlePreviousMonth = () => {
@@ -23,7 +23,7 @@ const CalendarPagination = ({
   };
 
   const toggleChart = () => {
-    setIsChartOpen(prevState => !prevState); // Перемикання стану
+    setIsChartOpen(prevState => !prevState);
   };
 
   return (
