@@ -87,7 +87,7 @@ export default function WaterForm({
             value={time}
             onChange={e => setTime(e.target.value)}
             className={clsx(s.inputTime, s.input)}
-            required
+            autoComplete="off"
           />
         </label>
         <label className={s.labelValueWater}>
@@ -99,6 +99,7 @@ export default function WaterForm({
             min="0"
             max="5000"
             className={clsx(s.inputValueWater, s.input)}
+            autoComplete="off"
           />
         </label>
         <button type="submit" className={s.btnSave} disabled={isLoading}>

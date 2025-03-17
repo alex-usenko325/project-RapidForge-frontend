@@ -6,7 +6,7 @@ import {
   selectVerificationStatus,
   selectVerificationError,
 } from '../../redux/auth/selectors';
-import s from './SendVerifyEmail.module.css';
+import s from './VerifyModal.module.css';
 import Modal from '../Modal/Modal';
 import { GiConfirmed } from 'react-icons/gi';
 import { FiXCircle } from 'react-icons/fi'; // Активовано
@@ -14,7 +14,7 @@ import clsx from 'clsx';
 import { closeModalAction } from '../../redux/modal/operations';
 import { useTranslation } from 'react-i18next';
 
-const SendVerifyEmail = () => {
+const VerifyEmailToken = () => {
   const { t } = useTranslation();
   const location = useLocation();
   const dispatch = useDispatch();
@@ -82,5 +82,4 @@ const SendVerifyEmail = () => {
   );
 };
 
-export default SendVerifyEmail;
-
+export default VerifyEmailToken;

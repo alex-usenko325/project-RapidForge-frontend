@@ -205,5 +205,13 @@
   "waterItem": {
     "volume": "{{volume}} ml",
     "time": "{{time}} "
+  },
+  "settings": {
+    "nothingToUpdate": "Nothing to update",
+    "successfullyData": "Successfully updated user data",
+    "logAgain": "Unauthorized: Please log in again.",
+    "againLater": "Server error: Try again later.",
+    "wrong": "Something went wrong.",
+    "okAvatar": "'Successfully updated avatar"
   }
 }
