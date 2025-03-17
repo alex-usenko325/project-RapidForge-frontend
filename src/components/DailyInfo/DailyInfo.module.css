@@ -4,3 +4,14 @@
   align-items: center;
   margin-bottom: 24px;
 }
+
+.bottomContainer {
+  height: 106px;
+  margin-bottom: 40px;
+}
+
+@media screen and (min-width: 768px) {
+  .bottomContainer {
+    height: 118px;
+  }
+}
