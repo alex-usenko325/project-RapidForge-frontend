@@ -46,6 +46,17 @@
   height: 24px;
   width: 24px;
   opacity: 0.5;
+  cursor: pointer;
+  transition: opacity 0.3s, transform 0.3s;
+}
+.iconpie:hover {
+  opacity: 1;
+}
+
+.iconpieActive {
+  opacity: 1;
+  transform: scale(1.2); /* Збільшується при відкритому графіку */
+  stroke: #ff5733; /* Наприклад, червоний колір */
 }
 
 @media screen and (min-width: 320px) and (max-width: 767px) {
