@@ -129,7 +129,10 @@
     "successMessage": "Запис споживання води успішно додано!",
     "errorMessage": "Не вдалося додати запис споживання води. Спробуйте ще раз",
     "editSuccessMessage": "Успішно оновлено запис води!",
-    "editErrorMessage": "Запис води не знайдено!"
+    "editErrorMessage": "Запис води не знайдено!",
+    "editErrorNotValid": "Введіть дійсний час",
+    "editErrorRecordingTime": "Поле часу є обов’язковим",
+    "editErrorWaterAmount": "Кількість води має бути від 50 до 5000 мл"
   },
   "userSettingsModal": {
     "settings": "Налаштування"
