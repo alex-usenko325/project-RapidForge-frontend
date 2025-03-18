@@ -62,6 +62,7 @@
 
 .authField {
   border: 1px solid rgba(47, 47, 47, 0.2);
+  font-size: 14px;
   border-radius: 15px;
   padding: 16px;
   background-color: inherit;
