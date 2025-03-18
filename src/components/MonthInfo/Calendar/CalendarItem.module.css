@@ -58,10 +58,10 @@
   color: rgba(47, 47, 47, 0.6);
 }
 
-/* Стиль для поточного дня з акцентним бордером - змініть колір за бажанням */
+/* Стиль для поточного дня з акцентним бордером */
 .currentDay {
   box-sizing: border-box;
-  border: 2px solid #39c35b; /* Наприклад, помаранчевий */
+  border: 2px solid #39c35b;
   border-radius: 50%;
 }
 
@@ -72,7 +72,7 @@
   pointer-events: none;
 }
 
-@media screen and (min-width: 320px) and (max-width: 767px) {
+@media screen and (max-width: 767px) {
   .calendaritem {
     width: 28px;
   }
