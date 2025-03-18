@@ -19,16 +19,11 @@ export default function WaterForm({
   const dispatch = useDispatch();
   const isLoading = useSelector(selectWaterIsLoading);
   const [waterAmount, setWaterAmount] = useState(50);
+  const [time, setTime] = useState('');
+
   const increaseWater = () => setWaterAmount(waterAmount + 50);
   const decreaseWater = () =>
     setWaterAmount(waterAmount > 50 ? waterAmount - 50 : 50);
-
-  const [time, setTime] = useState('');
-
-  const handleCustomWaterAmount = e => {
-    const value = Math.max(0, Math.min(5000, parseInt(e.target.value) || 0));
-    setWaterAmount(value);
-  };
 
   useEffect(() => {
     const now = new Date();
@@ -37,8 +32,48 @@ export default function WaterForm({
     setTime(`${hours}:${minutes}`);
   }, []);
 
+  const handleCustomWaterAmount = e => {
+    let value = e.target.value;
+
+    if (value.length > 1) {
+      value = value.replace(/^0+/, '');
+    }
+    if (value === '') {
+      setWaterAmount('');
+      return;
+    }
+
+    // value = Math.max(0, Math.min(5000, parseInt(value) || 0));
+    value = Math.max(0, Math.min(5000, Number(value) || 0));
+    setWaterAmount(value);
+  };
+
+  const handleBlurNumber = () => {
+    if (waterAmount === '' || waterAmount <= 0) {
+      toast.error(t('waterModal.editErrorNumber'));
+      setWaterAmount('');
+    }
+  };
+
+  const handleBlurTime = () => {
+    if (!time || time === '--:--') {
+      toast.error(t('waterModal.editErrorNotValid'));
+      setTime('');
+    }
+  };
+
   const handleSubmit = async e => {
     e.preventDefault();
+
+    if (!time || time === '--:--') {
+      toast.error(t('waterModal.editErrorRecordingTime'));
+      return;
+    }
+
+    if (waterAmount === '' || waterAmount <= 0 || waterAmount > 5000) {
+      toast.error(t('waterModal.editErrorWaterAmount'));
+      return;
+    }
 
     const record = {
       date: new Date().toISOString().split('T')[0],
@@ -58,11 +93,12 @@ export default function WaterForm({
       }
       closeAddWaterModal();
     } catch (error) {
-      if (modalType === 'edit' && error.message.includes('not found')) {
-        toast.error(t('waterModal.editErrorMessage'));
-      } else {
-        toast.error(t('waterModal.errorMessage'));
-      }
+      toast.error(t('waterModal.editErrorSaving'));
+      // if (modalType === 'edit' && error.message.includes('not found')) {
+      //   toast.error(t('waterModal.editErrorMessage'));
+      // } else {
+      //   toast.error(t('waterModal.errorMessage'));
+      // }
     }
   };
 
@@ -76,7 +112,7 @@ export default function WaterForm({
           onClick={decreaseWater}
         ></button>
 
-        <p className={s.number}>{waterAmount} ml</p>
+        <p className={s.number}>{waterAmount || 0} ml</p>
         <button
           type="button"
           className={clsx(s.btn, s.btnPlus)}
@@ -93,6 +129,8 @@ export default function WaterForm({
             onChange={e => setTime(e.target.value)}
             className={clsx(s.inputTime, s.input)}
             autoComplete="off"
+            onInvalid={e => e.preventDefault()}
+            onBlur={handleBlurTime}
           />
         </label>
         <label className={s.labelValueWater}>
@@ -105,6 +143,7 @@ export default function WaterForm({
             max="5000"
             className={clsx(s.inputValueWater, s.input)}
             autoComplete="off"
+            onBlur={handleBlurNumber}
           />
         </label>
         <button type="submit" className={s.btnSave} disabled={isLoading}>

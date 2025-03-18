@@ -129,7 +129,12 @@
     "successMessage": "Water consumption record added successfully!",
     "errorMessage": "Failed to add water intake record. Please try again.",
     "editSuccessMessage": "Successfully updated water record!",
-    "editErrorMessage": "Water record not found"
+    "editErrorMessage": "Water record not found",
+    "editErrorNotValid": "Please enter a valid time",
+    "editErrorNumber": "Please enter a valid water amount (1-5000 ml)",
+    "editErrorRecordingTime": "Recording time is required",
+    "editErrorWaterAmount": "Water amount must be between 1 and 5000 ml",
+    "editErrorSaving": "An error occurred while saving your record"
   },
   "userSettingsModal": {
     "settings": "Settings"

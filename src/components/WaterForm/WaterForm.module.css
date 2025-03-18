@@ -81,7 +81,6 @@
 }
 
 @media only screen and (min-width: 768px) {
-
   .btnMinus,
   .btnPlus {
     width: 43px;
@@ -105,7 +104,6 @@
 }
 
 @media only screen and (min-width: 768px) {
-
   .btnMinus::after,
   .btnPlus::before,
   .btnPlus::after {
@@ -227,4 +225,16 @@
 .btnSave:hover,
 .btnSave:focus {
   background-color: var(--accent-hover);
+}
+
+/* Відключення стрілок у Chrome, Safari, Edge, Opera */
+input[type='number']::-webkit-outer-spin-button,
+input[type='number']::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Відключення стрілок у Firefox */
+input[type='number'] {
+  -moz-appearance: textfield;
 }
