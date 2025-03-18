@@ -18,7 +18,6 @@ const SingUpValidationSchema = Yup.object().shape({
     .email(() => i18next.t('signUp.validation.email.invalid'))
     .required(() => i18next.t('signUp.validation.email.required')),
   password: Yup.string()
-
     .min(6, () => i18next.t('signUp.validation.password.short'))
     .max(18, () => i18next.t('signUp.validation.password.long'))
     .matches(/[A-Z]/, () => i18next.t('signUp.validation.password.uppercase'))
@@ -27,7 +26,6 @@ const SingUpValidationSchema = Yup.object().shape({
       i18next.t('signUp.validation.password.special')
     )
     .required(() => i18next.t('signUp.validation.password.required')),
-
   repeatPassword: Yup.string()
     .oneOf([Yup.ref('password'), null], () =>
       i18next.t('signUp.validation.password.match')
@@ -41,53 +39,52 @@ const initialValues = {
   repeatPassword: '',
 };
 
-const SignUpForm = ({ onSignUpSuccess }) => {
-  const { t } = useTranslation();
+const SignUpForm = () => {
   const dispatch = useDispatch();
-  const [error, setError] = useState(null);
+  const { t } = useTranslation();
   const [isLoading, setIsLoading] = useState(false);
-
-  const handleSubmit = (values, actions) => {
-    setIsLoading(true); // Встановлюємо isLoading у true перед початком реєстрації
-    // Спочатку викликаєш signup
-    dispatch(signup({ email: values.email, password: values.password }))
-      .unwrap()
-      .then(() => {
-        // Після успішної реєстрації викликаємо sendVerificationEmail з email
-        dispatch(sendVerificationEmail(values.email))
-          .then(() => {
-            onSignUpSuccess(); // Відкриваємо іншу сторінку
-            actions.resetForm();
-            setIsLoading(false); // Завершуємо завантаження
-          })
-          .catch(err => {
-            setError(err.message); // Обробка помилки відправки email
-            actions.setSubmitting(false);
-            setIsLoading(false); // Завершуємо завантаження
-          });
-      })
-      .catch(err => {
-        actions.setSubmitting(false);
-        setIsLoading(false);
-        if (err.status === 409) {
-          toast.error(
-            <span>
-              {t('signIn.email_in_use')}
-              <br />
-              <Link to="/signin">
-                {t('signIn.please')}
-                {','} <b>{t('signIn.sign_in_toast')}</b>
-              </Link>
-            </span>
-          );
-        } else {
-          toast.error(t('errors.generic_error'));
-        }
-      });
-  };
-
+  const [error, setError] = useState('');
   const [showPassword, changeShowPassword] = useState(false);
   const [showRepeatPassword, changeShowRepeatPassword] = useState(false);
+
+  const onSignUpSuccess = () => {
+    // Redirect or show success message here
+  };
+
+  const handleSubmit = async (values, actions) => {
+    setIsLoading(true);
+
+    try {
+      await dispatch(
+        signup({ email: values.email, password: values.password })
+      ).unwrap();
+      try {
+        await dispatch(sendVerificationEmail(values.email));
+        onSignUpSuccess();
+        actions.resetForm();
+      } catch (err) {
+        setError(err.message);
+        toast.error(t('errors.email_verification_failed'));
+      }
+    } catch (err) {
+      if (err.status === 409) {
+        toast.error(
+          <span>
+            {t('signIn.email_in_use')}
+            <br />
+            <Link to="/signin">
+              {t('signIn.please')}, <b>{t('signIn.sign_in_toast')}</b>
+            </Link>
+          </span>
+        );
+      } else {
+        toast.error(t('errors.generic_error'));
+      }
+    } finally {
+      setIsLoading(false);
+      actions.setSubmitting(false);
+    }
+  };
 
   return (
     <div className={s.authSection}>
@@ -99,8 +96,8 @@ const SignUpForm = ({ onSignUpSuccess }) => {
           initialValues={initialValues}
           onSubmit={handleSubmit}
           validationSchema={SingUpValidationSchema}
-          validateOnChange={true} // Включаємо валідацію на кожну зміну
-          validateOnBlur={true} // Включаємо валідацію при втраті фокусу
+          validateOnChange={true}
+          validateOnBlur={true}
         >
           <Form className={s.authForm}>
             <div className={s.authFormWrap}>
