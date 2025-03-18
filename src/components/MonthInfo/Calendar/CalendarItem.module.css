@@ -39,16 +39,14 @@
 }
 
 .day {
-  font-size: 1.2rem;
-  font-weight: 700;
   font-size: 16px;
+  font-weight: 700;
   line-height: 1.5;
   letter-spacing: -0.01em;
   text-align: center;
   color: #323f47;
   z-index: 1;
 }
-
 
 .percentage-value {
   font-size: 12px;
@@ -60,23 +58,33 @@
   color: rgba(47, 47, 47, 0.6);
 }
 
-@media screen and (min-width: 320px) and (max-width: 767px) {
+/* Стиль для поточного дня з акцентним бордером */
+.currentDay {
+  box-sizing: border-box;
+  border: 2px solid #39c35b;
+  border-radius: 50%;
+}
+
+/* Стиль для недоступних (майбутніх) днів */
+.disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+@media screen and (max-width: 767px) {
   .calendaritem {
     width: 28px;
-     
   }
-  
+
   .day {
     font-size: 14px;
-line-height: 18px;
+    line-height: 18px;
   }
 
   .btnstyle {
     width: 28px;
     height: 28px;
-  }
-
-  .day {
-    font-size: 14px;
+    padding: 0;
   }
 }

@@ -37,7 +37,6 @@ const SignInForm = () => {
     try {
       setIsLoading(true);
       await dispatch(signin(values)).unwrap();
-      setIsLoading(false);
       actions.resetForm();
     } catch (error) {
       if (error.status === 404 || error.status === 401) {
@@ -47,6 +46,8 @@ const SignInForm = () => {
       } else {
         toast.error(t('errors.generic_error'));
       }
+    } finally {
+      setIsLoading(false); // Завжди завершуємо завантаження
     }
   };
 
