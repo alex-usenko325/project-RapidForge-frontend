@@ -33,26 +33,8 @@ export default function WaterForm({
   }, []);
 
   const handleCustomWaterAmount = e => {
-    let value = e.target.value;
-
-    if (value.length > 1) {
-      value = value.replace(/^0+/, '');
-    }
-    if (value === '') {
-      setWaterAmount('');
-      return;
-    }
-
-    // value = Math.max(0, Math.min(5000, parseInt(value) || 0));
-    value = Math.max(0, Math.min(5000, Number(value) || 0));
+    const value = Math.max(0, Math.min(5000, parseInt(e.target.value) || 0));
     setWaterAmount(value);
-  };
-
-  const handleBlurNumber = () => {
-    if (waterAmount === '' || waterAmount <= 0) {
-      toast.error(t('waterModal.editErrorNumber'));
-      setWaterAmount('');
-    }
   };
 
   const handleBlurTime = () => {
@@ -70,7 +52,7 @@ export default function WaterForm({
       return;
     }
 
-    if (waterAmount === '' || waterAmount <= 0 || waterAmount > 5000) {
+    if (waterAmount === '' || waterAmount < 50 || waterAmount > 5000) {
       toast.error(t('waterModal.editErrorWaterAmount'));
       return;
     }
@@ -93,12 +75,11 @@ export default function WaterForm({
       }
       closeAddWaterModal();
     } catch (error) {
-      toast.error(t('waterModal.editErrorSaving'));
-      // if (modalType === 'edit' && error.message.includes('not found')) {
-      //   toast.error(t('waterModal.editErrorMessage'));
-      // } else {
-      //   toast.error(t('waterModal.errorMessage'));
-      // }
+      if (modalType === 'edit' && error.message.includes('not found')) {
+        toast.error(t('waterModal.editErrorMessage'));
+      } else {
+        toast.error(t('waterModal.errorMessage'));
+      }
     }
   };
 
@@ -112,7 +93,7 @@ export default function WaterForm({
           onClick={decreaseWater}
         ></button>
 
-        <p className={s.number}>{waterAmount || 0} ml</p>
+        <p className={s.number}>{waterAmount} ml</p>
         <button
           type="button"
           className={clsx(s.btn, s.btnPlus)}
@@ -143,7 +124,6 @@ export default function WaterForm({
             max="5000"
             className={clsx(s.inputValueWater, s.input)}
             autoComplete="off"
-            onBlur={handleBlurNumber}
           />
         </label>
         <button type="submit" className={s.btnSave} disabled={isLoading}>

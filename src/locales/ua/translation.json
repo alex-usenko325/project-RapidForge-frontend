@@ -131,10 +131,8 @@
     "editSuccessMessage": "Успішно оновлено запис води!",
     "editErrorMessage": "Запис води не знайдено!",
     "editErrorNotValid": "Введіть дійсний час",
-    "editErrorNumber": "Введіть дійсну кількість води (1-5000 мл)",
     "editErrorRecordingTime": "Поле часу є обов’язковим",
-    "editErrorWaterAmount": "Кількість води має бути від 1 до 5000 мл",
-    "editErrorSaving": "Під час збереження запису сталася помилка"
+    "editErrorWaterAmount": "Кількість води має бути від 50 до 5000 мл"
   },
   "userSettingsModal": {
     "settings": "Налаштування"
