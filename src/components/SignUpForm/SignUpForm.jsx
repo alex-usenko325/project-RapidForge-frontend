@@ -39,17 +39,13 @@ const initialValues = {
   repeatPassword: '',
 };
 
-const SignUpForm = () => {
+const SignUpForm = ({ onSignUpSuccess }) => {
   const dispatch = useDispatch();
   const { t } = useTranslation();
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
   const [showPassword, changeShowPassword] = useState(false);
   const [showRepeatPassword, changeShowRepeatPassword] = useState(false);
-
-  const onSignUpSuccess = () => {
-    // Redirect or show success message here
-  };
 
   const handleSubmit = async (values, actions) => {
     setIsLoading(true);
