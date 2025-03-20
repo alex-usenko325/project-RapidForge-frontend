@@ -22,6 +22,7 @@
   line-height: 1.5;
   letter-spacing: -0.01em;
   color: #323f47;
+  width: 136px;
 }
 
 .pagination {
@@ -77,10 +78,11 @@
   .spanmonth {
     font-size: 14px;
     line-height: 18px;
+    width: 120px;
   }
 
   .pagination {
-    gap: 18px;
+    gap: 8px;
   }
 
   .iconpie {
