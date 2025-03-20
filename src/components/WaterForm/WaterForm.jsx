@@ -19,16 +19,11 @@ export default function WaterForm({
   const dispatch = useDispatch();
   const isLoading = useSelector(selectWaterIsLoading);
   const [waterAmount, setWaterAmount] = useState(50);
+  const [time, setTime] = useState('');
+
   const increaseWater = () => setWaterAmount(waterAmount + 50);
   const decreaseWater = () =>
     setWaterAmount(waterAmount > 50 ? waterAmount - 50 : 50);
-
-  const [time, setTime] = useState('');
-
-  const handleCustomWaterAmount = e => {
-    const value = Math.max(0, Math.min(5000, parseInt(e.target.value) || 0));
-    setWaterAmount(value);
-  };
 
   useEffect(() => {
     const now = new Date();
@@ -37,8 +32,30 @@ export default function WaterForm({
     setTime(`${hours}:${minutes}`);
   }, []);
 
+  const handleCustomWaterAmount = e => {
+    const value = Math.max(0, Math.min(5000, parseInt(e.target.value) || 0));
+    setWaterAmount(value);
+  };
+
+  const handleBlurTime = () => {
+    if (!time || time === '--:--') {
+      toast.error(t('waterModal.editErrorNotValid'));
+      setTime('');
+    }
+  };
+
   const handleSubmit = async e => {
     e.preventDefault();
+
+    if (!time || time === '--:--') {
+      toast.error(t('waterModal.editErrorRecordingTime'));
+      return;
+    }
+
+    if (waterAmount === '' || waterAmount < 50 || waterAmount > 5000) {
+      toast.error(t('waterModal.editErrorWaterAmount'));
+      return;
+    }
 
     const record = {
       date: new Date().toISOString().split('T')[0],
@@ -93,6 +110,8 @@ export default function WaterForm({
             onChange={e => setTime(e.target.value)}
             className={clsx(s.inputTime, s.input)}
             autoComplete="off"
+            onInvalid={e => e.preventDefault()}
+            onBlur={handleBlurTime}
           />
         </label>
         <label className={s.labelValueWater}>
