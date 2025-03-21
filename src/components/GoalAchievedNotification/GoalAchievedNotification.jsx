@@ -21,8 +21,7 @@ const GoalAchievedNotification = () => {
         width={windowWidth}
         height={windowHeight}
         recycle={false}
-        // run={false}
-        // currentTime={2}
+        numberOfPieces={750}
       />
     </>
   );

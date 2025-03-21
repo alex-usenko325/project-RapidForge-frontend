@@ -104,7 +104,8 @@
   },
   "waterDailyNorma": {
     "dailyNorma": "Денна норма",
-    "liters": "л"
+    "liters": "л",
+    "goalAchieved": "Вітаємо! 100% досягнуто. Продовжуйте пити воду протягом дня!"
   },
   "waterList": {
     "noEntries": "Сьогодні Ви ще не пили воду."

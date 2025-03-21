@@ -104,7 +104,8 @@
   },
   "waterDailyNorma": {
     "dailyNorma": "My daily norma",
-    "liters": "L"
+    "liters": "L",
+    "goalAchieved": "Congratulations! 100% achieved. Keep drinking water throughout the day!"
   },
   "waterList": {
     "noEntries": "No water consumed today."
