@@ -33,6 +33,11 @@ export default function WaterForm({
   }, []);
 
   const handleCustomWaterAmount = e => {
+    const currentValue = e.target.value;
+    if (currentValue === '') {
+      setWaterAmount('');
+      return;
+    }
     const value = Math.max(0, Math.min(5000, parseInt(e.target.value) || 0));
     setWaterAmount(value);
   };
