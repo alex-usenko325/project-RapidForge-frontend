@@ -44,6 +44,14 @@
     "already_have_account": "Вже маєте обліковий запис?",
     "sign_in": "Увійти"
   },
+
+  "resetPassword": {
+    "reset_password": "Змінити пароль",
+    "password": "Новий пароль",
+    "enter_your_password": "Введіть Ваш новий пароль",
+    "repeat_password": "Повторіть новий пароль"
+  },
+
   "emailInUseModal": {
     "title": "Електронна пошта вже існує",
     "message": "Будь ласка, увійдіть або використайте іншу електронну пошту.",

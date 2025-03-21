@@ -10,6 +10,7 @@ import { getUserData } from './redux/user/operations';
 
 import NotFoundPage from './pages/NotFoundPage/NotFoundPage';
 import Layout from './components/Layout';
+import ResetPasswordPage from './pages/ResetPasswordPage/ResetPasswordPage.jsx';
 
 const HomePage = lazy(() => import('./pages/HomePage/HomePage.jsx'));
 const TrackerPage = lazy(() => import('./pages/TrackerPage/TrackerPage.jsx'));
@@ -65,6 +66,14 @@ const App = () => {
             element={
               <RestrictedRoute isLoggedIn={isLoggedIn}>
                 <SignUpPage />
+              </RestrictedRoute>
+            }
+          />
+          <Route
+            path="/reset-password"
+            element={
+              <RestrictedRoute isLoggedIn={isLoggedIn}>
+                <ResetPasswordPage />
               </RestrictedRoute>
             }
           />

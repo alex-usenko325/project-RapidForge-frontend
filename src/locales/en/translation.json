@@ -44,6 +44,12 @@
     "already_have_account": "Already have an account?",
     "sign_in": "Sign In"
   },
+  "resetPassword": {
+    "reset_password": "Reset password",
+    "password": "New password",
+    "enter_your_password": "Enter your new password",
+    "repeat_password": "Repeat new password"
+  },
   "emailInUseModal": {
     "title": "Email already exists",
     "message": "Please sign in or use a different email.",
