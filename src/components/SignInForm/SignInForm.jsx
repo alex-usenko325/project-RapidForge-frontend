@@ -129,6 +129,12 @@ const SignInForm = () => {
                   {t('signIn.sign_up')}
                 </a>
               </div>
+              <div className={s.haveAnAccount}>
+                Forgot password?
+                <a href="/reset-password" className={s.authLink}>
+                  Reset it
+                </a>
+              </div>
             </div>
           </Form>
         </Formik>
