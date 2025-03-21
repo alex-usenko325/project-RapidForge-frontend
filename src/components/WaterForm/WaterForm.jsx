@@ -60,7 +60,7 @@ export default function WaterForm({
     }
 
     const record = {
-      date: selectedDate,
+      date: selectedDate || new Date().toISOString().split('T')[0],
       volume: waterAmount,
       time: time,
     };
