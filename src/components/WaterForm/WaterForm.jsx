@@ -7,7 +7,7 @@ import {
   addWaterRecord,
   updateWaterRecord,
 } from '../../redux/water/operations';
-import { selectWaterIsLoading } from '../../redux/water/selectors';
+import { selectSelectedDate, selectWaterIsLoading } from '../../redux/water/selectors';
 import toast from 'react-hot-toast';
 
 export default function WaterForm({
@@ -15,6 +15,8 @@ export default function WaterForm({
   modalType,
   waterEntryId,
 }) {
+
+  const selectedDate = useSelector(selectSelectedDate)
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const isLoading = useSelector(selectWaterIsLoading);
@@ -58,7 +60,7 @@ export default function WaterForm({
     }
 
     const record = {
-      date: new Date().toISOString().split('T')[0],
+      date: selectedDate || new Date().toISOString().split('T')[0],
       volume: waterAmount,
       time: time,
     };
