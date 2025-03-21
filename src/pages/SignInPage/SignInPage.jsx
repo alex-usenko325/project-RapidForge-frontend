@@ -11,6 +11,7 @@ import {
 import { selectModalComponent } from '../../redux/modal/selectors';
 import s from '../SignUpPage/SignUpPage.module.css';
 import VerifyEmailToken from '../../components/VerifyModal/VerifyEmailToken.jsx';
+import { GoogleOAuthProvider } from '@react-oauth/google'; // Імпортуємо GoogleOAuthProvider
 
 const SignInPage = () => {
   const [isLargeScreen, setIsLargeScreen] = useState(window.innerWidth >= 1440);
@@ -42,15 +43,20 @@ const SignInPage = () => {
   };
 
   return (
-    <div className={clsx('container', s.authContainer)}>
-      <SignInForm />
-      {isLargeScreen && <AdvantagesSection />}
+    <GoogleOAuthProvider
+      clientId={import.meta.env.VITE_GOOGLE_CLIENT_ID}
+      redirectUri="http://localhost:5173"
+    >
+      <div className={clsx('container', s.authContainer)}>
+        <SignInForm />
+        {isLargeScreen && <AdvantagesSection />}
 
-      {/* Відображення модалки, якщо вона активна */}
-      {modalComponent === 'VerifyEmail' && (
-        <VerifyEmailToken onClose={handleCloseModal} />
-      )}
-    </div>
+        {/* Відображення модалки, якщо вона активна */}
+        {modalComponent === 'VerifyEmail' && (
+          <VerifyEmailToken onClose={handleCloseModal} />
+        )}
+      </div>
+    </GoogleOAuthProvider>
   );
 };
 

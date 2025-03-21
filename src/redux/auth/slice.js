@@ -6,6 +6,7 @@ import {
   signup,
   sendVerificationEmail,
   verifyEmail,
+  loginWithGoogle,
 } from './operations';
 
 const initialState = {
@@ -86,6 +87,21 @@ const authSlice = createSlice({
       .addCase(verifyEmail.rejected, (state, action) => {
         state.verificationStatus = 'failed';
         state.verificationError = action.payload; // Зберігаємо помилку
+      })
+
+      // Додаємо нові кейси для Google авторизації
+      .addCase(loginWithGoogle.pending, state => {
+        state.isLoading = true;
+      })
+      .addCase(loginWithGoogle.fulfilled, (state, action) => {
+        state.token = action.payload.accessToken;
+        state.isLoggedIn = true;
+        state.email = action.payload.user.email;
+        state.isLoading = false;
+      })
+      .addCase(loginWithGoogle.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload; // Помилка при авторизації через Google
       });
   },
 });

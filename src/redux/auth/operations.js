@@ -3,8 +3,8 @@ import axios from 'axios';
 
 // Створення екземпляра axios для авторизації
 export const authAPI = axios.create({
-  baseURL: 'https://aqua-track-app.onrender.com', // Вкажіть правильний URL вашого серверу
-  // baseURL: 'http://localhost:3000', // Локальний URL серверу, якщо потрібно
+  // baseURL: 'https://aqua-track-app.onrender.com', // Вкажіть правильний URL вашого серверу
+  baseURL: 'http://localhost:4000', // Локальний URL серверу, якщо потрібно
   headers: {
     'Content-Type': 'application/json',
   },
@@ -133,6 +133,33 @@ export const refreshAccessToken = createAsyncThunk(
       return response.data.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.response.data);
+    }
+  }
+);
+
+export const loginWithGoogle = createAsyncThunk(
+  'auth/loginWithGoogle',
+  async (code, thunkAPI) => {
+    try {
+      // Відправка коду авторизації до бекенду
+      const response = await authAPI.post('/confirm-oauth', { code });
+
+      // Перевірка статусу
+      if (response.data.status === 200) {
+        // Повернення даних безпосередньо з response.data.data
+        return response.data.data;
+      } else {
+        return thunkAPI.rejectWithValue('Error during Google OAuth');
+      }
+    } catch (error) {
+      // Обробка помилки 401
+      if (error.response && error.response.status === 401) {
+        return thunkAPI.rejectWithValue(
+          'Unauthorized access. Please check your credentials.'
+        );
+      }
+      // Обробка інших помилок
+      return thunkAPI.rejectWithValue(error.message);
     }
   }
 );

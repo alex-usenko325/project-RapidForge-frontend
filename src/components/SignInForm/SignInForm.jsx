@@ -11,6 +11,7 @@ import i18next from 'i18next';
 import LocalizationDropdownMenu from '../LocalizationDropdownMenu/LocalizationDropdownMenu';
 import { RotatingLines } from 'react-loader-spinner'; // Імпортуємо індикатор завантаження
 import toast from 'react-hot-toast';
+import { GoogleAuthButton } from '../GoogleAuthButton/GoogleAuthButton.jsx'; // Імпортуємо кнопку GoogleLogin
 
 const SingInValidationSchema = Yup.object().shape({
   email: Yup.string()
@@ -132,6 +133,9 @@ const SignInForm = () => {
             </div>
           </Form>
         </Formik>
+        <div className={s.googleLoginWrap}>
+          <GoogleAuthButton /> {/* Додаємо кнопку Google Login */}
+        </div>
       </div>
     </div>
   );
