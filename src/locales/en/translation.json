@@ -46,9 +46,14 @@
   },
   "resetPassword": {
     "reset_password": "Reset password",
+    "note": "A link to the password reset page will be sent to your email",
+    "send_email": "Send link",
+    "send_success": "The link to reset password page was sent to your email",
+    "reset_success": "Password reset successfully",
     "password": "New password",
     "enter_your_password": "Enter your new password",
-    "repeat_password": "Repeat new password"
+    "repeat_password": "Repeat new password",
+    "email_error": "Invalid email. Please try again"
   },
   "emailInUseModal": {
     "title": "Email already exists",

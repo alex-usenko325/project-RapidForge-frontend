@@ -98,15 +98,14 @@ export const verifyEmail = createAsyncThunk(
 export const sendResetPasswordEmail = createAsyncThunk(
   'auth/sendResetPasswordEmail',
   async (email, thunkAPI) => {
-    console.log('from sendResetPasswordEmail_1: ', email);
     try {
       const response = await authAPI.post('/auth/send-reset-password-email', {
         email,
       });
-      await console.log('from sendResetPasswordEmail_2: ', response.data);
+
       return response.data;
     } catch (error) {
-      return thunkAPI.rejectWithValue(error.message);
+      return thunkAPI.rejectWithValue(error.response.data);
     }
   }
 );

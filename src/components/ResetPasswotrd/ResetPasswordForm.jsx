@@ -50,32 +50,31 @@ const ResetPasswordForm = ({ token }) => {
 
   const { t } = useTranslation();
   const dispatch = useDispatch();
-  const [error, setError] = useState(null);
+
   const [isLoading, setIsLoading] = useState(false);
 
   const handleSubmit = (values, actions) => {
     setIsLoading(true); // Встановлюємо isLoading у true перед початком реєстрації
-    console.log('from handleSubmit: ', values.email);
+
     if (!isToken) {
       dispatch(sendResetPasswordEmail(values.email))
-        .unwrap(payload => console.log('from unwrap: ', payload))
+        .unwrap()
         .then(() => {
           setIsLoading(false);
-          return toast(
-            <span>The link to reset password page was sent to your email</span>
+          return toast.success(
+            <span>`${t('resetPassword.send_success')}`</span>
           );
         })
         .catch(err => {
-          setError(err.message); // Обробка помилки реєстрації
           actions.setSubmitting(false);
-          setIsLoading(false); // Завершуємо завантаження
 
-          return toast.error(
-            <span>
-              {`${err}. `}
-              Please, try again
-            </span>
-          );
+          if (err.status === 404) {
+            toast.error(t('resetPassword.email_error'));
+          } else if (err.status === 403) {
+            toast.error(t('signIn.not_verified'));
+          } else {
+            toast.error(t('errors.generic_error'));
+          }
         });
       setIsLoading(false);
       return;
@@ -83,26 +82,20 @@ const ResetPasswordForm = ({ token }) => {
     dispatch(resetPassword({ token, password: values.password }))
       .unwrap()
       .then(() => {
-        return toast(
+        return toast.success(
           <span>
-            Password reset successfully
+            {t('resetPassword.reset_success')}
             <Link to="/signin" target="_blank" rel="noopener noreferrer">
-              Please <b>Log In</b>
+              <b> {t('signUp.sign_in')}</b>
             </Link>
           </span>
         );
       })
-      .catch(err => {
-        setError(err.message);
+      .catch(() => {
         actions.setSubmitting(false);
         setIsLoading(false); // Завершуємо завантаження
 
-        return toast.error(
-          <span>
-            {`${err}. `}
-            Please, try again
-          </span>
-        );
+        return toast.error(t('errors.generic_error'));
       });
     setIsLoading(false);
   };
@@ -128,23 +121,26 @@ const ResetPasswordForm = ({ token }) => {
           <Form className={s.authForm}>
             <div className={s.authFormWrap}>
               {!token && (
-                <label className={s.authLabel}>
-                  <span className={s.labelSpan}>
-                    {t('resetPassword.e_mail')}
-                  </span>
-                  <Field
-                    className={s.authField}
-                    type="email"
-                    name="email"
-                    placeholder={t('signUp.enter_your_email')}
-                    required
-                  />
-                  <ErrorMessage
-                    name="email"
-                    component={'span'}
-                    className={s.errorMessage}
-                  />
-                </label>
+                <>
+                  <p>{t('resetPassword.note')}</p>
+                  <label className={s.authLabel}>
+                    <span className={s.labelSpan}>
+                      {t('signUp.enter_your_email')}
+                    </span>
+                    <Field
+                      className={s.authField}
+                      type="email"
+                      name="email"
+                      placeholder={t('signUp.enter_your_email')}
+                      required
+                    />
+                    <ErrorMessage
+                      name="email"
+                      component={'span'}
+                      className={s.errorMessage}
+                    />
+                  </label>
+                </>
               )}
               {isToken && (
                 <>
@@ -226,11 +222,12 @@ const ResetPasswordForm = ({ token }) => {
                     ariaLabel="rotating-lines-loading"
                   />
                 ) : (
-                  t('resetPassword.reset_password')
+                  t(
+                    `resetPassword.${isToken ? 'reset_password' : 'send_email'}`
+                  )
                 )}
               </button>
 
-              {error && <div className={s.error}>{error}</div>}
               <div className={s.haveAnAccount}>
                 {t('signUp.already_have_account')}{' '}
                 <a href="/signin" className={s.authLink}>
