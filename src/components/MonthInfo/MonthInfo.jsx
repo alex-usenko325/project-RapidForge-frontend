@@ -16,7 +16,7 @@ const MonthInfo = () => {
   };
 
   return (
-    <div>
+    <div className="sixth-step">
       <CalendarPagination
         selectedDate={selectedDate}
         onDateChange={handleDateChange}

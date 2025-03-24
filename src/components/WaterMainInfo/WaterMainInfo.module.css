@@ -13,6 +13,28 @@
   padding: 24px 16px;
 }
 
+.tourBtn {
+  text-align: center;
+  left: 100px;
+  /* border-radius: 20px; */
+  margin-top: 5px;
+  /* padding: 4px; */
+  /* width: 40px;
+  background: var(--main-white); */
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--main-white);
+  outline: none;
+  border: none;
+  transition: color 250ms ease-in;
+}
+
+.tourBtn:hover,
+.tourBtn:focus {
+  /* color: var(--accent-hover); */
+  color: #323f47;
+}
+
 @media only screen and (min-resolution: 192dpi),
   only screen and (min-resolution: 2dppx),
   only screen and (-webkit-min-device-pixel-ratio: 2) {

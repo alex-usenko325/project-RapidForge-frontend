@@ -94,10 +94,22 @@
     "please": "Please",
     "sign_in_toast": "sign in"
   },
+  "onboardingTour": {
+    "startTourBtn": "Start Tour",
+    "welcome": "Welcome to AquaTrack! This is your personal water tracker.",
+    "first-step": "Here is your daily water consumption goal.",
+    "second-step": "This is your progress indicator for today.",
+    "third-step": "Click here to add more water.",
+    "fourth-step": "Here you can add your personal data and record your water consumption.",
+    "fifth-step": "This section shows your water intake for the day.",
+    "sixth-step": "Here you will see your water consumption for each day of the month.",
+    "seventh-step": "Click here to check out your water consumption graph!"
+  },
   "userBarPopover": {
     "settings": "Settings",
     "logout": "Log out"
   },
+
   "userPanel": {
     "hello": "Hello",
     "noUserData": "No user data"
