@@ -1,29 +1,33 @@
 import { useEffect } from 'react';
-import WaterDetailedInfo from '../../components/WaterDetailedInfo/WaterDetailedInfo';
-import WaterMainInfo from '../../components/WaterMainInfo/WaterMainInfo';
-import css from './TrackerPage.module.css';
-import clsx from 'clsx';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  selectSelectedDate,
+  selectWaterRecords,
+} from '../../redux/water/selectors.js';
 import {
   getWaterByMonth,
   getWaterRecords,
 } from '../../redux/water/operations.js';
+import WaterDetailedInfo from '../../components/WaterDetailedInfo/WaterDetailedInfo';
+import WaterMainInfo from '../../components/WaterMainInfo/WaterMainInfo';
+import dayjs from 'dayjs';
+import clsx from 'clsx';
+import css from './TrackerPage.module.css';
 
 export default function TrackerPage() {
   const dispatch = useDispatch();
-
-  const currentDate = new Date();
-  const year = currentDate.getFullYear().toString();
-  const month = (currentDate.getMonth() + 1).toString().padStart(2, '0');
+  const records = useSelector(selectWaterRecords);
+  const selectedDate = useSelector(selectSelectedDate);
 
   useEffect(() => {
-    async function fetchData() {
-      await dispatch(getWaterByMonth({ month, year })).unwrap();
-      await dispatch(getWaterRecords()).unwrap();
-    }
+    const month = dayjs(selectedDate).month() + 1;
+    const year = dayjs(selectedDate).year();
+    dispatch(getWaterByMonth({ month, year }));
+  }, [dispatch, records, selectedDate]);
 
-    fetchData();
-  }, [dispatch, year, month]);
+  useEffect(() => {
+    dispatch(getWaterRecords());
+  }, [dispatch]);
 
   return (
     <div className={clsx('container', css.container)}>

@@ -1,11 +1,11 @@
-import { useDispatch } from 'react-redux';
-import { setSelectedDate } from '../../../redux/water/slice';
+import { useSelector } from 'react-redux';
+import { selectSelectedDate } from '../../../redux/water/selectors.js';
+import dayjs from 'dayjs';
 import clsx from 'clsx';
 import s from './CalendarItem.module.css';
-import dayjs from 'dayjs';
 
-const CalendarItem = ({ day, selectedDate, onDateSelect, percent = 0 }) => {
-  const dispatch = useDispatch();
+const CalendarItem = ({ day, onDateSelect, percent = 0 }) => {
+  const selectedDate = useSelector(selectSelectedDate);
 
   const getFormattedDate = (selectedDate, day) => {
     const date = new Date(selectedDate);
@@ -29,7 +29,6 @@ const CalendarItem = ({ day, selectedDate, onDateSelect, percent = 0 }) => {
       return;
     }
     const formattedDate = getFormattedDate(selectedDate, day);
-    dispatch(setSelectedDate(formattedDate));
     onDateSelect(formattedDate);
   };
 

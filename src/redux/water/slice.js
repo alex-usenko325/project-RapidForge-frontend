@@ -14,12 +14,13 @@ import timezone from 'dayjs/plugin/timezone';
 dayjs.extend(utc);
 dayjs.extend(timezone);
 
+const userTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
 const initialState = {
   monthIntakes: [],
   records: [],
   isLoading: false,
   error: null,
-  selectedDate: null,
+  selectedDate: dayjs().tz(userTimezone).format(),
 };
 
 const waterSlice = createSlice({

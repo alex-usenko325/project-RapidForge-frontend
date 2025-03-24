@@ -1,9 +1,9 @@
-import { useTranslation } from 'react-i18next';
-import css from './WaterItem.module.css';
-import sprite from '../../assets/sprite.svg';
-import WaterModal from '../WaterModal/WaterModal.jsx';
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import WaterModal from '../WaterModal/WaterModal.jsx';
 import DeleteWaterModal from '../DeleteWaterModal/DeleteWaterModal.jsx';
+import sprite from '../../assets/sprite.svg';
+import css from './WaterItem.module.css';
 
 const WaterItem = ({ id, volume, time }) => {
   const { t } = useTranslation();

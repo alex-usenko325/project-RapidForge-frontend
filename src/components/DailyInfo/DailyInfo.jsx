@@ -1,10 +1,10 @@
 import { useSelector } from 'react-redux';
+import { selectWaterIsLoading } from '../../redux/water/selectors.js';
+import { RotatingLines } from 'react-loader-spinner';
 import AddWaterBtn from '../AddWaterBtn/AddWaterBtn.jsx';
 import ChooseDate from '../ChooseDate/ChooseDate.jsx';
 import WaterList from '../WaterList/WaterList.jsx';
 import s from './DailyInfo.module.css';
-import { selectWaterIsLoading } from '../../redux/water/selectors.js';
-import { RotatingLines } from 'react-loader-spinner';
 
 const DailyInfo = () => {
   const isLoading = useSelector(selectWaterIsLoading);

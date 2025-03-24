@@ -17,10 +17,12 @@ export const selectDailyNorm = state => state.user.user.dailyNorm || 1500;
 export const selectWaterProgress = state => {
   const dailyNorm = selectDailyNorm(state);
   const records = selectWaterRecords(state);
-  const waterConsumed = records.reduce(
-    (sum, record) => sum + (record.volume || 0),
-    0
-  );
+
+
+
+  const waterConsumed = records
+    .filter(record => record.date === new Date().toISOString().split('T')[0])
+    .reduce((sum, record) => sum + (record.volume || 0), 0);
   return dailyNorm > 0 ? Math.min((waterConsumed / dailyNorm) * 100, 100) : 0;
 };
 
