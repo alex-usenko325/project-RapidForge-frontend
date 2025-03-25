@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import WaterDetailedInfo from '../../components/WaterDetailedInfo/WaterDetailedInfo';
 import WaterMainInfo from '../../components/WaterMainInfo/WaterMainInfo';
 import css from './TrackerPage.module.css';
@@ -8,16 +8,28 @@ import {
   getWaterByMonth,
   getWaterRecords,
 } from '../../redux/water/operations.js';
-import { selectWaterProgress } from '../../redux/water/selectors.js';
+import {
+  selectConfettiShown,
+  selectLastConfettiDate,
+  selectShowConfetti,
+  selectWaterProgress,
+} from '../../redux/water/selectors.js';
 import GoalAchievedNotification from '../../components/GoalAchievedNotification/GoalAchievedNotification.jsx';
 import toast from 'react-hot-toast';
 import { useTranslation } from 'react-i18next';
+import {
+  setShowConfetti,
+  setConfettiShown,
+  setLastConfettiDate,
+} from '../../redux/water/slice.js';
 
 export default function TrackerPage() {
   const dispatch = useDispatch();
   const { t } = useTranslation();
   const progress = useSelector(selectWaterProgress);
-  const [showConfetti, setShowConfetti] = useState(false);
+  const showConfetti = useSelector(selectShowConfetti);
+  const confettiShown = useSelector(selectConfettiShown);
+  const lastConfettiDate = useSelector(selectLastConfettiDate);
 
   const currentDate = new Date();
   const year = currentDate.getFullYear().toString();
@@ -32,12 +44,26 @@ export default function TrackerPage() {
     fetchData();
   }, [dispatch, year, month]);
 
-  // Якщо прогрес 100%, показуємо конфетті
   useEffect(() => {
-    if (progress === 100) {
-      setShowConfetti(true);
+    const storedDate = localStorage.getItem('lastConfettiDate');
+    if (storedDate) {
+      dispatch(setLastConfettiDate(storedDate));
+    }
+  }, [dispatch]);
+
+  useEffect(() => {
+    const today = new Date().toISOString().split('T')[0]; // Поточна дата
+
+    if (progress === 100 && !confettiShown && lastConfettiDate !== today) {
+      dispatch(setLastConfettiDate(today));
+      localStorage.setItem('lastConfettiDate', today); // Збереження дати
+
+      dispatch(setShowConfetti(true));
+      dispatch(setConfettiShown(true));
+      localStorage.setItem('confettiShown', 'true'); // Збереження в localStorage
+
       toast.custom(
-        toast => (
+        toastInstance => (
           <div
             style={{
               display: 'flex',
@@ -55,7 +81,7 @@ export default function TrackerPage() {
           >
             <span>👏 {t('waterDailyNorma.goalAchieved')}</span>
             <button
-              onClick={() => toast.dismiss(toast.id)}
+              onClick={() => toast.remove(toastInstance.id)}
               style={{
                 marginLeft: '16px',
                 padding: '4px 8px',
@@ -71,12 +97,10 @@ export default function TrackerPage() {
             </button>
           </div>
         ),
-        {
-          duration: 10000,
-        }
+        { duration: 10000 }
       );
     }
-  }, [progress]);
+  }, [progress, dispatch, confettiShown, lastConfettiDate, t]);
 
   return (
     <>

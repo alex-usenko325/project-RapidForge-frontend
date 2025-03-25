@@ -11,8 +11,11 @@ export const selectWaterRecordsByMonth = state => state.water.monthIntakes;
 export const selectWaterRecords = state => state.water.records;
 export const selectWaterIsLoading = state => state.water.isLoading;
 export const selectWaterError = state => state.water.error;
-
 export const selectDailyNorm = state => state.user.user.dailyNorm || 1500;
+
+export const selectShowConfetti = state => state.water.showConfetti;
+export const selectConfettiShown = state => state.water.confettiShown;
+export const selectLastConfettiDate = state => state.water.lastConfettiDate;
 
 export const selectWaterProgress = state => {
   const dailyNorm = selectDailyNorm(state);

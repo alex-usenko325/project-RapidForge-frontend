@@ -20,6 +20,9 @@ const initialState = {
   isLoading: false,
   error: null,
   selectedDate: null,
+  showConfetti: false,
+  confettiShown: false,
+  lastConfettiDate: null,
 };
 
 const waterSlice = createSlice({
@@ -28,6 +31,15 @@ const waterSlice = createSlice({
   reducers: {
     setSelectedDate: (state, action) => {
       state.selectedDate = action.payload;
+    },
+    setShowConfetti: (state, action) => {
+      state.showConfetti = action.payload;
+    },
+    setConfettiShown: (state, action) => {
+      state.confettiShown = action.payload;
+    },
+    setLastConfettiDate: (state, action) => {
+      state.lastConfettiDate = action.payload;
     },
   },
   extraReducers: builder => {
@@ -120,5 +132,10 @@ const waterSlice = createSlice({
   },
 });
 
-export const { setSelectedDate } = waterSlice.actions;
+export const {
+  setSelectedDate,
+  setShowConfetti,
+  setConfettiShown,
+  setLastConfettiDate,
+} = waterSlice.actions;
 export const waterReducer = waterSlice.reducer;
