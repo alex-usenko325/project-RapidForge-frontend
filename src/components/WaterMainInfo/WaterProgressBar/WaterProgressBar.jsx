@@ -25,7 +25,7 @@ export default function WaterProgressBar() {
     );
 
   return (
-    <div className={css.container}>
+    <div className={`${css.container} second-step`}>
       <p className={css.label}>{t('waterProgressBar.today')}</p>
       <div className={css.progressBar}>
         <div

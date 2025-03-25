@@ -20,7 +20,7 @@ const AddWaterBtn = ({ style }) => {
   return (
     <>
       <button
-        className={style === 'green' ? s.addWaterBtn : s.btn}
+        className={`${style === 'green' ? s.addWaterBtn : s.btn} third-step`}
         onClick={() => handleClickOpenWaterModal('add')}
       >
         <span className={style === 'green' ? s.plus : s.icon}></span>
