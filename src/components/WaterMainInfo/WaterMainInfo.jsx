@@ -11,12 +11,13 @@ export default function WaterMainInfo({ tourOn }) {
 
   return (
     <div className={css.container}>
-      <LocalizationDropdownMenu />
-      <button className={css.tourBtn} onClick={tourOn}>
-        {t('onboardingTour.startTourBtn')}
-      </button>
-
       <Logo />
+      <div className={css.logoWrap}>
+        <button className={css.tourBtn} onClick={tourOn}>
+          {t('onboardingTour.startTourBtn')}
+        </button>
+        <LocalizationDropdownMenu />
+      </div>
       <WaterDailyNorma />
       <WaterProgressBar />
       <AddWaterBtn />

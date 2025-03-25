@@ -94,16 +94,17 @@
     "please": "Please",
     "sign_in_toast": "sign in"
   },
+
   "onboardingTour": {
-    "startTourBtn": "Start Tour",
-    "welcome": "Welcome to AquaTrack! This is your personal water tracker.",
-    "first-step": "Here is your daily water consumption goal.",
-    "second-step": "This is your progress indicator for today.",
-    "third-step": "Click here to add more water.",
-    "fourth-step": "Here you can add your personal data and record your water consumption.",
-    "fifth-step": "This section shows your water intake for the day.",
-    "sixth-step": "Here you will see your water consumption for each day of the month.",
-    "seventh-step": "Click here to check out your water consumption graph!"
+    "startTourBtn": "Take a Tour",
+    "welcome": "Welcome to AquaTrack! Your personal water tracker is here to help you stay hydrated.",
+    "first-step": "This is your daily water intake goal. Stay on track to reach it!",
+    "second-step": "Here’s your current progress for today’s water consumption.",
+    "third-step": "Click here to log more water intake.",
+    "fourth-step": "Update your personal data and set your water goal here.",
+    "fifth-step": "This section shows your total water intake for today.",
+    "sixth-step": "Here you can view your water consumption for each day of the month.",
+    "seventh-step": "Click here to explore your water consumption graph for the week!"
   },
   "userBarPopover": {
     "settings": "Settings",
