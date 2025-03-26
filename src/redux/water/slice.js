@@ -95,26 +95,11 @@ const waterSlice = createSlice({
         if (recordIndex !== -1) {
           state.records[recordIndex] = updatedRecord;
         }
-        if (state.selectedDate) {
-          const recordDate = dayjs(updatedRecord.date).tz(userTimezone);
-          const selectedMonth = dayjs(state.selectedDate)
-            .tz(userTimezone)
-            .month();
-          const selectedYear = dayjs(state.selectedDate)
-            .tz(userTimezone)
-            .year();
-
-          const monthIndex = state.monthIntakes.findIndex(
-            record => record._id === updatedRecord._id
-          );
-
-          if (
-            recordDate.month() === selectedMonth &&
-            recordDate.year() === selectedYear &&
-            monthIndex !== -1
-          ) {
-            state.monthIntakes[monthIndex] = updatedRecord;
-          }
+        const monthIndex = state.monthIntakes.findIndex(
+          record => record._id === updatedRecord._id
+        );
+        if (monthIndex !== -1) {
+          state.monthIntakes[monthIndex] = updatedRecord;
         }
       })
       .addCase(updateWaterRecord.rejected, (state, action) => {
