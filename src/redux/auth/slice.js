@@ -6,6 +6,8 @@ import {
   signup,
   sendVerificationEmail,
   verifyEmail,
+  sendResetPasswordEmail,
+  resetPassword,
 } from './operations';
 
 const initialState = {
@@ -32,8 +34,9 @@ const authSlice = createSlice({
         state.email = action.payload.email;
         state.isLoading = false;
       })
-      .addCase(signup.rejected, state => {
+      .addCase(signup.rejected, (state, action) => {
         state.isLoading = false;
+        state.error = action.payload.message;
       })
       .addCase(signin.pending, state => {
         state.isLoading = true;
@@ -84,6 +87,29 @@ const authSlice = createSlice({
         state.verificationStatus = 'succeeded';
       })
       .addCase(verifyEmail.rejected, (state, action) => {
+        state.verificationStatus = 'failed';
+        state.verificationError = action.payload;
+      })
+      .addCase(sendResetPasswordEmail.pending, state => {
+        state.verificationStatus = 'loading';
+        state.verificationError = null;
+      })
+      .addCase(sendResetPasswordEmail.fulfilled, state => {
+        state.verificationStatus = 'succeeded';
+      })
+      .addCase(sendResetPasswordEmail.rejected, (state, action) => {
+        state.verificationStatus = 'failed';
+        state.verificationError = action.payload.message;
+        // state.error = action.payload.message;
+      })
+      .addCase(resetPassword.pending, state => {
+        state.verificationStatus = 'loading';
+        state.verificationError = null;
+      })
+      .addCase(resetPassword.fulfilled, state => {
+        state.verificationStatus = 'succeeded';
+      })
+      .addCase(resetPassword.rejected, (state, action) => {
         state.verificationStatus = 'failed';
         state.verificationError = action.payload; // Зберігаємо помилку
       });
