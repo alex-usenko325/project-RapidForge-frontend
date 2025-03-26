@@ -130,9 +130,9 @@ const SignInForm = () => {
                 </a>
               </div>
               <div className={s.haveAnAccount}>
-                Forgot password?
-                <a href="/reset-password" className={s.authLink}>
-                  Reset it
+                {t('resetPassword.forgot')}
+                <a href=" /reset-password" className={s.authLink}>
+                  {t('resetPassword.reset_it')}
                 </a>
               </div>
             </div>
