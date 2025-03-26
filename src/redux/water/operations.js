@@ -26,7 +26,7 @@ export const getWaterByMonth = createAsyncThunk(
 
 export const getWaterRecords = createAsyncThunk(
   'water/getWaterRecords',
-  async (_, thunkAPI) => {
+  async (date, thunkAPI) => {
     const { auth } = thunkAPI.getState();
     const token = auth?.token;
 
@@ -36,7 +36,7 @@ export const getWaterRecords = createAsyncThunk(
 
     setAuthHeader(token);
     try {
-      const response = await authAPI.get('water/today');
+      const response = await authAPI.get(`water/today?date=${date}`);
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(

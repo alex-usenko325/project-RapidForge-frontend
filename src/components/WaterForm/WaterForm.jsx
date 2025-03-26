@@ -1,27 +1,32 @@
 import { useEffect, useState } from 'react';
-import s from './WaterForm.module.css';
-import clsx from 'clsx';
+import {
+  selectSelectedDate,
+  selectWaterIsLoading,
+} from '../../redux/water/selectors';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   addWaterRecord,
   updateWaterRecord,
 } from '../../redux/water/operations';
-import { selectSelectedDate, selectWaterIsLoading } from '../../redux/water/selectors';
 import toast from 'react-hot-toast';
+import dayjs from 'dayjs';
+import clsx from 'clsx';
+import s from './WaterForm.module.css';
 
 export default function WaterForm({
   closeAddWaterModal,
   modalType,
   waterEntryId,
 }) {
-
-  const selectedDate = useSelector(selectSelectedDate)
+  const [time, setTime] = useState('');
+  const selectedDate = useSelector(selectSelectedDate);
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const isLoading = useSelector(selectWaterIsLoading);
+  const selectedDateFormatted = selectedDate.split('T')[0];
   const [waterAmount, setWaterAmount] = useState(50);
-  const [time, setTime] = useState('');
+  const todayDate = dayjs().format('YYYY-MM-DD');
 
   const increaseWater = () => setWaterAmount(waterAmount + 50);
   const decreaseWater = () =>
@@ -65,7 +70,7 @@ export default function WaterForm({
     }
 
     const record = {
-      date: selectedDate || new Date().toISOString().split('T')[0],
+      date: selectedDateFormatted || todayDate,
       volume: waterAmount,
       time: time,
     };
