@@ -13,7 +13,7 @@ import { useTranslation } from 'react-i18next';
 import i18next from 'i18next';
 import LocalizationDropdownMenu from '../LocalizationDropdownMenu/LocalizationDropdownMenu';
 import toast from 'react-hot-toast';
-import { Link, Navigate } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 import { RotatingLines } from 'react-loader-spinner';
 
 const initialValues = {
@@ -61,9 +61,7 @@ const ResetPasswordForm = ({ token }) => {
         .unwrap()
         .then(() => {
           setIsLoading(false);
-          return toast.success(
-            <span>`${t('resetPassword.send_success')}`</span>
-          );
+          return toast.success(<span>{t('resetPassword.send_success')}</span>);
         })
         .catch(err => {
           actions.setSubmitting(false);
@@ -82,13 +80,9 @@ const ResetPasswordForm = ({ token }) => {
     dispatch(resetPassword({ token, password: values.password }))
       .unwrap()
       .then(() => {
-
         return toast.success(
           <span>
             {t('resetPassword.reset_success')}
-            <Link to="/signin" target="_blank" rel="noopener noreferrer">
-              <b> {t('signUp.sign_in')}</b>
-            </Link>
             <Navigate to="/signin" />
           </span>
         );
