@@ -10,7 +10,7 @@ const DailyInfo = () => {
   const isLoading = useSelector(selectWaterIsLoading);
   return (
     <>
-      <div className={s.topContainer}>
+      <div className={`${s.topContainer} fifth-step`}>
         <ChooseDate />
         <AddWaterBtn style="green" />
       </div>

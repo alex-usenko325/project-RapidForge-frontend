@@ -11,7 +11,7 @@ const MonthInfo = () => {
   };
 
   return (
-    <div>
+    <div className="sixth-step">
       <CalendarPagination
         isStatisticVisible={isStatisticVisible}
         toggleStatistic={toggleStatistic}

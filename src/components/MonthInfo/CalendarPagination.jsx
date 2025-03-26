@@ -63,7 +63,9 @@ const CalendarPagination = ({ isStatisticVisible, toggleStatistic }) => {
           <use href={`${sprite}#icon-chevron-right`}></use>
         </svg>
         <svg
-          className={`${s.iconpie} ${isChartOpen ? s.iconpieActive : ''}`}
+          className={`${s.iconpie} ${
+            isChartOpen ? s.iconpieActive : ''
+          } seventh-step`}
           onClick={() => {
             toggleStatistic();
             toggleChart();
