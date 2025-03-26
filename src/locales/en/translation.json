@@ -45,15 +45,17 @@
     "sign_in": "Sign In"
   },
   "resetPassword": {
-    "reset_password": "Reset password",
-    "note": "A link to the password reset page will be sent to your email",
+    "reset_password": "Reset Password",
+    "note": "Lost your password?\nPlease enter your email address. You will receive a link to create a new password via email",
     "send_email": "Send link",
-    "send_success": "The link to reset password page was sent to your email",
-    "reset_success": "Password reset successfully",
+    "send_success": "Email successfully sent! Check your inbox",
+    "reset_success": "Password successfully updated! Use the new password to sign in",
     "password": "New password",
     "enter_your_password": "Enter your new password",
     "repeat_password": "Repeat new password",
-    "email_error": "Invalid email. Please try again"
+    "email_error": "Invalid email. Please try again",
+    "reset_it": "Reset it",
+    "forgot": "Forgot password? "
   },
   "emailInUseModal": {
     "title": "Email already exists",

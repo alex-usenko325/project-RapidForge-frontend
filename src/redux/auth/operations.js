@@ -3,7 +3,8 @@ import axios from 'axios';
 
 // Створення екземпляра axios для авторизації
 export const authAPI = axios.create({
-  baseURL: 'https://aqua-track-app.onrender.com', // Вкажіть правильний URL вашого серверу
+  // baseURL: 'https://aqua-track-app.onrender.com', // Вкажіть правильний URL вашого серверу
+  baseURL: 'http://localhost:3000',
   headers: {
     'Content-Type': 'application/json',
   },
