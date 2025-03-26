@@ -4,7 +4,7 @@ import axios from 'axios';
 // Створення екземпляра axios для авторизації
 export const authAPI = axios.create({
   baseURL: 'https://aqua-track-app.onrender.com', // Вкажіть правильний URL вашого серверу
-  // baseURL: 'http://localhost:3000', // Локальний URL серверу, якщо потрібно
+  // baseURL: 'http://localhost:3000',
   headers: {
     'Content-Type': 'application/json',
   },
@@ -95,6 +95,37 @@ export const verifyEmail = createAsyncThunk(
   }
 );
 
+// send email for reset password
+export const sendResetPasswordEmail = createAsyncThunk(
+  'auth/sendResetPasswordEmail',
+  async (email, thunkAPI) => {
+    try {
+      const response = await authAPI.post('/auth/send-reset-password-email', {
+        email,
+      });
+
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.response.data);
+    }
+  }
+);
+
+export const resetPassword = createAsyncThunk(
+  'auth/resetPassword',
+  async (payload, thunkAPI) => {
+    console.log('From resetPwd payload_1:', payload);
+    try {
+      console.log('From resetPwd payload:', payload);
+      const response = await authAPI.post('/auth/reset-password', payload);
+
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
+
 // Вхід користувача (логін)
 export const signin = createAsyncThunk(
   'auth/signin',
@@ -102,6 +133,7 @@ export const signin = createAsyncThunk(
     try {
       const response = await authAPI.post('/auth/login', body);
       setAuthHeader(response.data.data.accessToken);
+      // console.log('🔥 Відповідь від бекенду:', response.data); // Додай цей лог
       return response.data.data;
     } catch (err) {
       return thunkAPI.rejectWithValue(err.response.data);
