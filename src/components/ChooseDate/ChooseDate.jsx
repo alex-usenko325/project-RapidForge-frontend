@@ -6,8 +6,8 @@ import s from './ChooseDate.module.css';
 
 const ChooseDate = () => {
   const { t } = useTranslation();
-
   const selectedDate = useSelector(selectSelectedDate);
+
   const formatDate = dateString => {
     const date = dayjs(dateString);
     const day = date.date();

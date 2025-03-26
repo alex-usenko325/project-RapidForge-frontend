@@ -19,13 +19,14 @@ export default function WaterForm({
   modalType,
   waterEntryId,
 }) {
-const selectedDate = useSelector(selectSelectedDate);
-  const selectedDateFormatted = dayjs(selectedDate).format('YYYY-MM-DD');
+  const [time, setTime] = useState('');
+  const selectedDate = useSelector(selectSelectedDate);
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const isLoading = useSelector(selectWaterIsLoading);
+  const selectedDateFormatted = selectedDate.split('T')[0];
   const [waterAmount, setWaterAmount] = useState(50);
-  const [time, setTime] = useState('');
+  const todayDate = dayjs().format('YYYY-MM-DD');
 
   const increaseWater = () => setWaterAmount(waterAmount + 50);
   const decreaseWater = () =>
@@ -69,7 +70,7 @@ const selectedDate = useSelector(selectSelectedDate);
     }
 
     const record = {
-      date: selectedDateFormatted || new Date().toISOString().split('T')[0],
+      date: selectedDateFormatted || todayDate,
       volume: waterAmount,
       time: time,
     };

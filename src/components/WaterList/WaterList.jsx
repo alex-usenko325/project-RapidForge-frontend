@@ -6,20 +6,18 @@ import {
   selectWaterRecordsByMonth,
 } from '../../redux/water/selectors';
 import WaterItem from '../WaterItem/WaterItem';
-import dayjs from 'dayjs';
 import css from './WaterList.module.css';
 
 export const WaterList = () => {
   const { t } = useTranslation();
-
   const waterListByDay = useSelector(selectWaterRecords);
   const waterListByMonth = useSelector(selectWaterRecordsByMonth);
   const selectedDate = useSelector(selectSelectedDate);
-  const selectedDateFormatted = dayjs(selectedDate).format('YYYY-MM-DD');
+  const selectedDateFormatted = selectedDate.split('T')[0];
 
   const filteredWaterList = selectedDate
     ? waterListByMonth.filter(
-        item => dayjs(item.date).format('YYYY-MM-DD') === selectedDateFormatted
+        item => item.date === selectedDateFormatted
       )
     : waterListByDay;
 

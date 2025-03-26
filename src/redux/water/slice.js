@@ -63,12 +63,12 @@ const waterSlice = createSlice({
         state.isLoading = false;
         state.records.push(action.payload);
         if (state.selectedDate) {
-          const recordDate = dayjs(action.payload.date).tz('Europe/Kyiv');
+          const recordDate = dayjs(action.payload.date).tz(userTimezone);
           const selectedMonth = dayjs(state.selectedDate)
-            .tz('Europe/Kyiv')
+            .tz(userTimezone)
             .month();
           const selectedYear = dayjs(state.selectedDate)
-            .tz('Europe/Kyiv')
+            .tz(userTimezone)
             .year();
           if (
             recordDate.month() === selectedMonth &&
