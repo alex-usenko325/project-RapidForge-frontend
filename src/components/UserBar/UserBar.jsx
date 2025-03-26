@@ -64,7 +64,7 @@ const UserBar = ({ avatar, name }) => {
   }, [isPopoverOpen]);
 
   return (
-    <div className={s.user_bar}>
+    <div className={`${s.user_bar} fourth-step`}>
       <button className={s.btn} onClick={togglePopover} ref={buttonRef}>
         <span className={s.name}>{name}</span>
         <img className={s.avatar} src={avatar} alt="user avatar" />
