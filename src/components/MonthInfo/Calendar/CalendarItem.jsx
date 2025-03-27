@@ -1,11 +1,13 @@
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { setSelectedDate } from '../../../redux/water/slice';
+import { selectSelectedDate } from '../../../redux/water/selectors.js';
+import dayjs from 'dayjs';
 import clsx from 'clsx';
 import s from './CalendarItem.module.css';
-import dayjs from 'dayjs';
 
-const CalendarItem = ({ day, selectedDate, onDateSelect, percent = 0 }) => {
+const CalendarItem = ({ day, percent = 0 }) => {
   const dispatch = useDispatch();
+  const selectedDate = useSelector(selectSelectedDate);
 
   const getFormattedDate = (selectedDate, day) => {
     const date = new Date(selectedDate);
@@ -14,13 +16,9 @@ const CalendarItem = ({ day, selectedDate, onDateSelect, percent = 0 }) => {
   };
 
   const formattedDate = getFormattedDate(selectedDate, day);
-
   const todayFormatted = dayjs().format('YYYY-MM-DD');
-
   const isFutureDay = dayjs(formattedDate).isAfter(dayjs(), 'day');
-
   const isCurrentDay = formattedDate === todayFormatted;
-
   const isSelected = dayjs(selectedDate).date() === day;
 
   const handleClick = () => {
@@ -30,7 +28,6 @@ const CalendarItem = ({ day, selectedDate, onDateSelect, percent = 0 }) => {
     }
     const formattedDate = getFormattedDate(selectedDate, day);
     dispatch(setSelectedDate(formattedDate));
-    onDateSelect(formattedDate);
   };
 
   const displayPercent = isFutureDay ? '' : percent ? percent.toFixed(0) : 0;

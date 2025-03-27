@@ -20,10 +20,13 @@ export const selectLastConfettiDate = state => state.water.lastConfettiDate;
 export const selectWaterProgress = state => {
   const dailyNorm = selectDailyNorm(state);
   const records = selectWaterRecords(state);
-  const waterConsumed = records.reduce(
+  const todayDate = dayjs().format('YYYY-MM-DD');
+  const todayRecords = records.filter(record => record.date === todayDate);
+  const waterConsumed = todayRecords.reduce(
     (sum, record) => sum + (record.volume || 0),
     0
   );
+  
   return dailyNorm > 0 ? Math.min((waterConsumed / dailyNorm) * 100, 100) : 0;
 };
 
@@ -31,7 +34,7 @@ export const selectWaterProgressByMonth = createSelector(
   [selectWaterRecordsByMonth, selectDailyNorm],
   (waterData, dailyNorm) => {
     const waterByDay = waterData.reduce((acc, record) => {
-      const date = dayjs(record.date).tz('Europe/Kyiv').format('YYYY-MM-DD');
+      const date = dayjs(record.date).format('YYYY-MM-DD');
       acc[date] = (acc[date] || 0) + (record.volume || 0);
       return acc;
     }, {});

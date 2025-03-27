@@ -13,9 +13,31 @@
   padding: 24px 16px;
 }
 
+.logoWrap {
+  display: flex;
+  justify-content: flex-end;
+  gap: 16px;
+}
+
+.tourBtn {
+  text-align: center;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--main-white);
+  outline: none;
+  border: none;
+  transition: color 250ms ease-in;
+}
+
+.tourBtn:hover,
+.tourBtn:focus {
+  /* color: var(--accent-hover); */
+  color: #323f47;
+}
+
 @media only screen and (min-resolution: 192dpi),
-  only screen and (min-resolution: 2dppx),
-  only screen and (-webkit-min-device-pixel-ratio: 2) {
+only screen and (min-resolution: 2dppx),
+only screen and (-webkit-min-device-pixel-ratio: 2) {
   .container {
     background-image: url(../../assets/images/bottle/mobile/bottle-mobile-x2.png);
     background-size: 76%;
@@ -29,6 +51,7 @@
     background-size: 75%;
     height: 415px;
   }
+
 }
 
 @media screen and (min-width: 768px) {
@@ -42,9 +65,13 @@
     padding: 32px;
   }
 
+  .tourBtn {
+    font-size: 18px;
+  }
+
   @media only screen and (min-resolution: 192dpi),
-    only screen and (min-resolution: 2dppx),
-    only screen and (-webkit-min-device-pixel-ratio: 2) {
+  only screen and (min-resolution: 2dppx),
+  only screen and (-webkit-min-device-pixel-ratio: 2) {
     .container {
       background-image: url(../../assets/images/bottle/tablet/bottle-tablet-x2.png);
       background-size: 53%;
@@ -64,8 +91,8 @@
   }
 
   @media only screen and (min-resolution: 192dpi),
-    only screen and (min-resolution: 2dppx),
-    only screen and (-webkit-min-device-pixel-ratio: 2) {
+  only screen and (min-resolution: 2dppx),
+  only screen and (-webkit-min-device-pixel-ratio: 2) {
     .container {
       background-image: url(../../assets/images/bottle/desktop/bottle-desktop-x2.png);
       background-size: 70%;

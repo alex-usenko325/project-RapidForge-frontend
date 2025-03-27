@@ -1,25 +1,30 @@
-import dayjs from 'dayjs';
-import s from './CalendarPagination.module.css';
-import sprite from '../../assets/sprite.svg';
 import { useTranslation } from 'react-i18next';
-import 'dayjs/locale/uk';
 import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectSelectedDate } from '../../redux/water/selectors.js';
+import { setSelectedDate } from '../../redux/water/slice.js';
+import dayjs from 'dayjs';
+import sprite from '../../assets/sprite.svg';
+import s from './CalendarPagination.module.css';
 
-const CalendarPagination = ({
-  selectedDate,
-  onDateChange,
-  isStatisticVisible,
-  toggleStatistic,
-}) => {
+const CalendarPagination = ({ isStatisticVisible, toggleStatistic }) => {
+  const dispatch = useDispatch();
+  const selectedDate = useSelector(selectSelectedDate);
+
   const [isChartOpen, setIsChartOpen] = useState(false);
   const { t, i18n } = useTranslation();
-  dayjs.locale('uk');
   const handlePreviousMonth = () => {
-    onDateChange(dayjs(selectedDate).subtract(1, 'month').toDate());
+    dispatch(
+      setSelectedDate(
+        dayjs(selectedDate).subtract(1, 'month').format('YYYY-MM-DD')
+      )
+    );
   };
 
   const handleNextMonth = () => {
-    onDateChange(dayjs(selectedDate).add(1, 'month').toDate());
+    dispatch(
+      setSelectedDate(dayjs(selectedDate).add(1, 'month').format('YYYY-MM-DD'))
+    );
   };
 
   const toggleChart = () => {
@@ -58,7 +63,9 @@ const CalendarPagination = ({
           <use href={`${sprite}#icon-chevron-right`}></use>
         </svg>
         <svg
-          className={`${s.iconpie} ${isChartOpen ? s.iconpieActive : ''}`}
+          className={`${s.iconpie} ${
+            isChartOpen ? s.iconpieActive : ''
+          } seventh-step`}
           onClick={() => {
             toggleStatistic();
             toggleChart();
