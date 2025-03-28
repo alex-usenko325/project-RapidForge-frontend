@@ -1,5 +1,9 @@
 import i18next from 'i18next';
 import s from './LocalizationDropdownMenu.module.css';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectLanguage } from '../../redux/user/selectors';
+import { changeLanguage } from '../../redux/user/slice';
+import { useEffect } from 'react';
 
 const lngs = {
   en: { nativeName: 'EN' },
@@ -7,28 +11,38 @@ const lngs = {
 };
 
 const LocalizationDropdownMenu = () => {
-    const changeLanguage = (event) => {
-        const selectedLanguage = event.target.value;
-        i18next.changeLanguage(selectedLanguage);
-    };
+  const selectedLanguage = useSelector(selectLanguage);
+  const dispatch = useDispatch();
 
-    return (
-        <div className={s.dropdownContainer}>
-          <select
-            id="language-select"
-            className={s.dropdown}
-            onChange={changeLanguage}
-            defaultValue={i18next.language}
-          >
-            {Object.keys(lngs).map((lng) => (
-              <option key={lng} value={lng}>
-                {lngs[lng].nativeName}
-              </option>
-            ))}
-          </select>
-        </div>
-   
-      );
-    };
+  useEffect(() => {
+    // Якщо мова в Redux змінюється, оновлюємо i18next
+    if (selectedLanguage) {
+      i18next.changeLanguage(selectedLanguage);
+    }
+  }, [selectedLanguage]);
 
-    export default LocalizationDropdownMenu;
+  const onChangeLanguage = event => {
+    const newLanguage = event.target.value;
+    dispatch(changeLanguage(newLanguage));
+    i18next.changeLanguage(newLanguage);
+  };
+
+  return (
+    <div className={s.dropdownContainer}>
+      <select
+        id="language-select"
+        className={s.dropdown}
+        onChange={onChangeLanguage}
+        value={selectedLanguage}
+      >
+        {Object.keys(lngs).map(lng => (
+          <option key={lng} value={lng}>
+            {lngs[lng].nativeName}
+          </option>
+        ))}
+      </select>
+    </div>
+  );
+};
+
+export default LocalizationDropdownMenu;

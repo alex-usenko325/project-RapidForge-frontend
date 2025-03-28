@@ -21,9 +21,6 @@ const initialState = {
   isLoading: false,
   error: null,
   selectedDate: dayjs().tz(userTimezone).format(),
-  showConfetti: false,
-  confettiShown: false,
-  lastConfettiDate: null,
 };
 
 const waterSlice = createSlice({

@@ -11,6 +11,9 @@ import { getUserData } from './redux/user/operations';
 import NotFoundPage from './pages/NotFoundPage/NotFoundPage';
 import Layout from './components/Layout';
 import ResetPasswordPage from './pages/ResetPasswordPage/ResetPasswordPage.jsx';
+import { selectIsLoggedIn } from './redux/auth/selectors.js';
+import { selectLanguage } from './redux/user/selectors.js';
+import i18next from 'i18next';
 
 const HomePage = lazy(() => import('./pages/HomePage/HomePage.jsx'));
 const TrackerPage = lazy(() => import('./pages/TrackerPage/TrackerPage.jsx'));
@@ -19,13 +22,17 @@ const SignInPage = lazy(() => import('./pages/SignInPage/SignInPage.jsx'));
 
 const App = () => {
   const dispatch = useDispatch();
-  const isLoggedIn = useSelector(state => state.auth.isLoggedIn);
+  const isLoggedIn = useSelector(selectIsLoggedIn);
+  const selectedLanguage = useSelector(selectLanguage);
 
   useEffect(() => {
     if (isLoggedIn) {
       dispatch(getUserData());
     }
-  }, [dispatch, isLoggedIn]);
+    if (selectedLanguage) {
+      i18next.changeLanguage(selectedLanguage);
+    }
+  }, [dispatch, isLoggedIn, selectedLanguage]);
 
   return (
     <Layout>

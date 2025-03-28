@@ -13,10 +13,6 @@ export const selectWaterIsLoading = state => state.water.isLoading;
 export const selectWaterError = state => state.water.error;
 export const selectDailyNorm = state => state.user.user.dailyNorm || 1500;
 
-export const selectShowConfetti = state => state.water.showConfetti;
-export const selectConfettiShown = state => state.water.confettiShown;
-export const selectLastConfettiDate = state => state.water.lastConfettiDate;
-
 export const selectWaterProgress = state => {
   const dailyNorm = selectDailyNorm(state);
   const records = selectWaterRecords(state);
@@ -26,7 +22,7 @@ export const selectWaterProgress = state => {
     (sum, record) => sum + (record.volume || 0),
     0
   );
-  
+
   return dailyNorm > 0 ? Math.min((waterConsumed / dailyNorm) * 100, 100) : 0;
 };
 
