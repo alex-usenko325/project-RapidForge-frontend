@@ -30,15 +30,15 @@ const waterSlice = createSlice({
     setSelectedDate: (state, action) => {
       state.selectedDate = action.payload;
     },
-    setShowConfetti: (state, action) => {
-      state.showConfetti = action.payload;
-    },
-    setConfettiShown: (state, action) => {
-      state.confettiShown = action.payload;
-    },
-    setLastConfettiDate: (state, action) => {
-      state.lastConfettiDate = action.payload;
-    },
+    // setShowConfetti: (state, action) => {
+    //   state.showConfetti = action.payload;
+    // },
+    // setConfettiShown: (state, action) => {
+    //   state.confettiShown = action.payload;
+    // },
+    // setLastConfettiDate: (state, action) => {
+    //   state.lastConfettiDate = action.payload;
+    // },
   },
   extraReducers: builder => {
     builder

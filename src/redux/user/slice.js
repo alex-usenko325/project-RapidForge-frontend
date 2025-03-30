@@ -8,7 +8,7 @@ import {
 import { logout } from '../auth/operations.js';
 
 // Зчитуємо мову з localStorage для початкового налаштування Redux
-const savedLanguage = localStorage.getItem('i118nextLng') || 'EN';
+const savedLanguage = localStorage.getItem('i118nextLng');
 
 const initialState = {
   user: {
@@ -27,7 +27,7 @@ const initialState = {
   language: savedLanguage,
   showConfetti: false,
   confettiShown: false,
-  lastConfettiDate: null,
+  lastConfettiDate: '2025-03-27',
 };
 
 const userSlice = createSlice({
@@ -36,6 +36,15 @@ const userSlice = createSlice({
   reducers: {
     changeLanguage(state, action) {
       state.language = action.payload;
+    },
+    setShowConfetti(state, action) {
+      state.showConfetti = action.payload;
+    },
+    setConfettiShown(state, action) {
+      state.confettiShown = action.payload;
+    },
+    setLastConfettiDate(state, action) {
+      state.lastConfettiDate = action.payload;
     },
   },
   extraReducers: builder => {
@@ -89,5 +98,10 @@ const userSlice = createSlice({
   },
 });
 
-export const { changeLanguage } = userSlice.actions;
+export const {
+  changeLanguage,
+  setShowConfetti,
+  setConfettiShown,
+  setLastConfettiDate,
+} = userSlice.actions;
 export const userReducer = userSlice.reducer;
