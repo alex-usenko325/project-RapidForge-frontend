@@ -26,8 +26,8 @@ const initialState = {
   error: null,
   language: savedLanguage,
   showConfetti: false,
-  confettiShown: false,
-  lastConfettiDate: '2025-03-27',
+  isConfettiShown: false,
+  lastConfettiDate: '',
 };
 
 const userSlice = createSlice({
@@ -40,8 +40,8 @@ const userSlice = createSlice({
     setShowConfetti(state, action) {
       state.showConfetti = action.payload;
     },
-    setConfettiShown(state, action) {
-      state.confettiShown = action.payload;
+    setIsConfettiShown(state, action) {
+      state.isConfettiShown = action.payload;
     },
     setLastConfettiDate(state, action) {
       state.lastConfettiDate = action.payload;
@@ -94,14 +94,20 @@ const userSlice = createSlice({
         state.isLoading = false;
         state.error = action.payload;
       })
-      .addCase(logout.fulfilled, () => initialState);
+      // .addCase(logout.fulfilled, () => initialState);
+      .addCase(logout.fulfilled, state => {
+        return {
+          ...initialState,
+          lastConfettiDate: state.lastConfettiDate,
+        };
+      });
   },
 });
 
 export const {
   changeLanguage,
   setShowConfetti,
-  setConfettiShown,
+  setIsConfettiShown,
   setLastConfettiDate,
 } = userSlice.actions;
 export const userReducer = userSlice.reducer;

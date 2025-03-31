@@ -15,13 +15,13 @@ import {
 import TourSteps from '../../onboardingTour/TourSteps.jsx';
 import dayjs from 'dayjs';
 import {
-  selectConfettiShown,
+  selectIsConfettiShown,
   selectLastConfettiDate,
   selectShowConfetti,
 } from '../../redux/user/selectors.js';
 import {
   setShowConfetti,
-  setConfettiShown,
+  setIsConfettiShown,
   setLastConfettiDate,
 } from '../../redux/user/slice.js';
 import toast from 'react-hot-toast';
@@ -38,7 +38,7 @@ export default function TrackerPage() {
   const todayDate = dayjs().format('YYYY-MM-DD');
   const progress = useSelector(selectWaterProgress);
   const showConfetti = useSelector(selectShowConfetti);
-  const confettiShown = useSelector(selectConfettiShown);
+  const isConfettiShown = useSelector(selectIsConfettiShown);
   const lastConfettiDate = useSelector(selectLastConfettiDate);
 
   useEffect(() => {
@@ -61,48 +61,22 @@ export default function TrackerPage() {
   };
 
   useEffect(() => {
-    if (!lastConfettiDate) {
-      dispatch(setLastConfettiDate(todayDate));
-    }
-  }, [dispatch, lastConfettiDate, todayDate]);
-  console.log(todayDate);
-
-  useEffect(() => {
-    if (progress === 100 && !confettiShown && lastConfettiDate !== todayDate) {
+    if (
+      progress === 100 &&
+      !isConfettiShown &&
+      lastConfettiDate !== todayDate
+    ) {
       dispatch(setShowConfetti(true));
-      dispatch(setConfettiShown(true));
+      dispatch(setIsConfettiShown(true));
       dispatch(setLastConfettiDate(todayDate));
 
       toast.custom(
         toastInstance => (
-          <div
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'space-between',
-              border: '1px solid #4CAF50',
-              padding: '16px',
-              backgroundColor: '#E8F5E9',
-              borderRadius: '8px',
-              boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.1)',
-              maxWidth: '350px',
-              fontSize: '14px',
-              fontWeight: '500',
-            }}
-          >
+          <div className={css.toastContainer}>
             <span>👏 {t('waterDailyNorma.goalAchieved')}</span>
             <button
               onClick={() => toast.remove(toastInstance.id)}
-              style={{
-                marginLeft: '16px',
-                padding: '4px 8px',
-                background: '#4CAF50',
-                color: '#fff',
-                border: 'none',
-                borderRadius: '4px',
-                cursor: 'pointer',
-                fontSize: '14px',
-              }}
+              className={css.toastButton}
             >
               {t('verifyModal.button')}
             </button>
@@ -111,7 +85,7 @@ export default function TrackerPage() {
         { duration: 10000 }
       );
     }
-  }, [progress, dispatch, confettiShown, lastConfettiDate, t, todayDate]);
+  }, [progress, dispatch, isConfettiShown, lastConfettiDate, t, todayDate]);
 
   return (
     <div className={clsx('container', css.container)}>

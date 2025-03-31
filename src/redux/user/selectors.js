@@ -5,5 +5,5 @@ export const selectIsRefreshing = state => state.user.isRefreshing;
 
 export const selectLanguage = state => state.user.language;
 export const selectShowConfetti = state => state.user.showConfetti;
-export const selectConfettiShown = state => state.user.confettiShown;
+export const selectIsConfettiShown = state => state.user.isConfettiShown;
 export const selectLastConfettiDate = state => state.user.lastConfettiDate;
