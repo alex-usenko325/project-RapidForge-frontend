@@ -1,35 +1,41 @@
 import { useTranslation } from 'react-i18next';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectSelectedDate } from '../../redux/water/selectors.js';
-import { setSelectedDate } from '../../redux/water/slice.js';
+import { selectSelectedMonth } from '../../redux/water/selectors.js';
+import { setSelectedMonth } from '../../redux/water/slice.js';
 import dayjs from 'dayjs';
 import sprite from '../../assets/sprite.svg';
 import s from './CalendarPagination.module.css';
 
 const CalendarPagination = ({ isStatisticVisible, toggleStatistic }) => {
+  const { t } = useTranslation();
   const dispatch = useDispatch();
-  const selectedDate = useSelector(selectSelectedDate);
-
+  const selectedMonth = useSelector(selectSelectedMonth);
   const [isChartOpen, setIsChartOpen] = useState(false);
-  const { t, i18n } = useTranslation();
+
   const handlePreviousMonth = () => {
     dispatch(
-      setSelectedDate(
-        dayjs(selectedDate).subtract(1, 'month').format('YYYY-MM-DD')
+      setSelectedMonth(
+        dayjs(selectedMonth).subtract(1, 'month').format('YYYY-MM')
       )
     );
   };
 
   const handleNextMonth = () => {
     dispatch(
-      setSelectedDate(dayjs(selectedDate).add(1, 'month').format('YYYY-MM-DD'))
+      setSelectedMonth(dayjs(selectedMonth).add(1, 'month').format('YYYY-MM'))
     );
   };
 
   const toggleChart = () => {
     setIsChartOpen(prevState => !prevState);
   };
+
+  const monthIndex = dayjs(selectedMonth).month();
+  const months = t('months', { returnObjects: true });
+  const month = months[Object.keys(months)[monthIndex]];
+  const selectedYear = selectedMonth.split('-')[0];
+  const dataShow = `${month}, ${selectedYear}`;
 
   return (
     <div className={s.calendarpagination}>
@@ -50,10 +56,7 @@ const CalendarPagination = ({ isStatisticVisible, toggleStatistic }) => {
           <use href={`${sprite}#icon-chevron-left`}></use>
         </svg>
 
-        <span className={s.spanmonth}>
-          {dayjs(selectedDate).locale(i18n.language).format('MMMM, YYYY')}
-        </span>
-
+        <span className={s.spanmonth}>{dataShow}</span>
         <svg
           className={`${s.btnpagination} ${
             isStatisticVisible ? s.disabled : ''

@@ -17,10 +17,12 @@ dayjs.extend(timezone);
 const userTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
 const initialState = {
   monthIntakes: [],
+  todayRecords: [],
   records: [],
   isLoading: false,
   error: null,
   selectedDate: dayjs().tz(userTimezone).format(),
+  selectedMonth: dayjs().tz(userTimezone).format('YYYY-MM'),
 };
 
 const waterSlice = createSlice({
@@ -30,35 +32,40 @@ const waterSlice = createSlice({
     setSelectedDate: (state, action) => {
       state.selectedDate = action.payload;
     },
-    // setShowConfetti: (state, action) => {
-    //   state.showConfetti = action.payload;
-    // },
-    // setConfettiShown: (state, action) => {
-    //   state.confettiShown = action.payload;
-    // },
-    // setLastConfettiDate: (state, action) => {
-    //   state.lastConfettiDate = action.payload;
-    // },
+    setSelectedMonth: (state, action) => {
+      state.selectedMonth = action.payload;
+    },
   },
   extraReducers: builder => {
+    const today = dayjs().format('YYYY-MM-DD');
     builder
-      .addCase(getWaterByMonth.fulfilled, (state, { payload }) => {
-        state.monthIntakes = payload;
-        state.isLoading = false;
-      })
       .addCase(getWaterByMonth.pending, state => {
         state.isLoading = true;
       })
-      .addCase(getWaterByMonth.rejected, state => {
+      .addCase(getWaterByMonth.fulfilled, (state, action) => {
+        state.monthIntakes = action.payload;
         state.isLoading = false;
+      })
+      .addCase(getWaterByMonth.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload;
       })
       .addCase(getWaterRecords.pending, state => {
         state.isLoading = true;
         state.error = null;
       })
+
       .addCase(getWaterRecords.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.records = action.payload.data;
+
+        if (state.todayRecords.length === 0) {
+          state.todayRecords = action.payload.data.filter(
+            record => record.date === today
+          );
+        }
+        state.records = action.payload.data.filter(
+          record => record.date !== today
+        );
       })
       .addCase(getWaterRecords.rejected, (state, action) => {
         state.isLoading = false;
@@ -70,22 +77,13 @@ const waterSlice = createSlice({
       })
       .addCase(addWaterRecord.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.records.push(action.payload);
-        if (state.selectedDate) {
-          const recordDate = dayjs(action.payload.date).tz(userTimezone);
-          const selectedMonth = dayjs(state.selectedDate)
-            .tz(userTimezone)
-            .month();
-          const selectedYear = dayjs(state.selectedDate)
-            .tz(userTimezone)
-            .year();
-          if (
-            recordDate.month() === selectedMonth &&
-            recordDate.year() === selectedYear
-          ) {
-            state.monthIntakes.push(action.payload);
-          }
+
+        if (action.payload.date === today) {
+          state.todayRecords.push(action.payload);
+        } else {
+          state.records.push(action.payload);
         }
+        state.monthIntakes.push(action.payload);
       })
       .addCase(addWaterRecord.rejected, (state, action) => {
         state.isLoading = false;
@@ -97,33 +95,35 @@ const waterSlice = createSlice({
       })
       .addCase(updateWaterRecord.fulfilled, (state, action) => {
         state.isLoading = false;
-        const updatedRecord = action.payload;
-        const recordIndex = state.records.findIndex(
-          record => record._id === updatedRecord._id
-        );
-        if (recordIndex !== -1) {
-          state.records[recordIndex] = updatedRecord;
-        }
-        if (state.selectedDate) {
-          const recordDate = dayjs(updatedRecord.date).tz(userTimezone);
-          const selectedMonth = dayjs(state.selectedDate)
-            .tz(userTimezone)
-            .month();
-          const selectedYear = dayjs(state.selectedDate)
-            .tz(userTimezone)
-            .year();
 
-          const monthIndex = state.monthIntakes.findIndex(
-            record => record._id === updatedRecord._id
+        if (action.payload.date === today) {
+          const todayRecordIndex = state.todayRecords.findIndex(
+            record => record._id === action.payload._id
           );
-
-          if (
-            recordDate.month() === selectedMonth &&
-            recordDate.year() === selectedYear &&
-            monthIndex !== -1
-          ) {
-            state.monthIntakes[monthIndex] = updatedRecord;
+          if (todayRecordIndex !== -1) {
+            state.todayRecords[todayRecordIndex] = action.payload;
+          } else {
+            state.todayRecords.push(action.payload);
           }
+        } else {
+          const recordIndex = state.records.findIndex(
+            record => record._id === action.payload._id
+          );
+          if (recordIndex !== -1) {
+            state.records[recordIndex] = action.payload;
+          } else {
+            state.records.push(action.payload);
+          }
+        }
+
+        const monthIndex = state.monthIntakes.findIndex(
+          record => record._id === action.payload._id
+        );
+
+        if (monthIndex !== -1) {
+          state.monthIntakes[monthIndex] = action.payload;
+        } else {
+          state.monthIntakes.push(action.payload);
         }
       })
       .addCase(updateWaterRecord.rejected, (state, action) => {
@@ -136,12 +136,27 @@ const waterSlice = createSlice({
       })
       .addCase(deleteWaterRecord.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.records = state.records.filter(
-          record => record._id !== action.payload
-        );
-        state.monthIntakes = state.monthIntakes.filter(
-          record => record._id !== action.payload
-        );
+        const deletedRecordId = action.payload;
+        const deletedRecord =
+          state.todayRecords.find(record => record._id === deletedRecordId) ||
+          (state.records.find(record => record._id === deletedRecordId) &&
+            state.monthIntakes.find(record => record._id === deletedRecordId));
+
+        if (deletedRecord) {
+          if (deletedRecord.date === today) {
+            state.todayRecords = state.todayRecords.filter(
+              record => record._id !== deletedRecordId
+            );
+          } else {
+            state.records = state.records.filter(
+              record => record._id !== deletedRecordId
+            );
+          }
+
+          state.monthIntakes = state.monthIntakes.filter(
+            record => record._id !== deletedRecordId
+          );
+        }
       })
       .addCase(deleteWaterRecord.rejected, (state, action) => {
         state.isLoading = false;
@@ -151,10 +166,5 @@ const waterSlice = createSlice({
   },
 });
 
-export const {
-  setSelectedDate,
-  setShowConfetti,
-  setConfettiShown,
-  setLastConfettiDate,
-} = waterSlice.actions;
+export const { setSelectedDate, setSelectedMonth } = waterSlice.actions;
 export const waterReducer = waterSlice.reducer;

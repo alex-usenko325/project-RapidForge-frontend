@@ -1,6 +1,9 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { setSelectedDate } from '../../../redux/water/slice';
-import { selectSelectedDate } from '../../../redux/water/selectors.js';
+import {
+  selectSelectedDate,
+  selectSelectedMonth,
+} from '../../../redux/water/selectors.js';
 import dayjs from 'dayjs';
 import clsx from 'clsx';
 import s from './CalendarItem.module.css';
@@ -8,25 +11,19 @@ import s from './CalendarItem.module.css';
 const CalendarItem = ({ day, percent = 0 }) => {
   const dispatch = useDispatch();
   const selectedDate = useSelector(selectSelectedDate);
+  const selectedMonth = useSelector(selectSelectedMonth);
 
-  const getFormattedDate = (selectedDate, day) => {
-    const date = new Date(selectedDate);
-    date.setDate(day);
-    return dayjs(date).format('YYYY-MM-DD');
-  };
-
-  const formattedDate = getFormattedDate(selectedDate, day);
+  const formattedDate = `${selectedMonth}-${String(day).padStart(2, '0')}`;
   const todayFormatted = dayjs().format('YYYY-MM-DD');
-  const isFutureDay = dayjs(formattedDate).isAfter(dayjs(), 'day');
+  const isFutureDay = dayjs(formattedDate).isAfter(todayFormatted, 'day');
   const isCurrentDay = formattedDate === todayFormatted;
-  const isSelected = dayjs(selectedDate).date() === day;
+  const isSelected = formattedDate === selectedDate;
 
   const handleClick = () => {
     if (isFutureDay) {
       alert('Ви не можете обрати майбутній день!');
       return;
     }
-    const formattedDate = getFormattedDate(selectedDate, day);
     dispatch(setSelectedDate(formattedDate));
   };
 

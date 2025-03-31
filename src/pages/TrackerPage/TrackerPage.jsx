@@ -1,19 +1,19 @@
 import { useDispatch, useSelector } from 'react-redux';
 import {
-  selectSelectedDate,
+  selectSelectedMonth,
   selectWaterProgress,
 } from '../../redux/water/selectors.js';
 import { useEffect, useState } from 'react';
-import WaterDetailedInfo from '../../components/WaterDetailedInfo/WaterDetailedInfo';
-import WaterMainInfo from '../../components/WaterMainInfo/WaterMainInfo';
-import css from './TrackerPage.module.css';
-import clsx from 'clsx';
 import {
   getWaterByMonth,
   getWaterRecords,
 } from '../../redux/water/operations.js';
-import TourSteps from '../../onboardingTour/TourSteps.jsx';
 import dayjs from 'dayjs';
+import WaterDetailedInfo from '../../components/WaterDetailedInfo/WaterDetailedInfo';
+import WaterMainInfo from '../../components/WaterMainInfo/WaterMainInfo';
+import TourSteps from '../../onboardingTour/TourSteps.jsx';
+import clsx from 'clsx';
+import css from './TrackerPage.module.css';
 import {
   selectIsConfettiShown,
   selectLastConfettiDate,
@@ -32,9 +32,9 @@ export default function TrackerPage() {
   const dispatch = useDispatch();
   const { t } = useTranslation();
   const [isTour, setIsTour] = useState(false);
-  const selectedDate = useSelector(selectSelectedDate);
-  const selectedDateFormatted = selectedDate.split('T')[0];
-  const [year, month] = selectedDateFormatted.split('-');
+  const selectedMonth = useSelector(selectSelectedMonth);
+
+  const [year, month] = selectedMonth.split('-');
   const todayDate = dayjs().format('YYYY-MM-DD');
   const progress = useSelector(selectWaterProgress);
   const showConfetti = useSelector(selectShowConfetti);

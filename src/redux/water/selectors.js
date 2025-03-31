@@ -1,13 +1,10 @@
 import dayjs from 'dayjs';
-import utc from 'dayjs/plugin/utc';
-import timezone from 'dayjs/plugin/timezone';
 import { createSelector } from 'reselect';
 
-dayjs.extend(utc);
-dayjs.extend(timezone);
-
+export const selectSelectedMonth = state => state.water.selectedMonth;
 export const selectSelectedDate = state => state.water.selectedDate;
 export const selectWaterRecordsByMonth = state => state.water.monthIntakes;
+export const selectWaterTodayRecords = state => state.water.todayRecords;
 export const selectWaterRecords = state => state.water.records;
 export const selectWaterIsLoading = state => state.water.isLoading;
 export const selectWaterError = state => state.water.error;
@@ -15,7 +12,7 @@ export const selectDailyNorm = state => state.user.user.dailyNorm || 1500;
 
 export const selectWaterProgress = state => {
   const dailyNorm = selectDailyNorm(state);
-  const records = selectWaterRecords(state);
+  const records = selectWaterTodayRecords(state);
   const todayDate = dayjs().format('YYYY-MM-DD');
   const todayRecords = records.filter(record => record.date === todayDate);
   const waterConsumed = todayRecords.reduce(
