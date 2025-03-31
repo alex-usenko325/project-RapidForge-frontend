@@ -8,7 +8,7 @@ import {
 import { logout } from '../auth/operations.js';
 
 // Зчитуємо мову з localStorage для початкового налаштування Redux
-const savedLanguage = localStorage.getItem('i118nextLng');
+const savedLanguage = localStorage.getItem('i18nextLng') || 'EN';
 
 const initialState = {
   user: {
